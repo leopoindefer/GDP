@@ -40,7 +40,7 @@ with col1:
     if button:
         try:
             predict = model(df)
-            predict = predict.loc[:,"ds","yhat"]
+            predict = predict.loc[:,["ds","yhat"]]
             st.dataframe(predict)
             st.line_chart(data=predict, x="ds", y="yhat")
         except:
