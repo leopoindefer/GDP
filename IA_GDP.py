@@ -40,7 +40,7 @@ with col1:
         try:
             predict = model(df)
             st.dataframe(predict)
-            st.sucess('des résultats')
+            st.line_chart(data=predict, x="ds", y="yhat")
         except:
             st.error('pas de résultat')
 
@@ -52,5 +52,3 @@ with col2:
             f'### Le cours de l action est estimé à {result}', unsafe_allow_html=True)
     except:
         pass
-    
-st.line_chart(data=predict, x="ds", y="yhat")
