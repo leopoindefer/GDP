@@ -41,7 +41,6 @@ with col1:
         try:
             predict = model(df)
             predict = predict.loc[:,"ds","yhat"]
-            predict["prediction"] = predict["yhat"]
             st.dataframe(predict)
             st.line_chart(data=predict, x="ds", y="yhat")
         except:
