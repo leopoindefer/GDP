@@ -1,9 +1,8 @@
 import streamlit as st
 import pickle as pkle  
 import math
-import pandas as pd
-from prophet import Prophet
-import yfinance as yf
+
+from model import model
 
 st.set_page_config(
     page_title="GDP",
@@ -31,9 +30,4 @@ df = pd.read_csv(file)
 df = df.rename(columns = {column:'y',"Date":"ds"})
 df=df.loc[:,["ds","y"]]
 
-m = Prophet()
-m.fit(df)
-future = m.make_future_dataframe(periods=365)
-forecast = m.predict(future)
-fig1 = m.plot(forecast)
-fig2 = m.plot_components(forecast)
+model = model(df)
