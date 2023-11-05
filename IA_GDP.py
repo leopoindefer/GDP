@@ -38,7 +38,7 @@ if action:
         predict = predict.loc[:,["ds","yhat"]]
         predict = predict.rename(columns={"ds":"date","yhat":"prediction"})
         
-        start_date = predict["date"].iloc[-1]
+        start_date = df["date"].iloc[-1]
         predict = predict.loc[predict['date'] >= start_date]
 
 
