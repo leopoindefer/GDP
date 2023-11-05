@@ -38,7 +38,7 @@ with col1:
 
     button = st.button('ESTIMER LE COURS DE L ACTION')
     
-    if button:
+    if action:
         try:
             predict = model(df)
             predict = predict.loc[:,["ds","yhat"]]
