@@ -7,5 +7,4 @@ def model(df):
     m.fit(df)
     future = m.make_future_dataframe(periods=365)
     forecast = m.predict(future)
-    forecast = forecast.loc[:,'ds','yhat']
     return forecast
