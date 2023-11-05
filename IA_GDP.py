@@ -1,6 +1,7 @@
 import streamlit as st
 import pickle as pkle  
 import math
+import pandas as pd
 
 from model import model
 
@@ -31,3 +32,4 @@ df = df.rename(columns = {column:'y',"Date":"ds"})
 df=df.loc[:,["ds","y"]]
 
 model = model(df)
+print(model)
