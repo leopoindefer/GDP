@@ -37,12 +37,14 @@ col1, col2 = st.columns(2)
 with col1:
 
     button = st.button('ESTIMER LE COURS DE L ACTION')
-    if button:
+    
+    if action:
         try:
             predict = model(df)
             predict = predict.loc[:,["ds","yhat"]]
+            predict.rename(columns={"ds":"date","yhat":"prediction"})
             st.dataframe(predict)
-            st.line_chart(data=predict, x="ds", y="yhat")
+            st.line_chart(data=predict, x="date", y="prediction")
         except:
             st.error('pas de résultat')
 
