@@ -31,17 +31,21 @@ file = f"data/{symb}.csv"
 df = pd.read_csv(file)
 df = df.rename(columns = {column:'y',"Date":"ds"})
 df=df.loc[:,["ds","y"]]
- 
-if action:
-    try:
-        predict = model(df)
-        predict = predict.loc[:,["ds","yhat"]]
-        predict = predict.rename(columns={"ds":"date","yhat":"prediction"})
-        st.dataframe(predict)
-        st.line_chart(data=predict, x="date", y="prediction")
-    except:
-        st.error('pas de résultat')
 
+col1 = st.columns(1)
+
+with col1:
+    
+    if action:
+        try:
+            predict = model(df)
+            predict = predict.loc[:,["ds","yhat"]]
+            predict = predict.rename(columns={"ds":"date","yhat":"prediction"})
+            st.dataframe(predict)
+            st.line_chart(data=predict, x="date", y="prediction")
+        except:
+            st.error('pas de résultat')
+            
     try:
         result = f'<span style="color: #7DCEA0;">{math.ceil(predict.iloc[-1]["yhat"])}€</span>'
 
