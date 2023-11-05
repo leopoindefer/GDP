@@ -42,8 +42,7 @@ with col1:
         try:
             predict = model(df)
             st.dataframe(predict)
-            st.line_chart(data=predict, x="ds", y="yhat")
-            graph = graph(df)
+            st.line_chart(data=predict, x="ds", y="yhat", xlabel="date", ylabel = "montant")
         except:
             st.error('pas de résultat')
 
