@@ -37,10 +37,6 @@ if action:
         predict = model(df)
         predict = predict.loc[:,["ds","yhat"]]
         predict = predict.rename(columns={"ds":"date","yhat":"prediction"})
-        
-        start_date = df["ds"].iloc[-365]
-        predict = predict.loc[predict['date'] >= start_date]
-
 
         st.line_chart(data=predict, x="date", y="prediction")
         st.dataframe(predict)
