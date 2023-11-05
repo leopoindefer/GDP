@@ -31,24 +31,17 @@ file = f"data/{symb}.csv"
 df = pd.read_csv(file)
 df = df.rename(columns = {column:'y',"Date":"ds"})
 df=df.loc[:,["ds","y"]]
+ 
+if action:
+    try:
+        predict = model(df)
+        predict = predict.loc[:,["ds","yhat"]]
+        predict = predict.rename(columns={"ds":"date","yhat":"prediction"})
+        st.dataframe(predict)
+        st.line_chart(data=predict, x="date", y="prediction")
+    except:
+        st.error('pas de résultat')
 
-col1, col2 = st.columns(2)
-
-with col1:
-
-    button = st.button('ESTIMER LE COURS DE L ACTION')
-    
-    if action:
-        try:
-            predict = model(df)
-            predict = predict.loc[:,["ds","yhat"]]
-            predict = predict.rename(columns={"ds":"date","yhat":"prediction"})
-            st.dataframe(predict)
-            st.line_chart(data=predict, x="date", y="prediction")
-        except:
-            st.error('pas de résultat')
-
-with col2:
     try:
         result = f'<span style="color: #7DCEA0;">{math.ceil(predict.iloc[-1]["yhat"])}€</span>'
 
