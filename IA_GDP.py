@@ -40,6 +40,8 @@ with col1:
     if button:
         try:
             predict = model(df)
+            predict = predict.loc[:,"ds","yhat"]
+            predict["prediction"] = predict["yhat"]
             st.dataframe(predict)
             st.line_chart(data=predict, x="ds", y="yhat")
         except:
@@ -47,8 +49,6 @@ with col1:
 
 with col2:
     try:
-        predict = predict.loc[:,"ds","yhat"]
-        predict["prediction"] = predict["yhat"]
         result = f'<span style="color: #7DCEA0;">{math.ceil(predict.iloc[-1]["yhat"])}€</span>'
 
         st.write(
