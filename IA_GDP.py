@@ -2,8 +2,10 @@ import streamlit as st
 import pickle as pkle  
 import math
 import pandas as pd
+from prophet import Prophet
 
 from model import model
+from model import graph
 
 st.set_page_config(
     page_title="GDP",
@@ -41,6 +43,7 @@ with col1:
             predict = model(df)
             st.dataframe(predict)
             st.line_chart(data=predict, x="ds", y="yhat")
+            graph = graph(df)
         except:
             st.error('pas de résultat')
 
