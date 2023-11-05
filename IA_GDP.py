@@ -24,7 +24,7 @@ action = st.selectbox('Choisir une action', ('AAPL','META','AMZN','TSLA'))
 
 symb = action
 column = f"Close_{symb}"
-file = f"bdd/actions/{symb}.csv"
+file = f"data/{symb}.csv"
 df = pd.read_csv(file)
 df = df.rename(columns = {column:'y',"Date":"ds"})
 df=df.loc[:,["ds","y"]]
