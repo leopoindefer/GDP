@@ -3,8 +3,6 @@ import pickle as pkle
 import math
 import pandas as pd
 
-from model import model
-
 st.set_page_config(
     page_title="GDP",
     page_icon="💯",
@@ -38,14 +36,13 @@ with col1:
     button = st.button('ESTIMER LE COURS DE L ACTION')
     if button:
         try:
-            model = model(df)
             st.sucess('des résultat')
         except:
             st.error('pas de résultat')
 
 with col2:
     try:
-        result = f'<span style="color: #7DCEA0;">{math.ceil(model[0])}€</span>'
+        result = f'<span style="color: #7DCEA0;">€</span>'
 
         st.write(
             f'### Le cours de l action est estimé à {result}', unsafe_allow_html=True)
