@@ -5,7 +5,6 @@ import pandas as pd
 from prophet import Prophet
 
 from model import model
-from model import graph
 
 st.set_page_config(
     page_title="GDP",
