@@ -45,7 +45,7 @@ with col1:
 
 with col2:
     try:
-        result = f'<span style="color: #7DCEA0;">{math.ceil(model[0])}€</span>'
+        result = f'<span style="color: #7DCEA0;">{math.ceil(model)}€</span>'
 
         st.write(
             f'### Le cours de l action est estimé à {result}', unsafe_allow_html=True)
