@@ -42,7 +42,7 @@ with col1:
         try:
             predict = model(df)
             predict = predict.loc[:,["ds","yhat"]]
-            predict.rename(columns={"ds":"date","yhat":"prediction"})
+            predict = predict.rename(columns={"ds":"date","yhat":"prediction"})
             st.dataframe(predict)
             st.line_chart(data=predict, x="date", y="prediction")
         except:
