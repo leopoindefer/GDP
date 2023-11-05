@@ -41,12 +41,14 @@ with col1:
         try:
             predict = model(df)
             st.dataframe(predict)
-            st.line_chart(data=predict, x="ds", y="yhat", xlabel="date", ylabel = "montant")
+            st.line_chart(data=predict, x="ds", y="yhat")
         except:
             st.error('pas de résultat')
 
 with col2:
     try:
+        predict = predict.loc[:,"ds","yhat"]
+        predict["prediction"] = predict["yhat"]
         result = f'<span style="color: #7DCEA0;">{math.ceil(predict.iloc[-1]["yhat"])}€</span>'
 
         st.write(
