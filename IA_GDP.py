@@ -46,11 +46,11 @@ with col1:
 
 with col2:
     try:
-        result = f'<span style="color: #7DCEA0;">{math.ceil(predict.iloc[-1])}€</span>'
+        result = f'<span style="color: #7DCEA0;">{math.ceil(predict.iloc[-1]["yhat"])}€</span>'
 
         st.write(
             f'### Le cours de l action est estimé à {result}', unsafe_allow_html=True)
     except:
         pass
-
-st.line_chart(data=model, x="ds",y="yhat")
+    
+st.line_chart(data=predict, x="ds", y="yhat")
