@@ -21,12 +21,12 @@ hide_st_style = """
             """
 st.markdown(hide_st_style, unsafe_allow_html=True) 
 
-st.header("Action à visualiser")
+st.header("Action à visualier")
 action = st.selectbox('Choisir une action', ('AAPL','META','AMZN','TSLA'))
 
 symb = action
 column = f"Close_{symb}"
-file = f"data/{symb}.csv"
+file = f"bdd/actions/{symb}.csv"
 df = pd.read_csv(file)
 df = df.rename(columns = {column:'y',"Date":"ds"})
 df=df.loc[:,["ds","y"]]
@@ -45,7 +45,7 @@ with col1:
 
 with col2:
     try:
-        result = f'<span style="color: #7DCEA0;">{math.ceil(model)}€</span>'
+        result = f'<span style="color: #7DCEA0;">{math.ceil(model[-1])}€</span>'
 
         st.write(
             f'### Le cours de l action est estimé à {result}', unsafe_allow_html=True)
