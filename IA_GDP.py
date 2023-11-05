@@ -39,7 +39,7 @@ with col1:
     if button:
         try:
             predict = model(df)
-            print(predict)
+            st.dataframe(predict)
             st.sucess('des résultats')
         except:
             st.error('pas de résultat')
