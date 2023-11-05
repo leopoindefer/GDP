@@ -39,13 +39,13 @@ with col1:
     if button:
         try:
             model = model(df)
-            st.sucess('des résultat')
+            st.sucess('des résultats')
         except:
             st.error('pas de résultat')
 
 with col2:
     try:
-        result = f'<span style="color: #7DCEA0;">{math.ceil(model)}€</span>'
+        result = f'<span style="color: #7DCEA0;">{math.ceil(model[-1])}€</span>'
 
         st.write(
             f'### Le cours de l action est estimé à {result}', unsafe_allow_html=True)
