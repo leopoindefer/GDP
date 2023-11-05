@@ -39,15 +39,18 @@ with col1:
     if button:
         try:
             model = model(df)
+            end_value = model["yhat"].iloc[-1]
             st.sucess('des résultats')
         except:
             st.error('pas de résultat')
 
 with col2:
     try:
-        result = f'<span style="color: #7DCEA0;">{math.ceil(model[-1])}€</span>'
+        result = f'<span style="color: #7DCEA0;">{math.ceil(model)}€</span>'
 
         st.write(
             f'### Le cours de l action est estimé à {result}', unsafe_allow_html=True)
     except:
         pass
+
+st.line_chart(data=model, x="ds",y="yhat")
