@@ -31,5 +31,23 @@ df = pd.read_csv(file)
 df = df.rename(columns = {column:'y',"Date":"ds"})
 df=df.loc[:,["ds","y"]]
 
-model = model(df)
-print(model)
+col1, col2 = st.columns(2)
+
+with col1:
+
+    button = st.button('ESTIMER LE COURS DE L ACTION')
+    if button:
+        try:
+            model = model(df)
+            st.sucess('des résultat')
+        except:
+            st.error('pas de résultat')
+
+with col2:
+    try:
+        result = f'<span style="color: #7DCEA0;">{math.ceil(model[0])}€</span>'
+
+        st.write(
+            f'### Le cours de l action est estimé à {result}', unsafe_allow_html=True)
+    except:
+        pass
