@@ -80,6 +80,7 @@ with tab1 :
                 div_indiv = div_indiv.iloc[-1].tolist()
                 div_indiv = sum(div_indiv)*4
                 
+            with col2:
                 div = div_indiv * invest_part
                 gap_value = gap_indiv_value * invest_part
                 tRend = (div/montant)*100
