@@ -46,7 +46,7 @@ with tab1 :
             predict['ds'] = pd.to_datetime(predict['ds'])
             se = df.set_index('ds').join(predict.set_index('ds'), how="left")
             se['sec'] = se['y'] - se['yhat']
-            sec = se["sec"].sum
+            sec = se.sum
             sec = sec**2
 
             predict = predict.rename(columns={"ds":"date","yhat":"prediction"})
