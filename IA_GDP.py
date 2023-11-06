@@ -5,6 +5,7 @@ import pandas as pd
 from prophet import Prophet
 import yfinance as yf
 import datetime
+from datetime import date
 
 from model import model
 
@@ -63,7 +64,7 @@ with tab1 :
             with col1:
 
                 montant = st.text_input('Montant à investir', 1000)
-                duree = st.date_input("Jusqu'à quand ?", datetime.date(2024, 1, 1), min_value=pd.to_datetime(datetime.now()), max_value=pd.to_datetime(predict["date"].iloc[-1]))
+                duree = st.date_input("Jusqu'à quand ?", datetime.date(2024, 1, 1), min_value=pd.to_datetime(date.today()), max_value=pd.to_datetime(predict["date"].iloc[-1]))
                 duree = pd.to_datetime(duree)
                 montant = float(montant)
                 start_value = df["y"].iloc[-1]
