@@ -64,6 +64,7 @@ with tab1 :
 
                 montant = st.text_input('Montant à investir', 1000)
                 duree = st.date_input("Jusqu'à quand ?", datetime.date(2024, 1, 1))
+                duree = pd.to_datetime(duree)
                 montant = float(montant)
                 start_value = df["y"].iloc[-1]
                 end_date = predict[predict['date'] <= duree]
