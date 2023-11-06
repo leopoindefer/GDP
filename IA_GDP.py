@@ -78,8 +78,9 @@ with tab1 :
                 gap_value = gap_indiv_value * invest_part
                 tRend = (div/montant)*100
                 tRent = (div+gap_value)/montant*100
-                mess = f'Taux de rendement de : {round(tRend,2)}%, Rendement de {round(div,2)}€ par actions'
-                mess2 = f'Taux de rentabilité de : {round(tRent,2)}%, Rentabilité de {round(div + gap_value,2)}€ par actions'
+                mess = f'Nombre d action acheté : {round(invest_part,2)}'
+                mess1 = f'Taux de rendement de : {round(tRend,2)}%, Rendement de {round(div,2)}€'
+                mess2 = f'Taux de rentabilité de : {round(tRent,2)}%, Rentabilité de {round(div + gap_value,2)}€'
                 st.write(mess)
                 st.write(mess2)
 
