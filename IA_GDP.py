@@ -66,7 +66,7 @@ with tab1 :
                 duree = st.date_input("Jusqu'à quand ?", datetime.date(2024, 1, 1))
                 montant = float(montant)
                 start_value = df["y"].iloc[-1]
-                end_date = predict[predict.date <= duree]
+                end_date = predict[predict['date'] <= duree]
                 end_value = end_date["prediction"].iloc[-1]
                 gap_indiv_value = (end_value - start_value)
                 invest_part = float(montant/start_value)
