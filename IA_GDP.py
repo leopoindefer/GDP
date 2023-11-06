@@ -68,7 +68,7 @@ with tab1 :
                 montant = float(montant)
                 start_value = df["y"].iloc[-1]
                 end_date = predict[predict['date'] <= duree]
-                end_value = predict["prediction"].iloc[-1]
+                end_value = end_date["prediction"].iloc[-1]
                 gap_indiv_value = (end_value - start_value)
                 invest_part = float(montant/start_value)
 
