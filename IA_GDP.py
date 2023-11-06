@@ -41,6 +41,8 @@ with tab1 :
         try:
             predict = model(df)
             predict = predict.loc[:,["ds","yhat"]]
+            df['ds'] = pd.to_datetime(df['ds'])
+            predict['ds'] = pd.to_datetime(predict['ds'])
             sec = df.set_index('ds').join(predict.set_index('ds'), how="left")
             predict = predict.rename(columns={"ds":"date","yhat":"prediction"})
 
