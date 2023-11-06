@@ -74,13 +74,15 @@ with tab1 :
                 div_indiv = div_indiv.iloc[-1].tolist()
                 div_indiv = sum(div_indiv)*4
                 
-            #with col2:
+            with col2:
                 div = div_indiv * invest_part
                 gap_value = gap_indiv_value * invest_part
                 tRend = (div/montant)*100
                 tRent = (div+gap_value)/montant*100
-                mess = f'Taux de rendement de : {round(tRend,2)}%, Rendement de {round(div,2)}€ par actions\nTaux de rentabilité de : {round(tRent,2)}%, Rentabilité de {round(div + gap_value,2)}€ par actions'
+                mess = f'Taux de rendement de : {round(tRend,2)}%, Rendement de {round(div,2)}€ par actions'
+                mess2 = f'Taux de rentabilité de : {round(tRent,2)}%, Rentabilité de {round(div + gap_value,2)}€ par actions'
                 st.write(mess)
+                st.write(mess2)
 
         except:
             st.error('pas de résultat')
