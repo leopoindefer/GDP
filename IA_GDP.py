@@ -63,12 +63,11 @@ with tab1 :
             with col1:
 
                 montant = st.text_input('Montant à investir', 1000)
+                montant = float(montant)
                 start_value = df["y"].iloc[-1]
                 end_value = predict["prediction"].iloc[-1]
                 gap_indiv_value = (end_value - start_value)
-                #invest_part = montant/start_value
-                st.write(type(start_value))
-                st.write(float(montant))
+                invest_part = montant/start_value
 
                 ticker = yf.Ticker(symb)
                 div_indiv = pd.DataFrame(ticker.dividends)
@@ -77,12 +76,12 @@ with tab1 :
                 st.write(div_indiv)
                 
             #with col2:
-                #div = div_indiv * invest_part
-                #gap_value = gap_indiv_value * invest_part
-                #tRend = (div/montant)*100
-                #tRent = (div+gap_value)/montant*100
-                #mess = f'Taux de rendement de : {round(tRend,2)}%, Rendement de {round(div,2)}€ par actions\nTaux de rentabilité de : {round(tRent,2)}%, Rentabilité de {round(div + gap_value,2)}€ par actions'
-                #st.write(mess)
+                div = div_indiv * invest_part
+                gap_value = gap_indiv_value * invest_part
+                tRend = (div/montant)*100
+                tRent = (div+gap_value)/montant*100
+                mess = f'Taux de rendement de : {round(tRend,2)}%, Rendement de {round(div,2)}€ par actions\nTaux de rentabilité de : {round(tRent,2)}%, Rentabilité de {round(div + gap_value,2)}€ par actions'
+                st.write(mess)
 
         except:
             st.error('pas de résultat')
