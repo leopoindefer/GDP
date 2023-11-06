@@ -79,7 +79,10 @@ with tab1 :
                 div_indiv = pd.DataFrame(ticker.dividends)
                 div_indiv = div_indiv.iloc[-1].tolist()
                 div_indiv = sum(div_indiv)*4
-                
+        except:
+            st.error('pas de résultat')
+
+        try:      
             with col2:
                 div = div_indiv * invest_part
                 gap_value = gap_indiv_value * invest_part
