@@ -29,7 +29,7 @@ with tab1 :
                 """
     st.markdown(hide_st_style, unsafe_allow_html=True) 
 
-    st.header("Action à visualier")
+    st.header("Action à visualiser")
     action = st.selectbox('Choisir une action', ('AAPL','META','AMZN','TSLA'))
 
     symb = action
@@ -80,7 +80,6 @@ with tab1 :
                 div_indiv = div_indiv.iloc[-1].tolist()
                 div_indiv = sum(div_indiv)*4
                 
-            with col2:
                 div = div_indiv * invest_part
                 gap_value = gap_indiv_value * invest_part
                 tRend = (div/montant)*100
