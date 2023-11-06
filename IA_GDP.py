@@ -67,8 +67,8 @@ with tab1 :
                 end_value = predict["prediction"].iloc[-1]
                 gap_indiv_value = (end_value - start_value)
                 #invest_part = montant/start_value
-                st.write(start_value)
-                st.write(montant)
+                st.write(type(start_value))
+                st.write(type(montant))
 
                 ticker = yf.Ticker(symb)
                 div_indiv = pd.DataFrame(ticker.dividends)
