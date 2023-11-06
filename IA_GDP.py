@@ -57,7 +57,7 @@ with tab1 :
 
                 colchart1, colchart2 = st.columns(2)
                 with colchart1:
-                    type_graph = st.selectbox('Prédiction', ('Prédiction','Réel'))
+                    type_graph = st.selectbox('Choisir la visualisation', ('Prédiction','Réel'))
 
                 if type_graph == "Prédiction":
                     st.line_chart(data=predict, x="date", y="prediction",color="#FF0000")
