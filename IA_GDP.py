@@ -80,7 +80,7 @@ with tab1 :
                 div_indiv = div_indiv.iloc[-1].tolist()
                 div_indiv = sum(div_indiv)*4
             except:
-                st.error('pas de dividende')
+                st.error('dividende réinvestit')
                 div_indiv = 0
     
         with col2:
