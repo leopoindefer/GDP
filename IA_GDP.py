@@ -42,8 +42,15 @@ with tab1 :
             predict = predict.loc[:,["ds","yhat"]]
             predict = predict.rename(columns={"ds":"date","yhat":"prediction"})
 
-            st.line_chart(data=predict, x="date", y="prediction")
-            st.dataframe(predict)
+            col1, col2 = st.columns(2)
+
+            with col1:
+
+                st.line_chart(data=predict, x="date", y="prediction")
+
+            with col2:
+                st.dataframe(predict)
+
         except:
             st.error('pas de résultat')
 
