@@ -61,10 +61,10 @@ with tab1 :
 
                 if type_graph == "Prédiction":
                     st.line_chart(data=predict, x="date", y="prediction",color="#FF0000")
-                    st.write(sec)
                 elif type_graph == "Réel":
                     st.line_chart(data=df, x="ds", y="y",color="#FF0000")
-
+                st.write(sec)
+                
             except:
                 st.error('pas de résultat')
 
