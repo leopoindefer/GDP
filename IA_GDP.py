@@ -41,6 +41,8 @@ with tab1 :
 
     if action:
         try:
+            with st.spinner('Wait for it...'):
+                time.sleep(5)
             predict = model(df)
             predict = predict.loc[:,["ds","yhat"]]
 
