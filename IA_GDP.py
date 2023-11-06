@@ -64,7 +64,7 @@ with tab1 :
 
                 montant = st.text_input('Montant à investir', 1000)
                 start_value = df["y"].iloc[-1]
-                end_value = predict["yhat"].iloc[-1]
+                end_value = predict["prediction"].iloc[-1]
                 gap_indiv_value = (end_value - start_value)
                 invest_part = montant/start_value
 
