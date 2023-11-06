@@ -55,7 +55,7 @@ with tab1 :
 
                 predict = predict.rename(columns={"ds":"date","yhat":"prediction"})
 
-                st.line_chart(data=predict, x="date", y="prediction")
+                st.line_chart(data=predict, x="date", y="prediction",color="red")
                 st.write(sec)
 
             except:
