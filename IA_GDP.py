@@ -56,13 +56,8 @@ with tab1 :
                 predict = predict.rename(columns={"ds":"date","yhat":"prediction"})
 
                 colchart1, colchart2 = st.columns(2)
-                with colchart1:
-                    type_graph = st.selectbox('Choisir la visualisation', ('Prédiction','Réel'))
 
-                if type_graph == "Prédiction":
-                    st.line_chart(data=predict, x="date", y="prediction",color="#FF0000")
-                elif type_graph == "Réel":
-                    st.line_chart(data=df, x="ds", y="y",color="#FF0000")
+                st.line_chart(data=ecart)
                 st.write(sec)
 
             except:
@@ -82,7 +77,7 @@ with tab1 :
             invest_part = float(montant/start_value)
     
         with col2:
-            
+
             try:
                 ticker = yf.Ticker(symb)
                 div_indiv = pd.DataFrame(ticker.dividends)
