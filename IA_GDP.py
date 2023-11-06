@@ -61,10 +61,10 @@ with tab1 :
             except:
                 st.error('pas de résultat')
 
-        try:
-            col1, col2 = st.columns(2)
-            with col1:
-
+       
+        col1, col2 = st.columns(2)
+        with col1:
+            try:
                 montant = st.text_input('Montant à investir', 1000)
                 duree = st.date_input("Jusqu'à quand ?", datetime.date(2024, 1, 1), min_value=pd.to_datetime(date.today()), max_value=pd.to_datetime(predict["date"].iloc[-1]))
                 duree = pd.to_datetime(duree)
@@ -79,11 +79,11 @@ with tab1 :
                 div_indiv = pd.DataFrame(ticker.dividends)
                 div_indiv = div_indiv.iloc[-1].tolist()
                 div_indiv = sum(div_indiv)*4
-        except:
-            st.error('pas de résultat')
-
-        try:      
-            with col2:
+            except:
+                st.error('pas de résultat')
+    
+        with col2:
+            try:  
                 div = div_indiv * invest_part
                 gap_value = gap_indiv_value * invest_part
                 tRend = (div/montant)*100
@@ -94,9 +94,8 @@ with tab1 :
                 st.write(mess)
                 st.write(mess1)
                 st.write(mess2)
-
-        except:
-            st.error('pas de résultat')
+            except:
+                st.error('pas de résultat')
 
 with tab2 :
     st.header("Créer votre portefeuille")
