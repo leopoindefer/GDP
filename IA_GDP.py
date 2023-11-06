@@ -55,8 +55,15 @@ with tab1 :
 
                 predict = predict.rename(columns={"ds":"date","yhat":"prediction"})
 
-                st.line_chart(data=predict, x="date", y="prediction",color="#FF0000")
-                st.write(sec)
+                colchart1, colchart2 = st.columns(2)
+                with colchart1:
+                    type_graph = st.selectbox('Prédiction', ('Prédiction','Réel'))
+
+                if type_graph == "Prédiction":
+                    st.line_chart(data=predict, x="date", y="prediction",color="#FF0000")
+                    st.write(sec)
+                elif type_graph == "Réel":
+                    st.line_chart(data=df, x="ds", y="y",color="#FF0000")
 
             except:
                 st.error('pas de résultat')
