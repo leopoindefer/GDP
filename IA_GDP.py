@@ -40,7 +40,7 @@ with tab1 :
     df=df.loc[:,["ds","y"]]
 
     if action:
-        with st.spinner('Wait for it...'):
+        with st.spinner('Chargement de la prédiction'):
 
             try:
                 predict = model(df)
