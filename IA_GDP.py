@@ -41,7 +41,7 @@ with tab1 :
         try:
             predict = model(df)
             predict = predict.loc[:,["ds","yhat"]]
-            sec = predict.join(df, on="ds", how="left")
+            sec = predict.set_index('ds').join(df.set_index('ds'), on="ds", how="left")
             predict = predict.rename(columns={"ds":"date","yhat":"prediction"})
 
             st.line_chart(data=predict, x="date", y="prediction")
