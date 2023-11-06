@@ -51,8 +51,9 @@ with tab1 :
 
             predict = predict.rename(columns={"ds":"date","yhat":"prediction"})
 
-            st.write(sec)
             st.line_chart(data=predict, x="date", y="prediction")
+            mess_sec = f'niveau de précision de la prédiction : {round(sec,2)}'
+            st.write(mess_sec)
             st.dataframe(predict)
 
             col1, col2 = st.columns(2)
