@@ -82,6 +82,7 @@ with tab1 :
                 mess1 = f'Taux de rendement de : {round(tRend,2)}%, Rendement de {round(div,2)}€'
                 mess2 = f'Taux de rentabilité de : {round(tRent,2)}%, Rentabilité de {round(div + gap_value,2)}€'
                 st.write(mess)
+                st.write(mess1)
                 st.write(mess2)
 
         except:
