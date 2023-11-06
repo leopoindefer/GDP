@@ -72,15 +72,15 @@ with tab1 :
                 div_indiv = pd.DataFrame(ticker.dividends)
                 div_indiv = div_indiv.iloc[-1].tolist()
                 div_indiv = sum(div_indiv)*4
-                div_indiv
+                st.write(div_indiv)
                 
-            with col2:
-                div = div_indiv * invest_part
-                gap_value = gap_indiv_value * invest_part
-                tRend = (div/montant)*100
-                tRent = (div+gap_value)/montant*100
-                mess = f'Taux de rendement de : {round(tRend,2)}%, Rendement de {round(div,2)}€ par actions\nTaux de rentabilité de : {round(tRent,2)}%, Rentabilité de {round(div + gap_value,2)}€ par actions'
-                st.write(mess)
+            #with col2:
+                #div = div_indiv * invest_part
+                #gap_value = gap_indiv_value * invest_part
+                #tRend = (div/montant)*100
+                #tRent = (div+gap_value)/montant*100
+                #mess = f'Taux de rendement de : {round(tRend,2)}%, Rendement de {round(div,2)}€ par actions\nTaux de rentabilité de : {round(tRent,2)}%, Rentabilité de {round(div + gap_value,2)}€ par actions'
+                #st.write(mess)
 
         except:
             st.error('pas de résultat')
