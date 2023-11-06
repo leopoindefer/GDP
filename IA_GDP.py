@@ -57,7 +57,9 @@ with tab1 :
 
                 colchart1, colchart2 = st.columns(2)
 
-                st.line_chart(data=ecart)
+                graph = ecart.loc[:,["y","yhat"]]
+                graph = df.rename(columns = {"y":'Reel',"yhat":"prediction"})
+                st.line_chart(data=graph)
                 st.write(sec)
 
             except:
