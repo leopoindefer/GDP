@@ -12,11 +12,11 @@ st.set_page_config(
     page_icon="💯",
 )
 
+st.title("Gérer votre portefeuille avec l'IA")
+
 tab1, tab2 = st.tabs(["Analyser le marché", "Création de portefeuille"])
 
 with tab1 :
-
-    st.title("Gérer votre portefeuille avec l'IA")
 
     hide_st_style = """
                 <style>
@@ -55,8 +55,13 @@ with tab1 :
             st.write(sec)
             st.dataframe(predict)
 
+        except:
+            st.error('pas de résultat')
+
+        try:
             col1, col2 = st.columns(2)
             with col1:
+
                 montant = st.text_input('Montant à investir', 1000)
                 start_value = df["y"].iloc[-1]
                 end_value = predict["yhat"].iloc[-1]
@@ -81,4 +86,4 @@ with tab1 :
             st.error('pas de résultat')
 
 with tab2 :
-    st.header("Action à visualier")
+    st.header("Créer votre portefeuille")
