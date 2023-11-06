@@ -64,7 +64,7 @@ with tab1 :
                 elif type_graph == "Réel":
                     st.line_chart(data=df, x="ds", y="y",color="#FF0000")
                 st.write(sec)
-                
+
             except:
                 st.error('pas de résultat')
 
@@ -80,7 +80,9 @@ with tab1 :
             end_value = end_date["prediction"].iloc[-1]
             gap_indiv_value = (end_value - start_value)
             invest_part = float(montant/start_value)
-
+    
+        with col2:
+            
             try:
                 ticker = yf.Ticker(symb)
                 div_indiv = pd.DataFrame(ticker.dividends)
@@ -89,8 +91,7 @@ with tab1 :
             except:
                 st.error('dividende réinvesti')
                 div_indiv = 0
-    
-        with col2:
+
             try:  
                 div = div_indiv * invest_part
                 gap_value = gap_indiv_value * invest_part
