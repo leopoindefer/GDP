@@ -40,26 +40,26 @@ with tab1 :
     df=df.loc[:,["ds","y"]]
 
     if action:
-        try:
-            with st.spinner('Wait for it...'):
-                time.sleep(5)
-            predict = model(df)
-            predict = predict.loc[:,["ds","yhat"]]
+        with st.spinner('Wait for it...'):
 
-            df['ds'] = pd.to_datetime(df['ds'])
-            predict['ds'] = pd.to_datetime(predict['ds'])
-            ecart = df.set_index('ds').join(predict.set_index('ds'), how="left")
-            ecart['se'] = ecart['y'] - ecart['yhat']
-            sec = ecart.sum(axis=0)
-            sec = sec.iloc[-1].tolist()**2
+            try:
+                predict = model(df)
+                predict = predict.loc[:,["ds","yhat"]]
 
-            predict = predict.rename(columns={"ds":"date","yhat":"prediction"})
+                df['ds'] = pd.to_datetime(df['ds'])
+                predict['ds'] = pd.to_datetime(predict['ds'])
+                ecart = df.set_index('ds').join(predict.set_index('ds'), how="left")
+                ecart['se'] = ecart['y'] - ecart['yhat']
+                sec = ecart.sum(axis=0)
+                sec = sec.iloc[-1].tolist()**2
 
-            st.line_chart(data=predict, x="date", y="prediction")
-            st.write(sec)
+                predict = predict.rename(columns={"ds":"date","yhat":"prediction"})
 
-        except:
-            st.error('pas de résultat')
+                st.line_chart(data=predict, x="date", y="prediction")
+                st.write(sec)
+
+            except:
+                st.error('pas de résultat')
 
         try:
             col1, col2 = st.columns(2)
