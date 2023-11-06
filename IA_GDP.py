@@ -47,11 +47,11 @@ with tab1 :
             ecart = df.set_index('ds').join(predict.set_index('ds'), how="left")
             ecart['se'] = ecart['y'] - ecart['yhat']
             sec = ecart.sum(axis=0)
-            sec = ecart.tolist()
+            sec = ecart.iloc[-1]
 
             predict = predict.rename(columns={"ds":"date","yhat":"prediction"})
 
-            st.write(sec)
+            st.dataframe(sec)
             st.line_chart(data=predict, x="date", y="prediction")
             st.dataframe(predict)
 
