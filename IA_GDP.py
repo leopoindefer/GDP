@@ -60,7 +60,7 @@ with tab1 :
                 graph = ecart.loc[:,["y","yhat"]]
                 graph = graph.rename(columns = {"y":'Reel',"yhat":"prediction"})
                 st.line_chart(data=graph)
-                st.write(round(sec,2))
+                st.write(round(sec,3))
 
             except:
                 st.error('pas de résultat')
