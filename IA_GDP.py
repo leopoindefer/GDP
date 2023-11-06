@@ -68,6 +68,7 @@ with tab1 :
                 gap_indiv_value = (end_value - start_value)
                 #invest_part = montant/start_value
                 st.write(start_value)
+                st.write(montant)
 
                 ticker = yf.Ticker(symb)
                 div_indiv = pd.DataFrame(ticker.dividends)
