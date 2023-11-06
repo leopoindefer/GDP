@@ -64,23 +64,23 @@ with tab1 :
        
         col1, col2 = st.columns(2)
         with col1:
+            montant = st.text_input('Montant à investir', 1000)
+            duree = st.date_input("Jusqu'à quand ?", datetime.date(2024, 1, 1), min_value=pd.to_datetime(date.today()), max_value=pd.to_datetime(predict["date"].iloc[-1]))
+            duree = pd.to_datetime(duree)
+            montant = float(montant)
+            start_value = df["y"].iloc[-1]
+            end_date = predict[predict['date'] <= duree]
+            end_value = end_date["prediction"].iloc[-1]
+            gap_indiv_value = (end_value - start_value)
+            invest_part = float(montant/start_value)
+            
             try:
-                montant = st.text_input('Montant à investir', 1000)
-                duree = st.date_input("Jusqu'à quand ?", datetime.date(2024, 1, 1), min_value=pd.to_datetime(date.today()), max_value=pd.to_datetime(predict["date"].iloc[-1]))
-                duree = pd.to_datetime(duree)
-                montant = float(montant)
-                start_value = df["y"].iloc[-1]
-                end_date = predict[predict['date'] <= duree]
-                end_value = end_date["prediction"].iloc[-1]
-                gap_indiv_value = (end_value - start_value)
-                invest_part = float(montant/start_value)
-
                 ticker = yf.Ticker(symb)
                 div_indiv = pd.DataFrame(ticker.dividends)
                 div_indiv = div_indiv.iloc[-1].tolist()
                 div_indiv = sum(div_indiv)*4
             except:
-                st.error('pas de résultat')
+                st.error('pas de dividende')
     
         with col2:
             try:  
