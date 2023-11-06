@@ -44,6 +44,7 @@ with tab1 :
 
             st.line_chart(data=predict, x="date", y="prediction")
             st.dataframe(predict)
+            montant = st.text_input('Montant à investir', 1000)
 
         except:
             st.error('pas de résultat')
