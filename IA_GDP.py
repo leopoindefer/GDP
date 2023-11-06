@@ -44,12 +44,13 @@ with tab1 :
 
             df['ds'] = pd.to_datetime(df['ds'])
             predict['ds'] = pd.to_datetime(predict['ds'])
-            se = df.set_index('ds').join(predict.set_index('ds'), how="left")
-            se['sec'] = se['y'] - se['yhat']
+            ecart = df.set_index('ds').join(predict.set_index('ds'), how="left")
+            ecart['se'] = ecart['y'] - ecart['yhat']
+            sec = ecart.sum(axis=0)
 
             predict = predict.rename(columns={"ds":"date","yhat":"prediction"})
 
-            st.dataframe(se)
+            st.dataframe(sec)
             st.line_chart(data=predict, x="date", y="prediction")
             st.dataframe(predict)
 
