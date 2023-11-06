@@ -73,7 +73,7 @@ with tab1 :
             end_value = end_date["prediction"].iloc[-1]
             gap_indiv_value = (end_value - start_value)
             invest_part = float(montant/start_value)
-            
+
             try:
                 ticker = yf.Ticker(symb)
                 div_indiv = pd.DataFrame(ticker.dividends)
@@ -81,6 +81,7 @@ with tab1 :
                 div_indiv = sum(div_indiv)*4
             except:
                 st.error('pas de dividende')
+                div_indiv = 0
     
         with col2:
             try:  
