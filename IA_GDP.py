@@ -11,6 +11,8 @@ st.set_page_config(
     page_icon="💯",
 )
 
+tab1, tab2 = st.tabs(["Je suis futur locataire", "Je suis futur bailleur"])
+
 st.title("Gérer votre portefeuille avec l'IA")
 
 hide_st_style = """
@@ -31,7 +33,7 @@ file = f"data/{symb}.csv"
 df = pd.read_csv(file)
 df = df.rename(columns = {column:'y',"Date":"ds"})
 df=df.loc[:,["ds","y"]]
-    
+
 if action:
     try:
         predict = model(df)
@@ -42,11 +44,3 @@ if action:
         st.dataframe(predict)
     except:
         st.error('pas de résultat')
-
-    try:
-        result = f'<span style="color: #7DCEA0;">{math.ceil(predict.iloc[-1]["yhat"])}€</span>'
-
-        st.write(
-            f'### Le cours de l action est estimé à {result}', unsafe_allow_html=True)
-    except:
-        pass
