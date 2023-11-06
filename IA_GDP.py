@@ -41,8 +41,10 @@ with tab1 :
         try:
             predict = model(df)
             predict = predict.loc[:,["ds","yhat"]]
+            SEC = df.join(predict, on="ds", how="left")
             predict = predict.rename(columns={"ds":"date","yhat":"prediction"})
 
+            st.dataframe(SEC)
             st.line_chart(data=predict, x="date", y="prediction")
             st.dataframe(predict)
 
