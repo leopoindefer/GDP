@@ -53,7 +53,6 @@ with tab1 :
 
             st.line_chart(data=predict, x="date", y="prediction")
             st.write(sec)
-            st.dataframe(predict)
 
         except:
             st.error('pas de résultat')
