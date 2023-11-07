@@ -45,7 +45,7 @@ with tab1 :
     #Preprocessing pour modele ARIMA
     df_arima = pd.DataFrame(df.loc[:,["Date",column]])
     df_arima = pd.to_datetime(df_arima['Date'])
-    st.dataframe(df)
+    st.dataframe(df_arima)
 
     if action:
         with st.spinner('Chargement de la prédiction'):
