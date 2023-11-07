@@ -43,7 +43,7 @@ with tab1 :
     df_prophet = df_prophet.loc[:,["ds","y"]]
 
     #Preprocessing pout modele ARIMA
-    df_arima = df.loc[:,["Date",column]]
+    df_arima = pd.DataFrame(df.loc[:,["Date",column]])
     df_arima = pd.to_datetime(df_arima['Date'])
     df_arima = df_arima.set_index("Date")
 
