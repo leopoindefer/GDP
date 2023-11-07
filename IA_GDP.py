@@ -75,8 +75,7 @@ with tab1 :
 
             #ARIMA
             try:
-                model_arima = ARIMA(df_arima, order=(1,5,0))
-                model_arima = model_arima.fit()
+                model_arima = ARIMA(df_arima, order=(1,5,0)).fit()
                 predict_arima = model_arima.predict()
                 st.dataframe(predict_arima)
                 
