@@ -26,5 +26,5 @@ def arima_model(df):
     # Boucler sur toutes les combinaisons possibles de p, d et q
     model = sm.tsa.ARIMA(df_shifted, order=(1,0,0)).fit()
     # Stocker l'AIC pour ce modèle
-
-    return model()
+    arima_pred = model.forecast()
+    return arima_pred
