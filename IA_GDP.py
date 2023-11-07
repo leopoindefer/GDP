@@ -43,8 +43,13 @@ with tab1 :
     df_prophet = df_prophet.loc[:,["ds","y"]]
 
     #Preprocessing pour modele ARIMA
-    df_arima = pd.DataFrame(df.loc[:,["Date",column]])
+    df_arima = df
     df_arima = pd.to_datetime(df_arima['Date'])
+    close_columns=[]
+    for col in df.columns:
+        if 'Close' in col:
+            close_columns.append(col)
+    df_arima=df_arima[close_columns]
     st.dataframe(df_arima)
 
     if action:
