@@ -7,7 +7,7 @@ import yfinance as yf
 import datetime
 from datetime import date
 
-from model import model
+from fonctions.models import prophet_model
 
 st.set_page_config(
     page_title="GDP",
@@ -60,7 +60,7 @@ with tab1 :
                 graph = ecart.loc[:,["y","yhat"]]
                 graph = graph.rename(columns = {"y":'Reel',"yhat":"prediction"})
                 st.line_chart(data=graph)
-                st.write(round(sec,3))
+                st.write(sec)
 
             except:
                 st.error('pas de résultat')
