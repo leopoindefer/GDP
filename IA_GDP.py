@@ -8,6 +8,7 @@ import datetime
 from datetime import date
 
 from fonctions.models import prophet_model
+from fonctions.models import df_prophet
 
 st.set_page_config(
     page_title="GDP",
@@ -36,8 +37,7 @@ with tab1 :
     column = f"Close_{symb}"
     file = f"data/{symb}.csv"
     df = pd.read_csv(file)
-    df = df.rename(columns = {column:'y',"Date":"ds"})
-    df=df.loc[:,["ds","y"]]
+    df = df_prophet(df)
 
     if action:
         with st.spinner('Chargement de la prédiction'):
