@@ -37,7 +37,7 @@ def arima_model(df):
                     model = sm.tsa.ARIMA(df_shifted, order=(p,d,q)).fit()
                     # Stocker l'AIC pour ce modèle
                     aic_results.append((p,d,q,model.aic))
-                except:
+                except: 
                     continue
 
-    print('BEST MODEL', sorted(aic_results, key=lambda x: x[3])[0])
+   return sorted(aic_results, key=lambda x: x[3])[0]
