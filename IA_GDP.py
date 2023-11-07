@@ -38,14 +38,14 @@ with tab1 :
     file = f"data/{symb}.csv"
     df = pd.read_csv(file)
 
-    #Preprocessing pout modele PROPHET
+    #Preprocessing pour modele PROPHET
     df_prophet = df.rename(columns = {column:'y',"Date":"ds"})
     df_prophet = df_prophet.loc[:,["ds","y"]]
 
-    #Preprocessing pout modele ARIMA
+    #Preprocessing pour modele ARIMA
     df_arima = pd.DataFrame(df.loc[:,["Date",column]])
     df_arima = pd.to_datetime(df_arima['Date'])
-    df_arima = df_arima.set_index("Date")
+    st.dataframe(df)
 
     if action:
         with st.spinner('Chargement de la prédiction'):
