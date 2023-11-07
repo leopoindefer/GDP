@@ -43,7 +43,7 @@ with tab1 :
         with st.spinner('Chargement de la prédiction'):
 
             try:
-                predict = model(df)
+                predict = prophet_model(df)
                 predict = predict.loc[:,["ds","yhat"]]
 
                 df['ds'] = pd.to_datetime(df['ds'])
