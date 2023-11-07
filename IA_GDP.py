@@ -78,7 +78,7 @@ with tab1 :
                 df_shifted = df_arima.shift(2)/df_arima
                 df_shifted = df_shifted.dropna()
                 model_arima = sm.tsa.ARIMA(df_shifted, order=(8,0,10)).fit()
-                st.dataframe(model_arima.get_forecast())
+                st.dataframe(model_arima.forecast())
                 
             except:
                 st.error('pas de résultat pour ARIMA')
