@@ -44,12 +44,10 @@ with tab1 :
 
     #Preprocessing pour modele ARIMA
     df_arima = df
-    df_arima = pd.to_datetime(df_arima['Date'])
-    close_columns=[]
-    for col in df.columns:
-        if 'Close' in col:
-            close_columns.append(col)
-    df_arima=df_arima[close_columns]
+    df_arima['Date'] = pd.to_datetime(df_arima['Date'])
+    df_arima.set_index('Date', inplace = True)
+    df_arima = df_arima.loc[:,column]
+    df_arima = pd.DataFrame(df_arima)
     st.dataframe(df_arima)
 
     if action:
