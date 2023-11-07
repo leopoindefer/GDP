@@ -37,16 +37,15 @@ with tab1 :
     column = f"Close_{symb}"
     file = f"data/{symb}.csv"
     df = pd.read_csv(file)
-    df = df_prophet(df)
+    dfProphet = df_prophet(df)
 
     if action:
         with st.spinner('Chargement de la prédiction'):
 
             try:
-                predict = model(df)
+                predict = model(dfProphet)
                 predict = predict.loc[:,["ds","yhat"]]
 
-                df['ds'] = pd.to_datetime(df['ds'])
                 predict['ds'] = pd.to_datetime(predict['ds'])
                 ecart = df.set_index('ds').join(predict.set_index('ds'), how="left")
                 ecart['se'] = ecart['y'] - ecart['yhat']
