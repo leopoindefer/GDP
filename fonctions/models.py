@@ -19,15 +19,12 @@ def prophet_model(df):
 def arima_model(df):
     df_shifted = df.shift(2)/df
     df_shifted = df_shifted.dropna()
-    adf_shifted = adfuller(df_shifted)
-
     # Définir les différentes valeurs de p, d et q à tester
 
     # Stocker les résultats de l'AIC pour chaque combinaison de paramètres
-    aic_results = []
 
     # Boucler sur toutes les combinaisons possibles de p, d et q
     model = sm.tsa.ARIMA(df_shifted, order=(1,0,0)).fit()
-                    # Stocker l'AIC pour ce modèle
-    
-   return model.summary()
+    # Stocker l'AIC pour ce modèle
+
+   return model
