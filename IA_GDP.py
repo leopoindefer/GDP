@@ -37,8 +37,12 @@ with tab1 :
     column = f"Close_{symb}"
     file = f"data/{symb}.csv"
     df = pd.read_csv(file)
+
+    #Preprocessing pout modele PROPHET
     df_prophet = df.rename(columns = {column:'y',"Date":"ds"})
     df_prophet = df_prophet.loc[:,["ds","y"]]
+
+    #Preprocessing pout modele ARIMA
     df_arima = df.loc[:,["Date",column]]
     df_arima = pd.to_datetime(df_arima['Date'])
     df_arima = df_arima.set_index("Date")
@@ -47,22 +51,26 @@ with tab1 :
         with st.spinner('Chargement de la prédiction'):
 
             try:
-                predict = prophet_model(df_prophet)
-                predict = predict.loc[:,["ds","yhat"]]
+                predict_prophet = prophet_model(df_prophet)
+                predict_prophet = predict_prophet.loc[:,["ds","yhat"]]
 
                 df_prophet['ds'] = pd.to_datetime(df_prophet['ds'])
-                predict['ds'] = pd.to_datetime(predict['ds'])
-                ecart = df_prophet.set_index('ds').join(predict.set_index('ds'), how="left")
+                predict_prophet['ds'] = pd.to_datetime(predict_prophet['ds'])
+                ecart = df_prophet.set_index('ds').join(predict_prophet.set_index('ds'), how="left")
                 ecart['se'] = ecart['y'] - ecart['yhat']
                 sec = ecart.sum(axis=0)
                 sec = sec.iloc[-1].tolist()**2
-
             except:
-                st.error('pas de résultat pour prophet')
+                st.error('pas de résultat pour PROPHET')
 
-            predict = predict.rename(columns={"ds":"date","yhat":"prediction"})
+            try:
+                predict_ARIMA = arima_model(df_arima)
+            except:
+                st.error('pas de résultat pour ARIMA')
+
+            predict_prophet = predict_prophet.rename(columns={"ds":"date","yhat":"predict_prophetion"})
             graph = ecart.loc[:,["y","yhat"]]
-            graph = graph.rename(columns = {"y":'Reel',"yhat":"prediction"})
+            graph = graph.rename(columns = {"y":'Reel',"yhat":"predict_prophetion"})
             st.line_chart(data=graph)
             st.write(sec)
 
@@ -70,12 +78,12 @@ with tab1 :
         col1, col2 = st.columns(2)
         with col1:
             montant = st.text_input('Montant à investir', 1000)
-            duree = st.date_input("Jusqu'à quand ?", datetime.date(2024, 1, 1), min_value=pd.to_datetime(date.today()), max_value=pd.to_datetime(predict["date"].iloc[-1]))
+            duree = st.date_input("Jusqu'à quand ?", datetime.date(2024, 1, 1), min_value=pd.to_datetime(date.today()), max_value=pd.to_datetime(predict_prophet["date"].iloc[-1]))
             duree = pd.to_datetime(duree)
             montant = float(montant)
             start_value = df_prophet["y"].iloc[-1]
-            end_date = predict[predict['date'] <= duree]
-            end_value = end_date["prediction"].iloc[-1]
+            end_date = predict_prophet[predict_prophet['date'] <= duree]
+            end_value = end_date["predict_prophetion"].iloc[-1]
             gap_indiv_value = (end_value - start_value)
             invest_part = float(montant/start_value)
     
