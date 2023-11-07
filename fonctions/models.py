@@ -27,4 +27,4 @@ def arima_model(df):
     model = sm.tsa.ARIMA(df_shifted, order=(1,0,0)).fit()
     # Stocker l'AIC pour ce modèle
 
-    return model
+    return model()
