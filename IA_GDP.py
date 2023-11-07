@@ -9,12 +9,6 @@ from datetime import date
 
 from fonctions.models import prophet_model
 
-def df_prophet(df):
-    df_prophet = df.rename(columns = {column:'y',"Date":"ds"})
-    df_prophet = df_prophet.loc[:,["ds","y"]]
-    df_prophet['ds'] = pd.to_datetime(df_prophet['ds'])
-    return df_prophet
-
 st.set_page_config(
     page_title="GDP",
     page_icon="💯",
@@ -42,15 +36,17 @@ with tab1 :
     column = f"Close_{symb}"
     file = f"data/{symb}.csv"
     df = pd.read_csv(file)
-    dfProphet = df_prophet(df)
+    df = df.rename(columns = {column:'y',"Date":"ds"})
+    df=df.loc[:,["ds","y"]]
 
     if action:
         with st.spinner('Chargement de la prédiction'):
 
             try:
-                predict = model(dfProphet)
+                predict = model(df)
                 predict = predict.loc[:,["ds","yhat"]]
 
+                df['ds'] = pd.to_datetime(df['ds'])
                 predict['ds'] = pd.to_datetime(predict['ds'])
                 ecart = df.set_index('ds').join(predict.set_index('ds'), how="left")
                 ecart['se'] = ecart['y'] - ecart['yhat']
