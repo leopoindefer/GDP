@@ -6,9 +6,15 @@ from prophet import Prophet
 import yfinance as yf
 import datetime
 from datetime import date
+import matplotlib as plt
 
 from fonctions.prophet import prophet_model
-from fonctions.arima import arima_model
+
+from statsmodels.tsa.seasonal import seasonal_decompose
+from statsmodels.tsa.stattools import adfuller
+from statsmodels.tsa.arima.model import ARIMA
+from statsmodels.graphics.tsaplots import plot_predict
+import statsmodels.api as sm
 
 st.set_page_config(
     page_title="GDP",
@@ -53,6 +59,7 @@ with tab1 :
     if action:
         with st.spinner('Chargement de la prédiction'):
 
+            #PROPHET
             try:
                 predict_prophet = prophet_model(df_prophet)
                 predict_prophet = predict_prophet.loc[:,["ds","yhat"]]
@@ -66,8 +73,17 @@ with tab1 :
             except:
                 st.error('pas de résultat pour PROPHET')
 
+            #ARIMA
             try:
-                predict_ARIMA = arima_model(df_arima)
+                df_shifted = df_arima.shift(2)/df_arima
+                df_shifted = df_shifted.dropna()
+                model = sm.tsa.ARIMA(df_shifted, order=(5,1,0)).fit()
+                arima_pred = model.forecast()
+
+                p1_d1_q1 = (8,0,10)
+                res_model1 = ARIMA(df_arima, order=p1_d1_q1).fit()
+                st.line_chart(data=res_model1)
+                
             except:
                 st.error('pas de résultat pour ARIMA')
 
