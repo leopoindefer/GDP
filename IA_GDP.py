@@ -77,9 +77,11 @@ with tab1 :
             try:
                 df_shifted = df_arima.shift(2)/df_arima
                 df_shifted = df_shifted.dropna()
-                model = sm.tsa.ARIMA(df_shifted, order=(8,0,10)).fit()
-                arima_pred = model.forecast()
-                st.line_chart(data=model)
+                model_arima = sm.tsa.ARIMA(df_shifted, order=(8,0,10)).fit()
+                fig, ax = plt.subplots(figsize=(16,9))
+                ax = df.loc['2008':'2012'].plot(ax=ax)
+                plot_predict(model_arima, '2008', '2012', ax=ax)
+                plt.show()
                 
             except:
                 st.error('pas de résultat pour ARIMA')
