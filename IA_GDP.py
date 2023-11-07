@@ -49,10 +49,8 @@ with tab1 :
     df_arima = df_arima.loc[:,column]
     df_arima = pd.DataFrame(df_arima)
     df_arima.resample("MS").first()
-    
-    run = st.button("run")
 
-    if run:
+    if action:
         with st.spinner('Chargement de la prédiction'):
 
             try:
