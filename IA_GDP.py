@@ -8,6 +8,7 @@ import datetime
 from datetime import date
 
 from fonctions.models import prophet_model
+from fonctions.models import arima_model
 
 st.set_page_config(
     page_title="GDP",
@@ -36,34 +37,34 @@ with tab1 :
     column = f"Close_{symb}"
     file = f"data/{symb}.csv"
     df = pd.read_csv(file)
-    df = df.rename(columns = {column:'y',"Date":"ds"})
-    df=df.loc[:,["ds","y"]]
+    df_prophet = df.rename(columns = {column:'y',"Date":"ds"})
+    df_prophet = df_prophet.loc[:,["ds","y"]]
+    df_arima = df.loc[:,["Date",column]]
+    df_arima = pd.to_datetime(df_arima['Date'])
+    df_arima = df_arima.set_index("Date")
 
     if action:
         with st.spinner('Chargement de la prédiction'):
 
             try:
-                predict = prophet_model(df)
+                predict = prophet_model(df_prophet)
                 predict = predict.loc[:,["ds","yhat"]]
 
-                df['ds'] = pd.to_datetime(df['ds'])
+                df_prophet['ds'] = pd.to_datetime(df_prophet['ds'])
                 predict['ds'] = pd.to_datetime(predict['ds'])
-                ecart = df.set_index('ds').join(predict.set_index('ds'), how="left")
+                ecart = df_prophet.set_index('ds').join(predict.set_index('ds'), how="left")
                 ecart['se'] = ecart['y'] - ecart['yhat']
                 sec = ecart.sum(axis=0)
                 sec = sec.iloc[-1].tolist()**2
 
-                predict = predict.rename(columns={"ds":"date","yhat":"prediction"})
-
-                colchart1, colchart2 = st.columns(2)
-
-                graph = ecart.loc[:,["y","yhat"]]
-                graph = graph.rename(columns = {"y":'Reel',"yhat":"prediction"})
-                st.line_chart(data=graph)
-                st.write(sec)
-
             except:
-                st.error('pas de résultat')
+                st.error('pas de résultat pour prophet')
+
+            predict = predict.rename(columns={"ds":"date","yhat":"prediction"})
+            graph = ecart.loc[:,["y","yhat"]]
+            graph = graph.rename(columns = {"y":'Reel',"yhat":"prediction"})
+            st.line_chart(data=graph)
+            st.write(sec)
 
        
         col1, col2 = st.columns(2)
@@ -72,7 +73,7 @@ with tab1 :
             duree = st.date_input("Jusqu'à quand ?", datetime.date(2024, 1, 1), min_value=pd.to_datetime(date.today()), max_value=pd.to_datetime(predict["date"].iloc[-1]))
             duree = pd.to_datetime(duree)
             montant = float(montant)
-            start_value = df["y"].iloc[-1]
+            start_value = df_prophet["y"].iloc[-1]
             end_date = predict[predict['date'] <= duree]
             end_value = end_date["prediction"].iloc[-1]
             gap_indiv_value = (end_value - start_value)
