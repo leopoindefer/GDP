@@ -70,6 +70,7 @@ with tab1 :
 
             try:
                 predict_ARIMA = arima_model(df_arima)
+                st.dataframe(predict_ARIMA)
             except:
                 st.error('pas de résultat pour ARIMA')
 
