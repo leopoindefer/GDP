@@ -68,7 +68,6 @@ with tab1 :
 
             try:
                 predict_ARIMA = arima_model(df_arima)
-                st.line_chart(data=predict_ARIMA)
             except:
                 st.error('pas de résultat pour ARIMA')
 
