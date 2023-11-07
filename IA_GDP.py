@@ -7,8 +7,8 @@ import yfinance as yf
 import datetime
 from datetime import date
 
-from fonctions.models import prophet_model
-from fonctions.models import arima_model
+from fonctions.prophet import prophet_model
+from fonctions.arima import arima_model
 
 st.set_page_config(
     page_title="GDP",
@@ -68,13 +68,13 @@ with tab1 :
 
             try:
                 predict_ARIMA = arima_model(df_arima)
-                st.dataframe(predict_ARIMA)
+                st.line_chart(data=predict_ARIMA)
             except:
                 st.error('pas de résultat pour ARIMA')
 
-            predict_prophet = predict_prophet.rename(columns={"ds":"date","yhat":"predict_prophetion"})
+            predict_prophet = predict_prophet.rename(columns={"ds":"date","yhat":"prediction"})
             graph = ecart.loc[:,["y","yhat"]]
-            graph = graph.rename(columns = {"y":'Reel',"yhat":"predict_prophetion"})
+            graph = graph.rename(columns = {"y":'Reel',"yhat":"predicttion"})
             st.line_chart(data=graph)
             st.write(sec)
 
@@ -87,7 +87,7 @@ with tab1 :
             montant = float(montant)
             start_value = df_prophet["y"].iloc[-1]
             end_date = predict_prophet[predict_prophet['date'] <= duree]
-            end_value = end_date["predict_prophetion"].iloc[-1]
+            end_value = end_date["prediction"].iloc[-1]
             gap_indiv_value = (end_value - start_value)
             invest_part = float(montant/start_value)
     
