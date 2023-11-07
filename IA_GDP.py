@@ -8,7 +8,7 @@ import datetime
 from datetime import date
 
 from fonctions.models import prophet_model
-from fonctions.models import df_prophet
+from fonctions.cleaner import df_prophet
 
 st.set_page_config(
     page_title="GDP",
