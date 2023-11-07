@@ -77,12 +77,9 @@ with tab1 :
             try:
                 df_shifted = df_arima.shift(2)/df_arima
                 df_shifted = df_shifted.dropna()
-                model = sm.tsa.ARIMA(df_shifted, order=(5,1,0)).fit()
+                model = sm.tsa.ARIMA(df_shifted, order=(8,0,10)).fit()
                 arima_pred = model.forecast()
-
-                p1_d1_q1 = (8,0,10)
-                res_model1 = ARIMA(df_arima, order=p1_d1_q1).fit()
-                st.line_chart(data=res_model1)
+                st.line_chart(data=model)
                 
             except:
                 st.error('pas de résultat pour ARIMA')
