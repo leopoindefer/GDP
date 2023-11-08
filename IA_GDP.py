@@ -152,8 +152,8 @@ with tab1 :
         st.write('')
         st.write("")
         run = st.button('Comparer')
-        graph_comp = df1.set_index('Date').join(df2.set_index('Date'), how="left")
-        st.line_chart(graph_comp)
+    graph_comp = df1.set_index('Date').join(df2.set_index('Date'), how="left")
+    st.line_chart(graph_comp)
 
     if run:
 
