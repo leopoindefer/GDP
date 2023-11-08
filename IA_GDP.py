@@ -149,6 +149,7 @@ with tab1 :
         df2 = df2.loc[:,[column2, "Date"]]
 
     with col_comp3:
+        st.write(' ')
         run = st.button('Comparer')
 
     if run:
