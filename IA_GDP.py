@@ -158,7 +158,7 @@ with tab1 :
         start_date = start_date_df2
     else:
         start_date = start_date_df1
-    st.write(start_date)
+    st.write(df2)
     #df1 = df.loc[df1['Date'] >= start_date]
     #df2 = df.loc[df2['Date'] >= start_date]
     #x = df1.loc[:,column1].tolist()
