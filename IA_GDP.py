@@ -129,20 +129,23 @@ with tab1 :
     st.markdown('----')
 
     st.header("Comparer des actions ou indices")
+    col_comp1, col_comp2 = st.columns(2)
 
-    action_comp1 = st.selectbox('Choisir une action', ('AAPL','META','AMZN','TSLA'))
-    symb1 = action_comp1
-    column1 = f"Close_{symb1}"
-    file1 = f"data/actions/{symb1}.csv"
-    df1 = pd.read_csv(file1)
-    df1 = df1.loc[:,[column1, "Date"]]
+    with col_comp1:
+        action_comp1 = st.selectbox('Action comparante', ('AAPL','META','AMZN','TSLA'))
+        symb1 = action_comp1
+        column1 = f"Close_{symb1}"
+        file1 = f"data/actions/{symb1}.csv"
+        df1 = pd.read_csv(file1)
+        df1 = df1.loc[:,[column1, "Date"]]
 
-    action_comp2 = st.selectbox('Choisir une action', ('AAPL','META','AMZN','TSLA'))
-    symb2 = action_comp2
-    column2 = f"Close_{symb2}"
-    file2 = f"data/actions/{symb2}.csv"
-    df2 = pd.read_csv(file2)
-    df2 = df2.loc[:,[column2, "Date"]]
+    with col_comp2:
+        action_comp2 = st.selectbox('Action comparée', ('AAPL','META','AMZN','TSLA'))
+        symb2 = action_comp2
+        column2 = f"Close_{symb2}"
+        file2 = f"data/actions/{symb2}.csv"
+        df2 = pd.read_csv(file2)
+        df2 = df2.loc[:,[column2, "Date"]]
 
     graph_comp = df1.set_index('Date').join(df2.set_index('Date'), how="left")
     st.line_chart(graph_comp)
