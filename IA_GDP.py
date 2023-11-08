@@ -154,7 +154,7 @@ with tab1 :
     #coefficient de Pearson
     start_date1 = min(df1['Date'])
     start_date2 = min(df2["Date"])
-    if start_date1 < start_date2:
+    if start_date1 > start_date2:
         start_date = start_date1
     else:
         start_date = start_date2
