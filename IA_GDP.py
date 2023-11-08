@@ -158,8 +158,18 @@ with tab1 :
         start_date = start_date_df2
     else:
         start_date = start_date_df1
+
+    end_date_df1 = max(df1['Date'])
+    end_date_df2 = max(df2['Date'])
+    if end_date_df1 > end_date_df2:
+        end_date = end_date_df2
+    else:
+        end_date = end_date_df1
+
     df1 = df.loc[df1['Date'] >= start_date]
+    df1 = df.loc[df1['Date'] <= end_date]
     df2 = df.loc[df2['Date'] >= start_date]
+    df2 = df.loc[df2['Date'] <= end_date]
     st.dataframe(df1)
     st.dataframe(df2)
     #x = df1.loc[:,column1].tolist()
