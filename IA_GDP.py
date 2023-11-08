@@ -152,15 +152,6 @@ with tab1 :
     st.line_chart(graph_comp)
 
     #coefficient de Pearson
-    start_date_df1 = min(df1['Date'])
-    start_date_df2 = min(df2['Date'])
-    if start_date_df1 < start_date_df2:
-        start_date = start_date_df2
-    else:
-        start_date = start_date_df1
-
-    df1 = df.loc[df1['Date'] >= start_date]
-    df2 = df.loc[df2['Date'] >= start_date]
     st.dataframe(df1)
     st.dataframe(df2)
     X = df1.tolist()
