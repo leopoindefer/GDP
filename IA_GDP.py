@@ -130,7 +130,7 @@ with tab1 :
     st.markdown('----')
 
     st.header("Comparer des actions ou indices")
-    col_comp1, col_comp2 = st.columns(2)
+    col_comp1, col_comp2, col_comp3 = st.columns(3)
 
     with col_comp1:
         action_comp1 = st.selectbox('Action comparante', ('AAPL','META','AMZN','TSLA'))
@@ -148,26 +148,31 @@ with tab1 :
         df2 = pd.read_csv(file2)
         df2 = df2.loc[:,[column2, "Date"]]
 
-    graph_comp = df1.set_index('Date').join(df2.set_index('Date'), how="left")
-    st.line_chart(graph_comp)
+    with col_comp3:
+        run = st.button('Comparer')
 
-    #coefficient de Pearson
-    start_date1 = min(df1['Date'])
-    start_date2 = min(df2["Date"])
-    if start_date1 >= start_date2:
-        start_date = start_date1
-    else:
-        start_date = start_date2
-    start_date = pd.to_datetime(start_date)
-    df1['Date'] = pd.to_datetime(df1['Date'])
-    df2['Date'] = pd.to_datetime(df2['Date'])
-    df1 = df1[df1.Date>=start_date]
-    df2 = df2[df2.Date>=start_date]
-    X = df1[column1].tolist()
-    Y = df2[column2].tolist()
-    corr, _ = pearsonr(X, Y)
-    mess_corr = f'Corrélation linéraire à : {round(corr*100,2)}%'
-    st.write(mess_corr)
+    if run:
+
+        graph_comp = df1.set_index('Date').join(df2.set_index('Date'), how="left")
+        st.line_chart(graph_comp)
+
+        #coefficient de Pearson
+        start_date1 = min(df1['Date'])
+        start_date2 = min(df2["Date"])
+        if start_date1 >= start_date2:
+            start_date = start_date1
+        else:
+            start_date = start_date2
+        start_date = pd.to_datetime(start_date)
+        df1['Date'] = pd.to_datetime(df1['Date'])
+        df2['Date'] = pd.to_datetime(df2['Date'])
+        df1 = df1[df1.Date>=start_date]
+        df2 = df2[df2.Date>=start_date]
+        X = df1[column1].tolist()
+        Y = df2[column2].tolist()
+        corr, _ = pearsonr(X, Y)
+        mess_corr = f'Corrélation linéraire à : {round(corr*100,2)}%'
+        st.write(mess_corr)
 
     st.markdown('----')
 
