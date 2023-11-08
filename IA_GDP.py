@@ -165,7 +165,7 @@ with tab1 :
     df2 = df2[df2.Date>=start_date]
     X = df1[column1].tolist()
     Y = df2[column2].tolist()
-    st.write(start_date1)
+    st.write(start_date)
     st.dataframe(df1)
     st.write(start_date2)
     st.dataframe(df2)
