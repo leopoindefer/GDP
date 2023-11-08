@@ -160,6 +160,7 @@ with tab1 :
         start_date = start_date1
     else:
         start_date = start_date2
+    start_date = pd.to_datetime(start_date)
     X = df1[column1].tolist()
     Y = df2[column2].tolist()
     corr, _ = pearsonr(X, Y)
