@@ -152,8 +152,6 @@ with tab1 :
         st.write('')
         st.write("")
         run = st.button('Comparer')
-    graph_comp = df1.set_index('Date').join(df2.set_index('Date'), how="left")
-    st.line_chart(graph_comp)
 
     if run:
 
@@ -177,6 +175,9 @@ with tab1 :
         corr, _ = pearsonr(X, Y)
         mess_corr = f'Corrélation linéraire à : {round(corr*100,2)}%'
         st.write(mess_corr)
+    
+    else:
+        st.line_chart(df1)
 
     st.markdown('----')
 
