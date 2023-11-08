@@ -7,6 +7,7 @@ import yfinance as yf
 import datetime
 from datetime import date
 import matplotlib as plt
+from scipy.stats import pearsonr
 
 from fonctions.prophet import prophet_model
 
@@ -151,8 +152,11 @@ with tab1 :
     st.line_chart(graph_comp)
 
     #coefficient de Pearson
-    liste_df1 = df1.loc[:,column1].tolist()
-    st.write(liste_df1)
+    x = df1.loc[:,column1].tolist()
+    y = df2.loc[:,column2].tolist()
+    corr, _ = pearsonr(x, y)
+    corr_mess = f'corrélé à : {corr}'
+    st.write(corr_mess)
 
     st.markdown('----')
 
