@@ -152,8 +152,6 @@ with tab1 :
     st.line_chart(graph_comp)
 
     #coefficient de Pearson
-    st.dataframe(df1)
-    st.dataframe(df2)
     start_date1 = min(df1['Date'])
     start_date2 = min(df2["Date"])
     if start_date1 < start_date2:
@@ -167,6 +165,8 @@ with tab1 :
     df2 = df2[df2.Date>=start_date]
     X = df1[column1].tolist()
     Y = df2[column2].tolist()
+    st.dataframe(df1)
+    st.dataframe(df2)
     corr, _ = pearsonr(X, Y)
     mess_corr = f'Corrélation linéraire à : {round(corr*100,2)}%'
     st.write(mess_corr)
