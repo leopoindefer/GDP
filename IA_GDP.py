@@ -160,11 +160,13 @@ with tab1 :
         start_date = start_date_df1
     df1 = df.loc[df1['Date'] > start_date]
     df2 = df.loc[df2['Date'] > start_date]
-    x = df1.loc[:,column1].tolist()
-    y = df2.loc[:,column2].tolist()
-    corr, _ = pearsonr(x, y)
-    corr_mess = f'corrélé linéairement à : {round(corr*100,2)}%'
-    st.write(corr_mess)
+    st.dataframe(df1)
+    st.dataframe(df2)
+    #x = df1.loc[:,column1].tolist()
+    #y = df2.loc[:,column2].tolist()
+    #corr, _ = pearsonr(x, y)
+    #corr_mess = f'corrélé linéairement à : {round(corr*100,2)}%'
+    #st.write(corr_mess)
 
     st.markdown('----')
 
