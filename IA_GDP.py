@@ -154,9 +154,9 @@ with tab1 :
     #coefficient de Pearson
     st.dataframe(df1)
     st.dataframe(df2)
-    X = df1.tolist()
-    Y = df2.tolist()
-    #corr, _ = pearsonr(X, Y)
+    X = df1[column1].tolist()
+    Y = df2[column2].tolist()
+    corr, _ = pearsonr(X, Y)
     #mess_corr = f'Corrélation linéraire à :{round(corr*100,2)}%'
 
     st.markdown('----')
