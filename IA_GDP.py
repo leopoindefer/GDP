@@ -165,7 +165,9 @@ with tab1 :
     df2 = df2[df2.Date>=start_date]
     X = df1[column1].tolist()
     Y = df2[column2].tolist()
+    st.write("df1")
     st.dataframe(df1)
+    st.write("df2")
     st.dataframe(df2)
     corr, _ = pearsonr(X, Y)
     mess_corr = f'Corrélation linéraire à : {round(corr*100,2)}%'
