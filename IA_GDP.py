@@ -133,7 +133,7 @@ with tab1 :
     col_comp1, col_comp2, col_comp3 = st.columns(3)
 
     with col_comp1:
-        action_comp1 = st.selectbox(' ', ('AAPL','META','AMZN','TSLA'))
+        action_comp1 = st.selectbox('', ('AAPL','META','AMZN','TSLA'))
         symb1 = action_comp1
         column1 = f"Close_{symb1}"
         file1 = f"data/actions/{symb1}.csv"
@@ -141,7 +141,7 @@ with tab1 :
         df1 = df1.loc[:,[column1, "Date"]]
 
     with col_comp2:
-        action_comp2 = st.selectbox('', ('META','AMZN','TSLA','AAPL'))
+        action_comp2 = st.selectbox(' ', ('META','AMZN','TSLA','AAPL'))
         symb2 = action_comp2
         column2 = f"Close_{symb2}"
         file2 = f"data/actions/{symb2}.csv"
@@ -149,9 +149,11 @@ with tab1 :
         df2 = df2.loc[:,[column2, "Date"]]
 
     with col_comp3:
-        st.write(' ')
-        st.write(' ')
+        st.write('')
+        st.write("")
         run = st.button('Comparer')
+        graph_comp = df1.set_index('Date').join(df2.set_index('Date'), how="left")
+        st.line_chart(graph_comp)
 
     if run:
 
