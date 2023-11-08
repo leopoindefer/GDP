@@ -161,6 +161,8 @@ with tab1 :
     else:
         start_date = start_date2
     start_date = pd.to_datetime(start_date)
+    df1 = df1.loc["Date">start_date]
+    df2 = df2.loc["Date">start_date]
     X = df1[column1].tolist()
     Y = df2[column2].tolist()
     corr, _ = pearsonr(X, Y)
