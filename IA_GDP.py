@@ -161,6 +161,8 @@ with tab1 :
     else:
         start_date = start_date2
     start_date = pd.to_datetime(start_date)
+    df1['Date'] = pd.to_datetime(df1['Date'])
+    df2['Date'] = pd.to_datetime(df2['Date'])
     df1 = df1[df1.Date>=start_date]
     df2 = df2[df2.Date>=start_date]
     X = df1[column1].tolist()
