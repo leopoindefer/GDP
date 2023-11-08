@@ -41,7 +41,7 @@ with tab1 :
 
     symb = action
     column = f"Close_{symb}"
-    file = f"data/{symb}.csv"
+    file = f"data/actions/{symb}.csv"
     df = pd.read_csv(file)
 
     #Preprocessing pour modele PROPHET
