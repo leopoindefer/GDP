@@ -125,6 +125,10 @@ with tab1 :
                 st.write(mess2)
             except:
                 st.error('pas de résultat')
+    
+    st.markdown('----')
+    st.header("Comparer des actions ou indices")
+    st.markdown('----')
 
 with tab2 :
     st.header("Créer votre portefeuille")
