@@ -177,7 +177,7 @@ with tab1 :
         st.write(mess_corr)
     
     else:
-        st.line_chart(df1)
+        st.line_chart(df)
 
     st.markdown('----')
 
