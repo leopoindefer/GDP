@@ -85,9 +85,9 @@ with tab1 :
 
             predict_prophet = predict_prophet.rename(columns={"ds":"date","yhat":"prediction"})
             graph = ecart.loc[:,["y","yhat"]]
-            graph = graph.rename(columns = {"y":'Reel',"yhat":"predicttion"})
+            graph = graph.rename(columns = {"y":'Reel',"yhat":"prediction"})
             st.line_chart(data=graph)
-            st.write(sec)
+            st.write(round(sec,2))
 
        
         col1, col2 = st.columns(2)
@@ -172,6 +172,10 @@ with tab1 :
     df2 = df.loc[df2['Date'] <= end_date]
     st.dataframe(df1)
     st.dataframe(df2)
+    X = df1.tolist()
+    Y = df2.tolist()
+    corr, _ = pearsonr(X, Y)
+    mess_corr = f'Corrélation linéraire à :{round(corr*100,2)}%'
 
     st.markdown('----')
 
