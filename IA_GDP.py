@@ -157,7 +157,8 @@ with tab1 :
     X = df1[column1].tolist()
     Y = df2[column2].tolist()
     corr, _ = pearsonr(X, Y)
-    #mess_corr = f'Corrélation linéraire à :{round(corr*100,2)}%'
+    mess_corr = f'Corrélation linéraire à :{round(corr*100,2)}%'
+    st.write(mess_corr)
 
     st.markdown('----')
 
