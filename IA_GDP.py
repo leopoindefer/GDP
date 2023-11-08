@@ -147,8 +147,9 @@ with tab1 :
         df2 = pd.read_csv(file2)
         df2 = df2.loc[:,[column2, "Date"]]
 
-    graph_comp = df1.set_index('Date').join(df2.set_index('Date'), how="left")
-    st.line_chart(graph_comp)
+    st.dataframe(df1)
+    #graph_comp = df1.set_index('Date').join(df2.set_index('Date'), how="left")
+    #st.line_chart(graph_comp)
     st.markdown('----')
 
 with tab2 :
