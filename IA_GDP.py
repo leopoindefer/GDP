@@ -151,7 +151,7 @@ with tab1 :
     st.line_chart(graph_comp)
 
     #coefficient de Pearson
-    liste_df1 = df1[:,column1].tolist()
+    liste_df1 = df1.loc[:,column1].tolist()
     st.write(liste_df1)
 
     st.markdown('----')
