@@ -154,10 +154,16 @@ with tab1 :
     #coefficient de Pearson
     st.dataframe(df1)
     st.dataframe(df2)
+    start_date1 = min(df1['Date'])
+    start_date2 = min(df2["Date"])
+    if start_date1 < start_date2:
+        start_date = start_date1
+    else:
+        start_date = start_date2
     X = df1[column1].tolist()
     Y = df2[column2].tolist()
     corr, _ = pearsonr(X, Y)
-    mess_corr = f'Corrélation linéraire à :{round(corr*100,2)}%'
+    mess_corr = f'Corrélation linéraire à : {round(corr*100,2)}%'
     st.write(mess_corr)
 
     st.markdown('----')
