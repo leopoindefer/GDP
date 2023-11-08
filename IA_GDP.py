@@ -138,7 +138,6 @@ with tab1 :
         file1 = f"data/actions/{symb1}.csv"
         df1 = pd.read_csv(file1)
         df1 = df1.loc[:,[column1, "Date"]]
-        st.dataframe(df1)
 
     with col_comp2:
         action_comp2 = st.selectbox('Action comparée', ('AAPL','META','AMZN','TSLA'))
@@ -147,10 +146,8 @@ with tab1 :
         file2 = f"data/actions/{symb2}.csv"
         df2 = pd.read_csv(file2)
         df2 = df2.loc[:,[column2, "Date"]]
-        st.dataframe(df2)
 
     graph_comp = df1.set_index('Date').join(df2.set_index('Date'), how="left")
-    st.dataframe(graph_comp)
     st.line_chart(graph_comp)
     st.markdown('----')
 
