@@ -150,6 +150,7 @@ with tab1 :
 
     with col_comp3:
         st.write(' ')
+        st.write(' ')
         run = st.button('Comparer')
 
     if run:
