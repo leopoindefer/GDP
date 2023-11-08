@@ -150,6 +150,7 @@ with tab1 :
         st.dataframe(df2)
 
     graph_comp = df1.set_index('Date').join(df2.set_index('Date'), how="left")
+    st.dataframe(graph_comp)
     #st.line_chart(graph_comp)
     st.markdown('----')
 
