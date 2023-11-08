@@ -175,9 +175,6 @@ with tab1 :
         corr, _ = pearsonr(X, Y)
         mess_corr = f'Corrélation linéraire à : {round(corr*100,2)}%'
         st.write(mess_corr)
-    
-    else:
-        st.line_chart(df)
 
     st.markdown('----')
 
