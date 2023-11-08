@@ -149,6 +149,11 @@ with tab1 :
 
     graph_comp = df1.set_index('Date').join(df2.set_index('Date'), how="left")
     st.line_chart(graph_comp)
+
+    #coefficient de Pearson
+    liste_df1 = df1[:,column1].tolist()
+    st.write(liste_df1)
+
     st.markdown('----')
 
 with tab2 :
