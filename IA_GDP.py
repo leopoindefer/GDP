@@ -141,7 +141,7 @@ with tab1 :
         df1 = df1.loc[:,[column1, "Date"]]
 
     with col_comp2:
-        action_comp2 = st.selectbox('Action comparée', ('AAPL','META','AMZN','TSLA'))
+        action_comp2 = st.selectbox('Action comparée', ('META','AMZN','TSLA','AAPL'))
         symb2 = action_comp2
         column2 = f"Close_{symb2}"
         file2 = f"data/actions/{symb2}.csv"
