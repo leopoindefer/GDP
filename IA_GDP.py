@@ -185,9 +185,11 @@ with tab1 :
 
     symbol_txt = ["AAPL", "AMZN", "META", "TSLA"]
     symbol = [AAPL, AMZN, META, TSLA]
-    for s in symbol:
-        close = re.findall("Close", s.columns)
-        s.loc[:,["Date",close]]
+    liste_cours = list()
+    for s, s_txt in zip(symbol, symbol_txt):
+         if "Close" in s.columns:
+            cours = s["Close"].tail(2).tolist()  # Récupère les deux dernières valeurs de la colonne "Close"
+            liste_cours.append({"Symbole": s_txt, "Values": cours})
     macro = pd.DataFrame()
     macro["Symboles"] = symbol_txt
     macro["Value"] = symbol
