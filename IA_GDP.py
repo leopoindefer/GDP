@@ -22,6 +22,11 @@ st.set_page_config(
     page_icon="💯",
 )
 
+AAPL = pd.read_csv(r"data/actions/AAPL.csv")
+AMZN = pd.read_csv(r"data/actions/AMZN.csv")
+META = pd.read_csv(r"data/actions/META.csv")
+TSLA = pd.read_csv(r"data/actions/TSLA.csv")
+
 st.title("Gérer votre portefeuille avec l'IA")
 
 tab1, tab2 = st.tabs(["Analyser le marché", "Création de portefeuille"])
@@ -39,7 +44,6 @@ with tab1 :
 
     st.header("Action à visualiser")
     action = st.selectbox('Choisir une action', ('AAPL','META','AMZN','TSLA'))
-
     symb = action
     column = f"Close_{symb}"
     file = f"data/actions/{symb}.csv"
@@ -177,6 +181,8 @@ with tab1 :
         st.write(mess_corr)
 
     st.markdown('----')
+
+    symbol = [AAPL, AMZN, META, TSLA]
 
 with tab2 :
     st.header("Créer votre portefeuille")
