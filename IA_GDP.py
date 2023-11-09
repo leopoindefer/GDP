@@ -116,13 +116,13 @@ with tab1 :
             gap_value = gap_indiv_value * invest_part
             tRend = (div/montant)*100
             tRent = (div+gap_value)/montant*100
-            nb_part = f'<span style="color: #7DCEA0;">{round(invest_part,2)}</span>'
+            nb_part = f'<span style="color: #F1948A;">{round(invest_part,2)}</span>'
             st.write(f'Nombre d action acheté : {nb_part}', unsafe_allow_html=True)
-            tx_rendement = f'<span style="color: #7DCEA0;">{round(tRend,2)}</span>'
-            rendement = f'<span style="color: #7DCEA0;">{round(div,2)}</span>'
+            tx_rendement = f'<span style="color: #F1948A;">{round(tRend,2)}</span>'
+            rendement = f'<span style="color: #F1948A;">{round(div,2)}</span>'
             st.write(f'Taux de rendement de : {tx_rendement}%, Rendement de {rendement}€', unsafe_allow_html=True)
-            tx_rentabilite = f'<span style="color: #7DCEA0;">{round(tRent,2)}</span>' 
-            rentabilite = f'<span style="color: #7DCEA0;">{round(div + gap_value,2)}</span>'
+            tx_rentabilite = f'<span style="color: #F1948A;">{round(tRent,2)}</span>' 
+            rentabilite = f'<span style="color: #F1948A;">{round(div + gap_value,2)}</span>'
             st.write(f'Taux de rentabilité de : {tx_rentabilite}%, Rentabilité de {rentabilite}€', unsafe_allow_html=True)
         except:
             st.error('pas de résultat')
