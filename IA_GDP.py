@@ -183,6 +183,9 @@ with tab1 :
     st.markdown('----')
 
     symbol = [AAPL, AMZN, META, TSLA]
+    macro = pd.DataFrame()
+    macro["Symboles"] = symbol
+    st.dataframe(macro)
 
 with tab2 :
     st.header("Créer votre portefeuille")
