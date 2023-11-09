@@ -8,6 +8,7 @@ import datetime
 from datetime import date
 import matplotlib as plt
 from scipy.stats import pearsonr
+import re
 
 from fonctions.prophet import prophet_model
 
@@ -182,9 +183,14 @@ with tab1 :
 
     st.markdown('----')
 
+    symbol_txt = ["AAPL", "AMZN", "META", "TSLA"]
     symbol = [AAPL, AMZN, META, TSLA]
+    for s in symbol:
+        close = re.findall("Close", s.columns)
+        s.loc[:,["Date",close]]
     macro = pd.DataFrame()
-    macro["Symboles"] = symbol
+    macro["Symboles"] = symbol_txt
+    macro["Value"] = symbol
     st.dataframe(macro)
 
 with tab2 :
