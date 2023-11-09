@@ -47,7 +47,7 @@ with tab1 :
 
     #Preprocessing pour modele PROPHET
     df_prophet = df.rename(columns = {column:'y',"Date":"ds"})
-    df_prophet = df_prophet.loc[:,["ds","y"]]
+    df_prophet = df_prophet.loc[["ds","y"]]
 
     #Preprocessing pour modele ARIMA
     df_arima = df
@@ -63,7 +63,7 @@ with tab1 :
             #PROPHET
             try:
                 predict_prophet = prophet_model(df_prophet)
-                predict_prophet = predict_prophet.loc[["ds","yhat"]]
+                predict_prophet = predict_prophet[["ds","yhat"]]
 
                 df_prophet['ds'] = pd.to_datetime(df_prophet['ds'])
                 predict_prophet['ds'] = pd.to_datetime(predict_prophet['ds'])
