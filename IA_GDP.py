@@ -187,12 +187,13 @@ with tab1 :
     symbol = [AAPL, AMZN, META, TSLA]
     liste_cours = list()
     for s, s_txt in zip(symbol, symbol_txt):
-         if "Close" in s.columns:
-            cours = s["Close"].tail(2).tolist()  # Récupère les deux dernières valeurs de la colonne "Close"
+        close_columns = [col for col in s.columns if 'Close' in col]
+        if close_columns:
+            cours = s[close_columns].tail(2).values.flatten().tolist()
             liste_cours.append({"Symbole": s_txt, "Values": cours})
-    macro = pd.DataFrame()
-    macro["Symboles"] = symbol_txt
-    macro["Value"] = symbol
+    macro = pd.DataFrame(liste_cours)
+
+    # Affiche le DataFrame avec Streamlit
     st.dataframe(macro)
 
 with tab2 :
