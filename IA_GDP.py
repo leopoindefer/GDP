@@ -47,7 +47,7 @@ with tab1 :
 
     #Preprocessing pour modele PROPHET
     df_prophet = df.rename(columns = {column:'y',"Date":"ds"})
-    df_prophet = df_prophet.loc[["ds","y"]]
+    df_prophet = df_prophet.loc[:,["ds","y"]]
 
     #Preprocessing pour modele ARIMA
     df_arima = df
@@ -63,7 +63,7 @@ with tab1 :
             #PROPHET
             try:
                 predict_prophet = prophet_model(df_prophet)
-                predict_prophet = predict_prophet[["ds","yhat"]]
+                predict_prophet = predict_prophet.loc[:,["ds","yhat"]]
 
                 df_prophet['ds'] = pd.to_datetime(df_prophet['ds'])
                 predict_prophet['ds'] = pd.to_datetime(predict_prophet['ds'])
@@ -93,9 +93,6 @@ with tab1 :
         col1, col2 = st.columns(2)
         with col1:
             montant = st.text_input('Montant à investir', 1000)
-    
-        with col2:
-
             duree = st.date_input("Jusqu'à quand ?", datetime.date(2024, 1, 1), min_value=pd.to_datetime(date.today()), max_value=pd.to_datetime(predict_prophet["date"].iloc[-1]))
             duree = pd.to_datetime(duree)
             montant = float(montant)
@@ -104,29 +101,31 @@ with tab1 :
             end_value = end_date["prediction"].iloc[-1]
             gap_indiv_value = (end_value - start_value)
             invest_part = float(montant/start_value)
+    
+        with col2:
 
-        try:
-            ticker = yf.Ticker(symb)
-            div_indiv = pd.DataFrame(ticker.dividends)
-            div_indiv = div_indiv.iloc[-1].tolist()
-            div_indiv = sum(div_indiv)*4
-        except:
-            st.error('dividende réinvesti')
-            div_indiv = 0
+            try:
+                ticker = yf.Ticker(symb)
+                div_indiv = pd.DataFrame(ticker.dividends)
+                div_indiv = div_indiv.iloc[-1].tolist()
+                div_indiv = sum(div_indiv)*4
+            except:
+                st.error('dividende réinvesti')
+                div_indiv = 0
 
-        try:  
-            div = div_indiv * invest_part
-            gap_value = gap_indiv_value * invest_part
-            tRend = (div/montant)*100
-            tRent = (div+gap_value)/montant*100
-            mess = f'Nombre d action acheté : {round(invest_part,2)}'
-            mess1 = f'Taux de rendement de : {round(tRend,2)}%, Rendement de {round(div,2)}€'
-            mess2 = f'Taux de rentabilité de : {round(tRent,2)}%, Rentabilité de {round(div + gap_value,2)}€'
-            st.write(mess)
-            st.write(mess1)
-            st.write(mess2)
-        except:
-            st.error('pas de résultat')
+            try:  
+                div = div_indiv * invest_part
+                gap_value = gap_indiv_value * invest_part
+                tRend = (div/montant)*100
+                tRent = (div+gap_value)/montant*100
+                mess = f'Nombre d action acheté : {round(invest_part,2)}'
+                mess1 = f'Taux de rendement de : {round(tRend,2)}%, Rendement de {round(div,2)}€'
+                mess2 = f'Taux de rentabilité de : {round(tRent,2)}%, Rentabilité de {round(div + gap_value,2)}€'
+                st.write(mess)
+                st.write(mess1)
+                st.write(mess2)
+            except:
+                st.error('pas de résultat')
     
     st.markdown('----')
 
