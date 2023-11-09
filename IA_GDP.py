@@ -116,12 +116,14 @@ with tab1 :
             gap_value = gap_indiv_value * invest_part
             tRend = (div/montant)*100
             tRent = (div+gap_value)/montant*100
-            mess = f'Nombre d action acheté : <span style="color: #7DCEA0;">{round(invest_part,2)}</span>'
-            mess1 = f'Taux de rendement de : {round(tRend,2)}%, Rendement de {round(div,2)}€'
-            mess2 = f'Taux de rentabilité de : {round(tRent,2)}%, Rentabilité de {round(div + gap_value,2)}€'
-            st.write(mess)
-            st.write(mess1)
-            st.write(mess2)
+            nb_part = f'<span style="color: #7DCEA0;">{round(invest_part,2)}</span>'
+            st.write(f'### Nombre d action acheté : {nb_part}')
+            tx_rendement = f'<span style="color: #7DCEA0;">{round(tRend,2)}</span>'
+            rendement = f'<span style="color: #7DCEA0;">{round(div,2)}</span>'
+            st.write(f'### Taux de rendement de : {tx_rendement}%, Rendement de {rendement}€')
+            tx_rentabilite = f'<span style="color: #7DCEA0;">{round(tRent,2)}</span>' 
+            rentabilite = f'<span style="color: #7DCEA0;">{round(div + gap_value,2)}</span>'
+            st.write(f'### Taux de rentabilité de : {tx_rentabilite}%, Rentabilité de {rentabilite}€')
         except:
             st.error('pas de résultat')
     
