@@ -16,10 +16,10 @@ def Tableau(symbol_txt,symbol):
             start_date = datetime.now() - timedelta(days=365*5)
             s_cinq_ans = s_resampled[s_resampled.index>=start_date]
             variation = s_cinq_ans[close_columns].pct_change().dropna()
-            renta_moy = round(variation.values.mean(),2)
+            renta_moy = round(variation.values.mean(),2)*100
             risque_moy = round(np.std(s_cinq_ans[close_columns]),2)
             line = [str(val) for val in s_resampled[close_columns].values.flatten()]
-            liste_cours.append({"SYMBOLE": s_txt, "DERNIER": cours, "M-1": cours_prec, "VAR": f'{var}%', "RENTABILITE": renta_moy, "RISQUE": risque_moy, "VISION":line})
+            liste_cours.append({"SYMBOLE": s_txt, "DERNIER": cours, "M-1": cours_prec, "VAR": f'{var}%', "RENTABILITE": f'{renta_moy}%', "RISQUE": risque_moy, "VISION":line})
     macro = pd.DataFrame(liste_cours)
     macro.set_index('SYMBOLE', inplace=True)
     return macro
