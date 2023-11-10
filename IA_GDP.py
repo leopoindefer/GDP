@@ -55,10 +55,6 @@ with tab1 :
     file = f"data/actions/{symb}.csv"
     df = pd.read_csv(file)
 
-    #Preprocessing pour modele PROPHET
-    df_prophet = df.rename(columns = {column:'y',"Date":"ds"})
-    df_prophet = df_prophet.loc[:,["ds","y"]]
-
     #Preprocessing pour modele ARIMA
     df_arima = df
     df_arima['Date'] = pd.to_datetime(df_arima['Date'])
@@ -72,15 +68,9 @@ with tab1 :
 
             #PROPHET
             try:
-                predict_prophet = prophet_model(df_prophet)
+                predict_prophet, sec = prophet_model(df, symb)
                 predict_prophet = predict_prophet.loc[:,["ds","yhat"]]
 
-                df_prophet['ds'] = pd.to_datetime(df_prophet['ds'])
-                predict_prophet['ds'] = pd.to_datetime(predict_prophet['ds'])
-                ecart = df_prophet.set_index('ds').join(predict_prophet.set_index('ds'), how="left")
-                ecart['se'] = ecart['y'] - ecart['yhat']
-                sec = ecart.sum(axis=0)
-                sec = sec.iloc[-1].tolist()**2
             except:
                 st.error('pas de résultat pour PROPHET')
 
