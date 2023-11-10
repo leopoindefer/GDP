@@ -80,6 +80,12 @@ with tab1 :
             except:
                 st.error('pas de résultat pour PROPHET')
 
+            predict_prophet = predict_prophet.rename(columns={"ds":"date","yhat":"prediction"})
+            graph = ecart.loc[:,["y","yhat"]]
+            graph = graph.rename(columns = {"y":'Reel',"yhat":"prediction"})
+            st.line_chart(data=graph)
+            st.write(round(sec,2))
+
             #ARIMA
             try:
                 model_arima = ARIMA(df_arima, order=(1,5,0)).fit()
@@ -88,12 +94,6 @@ with tab1 :
                 
             except:
                 st.error('pas de résultat pour ARIMA')
-
-            predict_prophet = predict_prophet.rename(columns={"ds":"date","yhat":"prediction"})
-            graph = ecart.loc[:,["y","yhat"]]
-            graph = graph.rename(columns = {"y":'Reel',"yhat":"prediction"})
-            st.line_chart(data=graph)
-            st.write(round(sec,2))
 
        
         col1, col2 = st.columns(2)
