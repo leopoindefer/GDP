@@ -136,7 +136,7 @@ with tab1 :
     st.markdown('----')
 
     macro = Tableau(symbol_txt, symbol)
-    st.dataframe(macro.style.applymap(lambda x: 'color: red' if any('-' in words for words in x.split()) else 'color: green',subset = ['VAR']), column_config={"VIEW": st.column_config.LineChartColumn(
-            "VIEW", y_min=0, y_max=500)})
+    st.dataframe(macro.style.applymap(lambda x: 'color: red' if any('-' in words for words in x.split()) else 'color: green',subset = ['VAR']), column_config={"VISION": st.column_config.LineChartColumn(
+            "VISION", y_min=0, y_max=500)})
 with tab2 : 
     st.header("Créer votre portefeuille")
