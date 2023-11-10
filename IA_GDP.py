@@ -116,11 +116,11 @@ with tab1 :
     col_comp1, col_comp2, col_comp3 = st.columns(3)
 
     with col_comp1:
-        symb1 = st.selectbox('', symbol_txt)
+        comp1 = st.selectbox('', symbol_txt)
 
     with col_comp2:
         symbol_txt2 = symbol_txt - symb1
-        symb2 = st.selectbox(' ', symbol_txt2)
+        comp2 = st.selectbox(' ', symbol_txt2)
 
     with col_comp3:
         st.write('')
@@ -128,7 +128,8 @@ with tab1 :
         run = st.button('Comparer')
 
     if run:
-
+        symb1 = comp1
+        symb2 = comp2
         graph_comp, corr = Comparaison(symb1,symb2)
         st.line_chart(graph_comp)
         mess_corr = f'Corrélation linéraire à : {round(corr*100,2)}%'
