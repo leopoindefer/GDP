@@ -189,8 +189,8 @@ with tab1 :
     for s, s_txt in zip(symbol, symbol_txt):
         close_columns = [col for col in s.columns if 'Close' in col]
         if close_columns:
-            cours = s[close_columns].tail(2).values.flatten().tolist()
-            liste_cours.append({"Symbole": s_txt, "Values": cours})
+            cours = s[close_columns].tail(1).values.flatten().sum()
+            liste_cours.append({"Symbole": s_txt, "Dernier": cours})
     macro = pd.DataFrame(liste_cours)
 
     # Affiche le DataFrame avec Streamlit
