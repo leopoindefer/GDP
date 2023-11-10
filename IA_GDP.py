@@ -200,7 +200,7 @@ with tab1 :
 
             #var_coloree = f'<span style="color: {couleur};">{round(var, 2)}%</span>'
 
-            liste_cours.append({"SYMBOLE": s_txt, "DERNIER": round(cours,2), "M-1": round(cours_prec,2), "VAR": f'<span style="color: {couleur};">{round(var, 2)}%</span>'})
+            liste_cours.append({"SYMBOLE": s_txt, "DERNIER": round(cours,2), "M-1": round(cours_prec,2), "VAR": var})
     macro = pd.DataFrame(liste_cours)
 
     # Affiche le DataFrame avec Streamlit
