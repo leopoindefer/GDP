@@ -195,10 +195,10 @@ with tab1 :
             cours = s[close_columns].iloc[-1].values.sum()
             cours_prec = s_resampled[close_columns].iloc[-2].values.sum()
             var = ((cours - cours_prec)/ cours_prec)*100
-            liste_cours.append({"SYMBOLE": s_txt, "DERNIER": cours, "M-1": cours_prec, "VAR": f'{var}%'})
+            liste_cours.append({"SYMBOLE": s_txt, "DERNIER": cours, "M-1": cours_prec, "VAR": f'{var}'})
     macro = pd.DataFrame(liste_cours)
     
-    st.dataframe(macro.style.applymap(lambda x: 'color: green' if x >= 0 else 'color: red',subset = ['VAR']))
+    st.dataframe(macro.style.applymap(lambda x: 'color: green'if any('-' in words for words in x.split()) else 'color: red',subset = ['VAR']))
 
 with tab2 : 
     st.header("Créer votre portefeuille")
