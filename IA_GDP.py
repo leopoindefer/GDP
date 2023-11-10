@@ -68,7 +68,7 @@ with tab1 :
 
             #PROPHET
             try:
-                predict_prophet = prophet_model(df_prophet)
+                df_prophet, predict_prophet = prophet_model(df)
                 predict_prophet = predict_prophet.loc[:,["ds","yhat"]]
 
                 df_prophet['ds'] = pd.to_datetime(df_prophet['ds'])
