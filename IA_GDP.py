@@ -187,6 +187,7 @@ with tab1 :
     symbol = [AAPL, AMZN, META, TSLA]
     liste_cours = list()
     for s, s_txt in zip(symbol, symbol_txt):
+        s = s.resample("1M").first()
         close_columns = [col for col in s.columns if 'Close' in col]
         if close_columns:
             cours = s[close_columns].iloc[-1].values.sum()
