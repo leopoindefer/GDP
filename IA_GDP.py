@@ -9,6 +9,7 @@ from datetime import date
 import matplotlib as plt
 from scipy.stats import pearsonr
 import re
+import random
 
 from fonctions.prophet import prophet_model
 
@@ -195,10 +196,12 @@ with tab1 :
             cours = round(s[close_columns].iloc[-1].values.sum(),2)
             cours_prec = round(s_resampled[close_columns].iloc[-2].values.sum(),2)
             var = round(((cours - cours_prec)/ cours_prec)*100,2)
-            liste_cours.append({"SYMBOLE": s_txt, "DERNIER": cours, "M-1": cours_prec, "VAR": f'{var}%'})
+            line =  [[random.randint(0, 5000) for _ in range(30)] for _ in range(3)]
+            liste_cours.append({"SYMBOLE": s_txt, "DERNIER": cours, "M-1": cours_prec, "VAR": f'{var}%', "VIEW":line})
     macro = pd.DataFrame(liste_cours)
     macro.set_index('SYMBOLE', inplace=True)
     
-    st.dataframe(macro.style.applymap(lambda x: 'color: red' if any('-' in words for words in x.split()) else 'color: green',subset = ['VAR']))
+    st.dataframe(macro.style.applymap(lambda x: 'color: red' if any('-' in words for words in x.split()) else 'color: green',subset = ['VAR']), column_config={"VIEW": st.column_config.LineChartColumn(
+            "Views (past 30 days)", y_min=0, y_max=5000)})
 with tab2 : 
     st.header("Créer votre portefeuille")
