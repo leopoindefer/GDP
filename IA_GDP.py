@@ -68,7 +68,7 @@ with tab1 :
 
             #PROPHET
             try:
-                predict_prophet, sec = prophet_model(df, symb)
+                predict_prophet, sec, graph = prophet_model(df, symb)
                 predict_prophet = predict_prophet.loc[:,["ds","yhat"]]
 
             except:
@@ -83,9 +83,6 @@ with tab1 :
             except:
                 st.error('pas de résultat pour ARIMA')
 
-            predict_prophet = predict_prophet.rename(columns={"ds":"date","yhat":"prediction"})
-            graph = ecart.loc[:,["y","yhat"]]
-            graph = graph.rename(columns = {"y":'Reel',"yhat":"prediction"})
             st.line_chart(data=graph)
             st.write(round(sec,2))
 
