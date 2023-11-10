@@ -200,6 +200,7 @@ with tab1 :
     
     st.dataframe(macro.style.applymap(lambda x: 'color: red' if any('-' in words for words in x.split()) else 'color: green',subset = ['VAR']))
     ticker_symbol = yf.Ticker("AAPL")
-    st.write(ticker_symbol)
+    stock_index = ticker_symbol.info['index']
+    st.write(stock_index)
 with tab2 : 
     st.header("Créer votre portefeuille")
