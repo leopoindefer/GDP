@@ -188,7 +188,7 @@ with tab1 :
     liste_cours = list()
     for s, s_txt in zip(symbol, symbol_txt):
         s["Date"] = pd.to_datetime(s["Date"])
-        #s = s.set_index("Date")
+        s = s.set_index("Date")
         #s_resampled = s.set_index("Date").resample("M").last().reset_index()
         close_columns = [col for col in s.columns if 'Close' in col]
         if close_columns:
