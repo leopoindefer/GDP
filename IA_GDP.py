@@ -204,7 +204,7 @@ with tab1 :
     macro = pd.DataFrame(liste_cours)
 
     # Affiche le DataFrame avec Streamlit
-    st.dataframe(macro.style.applymap(lambda x: 'color: red' if var >= 0 else 'color: green',subset = ['VAR']))
+    st.dataframe(macro.style.applymap(lambda x: 'color: red' if x >= 0 else 'color: green',subset = ['VAR']))
 
 with tab2 : 
     st.header("Créer votre portefeuille")
