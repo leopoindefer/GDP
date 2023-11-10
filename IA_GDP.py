@@ -199,8 +199,5 @@ with tab1 :
     macro = pd.DataFrame(liste_cours)
     
     st.dataframe(macro.style.applymap(lambda x: 'color: red' if any('-' in words for words in x.split()) else 'color: green',subset = ['VAR']))
-    ticker_symbol = yf.Ticker("AAPL")
-    stock_index = ticker_symbol.info['index']
-    st.write(stock_index)
 with tab2 : 
     st.header("Créer votre portefeuille")
