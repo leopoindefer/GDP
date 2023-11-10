@@ -74,6 +74,7 @@ with tab1 :
                 #MSE
                 df['ds'] = pd.to_datetime(predict_prophet['ds'])
                 predict_prophet['ds'] = pd.to_datetime(predict_prophet['ds'])
+                predict_prophet = predict_prophet.rename(columns={"ds":"date","yhat":"prediction"})
                 ecart = df.set_index('ds').join(predict_prophet.set_index('ds'), how="left")
                 ecart['se'] = ecart['y'] - ecart['yhat']
                 sec = ecart.sum(axis=0)
@@ -91,7 +92,6 @@ with tab1 :
             except:
                 st.error('pas de résultat pour ARIMA')
 
-            predict_prophet = predict_prophet.rename(columns={"ds":"date","yhat":"prediction"})
             graph = ecart.loc[:,["y","yhat"]]
             graph = graph.rename(columns = {"y":'Reel',"yhat":"prediction"})
 
