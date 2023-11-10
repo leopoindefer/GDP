@@ -205,7 +205,7 @@ with tab1 :
     macro = pd.DataFrame(liste_cours)
 
     # Affiche le DataFrame avec Streamlit
-    st.table(macro)
+    st.dataframe(macro)
 
 with tab2 :
     st.header("Créer votre portefeuille")
