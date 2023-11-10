@@ -11,6 +11,7 @@ import re
 
 from fonctions.tableau import Tableau
 from fonctions.comparaison import Comparaison
+from fonctions.projection import Projection
 
 from fonctions.prophet import prophet_model
 
@@ -102,39 +103,12 @@ with tab1 :
         col1, col2 = st.columns(2)
         with col1:
             montant = st.text_input('Montant à investir', 1000)
-            montant = float(montant)
         with col2:
             duree = st.date_input("Jusqu'à quand ?", datetime.date(2024, 1, 1), min_value=pd.to_datetime(date.today()), max_value=pd.to_datetime(predict_prophet["date"].iloc[-1]))
-            duree = pd.to_datetime(duree)
-        try:
-            ticker = yf.Ticker(symb)
-            div_indiv = pd.DataFrame(ticker.dividends)
-            div_indiv = div_indiv.iloc[-1].tolist()
-            div_indiv = sum(div_indiv)*4
-        except:
-            st.error('dividende réinvesti')
-            div_indiv = 0
-
-        try: 
-            start_value = df_prophet["y"].iloc[-1]
-            end_date = predict_prophet[predict_prophet['date'] <= duree]
-            end_value = end_date["prediction"].iloc[-1]
-            gap_indiv_value = (end_value - start_value)
-            invest_part = float(montant/start_value)
-            div = div_indiv * invest_part
-            gap_value = gap_indiv_value * invest_part
-            tRend = (div/montant)*100
-            tRent = (div+gap_value)/montant*100
-            nb_part = f'<span style="color: #FF0000;">{round(invest_part,2)}</span>'
-            st.write(f'Nombre d action acheté : {nb_part}', unsafe_allow_html=True)
-            tx_rendement = f'<span style="color: #FF0000;">{round(tRend,2)}%</span>'
-            rendement = f'<span style="color: #FF0000;">{round(div,2)}€</span>'
-            st.write(f'Taux de rendement de : {tx_rendement}, Rendement de {rendement}', unsafe_allow_html=True)
-            tx_rentabilite = f'<span style="color: #FF0000;">{round(tRent,2)}%</span>' 
-            rentabilite = f'<span style="color: #FF0000;">{round(div + gap_value,2)}€</span>'
-            st.write(f'Taux de rentabilité de : {tx_rentabilite}, Rentabilité de {rentabilite}', unsafe_allow_html=True)
-        except:
-            st.error('pas de résultat')
+        nb_part, tx_rendement, rendement, tx_rentabilite, rentabilite = Projection(montant, duree, symb, df_prophet, predict_prophet)
+        st.write(f'Nombre d action acheté : {nb_part}', unsafe_allow_html=True)
+        st.write(f'Taux de rendement de : {tx_rendement}, Rendement de {rendement}', unsafe_allow_html=True)
+        st.write(f'Taux de rentabilité de : {tx_rentabilite}, Rentabilité de {rentabilite}', unsafe_allow_html=True)
     
     st.markdown('----')
 
