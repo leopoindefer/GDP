@@ -192,8 +192,8 @@ with tab1 :
         s_resampled = s.resample("M").first()
         close_columns = [col for col in s_resampled.columns if 'Close' in col]
         if close_columns:
-            cours = s[close_columns].iloc[-1].values.sum()
-            cours_prec = s_resampled[close_columns].iloc[-2].values.sum()
+            cours = round(s[close_columns].iloc[-1].values.sum(),2)
+            cours_prec = round(s_resampled[close_columns].iloc[-2].values.sum(),2)
             var = round(((cours - cours_prec)/ cours_prec)*100,2)
             liste_cours.append({"SYMBOLE": s_txt, "DERNIER": cours, "M-1": cours_prec, "VAR": f'{var}%'})
     macro = pd.DataFrame(liste_cours)
