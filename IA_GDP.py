@@ -190,7 +190,8 @@ with tab1 :
         close_columns = [col for col in s.columns if 'Close' in col]
         if close_columns:
             cours = s[close_columns].tail(1).values.flatten().sum()
-            liste_cours.append({"Symbole": s_txt, "Dernier": cours})
+            cours_prec = s[close_columns].iloc[-2].values.sum()
+            liste_cours.append({"SYMBOLE": s_txt, "DERNIER": cours, "M-1": cours_prec})
     macro = pd.DataFrame(liste_cours)
 
     # Affiche le DataFrame avec Streamlit
