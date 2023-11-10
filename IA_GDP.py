@@ -119,7 +119,7 @@ with tab1 :
         comp1 = st.selectbox('', symbol_txt)
 
     with col_comp2:
-        symbol_txt2 = symbol_txt - symb1
+        symbol_txt2 = symbol_txt - comp1
         comp2 = st.selectbox(' ', symbol_txt2)
 
     with col_comp3:
