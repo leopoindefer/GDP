@@ -187,9 +187,7 @@ with tab1 :
     symbol = [AAPL, AMZN, META, TSLA]
     liste_cours = list()
     for s, s_txt in zip(symbol, symbol_txt):
-        s["Date"] = pd.to_datetime(s["Date"])
-        s = s.set_index("Date")
-        s_resampled = s.set_index("Date").resample("M").last().reset_index()
+
         close_columns = [col for col in s_resampled.columns if 'Close' in col]
         if close_columns:
             cours = s_resampled[close_columns].iloc[-1].values.sum()
@@ -199,7 +197,7 @@ with tab1 :
     macro = pd.DataFrame(liste_cours)
 
     # Affiche le DataFrame avec Streamlit
-    st.dataframe(macro)
+    st.dataframe(AAPL)
 
 with tab2 :
     st.header("Créer votre portefeuille")
