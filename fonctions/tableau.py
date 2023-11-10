@@ -20,7 +20,7 @@ def Tableau(symbol_txt,symbol):
             renta_moy = round(renta_moy*100,2)
             risque_moy = np.std(s_cinq_ans[close_columns]).values.mean()
             risque_moy = round(risque_moy,2)
-            line = [str(val) for val in s_resampled[close_columns].values.flatten()]
+            line = [str(val) for val in s_cinq_ans[close_columns].values.flatten()]
             liste_cours.append({"SYMBOLE": s_txt, "DERNIER": f'{cours}', "M-1": f'{cours_prec}', "VAR": f'{var}%', "RENTABILITE": f'{renta_moy}%', "RISQUE": f'{risque_moy}', "VISION":line})
     macro = pd.DataFrame(liste_cours)
     macro.set_index('SYMBOLE', inplace=True)
