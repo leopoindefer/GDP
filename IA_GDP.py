@@ -192,7 +192,7 @@ with tab1 :
         s_resampled = s.resample("M").first()
         close_columns = [col for col in s_resampled.columns if 'Close' in col]
         if close_columns:
-            cours = s_resampled[close_columns].iloc[-1].values.sum()
+            cours = s[close_columns].iloc[-1].values.sum()
             cours_prec = s_resampled[close_columns].iloc[-2].values.sum()
             var = ((cours - cours_prec)/ cours_prec)*100
             liste_cours.append({"SYMBOLE": s_txt, "DERNIER": cours, "M-1": cours_prec, "VAR": var})
