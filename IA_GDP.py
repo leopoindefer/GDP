@@ -196,7 +196,7 @@ with tab1 :
             cours = round(s[close_columns].iloc[-1].values.sum(),2)
             cours_prec = round(s_resampled[close_columns].iloc[-2].values.sum(),2)
             var = round(((cours - cours_prec)/ cours_prec)*100,2)
-            line =  s_resampled[close_columns].tolist()
+            line =  s_resampled[close_columns]
             liste_cours.append({"SYMBOLE": s_txt, "DERNIER": cours, "M-1": cours_prec, "VAR": f'{var}%', "VIEW":line})
     macro = pd.DataFrame(liste_cours)
     macro.set_index('SYMBOLE', inplace=True)
