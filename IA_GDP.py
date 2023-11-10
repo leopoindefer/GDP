@@ -200,11 +200,11 @@ with tab1 :
 
             #var_coloree = f'<span style="color: {couleur};">{round(var, 2)}%</span>'
 
-            liste_cours.append({"SYMBOLE": s_txt, "DERNIER": round(cours,2), "M-1": round(cours_prec,2), "VAR": var})
+            liste_cours.append({"SYMBOLE": s_txt, "DERNIER": cours, "M-1": cours_prec, "VAR": var})
     macro = pd.DataFrame(liste_cours)
 
     # Affiche le DataFrame avec Streamlit
-    st.dataframe(macro.style.applymap(lambda x: 'color: red' if var >= 0 else 'color: green'))
+    st.dataframe(macro.style.applymap(lambda x: 'color: red' if var >= 0 else 'color: green',subset = ['VAR']))
 
-with tab2 :
+with tab2 : 
     st.header("Créer votre portefeuille")
