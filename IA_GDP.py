@@ -7,10 +7,10 @@ import yfinance as yf
 import datetime
 from datetime import date
 import matplotlib as plt
-from scipy.stats import pearsonr
 import re
 
 from fonctions.tableau import Tableau
+from fonctions.comparaison import Comparaison
 
 from fonctions.prophet import prophet_model
 
@@ -140,20 +140,10 @@ with tab1 :
     col_comp1, col_comp2, col_comp3 = st.columns(3)
 
     with col_comp1:
-        action_comp1 = st.selectbox('', ('AAPL','META','AMZN','TSLA'))
-        symb1 = action_comp1
-        column1 = f"Close_{symb1}"
-        file1 = f"data/actions/{symb1}.csv"
-        df1 = pd.read_csv(file1)
-        df1 = df1.loc[:,[column1, "Date"]]
+        symb1 = st.selectbox('', ('AAPL','META','AMZN','TSLA'))
 
     with col_comp2:
-        action_comp2 = st.selectbox(' ', ('META','AMZN','TSLA','AAPL'))
-        symb2 = action_comp2
-        column2 = f"Close_{symb2}"
-        file2 = f"data/actions/{symb2}.csv"
-        df2 = pd.read_csv(file2)
-        df2 = df2.loc[:,[column2, "Date"]]
+        symb2 = st.selectbox(' ', ('META','AMZN','TSLA','AAPL'))
 
     with col_comp3:
         st.write('')
@@ -162,24 +152,8 @@ with tab1 :
 
     if run:
 
-        graph_comp = df1.set_index('Date').join(df2.set_index('Date'), how="left")
+        graph_comp, corr = Comparaison(symb1,symb2)
         st.line_chart(graph_comp)
-
-        #coefficient de Pearson
-        start_date1 = min(df1['Date'])
-        start_date2 = min(df2["Date"])
-        if start_date1 >= start_date2:
-            start_date = start_date1
-        else:
-            start_date = start_date2
-        start_date = pd.to_datetime(start_date)
-        df1['Date'] = pd.to_datetime(df1['Date'])
-        df2['Date'] = pd.to_datetime(df2['Date'])
-        df1 = df1[df1.Date>=start_date]
-        df2 = df2[df2.Date>=start_date]
-        X = df1[column1].tolist()
-        Y = df2[column2].tolist()
-        corr, _ = pearsonr(X, Y)
         mess_corr = f'Corrélation linéraire à : {round(corr*100,2)}%'
         st.write(mess_corr)
 
