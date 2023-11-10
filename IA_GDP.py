@@ -197,6 +197,7 @@ with tab1 :
             var = round(((cours - cours_prec)/ cours_prec)*100,2)
             liste_cours.append({"SYMBOLE": s_txt, "DERNIER": cours, "M-1": cours_prec, "VAR": f'{var}%'})
     macro = pd.DataFrame(liste_cours)
+    macro.set_index('SYMBOLE', inplace=True)
     
     st.dataframe(macro.style.applymap(lambda x: 'color: red' if any('-' in words for words in x.split()) else 'color: green',subset = ['VAR']))
 with tab2 : 
