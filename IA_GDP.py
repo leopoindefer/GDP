@@ -195,16 +195,10 @@ with tab1 :
             cours = s[close_columns].iloc[-1].values.sum()
             cours_prec = s_resampled[close_columns].iloc[-2].values.sum()
             var = ((cours - cours_prec)/ cours_prec)*100
-
-            couleur = "#00FF00" if var >= 0 else "#FF0000"
-
-            #var_coloree = f'<span style="color: {couleur};">{round(var, 2)}%</span>'
-
-            liste_cours.append({"SYMBOLE": s_txt, "DERNIER": cours, "M-1": cours_prec, "VAR": var})
+            liste_cours.append({"SYMBOLE": s_txt, "DERNIER": cours, "M-1": cours_prec, "VAR": f'{var}%'})
     macro = pd.DataFrame(liste_cours)
-
-    # Affiche le DataFrame avec Streamlit
-    st.dataframe(macro.style.applymap(lambda x: 'color: red' if x >= 0 else 'color: green',subset = ['VAR']))
+    
+    st.dataframe(macro.style.applymap(lambda x: 'color: green' if x >= 0 else 'color: red',subset = ['VAR']))
 
 with tab2 : 
     st.header("Créer votre portefeuille")
