@@ -188,10 +188,10 @@ with tab1 :
     liste_cours = list()
     for s, s_txt in zip(symbol, symbol_txt):
         s_resampled = s.set_index("Date").resample("M").last().reset_index()
-        close_columns = [col for col in s.columns if 'Close' in col]
+        close_columns = [col for col in s_resampled.columns if 'Close' in col]
         if close_columns:
-            cours = s[close_columns].iloc[-1].values.sum()
-            cours_prec = s[close_columns].iloc[-2].values.sum()
+            cours = s_resampled[close_columns].iloc[-1].values.sum()
+            cours_prec = s_resampled[close_columns].iloc[-2].values.sum()
             var = ((cours - cours_prec)/ cours_prec)*100
             liste_cours.append({"SYMBOLE": s_txt, "DERNIER": cours, "M-1": cours_prec, "VAR": var})
     macro = pd.DataFrame(liste_cours)
