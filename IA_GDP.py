@@ -29,6 +29,8 @@ AAPL = pd.read_csv(r"data/actions/AAPL.csv")
 AMZN = pd.read_csv(r"data/actions/AMZN.csv")
 META = pd.read_csv(r"data/actions/META.csv")
 TSLA = pd.read_csv(r"data/actions/TSLA.csv")
+symbol_txt = ["AAPL", "AMZN", "META", "TSLA"]
+symbol = [AAPL, AMZN, META, TSLA]
 
 st.title("Gérer votre portefeuille avec l'IA")
 
@@ -140,10 +142,10 @@ with tab1 :
     col_comp1, col_comp2, col_comp3 = st.columns(3)
 
     with col_comp1:
-        symb1 = st.selectbox('', ('AAPL','META','AMZN','TSLA'))
+        symb1 = st.selectbox('', symbol_txt)
 
     with col_comp2:
-        symb2 = st.selectbox(' ', ('META','AMZN','TSLA','AAPL'))
+        symb2 = st.selectbox(' ', symbol_txt)
 
     with col_comp3:
         st.write('')
@@ -159,8 +161,6 @@ with tab1 :
 
     st.markdown('----')
 
-    symbol_txt = ["AAPL", "AMZN", "META", "TSLA"]
-    symbol = [AAPL, AMZN, META, TSLA]
     macro = Tableau(symbol_txt, symbol)
     st.dataframe(macro.style.applymap(lambda x: 'color: red' if any('-' in words for words in x.split()) else 'color: green',subset = ['VAR']), column_config={"VIEW": st.column_config.LineChartColumn(
             "VIEW", y_min=0, y_max=500)})
