@@ -1,4 +1,6 @@
 import pandas as pd
+import numpy as np
+from datetime import datetime, timedelta
 
 def Tableau(symbol_txt,symbol):
     liste_cours = list()
@@ -11,8 +13,13 @@ def Tableau(symbol_txt,symbol):
             cours = round(s[close_columns].iloc[-1].values.sum(),2)
             cours_prec = round(s_resampled[close_columns].iloc[-2].values.sum(),2)
             var = round(((cours - cours_prec)/ cours_prec)*100,2)
+            start_date = datetime.now() - timedelta(days=365*5)
+            s_cinq_ans = s_resampled[s_resampled.Date>=start_date]
+            variation = s_cinq_ans[close_columns].pct_change().dropna()
+            renta_moy = round(variation.mean(),2)
+            risque_moy = round(np.std(s_cinq_ans[close_columns]),2)
             line = [str(val) for val in s_resampled[close_columns].values.flatten()]
-            liste_cours.append({"SYMBOLE": s_txt, "DERNIER": cours, "M-1": cours_prec, "VAR": f'{var}%', "VIEW":line})
+            liste_cours.append({"SYMBOLE": s_txt, "DERNIER": cours, "M-1": cours_prec, "VAR": f'{var}%', "RENTABILITE": renta_moy, "RISQUE": risque_moy, "VISION":line})
     macro = pd.DataFrame(liste_cours)
     macro.set_index('SYMBOLE', inplace=True)
     return macro
