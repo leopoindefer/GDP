@@ -189,7 +189,7 @@ with tab1 :
     for s, s_txt in zip(symbol, symbol_txt):
         s["Date"] = pd.to_datetime(s["Date"])
         s = s.set_index("Date")
-        #s_resampled = s.set_index("Date").resample("M").last().reset_index()
+        s_resampled = s.resample("M").first()
         close_columns = [col for col in s.columns if 'Close' in col]
         if close_columns:
             cours = s[close_columns].iloc[-1].values.sum()
