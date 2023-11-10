@@ -199,6 +199,7 @@ with tab1 :
             couleur = "00FF00" if var >= 0 else "#FF0000"
 
             var = f'<span style="color: {couleur};">{round(var, 2)}%</span>'
+            var = st.write(f'{var}')
 
             liste_cours.append({"SYMBOLE": s_txt, "DERNIER": cours, "M-1": cours_prec, "VAR": var})
     macro = pd.DataFrame(liste_cours)
