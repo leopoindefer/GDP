@@ -68,18 +68,15 @@ with tab1 :
 
             #PROPHET
             try:
-                predict_prophet = prophet_model(df, symb)
+                predict_prophet = prophet_model(df_prophet)
                 predict_prophet = predict_prophet.loc[:,["ds","yhat"]]
 
-                #MSE
-                df['ds'] = pd.to_datetime(predict_prophet['ds'])
+                df_prophet['ds'] = pd.to_datetime(df_prophet['ds'])
                 predict_prophet['ds'] = pd.to_datetime(predict_prophet['ds'])
-                predict_prophet = predict_prophet.rename(columns={"ds":"date","yhat":"prediction"})
-                ecart = df.set_index('ds').join(predict_prophet.set_index('ds'), how="left")
+                ecart = df_prophet.set_index('ds').join(predict_prophet.set_index('ds'), how="left")
                 ecart['se'] = ecart['y'] - ecart['yhat']
                 sec = ecart.sum(axis=0)
                 sec = sec.iloc[-1].tolist()**2
-
             except:
                 st.error('pas de résultat pour PROPHET')
 
@@ -92,9 +89,9 @@ with tab1 :
             except:
                 st.error('pas de résultat pour ARIMA')
 
+            predict_prophet = predict_prophet.rename(columns={"ds":"date","yhat":"prediction"})
             graph = ecart.loc[:,["y","yhat"]]
             graph = graph.rename(columns = {"y":'Reel',"yhat":"prediction"})
-
             st.line_chart(data=graph)
             st.write(round(sec,2))
 
