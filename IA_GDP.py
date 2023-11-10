@@ -202,6 +202,6 @@ with tab1 :
     macro.set_index('SYMBOLE', inplace=True)
     
     st.dataframe(macro.style.applymap(lambda x: 'color: red' if any('-' in words for words in x.split()) else 'color: green',subset = ['VAR']), column_config={"VIEW": st.column_config.LineChartColumn(
-            "VIEW", y_min=0, y_max=1000)})
+            "VIEW", y_min=0, y_max=500)})
 with tab2 : 
     st.header("Créer votre portefeuille")
