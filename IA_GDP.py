@@ -9,7 +9,8 @@ from datetime import date
 import matplotlib as plt
 from scipy.stats import pearsonr
 import re
-import random
+
+from fonctions.tableau import Tableau
 
 from fonctions.prophet import prophet_model
 
@@ -186,21 +187,7 @@ with tab1 :
 
     symbol_txt = ["AAPL", "AMZN", "META", "TSLA"]
     symbol = [AAPL, AMZN, META, TSLA]
-    liste_cours = list()
-    for s, s_txt in zip(symbol, symbol_txt):
-        s["Date"] = pd.to_datetime(s["Date"])
-        s = s.set_index("Date")
-        s_resampled = s.resample("M").first()
-        close_columns = [col for col in s_resampled.columns if 'Close' in col]
-        if close_columns:
-            cours = round(s[close_columns].iloc[-1].values.sum(),2)
-            cours_prec = round(s_resampled[close_columns].iloc[-2].values.sum(),2)
-            var = round(((cours - cours_prec)/ cours_prec)*100,2)
-            line = [str(val) for val in s_resampled[close_columns].values.flatten()]
-            liste_cours.append({"SYMBOLE": s_txt, "DERNIER": cours, "M-1": cours_prec, "VAR": f'{var}%', "VIEW":line})
-    macro = pd.DataFrame(liste_cours)
-    macro.set_index('SYMBOLE', inplace=True)
-    
+    macro = Tableau(symbol_txt, symbol)
     st.dataframe(macro.style.applymap(lambda x: 'color: red' if any('-' in words for words in x.split()) else 'color: green',subset = ['VAR']), column_config={"VIEW": st.column_config.LineChartColumn(
             "VIEW", y_min=0, y_max=500)})
 with tab2 : 
