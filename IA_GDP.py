@@ -191,7 +191,7 @@ with tab1 :
         if close_columns:
             cours = s[close_columns].iloc[-1].values.sum()
             cours_prec = s[close_columns].iloc[-2].values.sum()
-            var = cours - ((cours_prec)/ cours_prec)*100
+            var = ((cours - cours_prec)/ cours_prec)*100
             liste_cours.append({"SYMBOLE": s_txt, "DERNIER": cours, "M-1": cours_prec, "VAR": var})
     macro = pd.DataFrame(liste_cours)
 
