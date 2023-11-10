@@ -194,13 +194,14 @@ with tab1 :
         if close_columns:
             cours = s[close_columns].iloc[-1].values.sum()
             cours_prec = s_resampled[close_columns].iloc[-2].values.sum()
-            var = ((cours - cours_prec)/ cours_prec)*100
+            varia = ((cours - cours_prec)/ cours_prec)*100
 
-            couleur = "#00FF00" if var >= 0 else "#FF0000"
+            couleur = "#00FF00" if varia >= 0 else "#FF0000"
 
-            var = f'<span style="color: {couleur};">{round(var, 2)}%</span>'
+            var_coloree = f'<span style="color: {couleur};">{round(varia, 2)}%</span>'
+            var = st.write(f'{var_coloree}', unsafe_allow_html=True)
 
-            liste_cours.append({"SYMBOLE": s_txt, "DERNIER": cours, "M-1": cours_prec, "VAR": var})
+            liste_cours.append({"SYMBOLE": s_txt, "DERNIER": round(cours,2), "M-1": round(cours_prec,2), "VAR": var})
     macro = pd.DataFrame(liste_cours)
 
     # Affiche le DataFrame avec Streamlit
