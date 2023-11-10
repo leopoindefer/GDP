@@ -18,7 +18,8 @@ def Tableau(symbol_txt,symbol):
             variation = s_cinq_ans[close_columns].pct_change().dropna()
             renta_moy = variation.values.mean()
             renta_moy = round(renta_moy*100,2)
-            risque_moy = round(np.std(s_cinq_ans[close_columns]),2)
+            risque_moy = np.std(s_cinq_ans[close_columns])
+            risque_moy = round(risque_moy,2)
             line = [str(val) for val in s_resampled[close_columns].values.flatten()]
             liste_cours.append({"SYMBOLE": s_txt, "DERNIER": cours, "M-1": cours_prec, "VAR": f'{var}%', "RENTABILITE": f'{renta_moy}%', "RISQUE": risque_moy, "VISION":line})
     macro = pd.DataFrame(liste_cours)
