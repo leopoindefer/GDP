@@ -20,7 +20,7 @@ st.set_page_config(
     page_icon="💯",
 )
 
-symbol_txt = ["AAPL", "TSLA", "AMZN", "META", "VLA.PA", "ALGRE.PA", "ALO.PA", "BNP.PA", "ALCYB.PA", "STLAP.PA", "AF.PA", "VIE.PA", "SAN.PA", "GLE.PA", "BNBS.PA"]
+symbol_txt = ["AAPL", "TSLA", "AMZN", "META", "VLA.PA", "ALGRE.PA", "ALO.PA", "BNP.PA", "ALCYB.PA", "STLAP.PA", "AF.PA", "VIE.PA", "SAN.PA", "GLE.PA"]
 symbol_dataframes = []  # Initialiser une liste pour stocker les DataFrames
 
 for sym in symbol_txt:
