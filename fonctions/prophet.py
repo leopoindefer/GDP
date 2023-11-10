@@ -20,4 +20,8 @@ def prophet_model(df, symb):
     sec = ecart.sum(axis=0)
     sec = sec.iloc[-1].tolist()**2
 
-    return forecast, sec
+    predict_prophet = predict_prophet.rename(columns={"ds":"date","yhat":"prediction"})
+    graph = ecart.loc[:,["y","yhat"]]
+    graph = graph.rename(columns = {"y":'Reel',"yhat":"prediction"})
+
+    return forecast, sec, graph
