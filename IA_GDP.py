@@ -26,12 +26,16 @@ st.set_page_config(
     page_icon="💯",
 )
 
-AAPL = pd.read_csv(r"data/actions/AAPL.csv")
-AMZN = pd.read_csv(r"data/actions/AMZN.csv")
-META = pd.read_csv(r"data/actions/META.csv")
-TSLA = pd.read_csv(r"data/actions/TSLA.csv")
-symbol_txt = ["AAPL", "AMZN", "META", "TSLA"]
-symbol = [AAPL, AMZN, META, TSLA]
+symbol_txt = ["AAPL", "TSLA", "AMZN", "META", "VLA.PA", "ALGRE.PA", "ALO.PA", "BNP.PA", "ALCYB.PA", "3SNF.PA", "STLAP.PA", "AF.PA", "VIE.PA", "SAN.PA", "GLE.PA", "BNBS.PA"]
+symbol_dataframes = []  # Initialiser une liste pour stocker les DataFrames
+
+for sym in symbol_txt:
+    file_path = f"data/actions/{sym}.csv"
+    df = pd.read_csv(file_path)
+    symbol_dataframes.append(df)
+
+symbol_dict = dict(zip(symbol_txt, symbol_dataframes))
+symbol = symbol_dataframes
 
 st.title("Gérer votre portefeuille avec l'IA")
 
