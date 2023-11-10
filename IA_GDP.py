@@ -15,12 +15,6 @@ from fonctions.projection import Projection
 
 from fonctions.prophet import prophet_model
 
-from statsmodels.tsa.seasonal import seasonal_decompose
-from statsmodels.tsa.stattools import adfuller
-from statsmodels.tsa.arima.model import ARIMA
-from statsmodels.graphics.tsaplots import plot_predict
-import statsmodels.api as sm
-
 st.set_page_config(
     page_title="GDP",
     page_icon="💯",
@@ -53,7 +47,7 @@ with tab1 :
     st.markdown(hide_st_style, unsafe_allow_html=True) 
 
     st.header("Action à visualiser")
-    action = st.selectbox('Choisir une action', ('AAPL','META','AMZN','TSLA'))
+    action = st.selectbox('Choisir une action', symbol_txt)
     symb = action
     column = f"Close_{symb}"
     file = f"data/actions/{symb}.csv"
@@ -87,15 +81,6 @@ with tab1 :
                 sec = sec.iloc[-1].tolist()**2
             except:
                 st.error('pas de résultat pour PROPHET')
-
-            #ARIMA
-            try:
-                model_arima = ARIMA(df_arima, order=(1,5,0)).fit()
-                predict_arima = pd.DataFrame(model_arima.resid())
-                st.dataframe(predict_arima)
-                
-            except:
-                st.error('pas de résultat pour ARIMA')
 
             predict_prophet = predict_prophet.rename(columns={"ds":"date","yhat":"prediction"})
             graph = ecart.loc[:,["y","yhat"]]
