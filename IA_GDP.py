@@ -55,6 +55,10 @@ with tab1 :
     file = f"data/actions/{symb}.csv"
     df = pd.read_csv(file)
 
+    #Preprocessing pour modele PROPHET
+    df_prophet = df.rename(columns = {column:'y',"Date":"ds"})
+    df_prophet = df_prophet.loc[:,["ds","y"]]
+
     #Preprocessing pour modele ARIMA
     df_arima = df
     df_arima['Date'] = pd.to_datetime(df_arima['Date'])
@@ -68,7 +72,7 @@ with tab1 :
 
             #PROPHET
             try:
-                df_prophet, predict_prophet = prophet_model(df)
+                predict_prophet = prophet_model(df_prophet)
                 predict_prophet = predict_prophet.loc[:,["ds","yhat"]]
 
                 df_prophet['ds'] = pd.to_datetime(df_prophet['ds'])
@@ -80,12 +84,6 @@ with tab1 :
             except:
                 st.error('pas de résultat pour PROPHET')
 
-            predict_prophet = predict_prophet.rename(columns={"ds":"date","yhat":"prediction"})
-            graph = ecart.loc[:,["y","yhat"]]
-            graph = graph.rename(columns = {"y":'Reel',"yhat":"prediction"})
-            st.line_chart(data=graph)
-            st.write(round(sec,2))
-
             #ARIMA
             try:
                 model_arima = ARIMA(df_arima, order=(1,5,0)).fit()
@@ -94,6 +92,12 @@ with tab1 :
                 
             except:
                 st.error('pas de résultat pour ARIMA')
+
+            predict_prophet = predict_prophet.rename(columns={"ds":"date","yhat":"prediction"})
+            graph = ecart.loc[:,["y","yhat"]]
+            graph = graph.rename(columns = {"y":'Reel',"yhat":"prediction"})
+            st.line_chart(data=graph)
+            st.write(round(sec,2))
 
        
         col1, col2 = st.columns(2)
