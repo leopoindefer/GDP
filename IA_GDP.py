@@ -199,13 +199,12 @@ with tab1 :
             couleur = "#00FF00" if var >= 0 else "#FF0000"
 
             var = f'<span style="color: {couleur};">{round(var, 2)}%</span>'
-            var = st.markdown(f'{var}', unsafe_allow_html=True)
 
             liste_cours.append({"SYMBOLE": s_txt, "DERNIER": cours, "M-1": cours_prec, "VAR": var})
     macro = pd.DataFrame(liste_cours)
 
     # Affiche le DataFrame avec Streamlit
-    st.dataframe(macro)
+    st.table(macro)
 
 with tab2 :
     st.header("Créer votre portefeuille")
