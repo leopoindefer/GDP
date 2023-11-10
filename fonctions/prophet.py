@@ -11,4 +11,4 @@ def prophet_model(df, symb):
     future = m.make_future_dataframe(periods=365)
     forecast = m.predict(future)
 
-    return forecast
+    return df, forecast
