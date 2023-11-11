@@ -77,7 +77,7 @@ with tab1 :
         # Créer le graphique Altair
         chart = alt.Chart(graph_comp).mark_line().encode(
             x='Date:T',  # Spécifiez ici la colonne des dates
-            y=alt.Y(column1, title=symb1),  # Spécifiez ici la colonne pour l'axe y
+            # Spécifiez ici la colonne pour l'axe y
             color=alt.value('blue')  # Couleur du graphique
         ).properties(width=800, height=400)
 
