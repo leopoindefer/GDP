@@ -1,19 +1,12 @@
 import streamlit as st
-import pickle as pkle  
-import math
 import pandas as pd
-from prophet import Prophet
-import yfinance as yf
 import datetime
 from datetime import date
-import matplotlib as plt
-import re
-import altair as alt
 
 from fonctions.tableau import Tableau
 from fonctions.comparaison import Comparaison
 from fonctions.projection import Projection
-
+from fonctions.cdp import CDP
 from fonctions.prophet import prophet_model
 
 st.set_page_config(
@@ -140,3 +133,5 @@ with tab3 :
 
     portefeuille = st.multiselect("Choisissez vos actions", symbol_txt)
     st.write('You selected:', portefeuille)
+    df_ptf = CDP(portefeuille)
+    st.dataframe(df_ptf)
