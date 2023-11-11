@@ -130,9 +130,11 @@ with tab2:
 with tab3 : 
     st.header("Composer votre portefeuille")
 
+    symbol_df = {sym: pd.read_csv(f"data/actions/{sym}.csv") for sym in symbol_txt}
+
     portefeuille = st.multiselect("Choisissez vos actions", symbol_txt)
     st.write('You selected:', portefeuille)
-    selected_dataframes = [symbol_dataframes[sym] for sym in portefeuille]
-    for sym, df in zip(portefeuille, selected_dataframes):
+    selected_df = [symbol_df[sym] for sym in portefeuille]
+    for sym, df in zip(portefeuille, selected_df):
         st.write(f"DataFrame pour {sym}:")
         st.dataframe(df)
