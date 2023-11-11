@@ -33,7 +33,7 @@ symbol = symbol_dataframes
 
 st.title("Gérer votre portefeuille avec l'IA")
 
-tab1, tab2 = st.tabs(["Analyser le marché", "Création de portefeuille"])
+tab1, tab2, tab3 = st.tabs(["Analyser le marché", "Prédire", "Création de portefeuille"])
 
 with tab1 :
 
@@ -45,6 +45,40 @@ with tab1 :
                 </style>
                 """
     st.markdown(hide_st_style, unsafe_allow_html=True) 
+    
+    macro = Tableau(symbol_txt, symbol)
+    st.dataframe(macro.style.applymap(lambda x: 'color: red' if any('-' in words for words in x.split()) else 'color: green',subset = ['VAR']), column_config={"VISION": st.column_config.LineChartColumn(
+            "VISION", y_min=0, y_max=500)})
+
+    st.markdown('----')
+
+    st.header("Comparer des actions ou indices")
+    col_comp1, col_comp2, col_comp3 = st.columns(3)
+
+    with col_comp1:
+        comp1 = st.selectbox('', symbol_txt)
+
+    with col_comp2:
+        symbol_txt2 = symbol_txt.copy()
+        symbol_txt2.remove(comp1)
+        comp2 = st.selectbox(' ', symbol_txt2)
+
+    with col_comp3:
+        st.write('')
+        st.write("")
+        run = st.button('Comparer')
+
+    if run:
+        symb1 = comp1
+        symb2 = comp2
+        graph_comp, corr = Comparaison(symb1,symb2)
+        st.line_chart(graph_comp)
+        mess_corr = f'Corrélation linéraire à : {round(corr*100,2)}%'
+        st.write(mess_corr)
+
+    st.markdown('----')
+    
+with tab2:
 
     st.header("Action à visualiser")
     action = st.selectbox('Choisir une action', symbol_txt)
@@ -98,37 +132,6 @@ with tab1 :
         st.write(f'Nombre d action acheté : {nb_part}', unsafe_allow_html=True)
         st.write(f'Taux de rendement de : {tx_rendement}, Rendement de {rendement}', unsafe_allow_html=True)
         st.write(f'Taux de rentabilité de : {tx_rentabilite}, Rentabilité de {rentabilite}', unsafe_allow_html=True)
-    
-    st.markdown('----')
 
-    st.header("Comparer des actions ou indices")
-    col_comp1, col_comp2, col_comp3 = st.columns(3)
-
-    with col_comp1:
-        comp1 = st.selectbox('', symbol_txt)
-
-    with col_comp2:
-        symbol_txt2 = symbol_txt.copy()
-        symbol_txt2.remove(comp1)
-        comp2 = st.selectbox(' ', symbol_txt2)
-
-    with col_comp3:
-        st.write('')
-        st.write("")
-        run = st.button('Comparer')
-
-    if run:
-        symb1 = comp1
-        symb2 = comp2
-        graph_comp, corr = Comparaison(symb1,symb2)
-        st.line_chart(graph_comp)
-        mess_corr = f'Corrélation linéraire à : {round(corr*100,2)}%'
-        st.write(mess_corr)
-
-    st.markdown('----')
-
-    macro = Tableau(symbol_txt, symbol)
-    st.dataframe(macro.style.applymap(lambda x: 'color: red' if any('-' in words for words in x.split()) else 'color: green',subset = ['VAR']), column_config={"VISION": st.column_config.LineChartColumn(
-            "VISION", y_min=0, y_max=500)})
-with tab2 : 
+with tab3 : 
     st.header("Créer votre portefeuille")
