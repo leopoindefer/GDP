@@ -151,7 +151,7 @@ with tab3 :
     #Toutes les combinaisons de poids
 
     # Noms des actifs
-    assets = [portefeuille]
+    assets = portefeuille
 
     # Générer toutes les combinaisons possibles de pondérations avec un pas de 0.1
     weights_combinations = list(product(*[range(0, 101) for _ in assets]))
