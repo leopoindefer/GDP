@@ -74,7 +74,7 @@ with tab1 :
         symb2 = comp2
         column1, column2, graph_comp, corr = Comparaison(symb1,symb2)
 
-        st.dataframe(graph_comp)
+        st.line_chart(graph_comp)
 
         mess_corr = f'Corrélation linéraire à : {round(corr*100,2)}%'
         st.write(mess_corr)
