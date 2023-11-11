@@ -155,7 +155,7 @@ with tab3 :
 
     # Générer toutes les combinaisons possibles de pondérations avec un pas de 0.1
     weights_combinations = list(product(*[range(0, 101) for _ in assets]))
-    weights_combinations = [(w[0] / 100, w[1] / 100, w[2] / 100, w[3] / 100) for w in weights_combinations if sum(w) == 100]
+    weights_combinations = [(w[0] / 100, w[1] / 100, w[2] / 100, w[3] / 100) for w in weights_combinations if len(w) == 4 and sum(w) == 100]
 
     combi_poids = pd.DataFrame(weights_combinations, columns=assets)
 
