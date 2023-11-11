@@ -72,7 +72,7 @@ with tab1 :
     if run:
         symb1 = comp1
         symb2 = comp2
-        graph_comp, corr = Comparaison(symb1,symb2)
+        column1, graph_comp, corr = Comparaison(symb1,symb2)
 
         # Créer le graphique Altair
         chart = alt.Chart(graph_comp).mark_line().encode(
