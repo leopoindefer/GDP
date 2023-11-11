@@ -74,15 +74,7 @@ with tab1 :
         symb2 = comp2
         column1, column2, graph_comp, corr = Comparaison(symb1,symb2)
 
-        # Créer le graphique Altair
-        chart = alt.Chart(graph_comp).mark_line().encode(
-            x='Date:T',  # Spécifiez ici la colonne des dates
-            y=[alt.Y(column1, title=symb1), alt.Y(column2, title=symb2)],
-            color=alt.value('blue')  # Couleur du graphique
-        ).properties(width=800, height=400)
-
-        # Afficher le graphique avec Streamlit
-        st.altair_chart(chart)
+        st.dataframe(graph_comp)
 
         mess_corr = f'Corrélation linéraire à : {round(corr*100,2)}%'
         st.write(mess_corr)
