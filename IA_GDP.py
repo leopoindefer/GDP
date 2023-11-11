@@ -6,7 +6,6 @@ from datetime import date
 from fonctions.tableau import Tableau
 from fonctions.comparaison import Comparaison
 from fonctions.projection import Projection
-from fonctions.cdp import CDP
 from fonctions.prophet import prophet_model
 
 st.set_page_config(
@@ -128,8 +127,24 @@ with tab2:
         st.write(f'Taux de rendement de : {tx_rendement}, Rendement de {rendement}', unsafe_allow_html=True)
         st.write(f'Taux de rentabilité de : {tx_rentabilite}, Rentabilité de {rentabilite}', unsafe_allow_html=True)
 
+
+
 with tab3 : 
     st.header("Composer votre portefeuille")
+
+    def CDP(dataframes):
+        if not dataframes:
+            st.warning("Veuillez sélectionner au moins un symbole.")
+            return pd.DataFrame()
+
+        df_ptf = dataframes[0]
+        for df in dataframes[1:]:
+            close_columns = [col for col in df.columns if 'Close' in col]
+            if close_columns:
+                df = df.set_index("Date").loc[:, close_columns]
+                df_ptf = pd.merge(df_ptf, df, how="inner", left_index=True, right_index=True)
+
+        return df_ptf
 
     portefeuille = st.multiselect("Choisissez vos actions", symbol_txt)
     st.write('You selected:', portefeuille)
