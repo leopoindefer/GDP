@@ -72,12 +72,12 @@ with tab1 :
     if run:
         symb1 = comp1
         symb2 = comp2
-        column1, graph_comp, corr = Comparaison(symb1,symb2)
+        column1, column2, graph_comp, corr = Comparaison(symb1,symb2)
 
         # Créer le graphique Altair
         chart = alt.Chart(graph_comp).mark_line().encode(
             x='Date:T',  # Spécifiez ici la colonne des dates
-            # Spécifiez ici la colonne pour l'axe y
+            y=alt.Y([column1, column2]),  # Spécifiez ici la colonne pour l'axe y
             color=alt.value('blue')  # Couleur du graphique
         ).properties(width=800, height=400)
 
