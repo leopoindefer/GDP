@@ -136,4 +136,7 @@ with tab2:
         st.write(f'Taux de rentabilité de : {tx_rentabilite}, Rentabilité de {rentabilite}', unsafe_allow_html=True)
 
 with tab3 : 
-    st.header("Créer votre portefeuille")
+    st.header("Composer votre portefeuille")
+
+    portefeuille = st.multiselect("Choisissez vos actions", symbol_txt)
+    st.write('You selected:', portefeuille)
