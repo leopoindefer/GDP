@@ -1,7 +1,7 @@
 import pandas as pd
 
-def CDP(portefeuille: list): 
-    for acts in portefeuille:
+def CDP(symbol, symbol_txt): 
+    for acts, acts_txt in zip(symbol, symbol_txt):
         close_columns = [col for col in acts.columns if 'Close' in col]
         acts = acts.set_index("Date")
         if close_columns:
