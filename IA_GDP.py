@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import datetime
 from datetime import date
+from itertools import product
 
 from fonctions.tableau import Tableau
 from fonctions.comparaison import Comparaison
@@ -145,6 +146,18 @@ with tab3 :
     variation = ptf_df.pct_change().dropna()
     cov_matrix = variation.cov()/4
     cov_matrix['sum'] = cov_matrix.sum(axis=1)
+
+    #Toutes les combinaisons de poids
+
+    # Noms des actifs
+    assets = [portefeuille]
+
+    # Générer toutes les combinaisons possibles de pondérations avec un pas de 0.1
+    weights_combinations = list(product(*[range(0, 101) for _ in assets]))
+    weights_combinations = [(w[0] / 100, w[1] / 100, w[2] / 100, w[3] / 100) for w in weights_combinations if sum(w) == 100]
+
+    combi_poids = pd.DataFrame(weights_combinations, columns=assets)
+
 
     # Affichez le DataFrame fusionné
     st.write("DataFrame fusionné:")
