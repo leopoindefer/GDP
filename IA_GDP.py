@@ -131,7 +131,7 @@ with tab2:
 with tab3 : 
     st.header("Composer votre portefeuille")
 
-    portefeuille = st.multiselect("Choisissez vos actions", symbol)
+    portefeuille = st.multiselect("Choisissez vos actions", symbol_txt)
     st.write('You selected:', portefeuille)
-    df_ptf = CDP(portefeuille)
+    df_ptf = CDP(symbol, portefeuille)
     st.dataframe(df_ptf)
