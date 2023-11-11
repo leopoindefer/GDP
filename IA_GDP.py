@@ -132,6 +132,6 @@ with tab3 :
 
     portefeuille = st.multiselect("Choisissez vos actions", symbol_txt)
     st.write('You selected:', portefeuille)
-    selected_dataframes = [symbol_dataframes[sym] for sym in portefeuille]
-    df_ptf = CDP(portefeuille)
-    st.dataframe(df_ptf)
+    #selected_dataframes = [symbol_dataframes[sym] for sym in portefeuille]
+    #df_ptf = CDP(portefeuille)
+    #st.dataframe(df_ptf)
