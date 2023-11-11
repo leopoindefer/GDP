@@ -1,5 +1,6 @@
 import streamlit as st
 import pandas as pd
+import numpy as np
 import datetime
 from datetime import date
 from itertools import product
@@ -158,7 +159,17 @@ with tab3 :
 
     combi_poids = pd.DataFrame(weights_combinations, columns=assets)
 
+    # Créer une matrice de pondérations
+    matrice_poids = combi_poids.values
+
+    # Multiplier chaque matrice de poids par la matrice de covariance
+    matrices_resultats = [np.dot(matrice_poids[i], cov_matrix) for i in range(len(matrice_poids))]
+
+    # Ajouter une colonne supplémentaire pour la somme de chaque ligne
+    for i, matrice_resultat in enumerate(matrices_resultats):
+        combi_poids.loc[i, 'portfolios_volatility'] = matrice_resultat.sum()
+    combi_risque = np.sqrt(combi_poids) * 100
 
     # Affichez le DataFrame fusionné
     st.write("DataFrame fusionné:")
-    st.dataframe(cov_matrix)
+    st.dataframe(combi_risque)
