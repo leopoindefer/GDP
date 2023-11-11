@@ -6,6 +6,6 @@ def CDP(symbol, symbol_txt):
         acts = acts.set_index("Date")
         if close_columns:
             acts = acts.loc[:,close_columns]
-            df_ptf = pd.merge(acts)
+            df_ptf = pd.merge(acts, how="inner")
             pd.DataFrame(df_ptf, inplace=True)
     return df_ptf
