@@ -137,10 +137,15 @@ with tab3 :
     selected_dataframes = [symbol_df[sym].set_index("Date").filter(like='Close') for sym in portefeuille]
 
     # Fusionnez les DataFrames en utilisant pd.concat
-    merged_df = pd.concat(selected_dataframes, axis=1, join='inner')
-    merged_df.index = pd.to_datetime(merged_df.index)
-    merged_df_mois = merged_df.resample('MS').first()
+    ptf_df = pd.concat(selected_dataframes, axis=1, join='inner')
+    ptf_df.index = pd.to_datetime(ptf_df.index)
+    ptf_df = ptf_df.resample('MS').first()
+
+    #matrice de covariance
+    variation = ptf_df.pct_change().dropna()
+    cov_matrix = variation.cov()/4
+    cov_matrix['sum'] = cov_matrix.sum(axis=1)
 
     # Affichez le DataFrame fusionné
     st.write("DataFrame fusionné:")
-    st.dataframe(merged_df_mois)
+    st.dataframe(cov_matrix)
