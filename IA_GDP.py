@@ -15,12 +15,7 @@ st.set_page_config(
 )
 
 symbol_txt = ["AAPL", "TSLA", "AMZN", "META", "VLA.PA", "ALGRE.PA", "ALO.PA", "BNP.PA", "ALCYB.PA", "STLAP.PA", "AF.PA", "VIE.PA", "SAN.PA", "GLE.PA"]
-symbol_dataframes = []  # Initialiser une liste pour stocker les DataFrames
-
-for sym in symbol_txt:
-    file_path = f"data/actions/{sym}.csv"
-    df = pd.read_csv(file_path)
-    symbol_dataframes.append(df)
+symbol_dataframes = {sym: pd.read_csv(f"data/actions/{sym}.csv") for sym in symbol_txt}
 
 symbol_dict = dict(zip(symbol_txt, symbol_dataframes))
 symbol = symbol_dataframes
