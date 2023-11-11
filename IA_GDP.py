@@ -153,23 +153,26 @@ with tab3 :
     # Noms des actifs
     assets = portefeuille
 
-    # Générer toutes les combinaisons possibles de pondérations avec un pas de 0.1
-    weights_combinations = list(product(*[range(0, 101) for _ in assets]))
-    weights_combinations = [(w[0] / 100, w[1] / 100, w[2] / 100, w[3] / 100) for w in weights_combinations if len(w) == 4 and sum(w) == 100]
+    calcul = st.button('Calculer')
+    if calcul:
+         with st.spinner('Chargement du calcul'):
+            # Générer toutes les combinaisons possibles de pondérations avec un pas de 0.1
+            weights_combinations = list(product(*[range(0, 101) for _ in assets]))
+            weights_combinations = [(w[0] / 100, w[1] / 100, w[2] / 100, w[3] / 100) for w in weights_combinations if len(w) == 4 and sum(w) == 100]
 
-    combi_poids = pd.DataFrame(weights_combinations, columns=assets)
+            combi_poids = pd.DataFrame(weights_combinations, columns=assets)
 
-    # Créer une matrice de pondérations
-    matrice_poids = combi_poids.values
+            # Créer une matrice de pondérations
+            matrice_poids = combi_poids.values
 
-    # Multiplier chaque matrice de poids par la matrice de covariance
-    matrices_resultats = [np.dot(matrice_poids[i], cov_matrix) for i in range(len(matrice_poids))]
+            # Multiplier chaque matrice de poids par la matrice de covariance
+            matrices_resultats = [np.dot(matrice_poids[i], cov_matrix) for i in range(len(matrice_poids))]
 
-    # Ajouter une colonne supplémentaire pour la somme de chaque ligne
-    for i, matrice_resultat in enumerate(matrices_resultats):
-        combi_poids.loc[i, 'portfolios_volatility'] = matrice_resultat.sum()
-    combi_risque = np.sqrt(combi_poids) * 100
+            # Ajouter une colonne supplémentaire pour la somme de chaque ligne
+            for i, matrice_resultat in enumerate(matrices_resultats):
+                combi_poids.loc[i, 'portfolios_volatility'] = matrice_resultat.sum()
+            combi_risque = np.sqrt(combi_poids) * 100
 
-    # Affichez le DataFrame fusionné
-    st.write("DataFrame fusionné:")
-    st.dataframe(combi_risque)
+            # Affichez le DataFrame fusionné
+            st.write("DataFrame fusionné:")
+            st.dataframe(combi_risque)
