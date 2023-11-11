@@ -13,6 +13,8 @@ def Comparaison(symb1, symb2):
     
     # Merge les deux dataframes sur la colonne des dates
     graph_comp = pd.merge(df1, df2, on='Date', how='inner')
+    graph_comp = graph_comp[:,[column1,column2]]
+    graph_comp.set_index("Date", inplace=True)
     
     # Utilisez les colonnes fusionnées pour calculer la corrélation
     X = graph_comp[column1].tolist()
