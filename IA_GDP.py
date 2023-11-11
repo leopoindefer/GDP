@@ -14,15 +14,8 @@ st.set_page_config(
 )
 
 symbol_txt = ["AAPL", "TSLA", "AMZN", "META", "VLA.PA", "ALGRE.PA", "ALO.PA", "BNP.PA", "ALCYB.PA", "STLAP.PA", "AF.PA", "VIE.PA", "SAN.PA", "GLE.PA"]
-symbol_dataframes = []  # Initialiser une liste pour stocker les DataFrames
+symbol_dataframes = {sym: pd.read_csv(f"data/actions/{sym}.csv") for sym in symbol_txt}
 
-for sym in symbol_txt:
-    file_path = f"data/actions/{sym}.csv"
-    df = pd.read_csv(file_path)
-    symbol_dataframes.append(df)
-
-symbol_dict = dict(zip(symbol_txt, symbol_dataframes))
-symbol = symbol_dataframes
 
 st.title("Gérer votre portefeuille avec l'IA")
 
@@ -39,7 +32,7 @@ with tab1 :
                 """
     st.markdown(hide_st_style, unsafe_allow_html=True) 
     
-    macro = Tableau(symbol_txt, symbol)
+    macro = Tableau(symbol_txt, symbol_dataframes)
     st.dataframe(macro.style.applymap(lambda x: 'color: red' if any('-' in words for words in x.split()) else 'color: green',subset = ['VAR']), column_config={"VISION": st.column_config.LineChartColumn(
             "VISION", y_min=0, y_max=500)})
 
