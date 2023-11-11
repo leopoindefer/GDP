@@ -21,4 +21,4 @@ def Comparaison(symb1, symb2):
     # Calcul de la corrélation de Pearson
     corr, _ = pearsonr(X, Y)
     
-    return graph_comp, corr
+    return column1, graph_comp, corr
