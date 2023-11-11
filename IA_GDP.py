@@ -134,10 +134,11 @@ with tab3 :
 
     portefeuille = st.multiselect("Choisissez vos actions", symbol_txt)
     # Utilisez le dictionnaire symbol_dataframes pour obtenir les DataFrames correspondants
-    selected_dataframes = [symbol_df[sym].set_index("Date").filter(like='Close').resample('MS').first() for sym in portefeuille]
+    selected_dataframes = [symbol_df[sym].set_index("Date").filter(like='Close') for sym in portefeuille]
 
     # Fusionnez les DataFrames en utilisant pd.concat
     merged_df = pd.concat(selected_dataframes, axis=1, join='inner')
+    merged_df = merged_df.resample('MS').first()
 
     # Affichez le DataFrame fusionné
     st.write("DataFrame fusionné:")
