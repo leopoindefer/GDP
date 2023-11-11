@@ -138,6 +138,7 @@ with tab3 :
 
     # Fusionnez les DataFrames en utilisant pd.concat
     merged_df = pd.concat(selected_dataframes, axis=1, join='inner')
+    merged_df.index = pd.to_datetime(merged_df.index)
     merged_df_mois = merged_df.resample('MS').first()
 
     # Affichez le DataFrame fusionné
