@@ -152,7 +152,7 @@ with tab3 :
                 combi_poids = pd.read_csv(file_poids)   
                 # Créer une matrice de pondérations
                 matrice_poids = combi_poids.values
-                matrice_poids = matrice_poids.loc[:,1:]
+                matrice_poids = matrice_poids[:,1:]
                 
                 #matrice de covariance
                 variation = ptf_df.pct_change().dropna()
