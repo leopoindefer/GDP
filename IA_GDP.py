@@ -164,35 +164,31 @@ with tab3 :
                 cov_matrix = variation.cov()/nb_acts
                 cov_matrix['sum'] = cov_matrix.sum(axis=1)
 
-                try:
-                    # Multiplier chaque matrice de poids par la matrice de covariance
-                    matrices_resultats = [np.dot(matrice_poids[i], cov_matrix) for i in range(len(matrice_poids))]
+                # Multiplier chaque matrice de poids par la matrice de covariance
+                matrices_resultats = [np.dot(matrice_poids[i], cov_matrix) for i in range(len(matrice_poids))]
 
-                    # Ajouter une colonne supplémentaire pour la somme de chaque ligne
-                    for i, matrice_resultat in enumerate(matrices_resultats):
-                        combi_poids.loc[i, 'portfolios_volatility'] = matrice_resultat.sum()
-                    combi_risque = np.sqrt(combi_poids) * 100
+                # Ajouter une colonne supplémentaire pour la somme de chaque ligne
+                for i, matrice_resultat in enumerate(matrices_resultats):
+                    combi_poids.loc[i, 'portfolios_volatility'] = matrice_resultat.sum()
+                combi_risque = np.sqrt(combi_poids) * 100
 
-                    # Affichez le DataFrame fusionné
-                    st.write("DataFrame fusionné:")
-                    st.dataframe(combi_risque)
+                # Affichez le DataFrame fusionné
+                st.write("DataFrame fusionné:")
+                st.dataframe(combi_risque)
 
-                    variation_list = variation.mean().tolist()
-                    combi_renta = combi_poids.multiply(variation_list)
-                    combi_renta['portfolio_returns'] = combi_renta.sum(axis=1)*100
+                variation_list = variation.mean().tolist()
+                combi_renta = combi_poids.multiply(variation_list)
+                combi_renta['portfolio_returns'] = combi_renta.sum(axis=1)*100
 
-                    combi_poids = combi_poids.drop(columns=['portfolios_volatility'])
+                combi_poids = combi_poids.drop(columns=['portfolios_volatility'])
 
-                    # Fusionner combi_poids avec combi_renta
-                    merged_df = combi_poids.merge(combi_renta[['portfolio_returns']], left_index=True, right_index=True)
+                # Fusionner combi_poids avec combi_renta
+                merged_df = combi_poids.merge(combi_renta[['portfolio_returns']], left_index=True, right_index=True)
 
-                    # Fusionner le résultat avec combi_risque
-                    merged_df = merged_df.merge(combi_risque[['portfolios_volatility']], left_index=True, right_index=True)
+                # Fusionner le résultat avec combi_risque
+                merged_df = merged_df.merge(combi_risque[['portfolios_volatility']], left_index=True, right_index=True)
                     
-                    st.dataframe(merged_df)
-
-                except:
-                    st.write("nop")
+                st.dataframe(merged_df)
 
             else:
                 st.write("Pas encore dispo")
