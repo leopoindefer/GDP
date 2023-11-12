@@ -173,10 +173,6 @@ with tab3 :
                     combi_poids.loc[i, 'portfolios_volatility'] = matrice_resultat.sum()
                 combi_risque = np.sqrt(combi_poids) * 100
 
-                # Affichez le DataFrame fusionné
-                st.write("DataFrame fusionné:")
-                st.dataframe(combi_risque)
-
                 try:
                     combi_poids = combi_poids.drop(columns=['portfolios_volatility'])
 
