@@ -139,20 +139,22 @@ with tab3 :
     # Utilisez le dictionnaire symbol_dataframes pour obtenir les DataFrames correspondants
     selected_dataframes = [symbol_df[sym].set_index("Date").filter(like='Close') for sym in portefeuille]
 
-    # Fusionnez les DataFrames en utilisant pd.concat
-    ptf_df = pd.concat(selected_dataframes, axis=1, join='inner')
-    ptf_df.index = pd.to_datetime(ptf_df.index)
-    ptf_df = ptf_df.resample('MS').first()
-
     calcul = st.button('Calculer')
     if calcul:
          with st.spinner('Chargement du calcul'):
+
+            # Fusionnez les DataFrames en utilisant pd.concat
+            ptf_df = pd.concat(selected_dataframes, axis=1, join='inner')
+            ptf_df.index = pd.to_datetime(ptf_df.index)
+            ptf_df = ptf_df.resample('MS').first()
+
             if nb_acts == 2:
                 file_poids = f"data/poids/{nb_acts}.csv"
                 combi_poids = pd.read_csv(file_poids)   
                 # Créer une matrice de pondérations
                 matrice_poids = combi_poids.values
                 matrice_poids = matrice_poids[:,1:]
+                matrice_poids = np.column_stack([matrice_poids[:,:], portefeuille])
                 
                 #matrice de covariance
                 variation = ptf_df.pct_change().dropna()
