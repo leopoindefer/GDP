@@ -28,7 +28,7 @@ symbol_dict = dict(zip(symbol_txt, symbol_dataframes))
 
 st.title("Gérer votre portefeuille avec l'IA")
 
-tab1, tab2, tab3 = st.tabs(["Analyser le marché", "Prédire", "Création de portefeuille"])
+tab1, tab2, tab3 = st.tabs(["Analyser le marché", "Performance future", "Création de portefeuille"])
 
 with tab1 :
 
