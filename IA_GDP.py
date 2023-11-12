@@ -186,8 +186,8 @@ with tab3 :
                     # Fusionner le résultat avec combi_risque
                     merged_df = merged_df.merge(combi_risque[['portfolios_volatility']], left_index=True, right_index=True)
 
-                    retours = merged_df.loc[:,['portfolio_returns']]
-                    volatilite = merged_df.loc[:,['portfolios_volatility']]
+                    retours = merged_df.loc[:,['portfolio_returns']].values.mean()
+                    volatilite = merged_df.loc[:,['portfolios_volatility']].values.mean()
                         
                     st.scatter_chart(x=volatilite, y=retours)
                 except:
