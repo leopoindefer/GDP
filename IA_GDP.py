@@ -154,15 +154,16 @@ with tab3 :
                 # Créer une matrice de pondérations
                 matrice_poids = combi_poids.values
                 matrice_poids = matrice_poids[:,1:]
-                #structured_array = np.core.records.fromarrays(matrice_poids.T, names=portefeuille)
+                combi_poids = pd.DataFrame(matrice_poids)
 
-                # Copier le tableau structuré pour résoudre le problème de continuité
-                #matrice_poids = np.copy(structured_array)
-                
-                #matrice de covariance
+                 #matrice de covariance
                 variation = ptf_df.pct_change().dropna()
                 cov_matrix = variation.cov()/nb_acts
                 cov_matrix['sum'] = cov_matrix.sum(axis=1)
+
+                variation_list = variation.mean().tolist()
+                combi_renta = combi_poids * np.array(variation_list)
+                combi_renta['portfolio_returns'] = combi_renta.sum(axis=1)*100
 
                 # Multiplier chaque matrice de poids par la matrice de covariance
                 matrices_resultats = [np.dot(matrice_poids[i], cov_matrix) for i in range(len(matrice_poids))]
@@ -175,14 +176,6 @@ with tab3 :
                 # Affichez le DataFrame fusionné
                 st.write("DataFrame fusionné:")
                 st.dataframe(combi_risque)
-
-                variation_list = variation.mean().tolist()
-                st.dataframe(variation)
-                st.write(variation_list)
-                st.dataframe(combi_poids)
-
-                combi_renta = combi_poids * np.array(variation_list)
-                combi_renta['portfolio_returns'] = combi_renta.sum(axis=1)*100
 
                 try:
                     combi_poids = combi_poids.drop(columns=['portfolios_volatility'])
