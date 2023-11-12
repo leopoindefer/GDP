@@ -157,7 +157,7 @@ with tab3 :
                 matrice_poids = pd.read_csv(df_poids)
 
                 # Multiplier chaque matrice de poids par la matrice de covariance
-                matrices_resultats = [np.dot(matrice_poids[i], cov_matrix) for i in range(len(matrice_poids))]
+                matrices_resultats = [np.dot(matrice_poids.iloc[i], cov_matrix) for i in range(len(matrice_poids))]
 
                 # Ajouter une colonne supplémentaire pour la somme de chaque ligne
                 for i, matrice_resultat in enumerate(matrices_resultats):
