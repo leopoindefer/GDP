@@ -144,17 +144,17 @@ with tab3 :
     ptf_df.index = pd.to_datetime(ptf_df.index)
     ptf_df = ptf_df.resample('MS').first()
 
-    #matrice de covariance
-    variation = ptf_df.pct_change().dropna()
-    cov_matrix = variation.cov()/4
-    cov_matrix['sum'] = cov_matrix.sum(axis=1)
-
     calcul = st.button('Calculer')
     if calcul:
          with st.spinner('Chargement du calcul'):
             if nb_acts == 2:
                 df_poids = f"data/poids/{nb_acts}.csv"
                 matrice_poids = pd.read_csv(df_poids)
+                
+                #matrice de covariance
+                variation = ptf_df.pct_change().dropna()
+                cov_matrix = variation.cov()/nb_acts
+                cov_matrix['sum'] = cov_matrix.sum(axis=1)
 
                 # Multiplier chaque matrice de poids par la matrice de covariance
                 matrices_resultats = [np.dot(matrice_poids.iloc[i], cov_matrix) for i in range(len(matrice_poids))]
