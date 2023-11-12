@@ -178,10 +178,10 @@ with tab3 :
 
                 variation_list = variation.mean().tolist()
 
-                try:
-                    combi_renta = combi_poids.multiply(variation_list)
-                    combi_renta['portfolio_returns'] = combi_renta.sum(axis=1)*100
+                combi_renta = combi_poids.multiply(variation_list)
+                combi_renta['portfolio_returns'] = combi_renta.sum(axis=1)*100
 
+                try:
                     combi_poids = combi_poids.drop(columns=['portfolios_volatility'])
 
                     # Fusionner combi_poids avec combi_renta
