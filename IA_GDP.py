@@ -127,7 +127,7 @@ with tab2:
         nb_part, tx_rendement, rendement, tx_rentabilite, rentabilite = Projection(montant, duree, symb, df_prophet, predict_prophet)
         st.write(f'Nombre d action acheté : {nb_part}', unsafe_allow_html=True)
         st.write(f'Taux de rendement de : {tx_rendement}, Rendement de {rendement}', unsafe_allow_html=True)
-        st.write(f'Taux de rentabilité de : {tx_rentabilite}, Rentabilité de {rentabilite}', unsafe_allow_html=True)
+        st.write(f'Taux de Rentabilité de : {tx_rentabilite}, Rentabilité de {rentabilite}', unsafe_allow_html=True)
 
 with tab3 : 
     st.header("Composer votre portefeuille")
@@ -163,26 +163,26 @@ with tab3 :
 
                 variation_list = variation.mean().tolist()
                 combi_renta = combi_poids * np.array(variation_list)
-                combi_renta['rentabilité'] = combi_renta.sum(axis=1)*100
+                combi_renta['Rentabilité'] = combi_renta.sum(axis=1)*100
 
                 # Multiplier chaque matrice de poids par la matrice de covariance
                 matrices_resultats = [np.dot(matrice_poids[i], cov_matrix) for i in range(len(matrice_poids))]
 
                 # Ajouter une colonne supplémentaire pour la somme de chaque ligne
                 for i, matrice_resultat in enumerate(matrices_resultats):
-                    combi_poids.loc[i, 'volatilité'] = matrice_resultat.sum()
+                    combi_poids.loc[i, 'Volatilité'] = matrice_resultat.sum()
                 combi_risque = np.sqrt(combi_poids) * 100
 
-                combi_poids = combi_poids.drop(columns=['volatilité'])
+                combi_poids = combi_poids.drop(columns=['Volatilité'])
 
                 # Fusionner combi_poids avec combi_renta
-                merged_df = combi_poids.merge(combi_renta[['rentabilité']], left_index=True, right_index=True)
+                merged_df = combi_poids.merge(combi_renta[['Rentabilité']], left_index=True, right_index=True)
 
                 # Fusionner le résultat avec combi_risque
-                merged_df = merged_df.merge(combi_risque[['volatilité']], left_index=True, right_index=True)
+                merged_df = merged_df.merge(combi_risque[['Volatilité']], left_index=True, right_index=True)
                 st.write('Frontière efficiente')
-                st.scatter_chart(merged_df, x='volatilité', y='rentabilité')
-
+                st.scatter_chart(merged_df, x='Volatilité', y='Rentabilité')
+                st.write("Couple rentabilité/volatilité par combinaison de pondération")
                 st.dataframe(merged_df)
 
             elif nb_acts == 3:
@@ -200,26 +200,26 @@ with tab3 :
 
                 variation_list = variation.mean().tolist()
                 combi_renta = combi_poids * np.array(variation_list)
-                combi_renta['rentabilité'] = combi_renta.sum(axis=1)*100
+                combi_renta['Rentabilité'] = combi_renta.sum(axis=1)*100
 
                 # Multiplier chaque matrice de poids par la matrice de covariance
                 matrices_resultats = [np.dot(matrice_poids[i], cov_matrix) for i in range(len(matrice_poids))]
 
                 # Ajouter une colonne supplémentaire pour la somme de chaque ligne
                 for i, matrice_resultat in enumerate(matrices_resultats):
-                    combi_poids.loc[i, 'volatilité'] = matrice_resultat.sum()
+                    combi_poids.loc[i, 'Volatilité'] = matrice_resultat.sum()
                 combi_risque = np.sqrt(combi_poids) * 100
 
-                combi_poids = combi_poids.drop(columns=['volatilité'])
+                combi_poids = combi_poids.drop(columns=['Volatilité'])
 
                 # Fusionner combi_poids avec combi_renta
-                merged_df = combi_poids.merge(combi_renta[['rentabilité']], left_index=True, right_index=True)
+                merged_df = combi_poids.merge(combi_renta[['Rentabilité']], left_index=True, right_index=True)
 
                 # Fusionner le résultat avec combi_risque
-                merged_df = merged_df.merge(combi_risque[['volatilité']], left_index=True, right_index=True)
+                merged_df = merged_df.merge(combi_risque[['Volatilité']], left_index=True, right_index=True)
                 st.write('Frontière efficiente')   
-                st.scatter_chart(merged_df, x='volatilité', y='rentabilité')
-
+                st.scatter_chart(merged_df, x='Volatilité', y='Rentabilité')
+                st.write("Couple rentabilité/volatilité par combinaison de pondération")
                 st.dataframe(merged_df)
 
             elif nb_acts == 4:
@@ -237,26 +237,26 @@ with tab3 :
 
                 variation_list = variation.mean().tolist()
                 combi_renta = combi_poids * np.array(variation_list)
-                combi_renta['rentabilité'] = combi_renta.sum(axis=1)*100
+                combi_renta['Rentabilité'] = combi_renta.sum(axis=1)*100
 
                 # Multiplier chaque matrice de poids par la matrice de covariance
                 matrices_resultats = [np.dot(matrice_poids[i], cov_matrix) for i in range(len(matrice_poids))]
 
                 # Ajouter une colonne supplémentaire pour la somme de chaque ligne
                 for i, matrice_resultat in enumerate(matrices_resultats):
-                    combi_poids.loc[i, 'volatilité'] = matrice_resultat.sum()
+                    combi_poids.loc[i, 'Volatilité'] = matrice_resultat.sum()
                 combi_risque = np.sqrt(combi_poids) * 100
 
-                combi_poids = combi_poids.drop(columns=['volatilité'])
+                combi_poids = combi_poids.drop(columns=['Volatilité'])
 
                 # Fusionner combi_poids avec combi_renta
-                merged_df = combi_poids.merge(combi_renta[['rentabilité']], left_index=True, right_index=True)
+                merged_df = combi_poids.merge(combi_renta[['Rentabilité']], left_index=True, right_index=True)
 
                 # Fusionner le résultat avec combi_risque
-                merged_df = merged_df.merge(combi_risque[['volatilité']], left_index=True, right_index=True)
+                merged_df = merged_df.merge(combi_risque[['Volatilité']], left_index=True, right_index=True)
                 st.write('Frontière efficiente')   
-                st.scatter_chart(merged_df, x='volatilité', y='rentabilité')
-
+                st.scatter_chart(merged_df, x='Volatilité', y='Rentabilité')
+                st.write("Couple rentabilité/volatilité par combinaison de pondération")
                 st.dataframe(merged_df)
 
             else:
