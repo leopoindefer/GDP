@@ -148,14 +148,14 @@ with tab3 :
     if calcul:
          with st.spinner('Chargement du calcul'):
             if nb_acts == 2:
-                df_poids = f"data/poids/{nb_acts}.csv"
-                combi_poids = pd.read_csv(df_poids)
+                file_poids = f"data/poids/{nb_acts}.csv"
+                combi_poids = pd.read_csv(file_poids)
                 # Créer une matrice de pondérations
                 matrice_poids = combi_poids.values
                 
                 #matrice de covariance
                 variation = ptf_df.pct_change().dropna()
-                cov_matrix = variation.cov()/nb_acts
+                cov_matrix = variation.cov.iloc[:, :-1]()/nb_acts
                 cov_matrix['sum'] = cov_matrix.sum(axis=1)
 
                 # Multiplier chaque matrice de poids par la matrice de covariance
@@ -163,8 +163,8 @@ with tab3 :
 
                 # Ajouter une colonne supplémentaire pour la somme de chaque ligne
                 for i, matrice_resultat in enumerate(matrices_resultats):
-                    df_poids.loc[i, 'portfolios_volatility'] = matrice_resultat.sum()
-                combi_risque = np.sqrt(df_poids) * 100
+                   combi_poids.loc[i, 'portfolios_volatility'] = matrice_resultat.sum()
+                combi_risque = np.sqrt(combi_poids) * 100
 
                 # Affichez le DataFrame fusionné
                 st.write("DataFrame fusionné:")
