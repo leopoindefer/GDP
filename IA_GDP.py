@@ -179,6 +179,7 @@ with tab3 :
                 variation_list = variation.mean().tolist()
                 st.dataframe(variation)
                 st.write(variation_list)
+                st.dataframe(combi_poids)
 
                 combi_renta = combi_poids * np.array(variation_list)
                 combi_renta['portfolio_returns'] = combi_renta.sum(axis=1)*100
