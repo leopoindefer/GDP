@@ -153,8 +153,8 @@ with tab3 :
                 combi_poids = pd.read_csv(file_poids)   
                 # Créer une matrice de pondérations
                 matrice_poids = combi_poids.values
-                matrice_poids = np.column_stack([matrice_poids[:,1:], portefeuille])
                 matrice_poids = matrice_poids[:,1:]
+                matrice_poids[portefeuille] = matrice_poids[:,]
                 
                 #matrice de covariance
                 variation = ptf_df.pct_change().dropna()
