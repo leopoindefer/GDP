@@ -158,8 +158,10 @@ with tab3 :
                 cov_matrix = variation.cov().iloc[:, :-1]/nb_acts
                 cov_matrix['sum'] = cov_matrix.sum(axis=1)
 
+                st.write("matrice de poids")
                 st.dataframe(matrice_poids)
-                st.cache_data(cov_matrix)
+                st.write('matrice de covariance')
+                st.dataframe(cov_matrix)
 
                 try:
                     # Multiplier chaque matrice de poids par la matrice de covariance
