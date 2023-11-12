@@ -154,7 +154,10 @@ with tab3 :
                 # Créer une matrice de pondérations
                 matrice_poids = combi_poids.values
                 matrice_poids = matrice_poids[:,1:]
-                matrice_poids = matrice_poids.view(dtype=[(new_name, matrice_poids.dtype) for new_name in portefeuille]).copy()
+                structured_array = np.core.records.fromarrays(matrice_poids.T, names=portefeuille)
+
+                # Copier le tableau structuré pour résoudre le problème de continuité
+                matrice_poids = np.copy(structured_array)
                 
                 #matrice de covariance
                 variation = ptf_df.pct_change().dropna()
