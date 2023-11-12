@@ -192,7 +192,7 @@ with tab3 :
                 try :
                     RisqueFaible = df_RisqueFaible.iloc[0]
                     messfaible = f"Portefeuille efficient pour un risque faible : \n {round(RisqueFaible,2)}"
-                    print(messfaible)
+                    st.write(messfaible)
                 except:
                     print("pas de risque faible")
 
