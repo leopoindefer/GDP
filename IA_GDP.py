@@ -155,7 +155,7 @@ with tab3 :
                 
                 #matrice de covariance
                 variation = ptf_df.pct_change().dropna()
-                cov_matrix = variation.cov.iloc[:, :-1]()/nb_acts
+                cov_matrix = variation.cov().iloc[:, :-1]/nb_acts
                 cov_matrix['sum'] = cov_matrix.sum(axis=1)
 
                 # Multiplier chaque matrice de poids par la matrice de covariance
