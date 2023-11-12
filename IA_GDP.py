@@ -164,11 +164,6 @@ with tab3 :
                 cov_matrix = variation.cov()/nb_acts
                 cov_matrix['sum'] = cov_matrix.sum(axis=1)
 
-                st.write("matrice de poids")
-                st.dataframe(matrice_poids)
-                st.write('matrice de covariance')
-                st.dataframe(cov_matrix)
-
                 try:
                     # Multiplier chaque matrice de poids par la matrice de covariance
                     matrices_resultats = [np.dot(matrice_poids[i], cov_matrix) for i in range(len(matrice_poids))]
@@ -181,6 +176,21 @@ with tab3 :
                     # Affichez le DataFrame fusionné
                     st.write("DataFrame fusionné:")
                     st.dataframe(combi_risque)
+
+                    variation_list = variation.mean().tolist()
+                    combi_renta = combi_poids.multiply(variation_list)
+                    combi_renta['portfolio_returns'] = combi_renta.sum(axis=1)*100
+
+                    combi_poids = combi_poids.drop(columns=['portfolios_volatility'])
+
+                    # Fusionner combi_poids avec combi_renta
+                    merged_df = combi_poids.merge(combi_renta[['portfolio_returns']], left_index=True, right_index=True)
+
+                    # Fusionner le résultat avec combi_risque
+                    merged_df = merged_df.merge(combi_risque[['portfolios_volatility']], left_index=True, right_index=True)
+                    
+                    st.dataframe(merged_df)
+
                 except:
                     st.write("nop")
 
