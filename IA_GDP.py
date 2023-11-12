@@ -149,8 +149,7 @@ with tab3 :
          with st.spinner('Chargement du calcul'):
             if nb_acts == 2:
                 file_poids = f"data/poids/{nb_acts}.csv"
-                combi_poids = pd.read_csv(file_poids)
-                combi_poids.set_index(combi_poids[0])
+                combi_poids = pd.read_csv(file_poids)   
                 # Créer une matrice de pondérations
                 matrice_poids = combi_poids.values
                 
