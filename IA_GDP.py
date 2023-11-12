@@ -177,18 +177,22 @@ with tab3 :
                 st.dataframe(combi_risque)
 
                 variation_list = variation.mean().tolist()
-                combi_renta = combi_poids.multiply(variation_list)
-                combi_renta['portfolio_returns'] = combi_renta.sum(axis=1)*100
 
-                combi_poids = combi_poids.drop(columns=['portfolios_volatility'])
+                try:
+                    combi_renta = combi_poids.multiply(variation_list)
+                    combi_renta['portfolio_returns'] = combi_renta.sum(axis=1)*100
 
-                # Fusionner combi_poids avec combi_renta
-                merged_df = combi_poids.merge(combi_renta[['portfolio_returns']], left_index=True, right_index=True)
+                    combi_poids = combi_poids.drop(columns=['portfolios_volatility'])
 
-                # Fusionner le résultat avec combi_risque
-                merged_df = merged_df.merge(combi_risque[['portfolios_volatility']], left_index=True, right_index=True)
-                    
-                st.dataframe(merged_df)
+                    # Fusionner combi_poids avec combi_renta
+                    merged_df = combi_poids.merge(combi_renta[['portfolio_returns']], left_index=True, right_index=True)
+
+                    # Fusionner le résultat avec combi_risque
+                    merged_df = merged_df.merge(combi_risque[['portfolios_volatility']], left_index=True, right_index=True)
+                        
+                    st.dataframe(merged_df)
+                except:
+                    st.write("multi")
 
             else:
                 st.write("Pas encore dispo")
