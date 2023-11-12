@@ -135,6 +135,7 @@ with tab3 :
     symbol_df = {sym: pd.read_csv(f"data/actions/{sym}.csv") for sym in symbol_txt}
 
     portefeuille = st.multiselect("Choisissez vos actions", symbol_txt)
+    nb_acts = len(portefeuille)
     # Utilisez le dictionnaire symbol_dataframes pour obtenir les DataFrames correspondants
     selected_dataframes = [symbol_df[sym].set_index("Date").filter(like='Close') for sym in portefeuille]
 
@@ -148,30 +149,22 @@ with tab3 :
     cov_matrix = variation.cov()/4
     cov_matrix['sum'] = cov_matrix.sum(axis=1)
 
-    #Toutes les combinaisons de poids
-
-    # Noms des actifs
-    assets = portefeuille
-
     calcul = st.button('Calculer')
     if calcul:
          with st.spinner('Chargement du calcul'):
-            # Générer toutes les combinaisons possibles de pondérations avec un pas de 0.1
-            weights_combinations = list(product(*[range(0, 101) for _ in assets]))
-            weights_combinations = [(w[0] / 100, w[1] / 100, w[2] / 100, w[3] / 100) for w in weights_combinations if len(w) == 4 and sum(w) == 100]
-
-            combi_poids = pd.DataFrame(weights_combinations, columns=assets)
-
-            # Créer une matrice de pondérations
-            matrice_poids = combi_poids.values
+            if nb_acts == 2:
+                df_poids = f"data/poids/{nb_acts}.csv"
+                matrice_poids = pd.read_csv(df_poids)
+            else:
+                st.write("Pas encore dispo")
 
             # Multiplier chaque matrice de poids par la matrice de covariance
             matrices_resultats = [np.dot(matrice_poids[i], cov_matrix) for i in range(len(matrice_poids))]
 
             # Ajouter une colonne supplémentaire pour la somme de chaque ligne
             for i, matrice_resultat in enumerate(matrices_resultats):
-                combi_poids.loc[i, 'portfolios_volatility'] = matrice_resultat.sum()
-            combi_risque = np.sqrt(combi_poids) * 100
+                df_poids.loc[i, 'portfolios_volatility'] = matrice_resultat.sum()
+            combi_risque = np.sqrt(df_poids) * 100
 
             # Affichez le DataFrame fusionné
             st.write("DataFrame fusionné:")
