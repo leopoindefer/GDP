@@ -177,11 +177,13 @@ with tab3 :
                 st.dataframe(combi_risque)
 
                 variation_list = variation.mean().tolist()
-
-                combi_renta = combi_poids.multiply(variation_list)
-                combi_renta['portfolio_returns'] = combi_renta.sum(axis=1)*100
+                st.dataframe(variation)
+                st.write(variation_list)
 
                 try:
+                    combi_renta = combi_poids.multiply(variation_list)
+                    combi_renta['portfolio_returns'] = combi_renta.sum(axis=1)*100
+
                     combi_poids = combi_poids.drop(columns=['portfolios_volatility'])
 
                     # Fusionner combi_poids avec combi_renta
