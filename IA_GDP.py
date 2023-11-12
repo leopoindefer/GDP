@@ -189,26 +189,16 @@ with tab3 :
                 df_RisqueMoyen = merged_df[(merged_df['portfolios_volatility'] >= (max_vola/3)) & (merged_df['portfolios_volatility'] <= (max_vola/3)*2)].sort_values(by='portfolio_returns', ascending=False)
                 df_RisqueEleve = merged_df[merged_df['portfolios_volatility'] > (max_vola/3)*2].sort_values(by='portfolio_returns', ascending=False)
 
-                try :
-                    RisqueFaible = df_RisqueFaible.iloc[0]
-                    messfaible = f"Portefeuille efficient pour un risque faible : \n {round(RisqueFaible,2)}"
-                    st.write(messfaible)
-                except:
-                    print("pas de risque faible")
-
-                try:
-                    RisqueMoyen = df_RisqueMoyen.iloc[0]
-                    messmoyen = f"Portefeuille efficient pour un risque faible : \n {round(RisqueMoyen,2)}"
-                    print(messmoyen)
-                except:
-                    print("pas de risque moyen")
-
-                try:
-                    RisqueEleve = df_RisqueEleve.iloc[0]
-                    messeleve = f"Portefeuille efficient pour un risque faible : \n {round(RisqueEleve,2)}"
-                    print(messeleve)
-                except:
-                    print("pas de risque élevé")
+                RisqueFaible = df_RisqueFaible.iloc[0]
+                messfaible = f"Portefeuille efficient pour un risque faible : \n {round(RisqueFaible,2)}"
+                st.write(messfaible)
+                RisqueMoyen = df_RisqueMoyen.iloc[0]
+                messmoyen = f"Portefeuille efficient pour un risque faible : \n {round(RisqueMoyen,2)}"
+                st.write(messmoyen)
+                RisqueEleve = df_RisqueEleve.iloc[0]
+                messeleve = f"Portefeuille efficient pour un risque faible : \n {round(RisqueEleve,2)}"
+                st.write(messeleve)
+                st.write("pas de risque élevé")
 
             elif nb_acts == 3:
                 file_poids = f"data/poids/{nb_acts}.csv"
@@ -254,23 +244,23 @@ with tab3 :
                 try :
                     RisqueFaible = df_RisqueFaible.iloc[0]
                     messfaible = f"Portefeuille efficient pour un risque faible : \n {round(RisqueFaible,2)}"
-                    print(messfaible)
+                    st.write(messfaible)
                 except:
-                    print("pas de risque faible")
+                    st.write("pas de risque faible")
 
                 try:
                     RisqueMoyen = df_RisqueMoyen.iloc[0]
                     messmoyen = f"Portefeuille efficient pour un risque faible : \n {round(RisqueMoyen,2)}"
-                    print(messmoyen)
+                    st.write(messmoyen)
                 except:
-                    print("pas de risque moyen")
+                    st.write("pas de risque moyen")
 
                 try:
                     RisqueEleve = df_RisqueEleve.iloc[0]
                     messeleve = f"Portefeuille efficient pour un risque faible : \n {round(RisqueEleve,2)}"
-                    print(messeleve)
+                    st.write(messeleve)
                 except:
-                    print("pas de risque élevé")
+                    st.write("pas de risque élevé")
 
             elif nb_acts == 4:
                 file_poids = f"data/poids/{nb_acts}.csv"
@@ -316,23 +306,23 @@ with tab3 :
                 try :
                     RisqueFaible = df_RisqueFaible.iloc[0]
                     messfaible = f"Portefeuille efficient pour un risque faible : \n {round(RisqueFaible,2)}"
-                    print(messfaible)
+                    st.write(messfaible)
                 except:
-                    print("pas de risque faible")
+                    st.write("pas de risque faible")
 
                 try:
                     RisqueMoyen = df_RisqueMoyen.iloc[0]
                     messmoyen = f"Portefeuille efficient pour un risque faible : \n {round(RisqueMoyen,2)}"
-                    print(messmoyen)
+                    st.write(messmoyen)
                 except:
-                    print("pas de risque moyen")
+                    st.write("pas de risque moyen")
 
                 try:
                     RisqueEleve = df_RisqueEleve.iloc[0]
                     messeleve = f"Portefeuille efficient pour un risque faible : \n {round(RisqueEleve,2)}"
-                    print(messeleve)
+                    st.write(messeleve)
                 except:
-                    print("pas de risque élevé")
+                    st.write("pas de risque élevé")
 
             else:
                 mess_gdp = f"Création de portefeuille pas encore disponible pour {nb_acts}"
