@@ -47,7 +47,7 @@ with tab1 :
     with col_vision2:
         st.write("")
 
-    macro = Tableau(symbol_txt, symbol_dataframes)
+    macro = Tableau(periode, symbol_txt, symbol_dataframes)
     st.dataframe(macro.style.applymap(lambda x: 'color: red' if any('-' in words for words in x.split()) else 'color: green',subset = ['VAR']), column_config={"VISION": st.column_config.LineChartColumn(
             "VISION", y_min=0, y_max=500)})
 
