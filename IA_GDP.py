@@ -99,19 +99,20 @@ with tab2:
     file = f"data/actions/{symb}.csv"
     df = pd.read_csv(file)
 
-    df_test = df.copy()
-    df_test['Date'] = pd.to_datetime(df_test['Date'])
-    df_test.set_index('Date', inplace = True) 
-    df_test = pd.DataFrame(df_test)
-    df_test = df_test.resample("MS").first()
-    df_test['Date'] = df_test.index
-    df_test = df_test.rename(columns = {column:'y',"Date":"ds"})
-    df_test = df_test.loc[:,["ds","y"]]
-    st.dataframe(df_test)
     #Preprocessing pour modele PROPHET
     df_prophet = df.copy()
+    df_prophet['Date'] = pd.to_datetime(df_prophet['Date'])
+    df_prophet.set_index('Date', inplace = True) 
+    df_prophet = pd.DataFrame(df_prophet)
+    df_prophet = df_prophet.resample("MS").first()
+    df_prophet['Date'] = df_prophet.index
     df_prophet = df_prophet.rename(columns = {column:'y',"Date":"ds"})
     df_prophet = df_prophet.loc[:,["ds","y"]]
+
+    #Journalier
+    #df_prophet = df.copy()
+    #df_prophet = df_prophet.rename(columns = {column:'y',"Date":"ds"})
+    #df_prophet = df_prophet.loc[:,["ds","y"]]
 
     #Preprocessing pour modele ARIMA
     df_arima = df
