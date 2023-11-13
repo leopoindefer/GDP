@@ -100,11 +100,11 @@ with tab2:
     df = pd.read_csv(file)
 
     #Preprocessing pour modele PROPHET
-    df_prophet = df
-    df_prophet['Date'] = pd.to_datetime(df_prophet['Date'])
-    df_prophet.set_index('Date', inplace = True)
-    df_prophet = df_prophet.resample("MS").first()
-    df_prophet["Date"] = df_prophet.index
+    df_test = df
+    df_test['Date'] = pd.to_datetime(df_test['Date'])
+    df_test.set_index('Date', inplace = True)
+    df_test = df_test.resample("MS").first()
+    df_test["Date"] = df_test.index
     df_prophet = df.rename(columns = {column:'y',"Date":"ds"})
     df_prophet = df_prophet.loc[:,["ds","y"]]
 
@@ -115,7 +115,7 @@ with tab2:
     df_arima = df_arima.loc[:,column]
     df_arima = pd.DataFrame(df_arima)
     df_arima.resample("MS").first()
-
+    st.dataframe(df_test)
     if action:
         with st.spinner('Chargement de la prédiction'):
 
