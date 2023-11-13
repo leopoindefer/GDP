@@ -143,9 +143,8 @@ with tab2:
 
             #ARIMA
             try:
-                fc, se, conf = ARIMA(df_arima)
-                fc_series = pd.Series(fc)
-                st.dataframe(fc_series)
+                predict_arima = ARIMA(df_arima)
+                st.dataframe = (predict_arima)
             except:
                 st.write("pas de résultat pour ARIMA")
 
