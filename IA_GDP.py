@@ -104,8 +104,8 @@ with tab2:
     df_test.set_index('Date', inplace = True) 
     df_test = pd.DataFrame(df_test)
     df_test = df_test.resample("MS").first()
-    
-
+    df_test['Date'] = df_test.index
+    st.dataframe(df_test)
     #Preprocessing pour modele PROPHET
     df_prophet = df.copy()
     df_prophet = df_prophet.rename(columns = {column:'y',"Date":"ds"})
