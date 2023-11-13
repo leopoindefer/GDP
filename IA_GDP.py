@@ -61,7 +61,7 @@ with tab1 :
             info_button_state = not info_button_state
 
     with col2_info:
-        if info_button_state:
+        if info_button:
             info_button_state = True
             st.info('Rentabilité et volatilité mensuelle')
 
