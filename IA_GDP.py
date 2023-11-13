@@ -41,7 +41,7 @@ with tab1 :
                 """
     st.markdown(hide_st_style, unsafe_allow_html=True) 
     
-    col_vision1, col_vision2 = st.columns(2)
+    col_vision1, col_vision2 = st.columns((2,7))
     with col_vision1:
         periode = st.selectbox("Période d'analyse", ["1 mois","6 mois","1 an","5 ans"])
     with col_vision2:
