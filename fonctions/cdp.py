@@ -34,4 +34,4 @@ def CDP(nb_acts, ptf_df):
     #Fusionner le résultat avec combi_risque
     merged_df = merged_df.merge(combi_risque[['Volatilité']], left_index=True, right_index=True)
     
-    return merged_df
+    return merged_df.to_dataframe(index=False)
