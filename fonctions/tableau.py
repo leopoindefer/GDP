@@ -42,7 +42,7 @@ def Tableau(periode, symbol_txt, symbol):
                 var = round(((cours - cours_prec)/ cours_prec)*100,2)
                 start_date = datetime.now() - timedelta(days=365*5)
                 s_cinq_ans = s_resampled[s_resampled.index>=start_date]
-                sixmois_prec = datetime.now() - timedelta(month=6)
+                sixmois_prec = datetime.now() - timedelta(days=183)
                 s_six_mois_prec = s_resampled[s_resampled.index>=sixmois_prec]
                 variation = s_cinq_ans[close_columns].pct_change().dropna()
                 renta_moy = variation.values.mean()
@@ -68,7 +68,7 @@ def Tableau(periode, symbol_txt, symbol):
                 var = round(((cours - cours_prec)/ cours_prec)*100,2)
                 start_date = datetime.now() - timedelta(days=365*5)
                 s_cinq_ans = s_resampled[s_resampled.index>=start_date]
-                annee_prec = datetime.now() - timedelta(month=12)
+                annee_prec = datetime.now() - timedelta(days=365)
                 s_annee_prec = s_resampled[s_resampled.index>=annee_prec]
                 variation = s_cinq_ans[close_columns].pct_change().dropna()
                 renta_moy = variation.values.mean()
