@@ -57,12 +57,9 @@ with tab1 :
     col1_info, col2_info = st.columns((1, 8))
     with col1_info:
         info_button = st.button("ℹ️")
-        if info_button_state == True:
-            info_button_state = not info_button_state
 
     with col2_info:
         if info_button:
-            info_button_state = True
             st.info('Rentabilité et volatilité mensuelle')
 
     st.markdown('----')
