@@ -46,8 +46,9 @@ with tab1 :
         periode = st.selectbox("Période d'analyse", ["1 mois","6 mois","1 an","5 ans"])
     with col_vision2:
         st.write("")
-
+    
     macro = Tableau(periode, symbol_txt, symbol_dataframes)
+    st.info('Rentabilité et volatilité mensuelle', icon="ℹ️")
     st.dataframe(macro.style.applymap(lambda x: 'color: red' if any('-' in words for words in x.split()) else 'color: green',subset = ['VAR']), column_config={"VISION": st.column_config.LineChartColumn(
             "VISION", y_min=0, y_max=500)})
 
