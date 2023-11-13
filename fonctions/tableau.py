@@ -14,8 +14,6 @@ def Tableau(periode, symbol_txt, symbol):
                 cours = round(s[close_columns].iloc[-1].values.sum(),2)
                 cours_prec = round(s_resampled[close_columns].iloc[-2].values.sum(),2)
                 var = round(((cours - cours_prec)/ cours_prec)*100,2)
-                start_date = datetime.now() - timedelta(days=365*5)
-                s_cinq_ans = s_resampled[s_resampled.index>=start_date]
                 mois_prec = datetime.now() - timedelta(days=31)
                 s_mois_prec = s[s.index>=mois_prec]
                 s_mois_prec_resampled = s_resampled[s_resampled.index>=mois_prec]
@@ -41,14 +39,13 @@ def Tableau(periode, symbol_txt, symbol):
                 cours = round(s[close_columns].iloc[-1].values.sum(),2)
                 cours_prec = round(s_resampled[close_columns].iloc[-7].values.sum(),2)
                 var = round(((cours - cours_prec)/ cours_prec)*100,2)
-                start_date = datetime.now() - timedelta(days=365*5)
-                s_cinq_ans = s_resampled[s_resampled.index>=start_date]
                 sixmois_prec = datetime.now() - timedelta(days=183)
                 s_six_mois_prec = s[s.index>=sixmois_prec]
-                variation = s_cinq_ans[close_columns].pct_change().dropna()
+                s_six_mois_prec_resampled = s_resampled[s_resampled.index>=sixmois_prec]
+                variation = s_six_mois_prec_resampled[close_columns].pct_change().dropna()
                 renta_moy = variation.values.mean()
                 renta_moy = round(renta_moy*100,2)
-                risque_moy = np.std(s_cinq_ans[close_columns]).values.mean()
+                risque_moy = np.std(s_six_mois_prec_resampled[close_columns]).values.mean()
                 risque_moy = round(risque_moy,2)
                 line = [str(val) for val in s_six_mois_prec[close_columns].values.flatten()]
                 liste_cours.append({"SYMBOLE": s_txt, "ACTUEL": f'{cours}', "M-6": f'{cours_prec}', "VAR": f'{var}%', "RENTABILITÉ": f'{renta_moy}%', "VOLATILITÉ": f'{risque_moy}', "VISION":line})
@@ -67,14 +64,13 @@ def Tableau(periode, symbol_txt, symbol):
                 cours = round(s[close_columns].iloc[-1].values.sum(),2)
                 cours_prec = round(s_resampled[close_columns].iloc[-13].values.sum(),2)
                 var = round(((cours - cours_prec)/ cours_prec)*100,2)
-                start_date = datetime.now() - timedelta(days=365*5)
-                s_cinq_ans = s_resampled[s_resampled.index>=start_date]
                 annee_prec = datetime.now() - timedelta(days=365)
                 s_annee_prec = s[s.index>=annee_prec]
-                variation = s_cinq_ans[close_columns].pct_change().dropna()
+                s_annee_prec_resampled = s_resampled[s_resampled.index>=annee_prec]
+                variation = s_annee_prec_resampled[close_columns].pct_change().dropna()
                 renta_moy = variation.values.mean()
                 renta_moy = round(renta_moy*100,2)
-                risque_moy = np.std(s_cinq_ans[close_columns]).values.mean()
+                risque_moy = np.std(s_annee_prec_resampled[close_columns]).values.mean()
                 risque_moy = round(risque_moy,2)
                 line = [str(val) for val in s_annee_prec[close_columns].values.flatten()]
                 liste_cours.append({"SYMBOLE": s_txt, "ACTUEL": f'{cours}', "N-1": f'{cours_prec}', "VAR": f'{var}%', "RENTABILITÉ": f'{renta_moy}%', "VOLATILITÉ": f'{risque_moy}', "VISION":line})
