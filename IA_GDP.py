@@ -142,11 +142,12 @@ with tab2:
                 st.error('pas de résultat pour PROPHET')
 
             #ARIMA
-            try:
-                predict_arima = ARIMA(df_arima)
-                st.write(predict_arima)
-            except:
-                st.write("pas de résultat pour ARIMA")
+            def ARIMA(df_arima):
+                model_arima = ARIMA(df_arima, order=(1,5,0)).fit()
+                predict_arima = model_arima.predict()
+                return predict_arima
+            predict_arima = ARIMA(df_arima)
+            st.write(predict_arima)
 
             predict_prophet = predict_prophet.rename(columns={"ds":"date","yhat":"prediction"})
             graph = ecart.loc[:,["y","yhat"]]
