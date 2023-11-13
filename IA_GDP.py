@@ -169,21 +169,21 @@ with tab3 :
                 st.write('Frontière efficiente')
                 st.scatter_chart(merged_df, x='Volatilité', y='Rentabilité')
                 st.write("Couple rentabilité/volatilité par combinaison de pondération")
-                st.dataframe(merged_df(index=False))
+                st.write(merged_df.to_dataframe(index=False))
 
             elif nb_acts == 3:
                 merged_df = CDP(nb_acts, ptf_df)
                 st.write('Frontière efficiente')   
                 st.scatter_chart(merged_df, x='Volatilité', y='Rentabilité')
                 st.write("Couple rentabilité/volatilité par combinaison de pondération")
-                st.dataframe(merged_df(index=False))
+                st.write(merged_df.to_dataframe(index=False))
 
             elif nb_acts == 4:
                 merged_df = CDP(nb_acts, ptf_df)
                 st.write('Frontière efficiente')   
                 st.scatter_chart(merged_df, x='Volatilité', y='Rentabilité')
                 st.write("Couple rentabilité/volatilité par combinaison de pondération")
-                st.dataframe(merged_df(index=False))
+                st.write(merged_df.to_dataframe(index=False))
 
             else:
                 mess_gdp = f"Création de portefeuille pas encore disponible pour {nb_acts}"
