@@ -17,7 +17,7 @@ def Tableau(periode, symbol_txt, symbol):
                 start_date = datetime.now() - timedelta(days=365*5)
                 s_cinq_ans = s_resampled[s_resampled.index>=start_date]
                 mois_prec = datetime.now() - timedelta(days=31)
-                s_mois_prec = s_resampled[s_resampled.index>=mois_prec]
+                s_mois_prec = s[s.index>=mois_prec]
                 variation = s_cinq_ans[close_columns].pct_change().dropna()
                 renta_moy = variation.values.mean()
                 renta_moy = round(renta_moy*100,2)
@@ -43,7 +43,7 @@ def Tableau(periode, symbol_txt, symbol):
                 start_date = datetime.now() - timedelta(days=365*5)
                 s_cinq_ans = s_resampled[s_resampled.index>=start_date]
                 sixmois_prec = datetime.now() - timedelta(days=183)
-                s_six_mois_prec = s_resampled[s_resampled.index>=sixmois_prec]
+                s_six_mois_prec = s[s.index>=sixmois_prec]
                 variation = s_cinq_ans[close_columns].pct_change().dropna()
                 renta_moy = variation.values.mean()
                 renta_moy = round(renta_moy*100,2)
