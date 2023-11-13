@@ -128,7 +128,6 @@ with tab2:
                 sec = sec.iloc[-1].tolist()**2
             except:
                 st.error('pas de résultat pour PROPHET')
-            st.dataframe(ecart)
             predict_prophet = predict_prophet.rename(columns={"ds":"date","yhat":"prediction"})
             graph = ecart.loc[:,["y","yhat"]]
             graph = graph.rename(columns = {"y":'Reel',"yhat":"prediction"})
