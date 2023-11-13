@@ -28,7 +28,7 @@ symbol_dict = dict(zip(symbol_txt, symbol_dataframes))
 
 st.title("Gérer votre portefeuille avec l'IA")
 
-tab1, tab2, tab3 = st.tabs(["Analyser le marché", "Performances futures", "Création de portefeuille"])
+tab1, tab2, tab3 = st.tabs(["Analyser le marché", "Prédiction de performance", "Création de portefeuille"])
 
 with tab1 :
 
@@ -169,21 +169,21 @@ with tab3 :
                 st.write('Frontière efficiente')
                 st.scatter_chart(merged_df, x='Volatilité', y='Rentabilité')
                 st.write("Couple rentabilité/volatilité par combinaison de pondération")
-                st.write(merged_df.to_dataframe(index=False))
+                st.dataframe(merged_df)
 
             elif nb_acts == 3:
                 merged_df = CDP(nb_acts, ptf_df)
                 st.write('Frontière efficiente')   
                 st.scatter_chart(merged_df, x='Volatilité', y='Rentabilité')
                 st.write("Couple rentabilité/volatilité par combinaison de pondération")
-                st.write(merged_df.to_dataframe(index=False))
+                st.dataframe(merged_df)
 
             elif nb_acts == 4:
                 merged_df = CDP(nb_acts, ptf_df)
                 st.write('Frontière efficiente')   
                 st.scatter_chart(merged_df, x='Volatilité', y='Rentabilité')
                 st.write("Couple rentabilité/volatilité par combinaison de pondération")
-                st.write(merged_df.to_dataframe(index=False))
+                st.dataframe(merged_df)
 
             else:
                 mess_gdp = f"Création de portefeuille pas encore disponible pour {nb_acts}"
