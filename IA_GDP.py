@@ -105,6 +105,8 @@ with tab2:
     df_test = pd.DataFrame(df_test)
     df_test = df_test.resample("MS").first()
     df_test['Date'] = df_test.index
+    df_test = df_test.rename(columns = {column:'y',"Date":"ds"})
+    df_test = df_test.loc[:,["ds","y"]]
     st.dataframe(df_test)
     #Preprocessing pour modele PROPHET
     df_prophet = df.copy()
