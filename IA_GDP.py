@@ -41,7 +41,11 @@ with tab1 :
                 """
     st.markdown(hide_st_style, unsafe_allow_html=True) 
     
-    st.selectbox("Période d'analyse", ["1 mois","6mois","1 an","5 ans"])
+    col_vision1, col_vision2 = st.columns(2)
+    with col_vision1:
+        periode = st.selectbox("Période d'analyse", ["1 mois","6 mois","1 an","5 ans"])
+    with col_vision2:
+        st.write("")
 
     macro = Tableau(symbol_txt, symbol_dataframes)
     st.dataframe(macro.style.applymap(lambda x: 'color: red' if any('-' in words for words in x.split()) else 'color: green',subset = ['VAR']), column_config={"VISION": st.column_config.LineChartColumn(
