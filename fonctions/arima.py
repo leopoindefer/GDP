@@ -8,5 +8,4 @@ import statsmodels.api as sm
 #ARIMA
 def ARIMA(df_arima):
         predict_arima = ARIMA(df_arima, order=(1,5,0)).fit()
-        summary = pd.DataFrame(predict_arima.summary())
-        return summary
+        return predict_arima
