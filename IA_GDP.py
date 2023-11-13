@@ -48,9 +48,13 @@ with tab1 :
         st.write("")
     
     macro = Tableau(periode, symbol_txt, symbol_dataframes)
-    st.info('Rentabilité et volatilité mensuelle', icon="ℹ️")
+    
     st.dataframe(macro.style.applymap(lambda x: 'color: red' if any('-' in words for words in x.split()) else 'color: green',subset = ['VAR']), column_config={"VISION": st.column_config.LineChartColumn(
             "VISION", y_min=0, y_max=500)})
+    info = st.button("📆", kwargs={
+        'clicked_button_ix': 1, 'n_buttons': 4})
+    if info:
+        st.info('Rentabilité et volatilité mensuelle', icon="ℹ️")
 
     st.markdown('----')
 
