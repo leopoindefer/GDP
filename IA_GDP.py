@@ -9,6 +9,7 @@ from fonctions.comparaison import Comparaison
 from fonctions.projection import Projection
 from fonctions.cdp import CDP
 from fonctions.prophet import prophet_model
+from fonctions.arima import ARIMA
 
 st.set_page_config(
     page_title="GDP",
@@ -121,7 +122,7 @@ with tab2:
     df_arima.set_index('Date', inplace = True)
     df_arima = df_arima.loc[:,column]
     df_arima = pd.DataFrame(df_arima)
-    df_arima.resample("MS").first()
+    df_arima = df_arima.resample("MS").first()
 
     if action:
         with st.spinner('Chargement de la prédiction'):
@@ -139,6 +140,13 @@ with tab2:
                 sec = sec.iloc[-1].tolist()**2
             except:
                 st.error('pas de résultat pour PROPHET')
+
+            try:
+                predict_arima = ARIMA(df_arima)
+                st.dataframe(predict_arima)
+            except:
+                st.write("pa de résultat pour ARIMA")
+                
             predict_prophet = predict_prophet.rename(columns={"ds":"date","yhat":"prediction"})
             graph = ecart.loc[:,["y","yhat"]]
             graph = graph.rename(columns = {"y":'Reel',"yhat":"prediction"})
