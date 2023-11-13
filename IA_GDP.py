@@ -52,10 +52,12 @@ with tab1 :
     st.dataframe(macro.style.applymap(lambda x: 'color: red' if any('-' in words for words in x.split()) else 'color: green',subset = ['VAR']), column_config={"VISION": st.column_config.LineChartColumn(
             "VISION", y_min=0, y_max=500)})
     
-    info = st.button("ℹ️", kwargs={
-        'clicked_button_ix': 1, 'n_buttons': 4})
-    if info:
-        st.info('Rentabilité et volatilité mensuelle', icon="ℹ️")
+    col1_info, col2_info, col3_info = st.columns(3)
+    with col1_info:
+        info = st.button("ℹ️", kwargs={'clicked_button_ix': 1, 'n_buttons': 4})
+    with col2_info:
+        if info:
+            st.info('Rentabilité et volatilité mensuelle')
 
     st.markdown('----')
 
