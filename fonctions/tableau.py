@@ -50,7 +50,7 @@ def Tableau(periode, symbol_txt, symbol):
                 risque_moy = np.std(s_cinq_ans[close_columns]).values.mean()
                 risque_moy = round(risque_moy,2)
                 line = [str(val) for val in s_six_mois_prec[close_columns].values.flatten()]
-                liste_cours.append({"SYMBOLE": s_txt, "ACTUEL": f'{cours}', "M-1": f'{cours_prec}', "VAR": f'{var}%', "RENTABILITÉ": f'{renta_moy}%', "VOLATILITÉ": f'{risque_moy}', "VISION":line})
+                liste_cours.append({"SYMBOLE": s_txt, "ACTUEL": f'{cours}', "M-6": f'{cours_prec}', "VAR": f'{var}%', "RENTABILITÉ": f'{renta_moy}%', "VOLATILITÉ": f'{risque_moy}', "VISION":line})
         macro = pd.DataFrame(liste_cours)
         macro.set_index('SYMBOLE', inplace=True)
         return macro
@@ -76,7 +76,7 @@ def Tableau(periode, symbol_txt, symbol):
                 risque_moy = np.std(s_cinq_ans[close_columns]).values.mean()
                 risque_moy = round(risque_moy,2)
                 line = [str(val) for val in s_annee_prec[close_columns].values.flatten()]
-                liste_cours.append({"SYMBOLE": s_txt, "ACTUEL": f'{cours}', "M-1": f'{cours_prec}', "VAR": f'{var}%', "RENTABILITÉ": f'{renta_moy}%', "VOLATILITÉ": f'{risque_moy}', "VISION":line})
+                liste_cours.append({"SYMBOLE": s_txt, "ACTUEL": f'{cours}', "N-1": f'{cours_prec}', "VAR": f'{var}%', "RENTABILITÉ": f'{renta_moy}%', "VOLATILITÉ": f'{risque_moy}', "VISION":line})
         macro = pd.DataFrame(liste_cours)
         macro.set_index('SYMBOLE', inplace=True)
         return macro
@@ -100,7 +100,7 @@ def Tableau(periode, symbol_txt, symbol):
                 risque_moy = np.std(s_cinq_ans[close_columns]).values.mean()
                 risque_moy = round(risque_moy,2)
                 line = [str(val) for val in s_cinq_ans[close_columns].values.flatten()]
-                liste_cours.append({"SYMBOLE": s_txt, "ACTUEL": f'{cours}', "M-1": f'{cours_prec}', "VAR": f'{var}%', "RENTABILITÉ": f'{renta_moy}%', "VOLATILITÉ": f'{risque_moy}', "VISION":line})
+                liste_cours.append({"SYMBOLE": s_txt, "ACTUEL": f'{cours}', "N-5": f'{cours_prec}', "VAR": f'{var}%', "RENTABILITÉ": f'{renta_moy}%', "VOLATILITÉ": f'{risque_moy}', "VISION":line})
         macro = pd.DataFrame(liste_cours)
         macro.set_index('SYMBOLE', inplace=True)
         return macro
