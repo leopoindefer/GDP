@@ -41,6 +41,17 @@ with tab1 :
                 """
     st.markdown(hide_st_style, unsafe_allow_html=True) 
     
+    col_vision1, col_vision2, col_vision3, col_vision4 = st.columns(4)
+
+    with col_vision1:
+        st.button("1 mois")
+    with col_vision2:
+        st.button('6 mois')
+    with col_vision3:
+        st.button('1 an')
+    with col_vision4:
+        st.button('5 ans')
+
     macro = Tableau(symbol_txt, symbol_dataframes)
     st.dataframe(macro.style.applymap(lambda x: 'color: red' if any('-' in words for words in x.split()) else 'color: green',subset = ['VAR']), column_config={"VISION": st.column_config.LineChartColumn(
             "VISION", y_min=0, y_max=500)})
