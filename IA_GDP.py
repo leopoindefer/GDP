@@ -145,8 +145,8 @@ with tab2:
                 predict_arima = ARIMA(df_arima)
                 st.dataframe(predict_arima)
             except:
-                st.write("pa de résultat pour ARIMA")
-                
+                st.write("pas de résultat pour ARIMA")
+
             predict_prophet = predict_prophet.rename(columns={"ds":"date","yhat":"prediction"})
             graph = ecart.loc[:,["y","yhat"]]
             graph = graph.rename(columns = {"y":'Reel',"yhat":"prediction"})
