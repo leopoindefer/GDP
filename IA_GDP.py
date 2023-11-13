@@ -52,11 +52,22 @@ with tab1 :
     st.dataframe(macro.style.applymap(lambda x: 'color: red' if any('-' in words for words in x.split()) else 'color: green',subset = ['VAR']), column_config={"VISION": st.column_config.LineChartColumn(
             "VISION", y_min=0, y_max=500)})
     
+    info_button_state = False
+
     col1_info, col2_info = st.columns((1,8))
     with col1_info:
-        info = st.button("ℹ️", kwargs={'clicked_button_ix': 1, 'n_buttons': 4})
+    # Utiliser st.button pour créer le bouton
+        info_button = st.button("ℹ️")
+
+    # Vérifier si le bouton est cliqué
+        if info_button:
+        # Inverser l'état du bouton à chaque clic
+            info_button_state = not info_button_state
+
+# La deuxième colonne affiche le texte d'information si le bouton est activé
     with col2_info:
-        if info:
+    # Vérifier l'état du bouton pour décider d'afficher ou non le texte d'information
+        if info_button_state:
             st.info('Rentabilité et volatilité mensuelle')
 
     st.markdown('----')
