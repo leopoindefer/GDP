@@ -144,7 +144,7 @@ with tab2:
             #ARIMA
             try:
                 predict_arima = ARIMA(df_arima)
-                st.dataframe(predict_arima)
+                st.write(predict_arima)
             except:
                 st.write("pas de résultat pour ARIMA")
 
