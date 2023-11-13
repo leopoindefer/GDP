@@ -123,8 +123,6 @@ with tab2:
     df_arima = df_arima.loc[:,column]
     df_arima = pd.DataFrame(df_arima)
     df_arima = df_arima.resample("MS").first()
-    train = df_arima.value[:85]
-    test = df_arima.value[85:]
 
     if action:
         with st.spinner('Chargement de la prédiction'):
@@ -146,7 +144,7 @@ with tab2:
             #ARIMA
             try:
                 fc, se, conf = ARIMA(df_arima)
-                fc_series = pd.Series(fc, index=test.index)
+                fc_series = pd.Series(fc)
                 st.dataframe(fc_series)
             except:
                 st.write("pas de résultat pour ARIMA")
