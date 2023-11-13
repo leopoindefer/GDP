@@ -116,7 +116,7 @@ with tab2:
 
             #PROPHET
             try:
-                predict_prophet = prophet_model(df_prophet)
+                predict_prophet, df_p = prophet_model(df_prophet)
                 predict_prophet = predict_prophet.loc[:,["ds","yhat"]]
 
                 df_prophet['ds'] = pd.to_datetime(df_prophet['ds'])
@@ -132,6 +132,7 @@ with tab2:
             graph = graph.rename(columns = {"y":'Reel',"yhat":"prediction"})
             st.line_chart(data=graph)
             st.write(round(sec,2))
+            st.dataframe(df_p)
 
        
         col1, col2 = st.columns(2)
