@@ -69,7 +69,7 @@ def Tableau(periode, symbol_txt, symbol):
                 start_date = datetime.now() - timedelta(days=365*5)
                 s_cinq_ans = s_resampled[s_resampled.index>=start_date]
                 annee_prec = datetime.now() - timedelta(days=365)
-                s_annee_prec = s_resampled[s_resampled.index>=annee_prec]
+                s_annee_prec = s[s.index>=annee_prec]
                 variation = s_cinq_ans[close_columns].pct_change().dropna()
                 renta_moy = variation.values.mean()
                 renta_moy = round(renta_moy*100,2)
