@@ -3,7 +3,6 @@ import pandas as pd
 import numpy as np
 import datetime
 from datetime import date
-from itertools import product
 
 from fonctions.tableau import Tableau
 from fonctions.comparaison import Comparaison
@@ -169,21 +168,21 @@ with tab3 :
                 st.write('Frontière efficiente')
                 st.scatter_chart(merged_df, x='Volatilité', y='Rentabilité')
                 st.write("Couple rentabilité/volatilité par combinaison de pondération")
-                st.dataframe(merged_df)
+                st.markdown(merged_df.style.hide(axis="index").to_html(), unsafe_allow_html=True)
 
             elif nb_acts == 3:
                 merged_df = CDP(nb_acts, ptf_df)
                 st.write('Frontière efficiente')   
                 st.scatter_chart(merged_df, x='Volatilité', y='Rentabilité')
                 st.write("Couple rentabilité/volatilité par combinaison de pondération")
-                st.dataframe(merged_df)
+                st.markdown(merged_df.style.hide(axis="index").to_html(), unsafe_allow_html=True)
 
             elif nb_acts == 4:
                 merged_df = CDP(nb_acts, ptf_df)
                 st.write('Frontière efficiente')   
                 st.scatter_chart(merged_df, x='Volatilité', y='Rentabilité')
                 st.write("Couple rentabilité/volatilité par combinaison de pondération")
-                st.dataframe(merged_df)
+                st.markdown(merged_df.style.hide(axis="index").to_html(), unsafe_allow_html=True)
 
             else:
                 mess_gdp = f"Création de portefeuille pas encore disponible pour {nb_acts}"
