@@ -54,7 +54,7 @@ with tab1 :
     
     info_button_state = False
 
-    col1_info, col2_info = st.columns((1,8))
+    col1_info, col2_info = st.columns((1, 8))
     with col1_info:
     # Utiliser st.button pour créer le bouton
         info_button = st.button("ℹ️")
