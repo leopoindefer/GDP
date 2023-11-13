@@ -90,10 +90,10 @@ def Tableau(periode, symbol_txt, symbol):
             close_columns = [col for col in s_resampled.columns if 'Close' in col]
             if close_columns:
                 cours = round(s[close_columns].iloc[-1].values.sum(),2)
-                var = round(((cours - cours_prec)/ cours_prec)*100,2)
                 start_date = datetime.now() - timedelta(days=365*5)
                 s_cinq_ans = s_resampled[s_resampled.index>=start_date]
                 cours_prec = round(s_cinq_ans[close_columns].iloc[0].values.sum(),2)
+                var = round(((cours - cours_prec)/ cours_prec)*100,2)
                 variation = s_cinq_ans[close_columns].pct_change().dropna()
                 renta_moy = variation.values.mean()
                 renta_moy = round(renta_moy*100,2)
