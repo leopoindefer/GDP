@@ -56,18 +56,13 @@ with tab1 :
 
     col1_info, col2_info = st.columns((1, 8))
     with col1_info:
-    # Utiliser st.button pour créer le bouton
         info_button = st.button("ℹ️")
-
-    # Vérifier si le bouton est cliqué
-        if info_button:
-        # Inverser l'état du bouton à chaque clic
+        if info_button_state == True:
             info_button_state = not info_button_state
 
-# La deuxième colonne affiche le texte d'information si le bouton est activé
     with col2_info:
-    # Vérifier l'état du bouton pour décider d'afficher ou non le texte d'information
         if info_button_state:
+            info_button_state = True
             st.info('Rentabilité et volatilité mensuelle')
 
     st.markdown('----')
