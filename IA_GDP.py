@@ -122,7 +122,7 @@ with tab2:
 
                 df_prophet['ds'] = pd.to_datetime(df_prophet['ds'])
                 predict_prophet['ds'] = pd.to_datetime(predict_prophet['ds'])
-                ecart = df_prophet.set_index('ds').join(predict_prophet.set_index('ds'), how="left")
+                ecart = predict_prophet.set_index('ds').join(df_prophet.set_index('ds'), how="left")
                 ecart['se'] = ecart['y'] - ecart['yhat']
                 sec = ecart.sum(axis=0)
                 sec = sec.iloc[-1].tolist()**2
