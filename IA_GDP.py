@@ -104,7 +104,6 @@ with tab2:
     df_test['Date'] = pd.to_datetime(df_test['Date'])
     df_test.set_index('Date', inplace = True)
     df_test = df_test.resample("MS").first()
-    df_test["Date"] = df_test.index
     df_prophet = df.rename(columns = {column:'y',"Date":"ds"})
     df_prophet = df_prophet.loc[:,["ds","y"]]
 
