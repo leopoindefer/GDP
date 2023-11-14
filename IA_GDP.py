@@ -160,7 +160,7 @@ with tab2:
             st.write("PROPHET")
             st.write(round(mse_prophet,2))
             st.write("ARIMA")
-            st.write(predict_arima.info)
+            st.write(predict_arima)
        
         col1, col2 = st.columns(2)
         with col1:
