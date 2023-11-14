@@ -115,15 +115,17 @@ with tab2:
     df_prophet = df.copy()
     df_prophet = df_prophet.rename(columns = {column:'y',"Date":"ds"})
     df_prophet = df_prophet.loc[:,["ds","y"]]
-
-    #Preprocessing pour modele ARIMA
-    df_arima = df
-    df_arima['Date'] = pd.to_datetime(df_arima['Date'])
-    df_arima.set_index('Date', inplace = True)
-    df_arima = df_arima.loc[:,column]
-    df_arima = pd.DataFrame(df_arima)
-    df_arima.index = pd.to_datetime(df_arima.index)
-    df_arima = df_arima.resample("MS").first()
+    try:
+        #Preprocessing pour modele ARIMA
+        df_arima = df
+        df_arima['Date'] = pd.to_datetime(df_arima['Date'])
+        df_arima.set_index('Date', inplace = True)
+        df_arima = df_arima.loc[:,column]
+        df_arima = pd.DataFrame(df_arima)
+        df_arima.index = pd.to_datetime(df_arima.index)
+        df_arima = df_arima.resample("MS").first()
+    except:
+        st.write("preproc")
 
     if action:
         with st.spinner('Chargement de la prédiction'):
