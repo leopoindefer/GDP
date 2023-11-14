@@ -22,5 +22,5 @@ def model_arima(df_arima):
                                         aic_results.append((p,d,q,model.aic))
                                 except:
                                         continue
-        predict_arima = model_arima.predict()
+        predict_arima = model.predict()
         return predict_arima
