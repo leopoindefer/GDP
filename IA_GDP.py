@@ -145,11 +145,11 @@ with tab2:
             try:
                 predict_arima = model_arima(df_arima)
                 predict_arima = pd.DataFrame(predict_arima)
-                loss_arima = predict_arima.join(df_arima, how="left")
-                loss_arima = loss_arima.rename(columns = {column:'y',"predicted_mean":"yhat"})
-                loss_arima['se'] = (loss_arima['y'] - loss_arima['yhat'])**2
-                mse_arima = loss_arima.mean(axis=0)
-                mse_arima = mse_arima.iloc[-1].tolist()
+                #loss_arima = predict_arima.join(df_arima, how="left")
+                #loss_arima = loss_arima.rename(columns = {column:'y',"predicted_mean":"yhat"})
+                #loss_arima['se'] = (loss_arima['y'] - loss_arima['yhat'])**2
+                #mse_arima = loss_arima.mean(axis=0)
+                #mse_arima = mse_arima.iloc[-1].tolist()
             except:
                 st.error('pas de résultat pour ARIMA')
 
@@ -160,7 +160,7 @@ with tab2:
             st.write("PROPHET")
             st.write(round(mse_prophet,2))
             st.write("ARIMA")
-            st.dataframe(loss_arima)
+            st.dataframe(predict_arima)
        
         col1, col2 = st.columns(2)
         with col1:
