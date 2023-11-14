@@ -4,7 +4,7 @@ import statsmodels.api as sm
 
 #ARIMA
 def model_arima(df_arima):
-        arima_shifted = df_arima.shift(2)/df_arima
+        arima_shifted = pd.df_arima.shift(2)/df_arima
         # Définir les différentes valeurs de p, d et q à tester
         p_values = range(0, 5)
         d_values = range(0, 5)
