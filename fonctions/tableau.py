@@ -28,8 +28,8 @@ def Tableau(periode, symbol_txt, symbol):
                     risque_moy = np.std(s_mois_prec_resampled[close_columns]).values.mean()
                     risque_moy = round(risque_moy,2)
                     line = [str(val) for val in s_mois_prec[close_columns].values.flatten()]
-                    liste_cours.append({"SYMBOLE": s_txt, "ACTUEL": f'{cours}', "M-1": f'{cours_prec}', "VAR": f'{var}%', "RENTABILITÉ": f'{renta_moy}%', "VOLATILITÉ": f'{risque_moy}', "VISION":line})
-            except:
+                    liste_cours.append({"SYMBOLE": s, "ACTUEL": f'{cours}', "M-1": f'{cours_prec}', "VAR": f'{var}%', "RENTABILITÉ": f'{renta_moy}%', "VOLATILITÉ": f'{risque_moy}', "VISION":line})
+            except Exception:
                 continue
         macro = pd.DataFrame(liste_cours)
         macro.set_index('SYMBOLE', inplace=True)
