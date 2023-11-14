@@ -142,15 +142,13 @@ with tab2:
                 st.error('pas de résultat pour PROPHET')
 
             #ARIMA
-            try:
-                predict_arima = model_arima(df_arima)
-                st.write(predict_arima)
-                loss_arima = predict_arima.join(df_arima, how="left")
-                loss_arima['se'] = (loss_arima['y'] - loss_arima['yhat'])**2
-                mse_arima = loss_arima.mean(axis=0)
-                mse_arima = mse_arima.iloc[-1].tolist()
-            except:
-                st.error('pas de résultat pour ARIMA')
+
+            predict_arima = model_arima(df_arima)
+            loss_arima = predict_arima.join(df_arima, how="left")
+            loss_arima['se'] = (loss_arima['y'] - loss_arima['yhat'])**2
+            st.dataframe(loss_arima)
+            mse_arima = loss_arima.mean(axis=0)
+            mse_arima = mse_arima.iloc[-1].tolist()
 
             predict_prophet = predict_prophet.rename(columns={"ds":"date","yhat":"prediction"})
             graph = loss_prophet.loc[:,["y","yhat"]]
