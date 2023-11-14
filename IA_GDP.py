@@ -9,7 +9,7 @@ from fonctions.comparaison import Comparaison
 from fonctions.projection import Projection
 from fonctions.cdp import CDP
 from fonctions.prophet import prophet_model
-#from fonctions.arima import model_arima
+from fonctions.arima import model_arima
 
 st.set_page_config(
     page_title="GDP",
@@ -145,8 +145,8 @@ with tab2:
             #ARIMA
             try:
                 st.write("2 lignes")
-                #predict_arima = model_arima(df_arima)
-                #predict_arima = pd.DataFrame(predict_arima)
+                predict_arima = model_arima(df_arima)
+                predict_arima = pd.DataFrame(predict_arima)
                 #loss_arima = predict_arima.join(df_arima, how="left")
                 #loss_arima = loss_arima.rename(columns = {column:'y',"predicted_mean":"yhat"})
                 #loss_arima['se'] = (loss_arima['y'] - loss_arima['yhat'])**2
