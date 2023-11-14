@@ -146,10 +146,14 @@ with tab2:
             predict_arima = model_arima(df_arima)
             predict_arima = pd.DataFrame(predict_arima)
             loss_arima = predict_arima.join(df_arima, how="left")
-            loss_arima['se'] = (loss_arima['y'] - loss_arima['yhat'])**2
             st.dataframe(loss_arima)
-            mse_arima = loss_arima.mean(axis=0)
-            mse_arima = mse_arima.iloc[-1].tolist()
+            try:
+                loss_arima['se'] = (loss_arima['y'] - loss_arima['yhat'])**2
+                st.dataframe(loss_arima)
+                mse_arima = loss_arima.mean(axis=0)
+                mse_arima = mse_arima.iloc[-1].tolist()
+            except:
+                st.error('pas de résultat pour PROPHET')
 
             predict_prophet = predict_prophet.rename(columns={"ds":"date","yhat":"prediction"})
             graph = loss_prophet.loc[:,["y","yhat"]]
