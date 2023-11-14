@@ -49,7 +49,7 @@ with tab1 :
     with col_vision2:
         indice = st.selectbox("Indices", liste_indice)
         file_indice = f"data/indices/{indice}.csv"
-        df_indice = pd.read_csv(file_indice)
+        df_indice = pd.read_csv(file_indice, delimiter=";")
 
     st.dataframe(df_indice)
     macro = Tableau(periode, symbol_txt, symbol_dataframes)
