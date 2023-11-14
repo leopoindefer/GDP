@@ -1,6 +1,5 @@
 import pandas as pd
 from statsmodels.tsa.arima.model import ARIMA
-import statsmodels.api as sm
 
 #ARIMA
 def model_arima(df_arima):
@@ -18,7 +17,7 @@ def model_arima(df_arima):
                         for d in d_values:
                                 for q in q_values:
                                         try:
-                                                model = sm.tsa.ARIMA(arima_shifted, order=(p,d,q)).fit()
+                                                model = ARIMA(arima_shifted, order=(p,d,q)).fit()
                                                 # Stocker l'AIC pour ce modèle
                                                 aic_results.append((p,d,q,model.aic))
                                         except:
