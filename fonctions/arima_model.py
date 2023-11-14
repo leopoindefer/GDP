@@ -26,5 +26,5 @@ def model_arima(df_arima):
                                         continue
         best_model = list(sorted(aic_results, key=lambda x: x[3])[0])[0:3]
         model_arima = ARIMA(arima_shifted, order=best_model).fit()
-        predict_arima = model_arima.predict()
+        predict_arima = model_arima.forecast()
         return predict_arima
