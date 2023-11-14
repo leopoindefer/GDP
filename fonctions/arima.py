@@ -23,7 +23,7 @@ def model_arima(df_arima):
                                         except:
                                                 continue
                 best_model = list(sorted(aic_results, key=lambda x: x[3])[0])[0:3]
-                model_arima = sm.tsa.ARIMA(arima_shifted, order=best_model).fit()
+                model_arima = ARIMA(arima_shifted, order=best_model).fit()
                 predict_arima = model_arima.predict()
         except:
                 ("model")
