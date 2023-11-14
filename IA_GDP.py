@@ -18,12 +18,11 @@ st.set_page_config(
 symbol_txt = []
 liste_indice = ["CAC40", "DOWJONES", "NASDAQ100", "S&P500", "SBF120"]
 
+#liste de toutes les actions
 for ind in liste_indice:
     file_path = f"data/indices/{ind}.csv"
     indices_df = pd.read_csv(file_path, delimiter=";")
     symbols_list = indices_df["ticker"].tolist()
-    
-    # Utilisez extend pour ajouter les éléments de symbols_list à symbol_txt
     symbol_txt.extend(symbols_list)
 
 st.title("Gérer votre portefeuille avec l'IA")
@@ -44,7 +43,7 @@ with tab1 :
     with col_vision1:
         periode = st.selectbox("Période d'analyse", ["1 mois","6 mois","1 an","5 ans"])
     with col_vision2:
-        indice = st.selectbox("Indices", liste_indice)
+        indice = st.selectbox("Indice", liste_indice)
         file_indice = f"data/indices/{indice}.csv"
         df_indice = pd.read_csv(file_indice, delimiter=";")
         actions = df_indice['ticker'].tolist()
