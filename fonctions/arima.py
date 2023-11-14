@@ -22,5 +22,6 @@ def model_arima(df_arima):
                                         aic_results.append((p,d,q,model.aic))
                                 except:
                                         continue
-        predict_arima = model.predict()
-        return predict_arima
+        best_model = sorted(aic_results, key=lambda x: x[3])[0]
+        #predict_arima = model.predict()
+        return best_model
