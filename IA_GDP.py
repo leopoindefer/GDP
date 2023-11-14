@@ -52,7 +52,7 @@ with tab1 :
     try:
         macro = Tableau(periode, actions)
         st.dataframe(macro.style.applymap(lambda x: 'color: red' if any('-' in words for words in x.split()) else 'color: green',subset = ['VAR']), column_config={"VISION": st.column_config.LineChartColumn(
-            "VISION", y_min=0, y_max=500)})
+            "VISION", y_min=0, y_max=200)})
     except:
         st.write("pas de donnée")
     
