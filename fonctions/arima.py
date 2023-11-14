@@ -23,7 +23,7 @@ def model_arima(df_arima):
                                 except:
                                         continue
         best_model = sorted(aic_results, key=lambda x: x[3])[0]
-        best_model = pd.DataFrame(best_model)
+        best_model = pd.DataFrame(best_model, index=False)
         best_model = best_model.iloc[0:3].values.tolist()
         #predict_arima = model.predict()
         return best_model
