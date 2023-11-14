@@ -6,10 +6,13 @@ def Tableau(periode, symbol_txt, symbol):
     if periode == "1 mois":
         liste_cours = list()
         symbol_dataframes = []  # Initialiser une liste pour stocker les DataFrames
-        for s in symbol_txt:
-            file_path = f"data/actions/{s}.csv"
-            s = pd.read_csv(file_path)
-            symbol_dataframes.append(s)
+        for s in symbol_txt:      
+            try:
+                file_path = f"data/actions/{s}.csv"
+                s = pd.read_csv(file_path)
+                symbol_dataframes.append(s)
+            except:
+                pass
             s["Date"] = pd.to_datetime(s["Date"])
             s = s.set_index("Date")
             s_resampled = s.resample("M").first()
