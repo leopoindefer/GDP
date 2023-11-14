@@ -98,7 +98,7 @@ with tab1 :
             st.write(mess_corr)
 
         st.markdown('----')
-    except:
+    except FileNotFoundError:
         st.write("page1")
     
 with tab2:
@@ -182,7 +182,7 @@ with tab2:
             st.write(f'Nombre d action acheté : {nb_part}', unsafe_allow_html=True)
             st.write(f'Taux de rendement de : {tx_rendement}, Rendement de {rendement}', unsafe_allow_html=True)
             st.write(f'Taux de Rentabilité de : {tx_rentabilite}, Rentabilité de {rentabilite}', unsafe_allow_html=True)
-    except:
+    except FileNotFoundError:
         st.write("page2")
 
 with tab3 : 
@@ -229,5 +229,5 @@ with tab3 :
                 else:
                     mess_gdp = f"Création de portefeuille pas encore disponible pour {nb_acts}"
                     st.write(mess_gdp)
-    except:
+    except FileNotFoundError:
         st.write("page3")
