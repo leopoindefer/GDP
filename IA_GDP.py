@@ -35,7 +35,7 @@ with tab1 :
     for ind in liste_indice:
         file_indice = f"data/indices/{ind}.csv"
         df_indice = pd.read_csv(file_indice)
-        actions = df_indice.loc[:,["ticker"]].values.tolist()
+        #actions = df_indice.loc[:,["ticker"]].values.tolist()
 
     hide_st_style = """
                 <style>
@@ -50,10 +50,10 @@ with tab1 :
     with col_vision1:
         periode = st.selectbox("Période d'analyse", ["1 mois","6 mois","1 an","5 ans"])
     with col_vision2:
-        indices = st.selectbox("Indices", liste_indice)
+        indices = st.selectbox("Indices", symbol_txt)
 
 
-    st.write(actions)
+    st.dataframe(df_indice)
     macro = Tableau(periode, symbol_txt, symbol_dataframes)
     
     st.dataframe(macro.style.applymap(lambda x: 'color: red' if any('-' in words for words in x.split()) else 'color: green',subset = ['VAR']), column_config={"VISION": st.column_config.LineChartColumn(
