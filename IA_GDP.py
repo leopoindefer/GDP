@@ -9,7 +9,7 @@ from fonctions.comparaison import Comparaison
 from fonctions.projection import Projection
 from fonctions.cdp import CDP
 from fonctions.prophet import prophet_model
-from fonctions.arima import ARIMA
+from fonctions.arima import model_arima
 
 st.set_page_config(
     page_title="GDP",
@@ -142,11 +142,7 @@ with tab2:
                 st.error('pas de résultat pour PROPHET')
 
             #ARIMA
-            def ARIMA(df_arima):
-                model_arima = ARIMA(df_arima, order=(1,1,5)).fit()
-                predict_arima = model_arima.predict()
-                return predict_arima
-            predict_arima = ARIMA(df_arima)
+            predict_arima = model_arima(df_arima)
             st.write(predict_arima)
 
             predict_prophet = predict_prophet.rename(columns={"ds":"date","yhat":"prediction"})
