@@ -6,9 +6,9 @@ def Tableau(periode, symbol_txt, symbol):
     if periode == "1 mois":
         liste_cours = list()
         symbol_dataframes = []  # Initialiser une liste pour stocker les DataFrames
-        for s in symbol_txt:
+        for s_txt in symbol_txt:
             try:      
-                file_path = f"data/actions/{s}.csv"
+                file_path = f"data/actions/{s_txt}.csv"
                 s = pd.read_csv(file_path)
                 symbol_dataframes.append(s)
                 s["Date"] = pd.to_datetime(s["Date"])
@@ -28,7 +28,7 @@ def Tableau(periode, symbol_txt, symbol):
                     risque_moy = np.std(s_mois_prec_resampled[close_columns]).values.mean()
                     risque_moy = round(risque_moy,2)
                     line = [str(val) for val in s_mois_prec[close_columns].values.flatten()]
-                    liste_cours.append({"SYMBOLE": s, "ACTUEL": f'{cours}', "M-1": f'{cours_prec}', "VAR": f'{var}%', "RENTABILITÉ": f'{renta_moy}%', "VOLATILITÉ": f'{risque_moy}', "VISION":line})
+                    liste_cours.append({"SYMBOLE": s_txt, "ACTUEL": f'{cours}', "M-1": f'{cours_prec}', "VAR": f'{var}%', "RENTABILITÉ": f'{renta_moy}%', "VOLATILITÉ": f'{risque_moy}', "VISION":line})
             except Exception:
                 continue
         macro = pd.DataFrame(liste_cours)
