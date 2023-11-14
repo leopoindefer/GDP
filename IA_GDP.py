@@ -180,9 +180,11 @@ with tab2:
 
 with tab3 : 
     st.header("Composer votre portefeuille")
-
-    symbol_df = {s: pd.read_csv(f"data/actions/{s}.csv") for s in symbol_txt}
-
+    symbol_df = []  # Initialiser une liste pour stocker les DataFrames
+    for s_txt in symbol_txt:     
+        file_path = f"data/actions/{s_txt}.csv"
+        s = pd.read_csv(file_path)
+        symbol_df.append(s)
     portefeuille = st.multiselect("Choisissez vos actions", symbol_txt)
     nb_acts = len(portefeuille)
     # Utilisez le dictionnaire symbol_dataframes pour obtenir les DataFrames correspondants
