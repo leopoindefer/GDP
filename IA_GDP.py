@@ -35,71 +35,71 @@ st.title("Gérer votre portefeuille avec l'IA")
 tab1, tab2, tab3 = st.tabs(["Analyser le marché", "Prédiction de performance", "Création de portefeuille"])
 
 with tab1 :
-
-    liste_indice = ["CAC40", "DOWJONES", "NASDAQ100", "S&P500", "SBF120"]
-
-    hide_st_style = """
-                <style>
-                #MainMenu {Visibility: hidden;}
-                footer {visibility: hidden;}
-                .bouton {visibility: hidden;}
-                </style>
-                """
-    st.markdown(hide_st_style, unsafe_allow_html=True) 
-    
-    col_vision1, col_vision2 = st.columns((2,7))
-    with col_vision1:
-        periode = st.selectbox("Période d'analyse", ["1 mois","6 mois","1 an","5 ans"])
-    with col_vision2:
-        indice = st.selectbox("Indices", liste_indice)
-        file_indice = f"data/indices/{indice}.csv"
-        df_indice = pd.read_csv(file_indice, delimiter=";")
-        actions = df_indice['ticker'].tolist()
     try:
-        macro = Tableau(periode, actions)
-        st.dataframe(macro.style.applymap(lambda x: 'color: red' if any('-' in words for words in x.split()) else 'color: green',subset = ['VAR']), column_config={"VISION": st.column_config.LineChartColumn(
-            "VISION", y_min=0, y_max=500)})
+        hide_st_style = """
+                    <style>
+                    #MainMenu {Visibility: hidden;}
+                    footer {visibility: hidden;}
+                    .bouton {visibility: hidden;}
+                    </style>
+                    """
+        st.markdown(hide_st_style, unsafe_allow_html=True) 
+        
+        col_vision1, col_vision2 = st.columns((2,7))
+        with col_vision1:
+            periode = st.selectbox("Période d'analyse", ["1 mois","6 mois","1 an","5 ans"])
+        with col_vision2:
+            indice = st.selectbox("Indices", liste_indice)
+            file_indice = f"data/indices/{indice}.csv"
+            df_indice = pd.read_csv(file_indice, delimiter=";")
+            actions = df_indice['ticker'].tolist()
+        try:
+            macro = Tableau(periode, actions)
+            st.dataframe(macro.style.applymap(lambda x: 'color: red' if any('-' in words for words in x.split()) else 'color: green',subset = ['VAR']), column_config={"VISION": st.column_config.LineChartColumn(
+                "VISION", y_min=0, y_max=500)})
+        except:
+            st.write("pas de donnée")
+        
+        info_button_state = False
+
+        col1_info, col2_info = st.columns((1, 8))
+        with col1_info:
+            info_button = st.button("ℹ️")
+
+        with col2_info:
+            if info_button:
+                st.info('Rentabilité et volatilité mensuelle')
+
+        st.markdown('----')
+
+        st.header("Comparer des actions ou indices")
+        col_comp1, col_comp2, col_comp3 = st.columns(3)
+
+        with col_comp1:
+            comp1 = st.selectbox('', symbol_txt)
+
+        with col_comp2:
+            symbol_txt2 = symbol_txt.copy()
+            symbol_txt2.remove(comp1)
+            comp2 = st.selectbox(' ', symbol_txt2)
+
+        with col_comp3:
+            st.write('')
+            st.write("")
+            run = st.button('Comparer')
+
+        if run:
+            symb1 = comp1
+            symb2 = comp2
+            graph_comp, corr = Comparaison(symb1,symb2)
+            st.line_chart(graph_comp)
+
+            mess_corr = f'Corrélation linéraire à : {round(corr*100,2)}%'
+            st.write(mess_corr)
+
+        st.markdown('----')
     except:
-        st.write("pas de donnée")
-    
-    info_button_state = False
-
-    col1_info, col2_info = st.columns((1, 8))
-    with col1_info:
-        info_button = st.button("ℹ️")
-
-    with col2_info:
-        if info_button:
-            st.info('Rentabilité et volatilité mensuelle')
-
-    st.markdown('----')
-
-    st.header("Comparer des actions ou indices")
-    col_comp1, col_comp2, col_comp3 = st.columns(3)
-
-    with col_comp1:
-        comp1 = st.selectbox('', symbol_txt)
-
-    with col_comp2:
-        symbol_txt2 = symbol_txt.copy()
-        symbol_txt2.remove(comp1)
-        comp2 = st.selectbox(' ', symbol_txt2)
-
-    with col_comp3:
-        st.write('')
-        st.write("")
-        run = st.button('Comparer')
-
-    if run:
-        symb1 = comp1
-        symb2 = comp2
-        graph_comp, corr = Comparaison(symb1,symb2)
-        st.line_chart(graph_comp)
-
-        mess_corr = f'Corrélation linéraire à : {round(corr*100,2)}%'
-        st.write(mess_corr)
-
-    st.markdown('----')
+        st.write("page1")
     
 with tab2:
 
