@@ -153,7 +153,7 @@ with tab2:
                 st.error('pas de résultat pour ARIMA')
 
             predict_prophet = predict_prophet.rename(columns={"ds":"date","yhat":"prediction"})
-            graph = mse_prophet.loc[:,["y","yhat"]]
+            graph = loss_prophet.loc[:,["y","yhat"]]
             graph = graph.rename(columns = {"y":'Reel',"yhat":"prediction"})
             st.line_chart(data=graph)
             st.write(round(mse_prophet,2))
