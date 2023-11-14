@@ -50,7 +50,7 @@ with tab1 :
         indice = st.selectbox("Indices", liste_indice)
         file_indice = f"data/indices/{indice}.csv"
         df_indice = pd.read_csv(file_indice, delimiter=";")
-        actions = df_indice.loc[:,["ticker"]].values.tolist()
+        actions = list(df_indice.loc[:,["ticker"]])
 
     macro = Tableau(periode, actions, symbol_dataframes)
     
