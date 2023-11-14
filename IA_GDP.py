@@ -122,6 +122,7 @@ with tab2:
     df_arima.set_index('Date', inplace = True)
     df_arima = df_arima.loc[:,column]
     df_arima = pd.DataFrame(df_arima)
+    df_arima.index = pd.to_datetime(df_arima.index)
     df_arima = df_arima.resample("MS").first()
 
     if action:
