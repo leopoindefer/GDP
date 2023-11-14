@@ -142,25 +142,25 @@ with tab2:
                 st.error('pas de résultat pour PROPHET')
 
             #ARIMA
-
-            predict_arima = model_arima(df_arima)
-            predict_arima = pd.DataFrame(predict_arima)
-            loss_arima = predict_arima.join(df_arima, how="left")
-            loss_arima = loss_arima.rename(columns = {column:'y',"predicted_mean":"yhat"})
-            st.dataframe(loss_arima)
             try:
+                predict_arima = model_arima(df_arima)
+                predict_arima = pd.DataFrame(predict_arima)
+                loss_arima = predict_arima.join(df_arima, how="left")
+                loss_arima = loss_arima.rename(columns = {column:'y',"predicted_mean":"yhat"})
                 loss_arima['se'] = (loss_arima['y'] - loss_arima['yhat'])**2
-                st.dataframe(loss_arima)
                 mse_arima = loss_arima.mean(axis=0)
                 mse_arima = mse_arima.iloc[-1].tolist()
             except:
-                st.error('pas de résultat pour PROPHET')
+                st.error('pas de résultat pour ARIMA')
 
             predict_prophet = predict_prophet.rename(columns={"ds":"date","yhat":"prediction"})
             graph = loss_prophet.loc[:,["y","yhat"]]
             graph = graph.rename(columns = {"y":'Reel',"yhat":"prediction"})
             st.line_chart(data=graph)
+            st.write("PROPHET")
             st.write(round(mse_prophet,2))
+            st.write("ARIMA")
+            st.write(round(mse_arima,2))
        
         col1, col2 = st.columns(2)
         with col1:
