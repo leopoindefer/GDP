@@ -35,7 +35,7 @@ with tab1 :
     for ind in liste_indice:
         file_indice = f"data/indices/{ind}.csv"
         df_indice = pd.read_csv(file_indice)
-        actions = df_indice.loc["ticker"].values.tolist()
+        actions = df_indice.loc[:,["ticker"]].values.tolist()
 
     hide_st_style = """
                 <style>
