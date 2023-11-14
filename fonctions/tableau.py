@@ -6,8 +6,8 @@ def Tableau(periode, symbol_txt, symbol):
     if periode == "1 mois":
         liste_cours = list()
         symbol_dataframes = []  # Initialiser une liste pour stocker les DataFrames
-        for s in symbol_txt:      
-            try:
+        for s in symbol_txt:
+            try:      
                 file_path = f"data/actions/{s}.csv"
                 s = pd.read_csv(file_path)
                 symbol_dataframes.append(s)
