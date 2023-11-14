@@ -52,8 +52,7 @@ with tab1 :
         df_indice = pd.read_csv(file_indice, delimiter=";")
         actions = df_indice.loc[:,["ticker"]].values.tolist()
 
-    st.write(actions)
-    macro = Tableau(periode, symbol_txt, symbol_dataframes)
+    macro = Tableau(periode, actions, symbol_dataframes)
     
     st.dataframe(macro.style.applymap(lambda x: 'color: red' if any('-' in words for words in x.split()) else 'color: green',subset = ['VAR']), column_config={"VISION": st.column_config.LineChartColumn(
             "VISION", y_min=0, y_max=500)})
