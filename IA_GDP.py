@@ -32,9 +32,6 @@ tab1, tab2, tab3 = st.tabs(["Analyser le marché", "Prédiction de performance",
 with tab1 :
 
     liste_indice = ["CAC40", "DOWJONES", "NASDAQ100", "S&P500", "SBF120"]
-    for ind in liste_indice:
-        file_indice = f"data/indices/{ind}.csv"
-        df_indice = pd.read_csv(file_indice)
         #actions = df_indice.loc[:,["ticker"]].values.tolist()
 
     hide_st_style = """
@@ -50,8 +47,9 @@ with tab1 :
     with col_vision1:
         periode = st.selectbox("Période d'analyse", ["1 mois","6 mois","1 an","5 ans"])
     with col_vision2:
-        indices = st.selectbox("Indices", symbol_txt)
-
+        indice = st.selectbox("Indices", liste_indice)
+        file_indice = f"data/indices/{indice}.csv"
+        df_indice = pd.read_csv(file_indice)
 
     st.dataframe(df_indice)
     macro = Tableau(periode, symbol_txt, symbol_dataframes)
