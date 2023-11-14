@@ -9,7 +9,7 @@ from fonctions.comparaison import Comparaison
 from fonctions.projection import Projection
 from fonctions.cdp import CDP
 from fonctions.prophet import prophet_model
-from fonctions.arima import model_arima
+#from fonctions.arima import model_arima
 
 st.set_page_config(
     page_title="GDP",
