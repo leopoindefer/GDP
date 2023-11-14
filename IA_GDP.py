@@ -115,17 +115,15 @@ with tab2:
     df_prophet = df.copy()
     df_prophet = df_prophet.rename(columns = {column:'y',"Date":"ds"})
     df_prophet = df_prophet.loc[:,["ds","y"]]
-    try:
-        #Preprocessing pour modele ARIMA
-        df_arima = df
-        df_arima['Date'] = pd.to_datetime(df_arima['Date'])
-        df_arima.set_index('Date', inplace = True)
-        df_arima = df_arima.loc[:,column]
-        df_arima = pd.DataFrame(df_arima)
-        df_arima.index = pd.to_datetime(df_arima.index)
-        df_arima = df_arima.resample("MS").first()
-    except:
-        st.write("preproc")
+
+    #Preprocessing pour modele ARIMA
+    df_arima = df
+    df_arima['Date'] = pd.to_datetime(df_arima['Date'])
+    df_arima.set_index('Date', inplace = True)
+    df_arima = df_arima.loc[:,column]
+    df_arima = pd.DataFrame(df_arima)
+    df_arima.index = pd.to_datetime(df_arima.index)
+    df_arima = df_arima.resample("MS").first()
 
     if action:
         with st.spinner('Chargement de la prédiction'):
@@ -146,8 +144,9 @@ with tab2:
 
             #ARIMA
             try:
-                predict_arima = model_arima(df_arima)
-                predict_arima = pd.DataFrame(predict_arima)
+                st.write("2 lignes")
+                #predict_arima = model_arima(df_arima)
+                #predict_arima = pd.DataFrame(predict_arima)
                 #loss_arima = predict_arima.join(df_arima, how="left")
                 #loss_arima = loss_arima.rename(columns = {column:'y',"predicted_mean":"yhat"})
                 #loss_arima['se'] = (loss_arima['y'] - loss_arima['yhat'])**2
