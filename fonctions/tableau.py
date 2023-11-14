@@ -11,8 +11,8 @@ def Tableau(periode, symbol_txt, symbol):
                 file_path = f"data/actions/{s}.csv"
                 s = pd.read_csv(file_path)
                 symbol_dataframes.append(s)
-            except:
-                pass
+            except FileNotFoundError:
+                continue
             s["Date"] = pd.to_datetime(s["Date"])
             s = s.set_index("Date")
             s_resampled = s.resample("M").first()
