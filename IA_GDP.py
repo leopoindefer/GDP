@@ -19,7 +19,7 @@ symbol_txt = []
 liste_indice = ["CAC40", "DOWJONES", "NASDAQ100", "S&P500", "SBF120"]
 
 for ind in liste_indice:
-    file_path = f"C:/Users/Utilisateur/Documents/site/data/indices/{ind}.csv"
+    file_path = f"data/indices/{ind}.csv"
     indices_df = pd.read_csv(file_path, delimiter=";")
     symbols_list = indices_df["ticker"].tolist()
     
