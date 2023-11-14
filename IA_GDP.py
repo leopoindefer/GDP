@@ -40,7 +40,7 @@ with tab1 :
                 """
     st.markdown(hide_st_style, unsafe_allow_html=True) 
     
-    col_vision1, col_vision2 = st.columns((2,7))
+    col_vision1, col_vision2, col_vision3 = st.columns((2,3,5))
     with col_vision1:
         periode = st.selectbox("Période d'analyse", ["1 mois","6 mois","1 an","5 ans"])
     with col_vision2:
@@ -48,6 +48,8 @@ with tab1 :
         file_indice = f"data/indices/{indice}.csv"
         df_indice = pd.read_csv(file_indice, delimiter=";")
         actions = df_indice['ticker'].tolist()
+    with col_vision3:
+        st.write("")
     try:
         macro = Tableau(periode, actions)
         st.dataframe(macro.style.applymap(lambda x: 'color: red' if any('-' in words for words in x.split()) else 'color: green',subset = ['VAR']), column_config={"VISION": st.column_config.LineChartColumn(
