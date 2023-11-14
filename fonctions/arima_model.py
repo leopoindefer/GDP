@@ -5,8 +5,7 @@ from statsmodels.tsa.base.tsa_model import TimeSeriesModel
 import pandas as pd
 
 #ARIMA
-def model_arima(df_arima):
-        arima_shifted = df_arima.shift(2)/df_arima
+def model_arima(arima_shifted):
         # Définir les différentes valeurs de p, d et q à tester
         p_values = range(0, 5)
         d_values = range(0, 5)
@@ -19,12 +18,12 @@ def model_arima(df_arima):
                 for d in d_values:
                         for q in q_values:
                                 try:
-                                        model = ARIMA(df_arima, order=(p,d,q)).fit()
+                                        model = ARIMA(arima_shifted, order=(p,d,q)).fit()
                                         # Stocker l'AIC pour ce modèle
                                         aic_results.append((p,d,q,model.aic))
                                 except:
                                         continue
         best_model = list(sorted(aic_results, key=lambda x: x[3])[0])[0:3]
-        model_arima = ARIMA(df_arima, order=best_model).fit()
+        model_arima = ARIMA(arima_shifted, order=best_model).fit()
         predict_arima = model_arima.forecast()
         return predict_arima
