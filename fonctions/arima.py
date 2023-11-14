@@ -24,5 +24,6 @@ def model_arima(df_arima):
                                         continue
         best_model = sorted(aic_results, key=lambda x: x[3])[0]
         best_model = list(best_model)
+        best_model = best_model.pop(-1)
         #predict_arima = model.predict()
         return best_model
