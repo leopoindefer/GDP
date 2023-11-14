@@ -134,9 +134,9 @@ with tab2:
 
                 df_prophet['ds'] = pd.to_datetime(df_prophet['ds'])
                 predict_prophet['ds'] = pd.to_datetime(predict_prophet['ds'])
-                mse_prophet = predict_prophet.set_index('ds').join(df_prophet.set_index('ds'), how="left")
-                mse_prophet['se'] = (mse_prophet['y'] - mse_prophet['yhat'])**2
-                mse_prophet = mse_prophet.mean(axis=0)
+                loss_prophet = predict_prophet.set_index('ds').join(df_prophet.set_index('ds'), how="left")
+                loss_prophet['se'] = (loss_prophet['y'] - loss_prophet['yhat'])**2
+                mse_prophet = loss_prophet.mean(axis=0)
                 mse_prophet = mse_prophet.iloc[-1].tolist()
             except:
                 st.error('pas de résultat pour PROPHET')
@@ -145,9 +145,9 @@ with tab2:
             try:
                 predict_arima = model_arima(df_arima)
                 st.write(predict_arima)
-                mse_arima = predict_arima.join(df_arima, how="left")
-                mse_arima['se'] = (mse_arima['y'] - mse_arima['yhat'])**2
-                mse_arima = mse_arima.mean(axis=0)
+                loss_arima = predict_arima.join(df_arima, how="left")
+                loss_arima['se'] = (loss_arima['y'] - loss_arima['yhat'])**2
+                mse_arima = loss_arima.mean(axis=0)
                 mse_arima = mse_arima.iloc[-1].tolist()
             except:
                 st.error('pas de résultat pour ARIMA')
@@ -156,7 +156,7 @@ with tab2:
             graph = mse_prophet.loc[:,["y","yhat"]]
             graph = graph.rename(columns = {"y":'Reel',"yhat":"prediction"})
             st.line_chart(data=graph)
-            st.write(round(sec,2))
+            st.write(round(mse_prophet,2))
        
         col1, col2 = st.columns(2)
         with col1:
