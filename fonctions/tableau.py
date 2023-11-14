@@ -31,8 +31,8 @@ def Tableau(periode, symbol_txt, symbol):
                     liste_cours.append({"SYMBOLE": s_txt, "ACTUEL": f'{cours}', "M-1": f'{cours_prec}', "VAR": f'{var}%', "RENTABILITÉ": f'{renta_moy}%', "VOLATILITÉ": f'{risque_moy}', "VISION":line})
             except:
                 continue
-            macro = pd.DataFrame(liste_cours)
-            macro.set_index('SYMBOLE', inplace=True)
+        macro = pd.DataFrame(liste_cours)
+        macro.set_index('SYMBOLE', inplace=True)
         return macro
     
     elif periode == "6 mois":
