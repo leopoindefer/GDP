@@ -15,15 +15,20 @@ st.set_page_config(
     page_icon="💯",
 )
 
-symbol_txt = ["AAPL", "TSLA", "AMZN", "META", "PLUG", "PLTR", "AMD", "RIVN", "NVDA", "SOFI", "NIO", "MARA", "F", "DNA", "LCID", "LIFW", "U", "RLX", "PFE", "BAC", "STNE", "UBER", "AAL", "GRAB", "INTC", "VLA.PA", "ALGRE.PA", "ALO.PA", "BNP.PA", "ALCYB.PA", "STLAP.PA", "AF.PA", "VIE.PA", "SAN.PA", "GLE.PA"]
-symbol_dataframes = []  # Initialiser une liste pour stocker les DataFrames
+symbol_txt = []
+liste_indice = ["CAC40", "DOWJONES", "NASDAQ100", "S&P500", "SBF120"]
+
+for ind in liste_indice:
+    file_path = f"C:/Users/Utilisateur/Documents/site/data/indices/{ind}.csv"
+    indices_df = pd.read_csv(file_path, delimiter=";")
+    symbols_list = indices_df["ticker"].tolist()
+    
+    # Utilisez extend pour ajouter les éléments de symbols_list à symbol_txt
+    symbol_txt.extend(symbols_list)
 
 for sym in symbol_txt:
     file_path = f"data/actions/{sym}.csv"
     df = pd.read_csv(file_path)
-    symbol_dataframes.append(df)
-
-symbol_dict = dict(zip(symbol_txt, symbol_dataframes))
 
 st.title("Gérer votre portefeuille avec l'IA")
 
@@ -51,7 +56,7 @@ with tab1 :
         df_indice = pd.read_csv(file_indice, delimiter=";")
         actions = df_indice['ticker'].tolist()
     try:
-        macro = Tableau(periode, actions, symbol_dataframes)
+        macro = Tableau(periode, actions)
         st.dataframe(macro.style.applymap(lambda x: 'color: red' if any('-' in words for words in x.split()) else 'color: green',subset = ['VAR']), column_config={"VISION": st.column_config.LineChartColumn(
             "VISION", y_min=0, y_max=500)})
     except:
