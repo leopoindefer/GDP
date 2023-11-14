@@ -146,6 +146,7 @@ with tab2:
             predict_arima = model_arima(df_arima)
             predict_arima = pd.DataFrame(predict_arima)
             loss_arima = predict_arima.join(df_arima, how="left")
+            df_arima = df_arima.rename(columns = {column:'y',"predicted_mean":"yhat"})
             st.dataframe(loss_arima)
             try:
                 loss_arima['se'] = (loss_arima['y'] - loss_arima['yhat'])**2
