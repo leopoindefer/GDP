@@ -144,6 +144,7 @@ with tab2:
             #ARIMA
 
             predict_arima = model_arima(df_arima)
+            predict_arima = pd.DataFrame(predict_arima)
             loss_arima = predict_arima.join(df_arima, how="left")
             loss_arima['se'] = (loss_arima['y'] - loss_arima['yhat'])**2
             st.dataframe(loss_arima)
