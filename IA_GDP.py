@@ -179,7 +179,7 @@ with tab2:
 
 with tab3 : 
     st.header("Composer votre portefeuille")
-    symbol_df = []
+    selected_dataframes = []
     portefeuille = st.multiselect("Choisissez vos actions", symbol_txt)
 
     for port in portefeuille:
@@ -188,7 +188,7 @@ with tab3 :
         s["Date"] = pd.to_datetime(s["Date"])
         s = s.set_index("Date")
         s_resampled = s.resample("M").first()
-        selected_dataframes = [s.filter(like='Close')]
+        selected_dataframes.append(s.filter(like='Close'))
     nb_acts = len(portefeuille)
 
     # Fusionnez les DataFrames en utilisant pd.concat
