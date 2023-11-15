@@ -181,7 +181,6 @@ with tab3 :
     st.header("Composer votre portefeuille")
     symbol_df = [] 
     portefeuille = st.multiselect("Choisissez vos actions", symbol_txt)
-    nb_acts = len(portefeuille)
 
     for port in portefeuille:
         file_path = f"data/actions/{port}.csv"
@@ -190,6 +189,7 @@ with tab3 :
         s = s.set_index("Date")
         s_resampled = s.resample("M").first()
         symbol_df.append(s)
+    nb_acts = len(portefeuille)
 
     selected_dataframes = [symbol_df[sym].set_index("Date").filter(like='Close') for sym in portefeuille]
     
