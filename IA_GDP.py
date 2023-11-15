@@ -15,6 +15,16 @@ st.set_page_config(
     page_icon="💯",
 )
 
+symbol_txt = ["AAPL", "TSLA", "AMZN", "META", "PLUG", "PLTR", "AMD", "RIVN", "NVDA", "SOFI", "NIO", "MARA", "F", "DNA", "LCID", "LIFW", "U", "RLX", "PFE", "BAC", "STNE", "UBER", "AAL", "GRAB", "INTC", "VLA.PA", "ALGRE.PA", "ALO.PA", "BNP.PA", "ALCYB.PA", "STLAP.PA", "AF.PA", "VIE.PA", "SAN.PA", "GLE.PA"]
+symbol_dataframes = []  # Initialiser une liste pour stocker les DataFrames
+
+for sym in symbol_txt:
+    file_path = f"data/actions/{sym}.csv"
+    df = pd.read_csv(file_path)
+    symbol_dataframes.append(df)
+
+symbol_dict = dict(zip(symbol_txt, symbol_dataframes))
+
 symbol_txt = []
 liste_indice = ["CAC40", "DOWJONES", "NASDAQ100", "S&P500", "SBF120"]
 
@@ -179,17 +189,16 @@ with tab2:
 
 with tab3 : 
     st.header("Composer votre portefeuille")
-    selected_dataframes = []
+    symbol_df = []
     portefeuille = st.multiselect("Choisissez vos actions", symbol_txt)
 
     for port in portefeuille:
         file_path = f"data/actions/{port}.csv"
         s = pd.read_csv(file_path)
-        s["Date"] = pd.to_datetime(s["Date"])
-        s = s.set_index("Date")
-        s_resampled = s.resample("M").first()
-        selected_dataframes.append(s)
+        symbol_df.append(s)
     nb_acts = len(portefeuille)
+
+    selected_dataframes = [symbol_df[sym].set_index("Date").filter(like='Close') for sym in portefeuille]
 
     # Fusionnez les DataFrames en utilisant pd.concat
     ptf_df = pd.concat(selected_dataframes, axis=1, join='inner')
