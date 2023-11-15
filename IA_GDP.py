@@ -213,7 +213,7 @@ with tab3 :
                 try :
                     RisqueFaible = df_RisqueFaible.iloc[0]
                     st.write("Portefeuille efficient pour un risque faible :")
-                    st.dataframe(RisqueFaible.transpose())
+                    st.dataframe(np.transpose(RisqueFaible))
                 except:
                     st.write("pas de risque faible")
 
