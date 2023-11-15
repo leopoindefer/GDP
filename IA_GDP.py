@@ -182,33 +182,22 @@ with tab3 :
     portefeuille = list()
     portefeuille = st.multiselect("Choisissez vos actions", symbol_txt)
     
-    # Initialisation du DataFrame avec la première action
-    prem = f"data/actions/{portefeuille[0]}.csv"
-    prem_df = pd.read_csv(prem)
-    prem_df["Date"] = pd.to_datetime(prem_df["Date"])
-    prem_df = prem_df.set_index("Date")
-    close_columns = [col for col in prem_df.columns if 'Close' in col]
-    prem_df = prem_df[close_columns]
+    portefeuille_data = []
 
-    # Initialisation du DataFrame pour le portefeuille total
-    ptf_df = prem_df[[]]
+for port in portefeuille:
+    file_path = f"data/actions/{port}.csv"
+    s = pd.read_csv(file_path)
+    s["Date"] = pd.to_datetime(s["Date"])
+    s = s.set_index("Date")
+    s_resampled = s.resample("M").first()
+    close_columns = [col for col in s.columns if 'Close' in col]
+    
+    if close_columns:
+        # Ajout du tuple à la liste
+        portefeuille_data.append((port, s[close_columns]))
 
-    # Boucle pour concaténer les DataFrames des actions restantes
-    for port in portefeuille[1:]:
-        file_path = f"data/actions/{port}.csv"
-        s = pd.read_csv(file_path)
-        s["Date"] = pd.to_datetime(s["Date"])
-        s = s.set_index("Date")
-        s_resampled = s.resample("M").first()
-        close_columns = [col for col in s.columns if 'Close' in col]
-        s = s[close_columns]
-        ptf_df = pd.concat([ptf_df, s], axis=1, join="inner")
-
-    nb_acts = len(portefeuille)
-    # Utilisez le dictionnaire symbol_dataframes pour obtenir les DataFrames correspondants
-    st.dataframe(prem_df)
-    st.dataframe(s)
-    st.dataframe(ptf_df)
+# Affichage de la liste
+    st.write(portefeuille_data)
     
     calcul = st.button('Calculer')
 
