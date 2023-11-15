@@ -179,26 +179,29 @@ with tab2:
 
 with tab3 : 
     st.header("Composer votre portefeuille")
-    symbol_df = []  # Initialiser une liste pour stocker les DataFrames
     portefeuille = st.multiselect("Choisissez vos actions", symbol_txt)
+
+    ptf_df = pd.DataFrame()
     for port in portefeuille:     
         file_path = f"data/actions/{port}.csv"
         s = pd.read_csv(file_path)
         s["Date"] = pd.to_datetime(s["Date"])
         s = s.set_index("Date")
         s_resampled = s.resample("M").first()
-        close_columns = [col for col in s_resampled.columns if 'Close' in col]
+        close_columns = [col for col in s.columns if 'Close' in col]
         if close_columns:
-            ptf_df = pd.concat(s, axis=1, join='inner')
+            ptf_df = pd.concat([ptf_df, s[close_columns]], axis=1, join='inner')
+            ptf_df.index = pd.to_datetime(ptf_df.index)
+            ptf_df = ptf_df.resample('MS').first()
     nb_acts = len(portefeuille)
     # Utilisez le dictionnaire symbol_dataframes pour obtenir les DataFrames correspondants
     st.write(ptf_df)
     calcul = st.button('Calculer')
+
     if calcul:
          with st.spinner('Chargement du calcul'):
 
             # Fusionnez les DataFrames en utilisant pd.concat
-            ptf_df = pd.concat(symbol_df, axis=1, join='inner')
             ptf_df.index = pd.to_datetime(ptf_df.index)
             ptf_df = ptf_df.resample('MS').first()
 
