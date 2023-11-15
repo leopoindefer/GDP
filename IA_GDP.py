@@ -198,8 +198,6 @@ with tab3 :
         symbol_df.append(s)
     nb_acts = len(portefeuille)
 
-    st.dataframe(ptf_df)
-
     calcul = st.button('Calculer')
     if calcul:
          with st.spinner('Chargement du calcul'):
