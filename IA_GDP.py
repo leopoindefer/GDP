@@ -25,18 +25,6 @@ for ind in liste_indice:
     symbols_list = indices_df["ticker"].tolist()
     symbol_txt.extend(symbols_list)
 
-symbol_dataframes = []  # Initialiser une liste pour stocker les DataFrames
-
-for sym in symbol_txt:
-    try:
-        file_path = f"data/actions/{sym}.csv"
-        df = pd.read_csv(file_path)
-        symbol_dataframes.append(df)
-    except Exception:
-        continue
-
-    symbol_dict = dict(zip(symbol_txt, symbol_dataframes))
-
 st.title("Gérer votre portefeuille avec l'IA")
 
 tab1, tab2, tab3 = st.tabs(["Analyser le marché", "Prédiction de performance", "Création de portefeuille"])
@@ -193,19 +181,11 @@ with tab3 :
     st.header("Composer votre portefeuille")
     portefeuille = st.multiselect("Choisissez vos actions", symbol_txt)
     symbol_df = {}
-
     for symb in symbol_txt:
         try:
             symbol_df[symb] = pd.read_csv(f"data/actions/{symb}.csv")
-        except FileNotFoundError:
-            print(f"Le fichier CSV pour le symbole {symb} n'a pas été trouvé. Continuer avec le prochain symbole.")
-            continue
-        except pd.errors.EmptyDataError:
-            print(f"Le fichier CSV pour le symbole {symb} est vide. Continuer avec le prochain symbole.")
-            continue
         except Exception as e:
-            print(f"Une erreur s'est produite lors de la lecture du fichier CSV pour le symbole {symb}: {str(e)}")
-        continue
+            continue
     nb_acts = len(portefeuille)
 
     calcul = st.button('Calculer')
