@@ -186,7 +186,10 @@ with tab3 :
         s = pd.read_csv(file_path)
         s["Date"] = pd.to_datetime(s["Date"])
         s = s.set_index("Date")
-        symbol_df.append(s)
+        s_resampled = s.resample("M").first()
+        close_columns = [col for col in s_resampled.columns if 'Close' in col]
+        if close_columns:
+            symbol_df.append(s)
     nb_acts = len(portefeuille)
     # Utilisez le dictionnaire symbol_dataframes pour obtenir les DataFrames correspondants
     ptf_df = pd.concat(s, axis=1, join='inner')
