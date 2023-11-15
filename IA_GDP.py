@@ -198,24 +198,23 @@ with tab3 :
             ptf_df = pd.concat(selected_dataframes, axis=1, join='inner')
             ptf_df.index = pd.to_datetime(ptf_df.index)
             ptf_df = ptf_df.resample('MS').first()
-            ptf_df = ptf_df.rename(columns={portefeuille})
 
             if nb_acts == 2:
-                merged_df = CDP(nb_acts, ptf_df)
+                merged_df = CDP(portefeuille, nb_acts, ptf_df)
                 st.write('Frontière efficiente')
                 st.scatter_chart(merged_df, x='Volatilité', y='Rentabilité')
                 st.write("Couple rentabilité/volatilité par combinaison de pondération")
                 st.dataframe(merged_df, hide_index=True)
 
             elif nb_acts == 3:
-                merged_df = CDP(nb_acts, ptf_df)
+                merged_df = CDP(portefeuille, nb_acts, ptf_df)
                 st.write('Frontière efficiente')   
                 st.scatter_chart(merged_df, x='Volatilité', y='Rentabilité')
                 st.write("Couple rentabilité/volatilité par combinaison de pondération")
                 st.dataframe(merged_df, hide_index=True)
 
             elif nb_acts == 4:
-                merged_df = CDP(nb_acts, ptf_df)
+                merged_df = CDP(portefeuille, nb_acts, ptf_df)
                 st.write('Frontière efficiente')   
                 st.scatter_chart(merged_df, x='Volatilité', y='Rentabilité')
                 st.write("Couple rentabilité/volatilité par combinaison de pondération")
