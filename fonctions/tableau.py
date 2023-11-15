@@ -28,7 +28,7 @@ def Tableau(periode, symbol_txt):
                     risque_moy = np.std(variation).values.mean()
                     risque_moy = round(risque_moy,2)
                     line = [str(val) for val in s_mois_prec[close_columns].values.flatten()]
-                    liste_cours.append({"SYMBOLE": s_txt, "ACTUEL": f'{cours}', "M-1": f'{cours_prec}', "VAR": f'{var}%', "RENTABILITÉ": f'{renta_moy}%', "VOLATILITÉ": f'{risque_moy}', "VISION":line})
+                    liste_cours.append({"SYMBOLE": s_txt, "ACTUEL": f'{cours}', "M-1": f'{cours_prec}', "VAR": f'{var}%', "RENTABILITÉ": f'{renta_moy}%', "VOLATILITÉ": f'{risque_moy}%', "VISION":line})
             except FileNotFoundError:
                 continue
             except Exception:
@@ -59,10 +59,10 @@ def Tableau(periode, symbol_txt):
                     variation = s_six_mois_prec_resampled[close_columns].pct_change().dropna()
                     renta_moy = variation.values.mean()
                     renta_moy = round(renta_moy*100,2)
-                    risque_moy = np.std(s_six_mois_prec_resampled[close_columns]).values.mean()
+                    risque_moy = np.std(variation).values.mean()
                     risque_moy = round(risque_moy,2)
                     line = [str(val) for val in s_six_mois_prec[close_columns].values.flatten()]
-                    liste_cours.append({"SYMBOLE": s_txt, "ACTUEL": f'{cours}', "M-6": f'{cours_prec}', "VAR": f'{var}%', "RENTABILITÉ": f'{renta_moy}%', "VOLATILITÉ": f'{risque_moy}', "VISION":line})
+                    liste_cours.append({"SYMBOLE": s_txt, "ACTUEL": f'{cours}', "M-6": f'{cours_prec}', "VAR": f'{var}%', "RENTABILITÉ": f'{renta_moy}%', "VOLATILITÉ": f'{risque_moy}%', "VISION":line})
             except FileNotFoundError:
                 continue
             except Exception:
@@ -93,10 +93,10 @@ def Tableau(periode, symbol_txt):
                     variation = s_annee_prec_resampled[close_columns].pct_change().dropna()
                     renta_moy = variation.values.mean()
                     renta_moy = round(renta_moy*100,2)
-                    risque_moy = np.std(s_annee_prec_resampled[close_columns]).values.mean()
+                    risque_moy = np.std(variation).values.mean()
                     risque_moy = round(risque_moy,2)
                     line = [str(val) for val in s_annee_prec[close_columns].values.flatten()]
-                    liste_cours.append({"SYMBOLE": s_txt, "ACTUEL": f'{cours}', "N-1": f'{cours_prec}', "VAR": f'{var}%', "RENTABILITÉ": f'{renta_moy}%', "VOLATILITÉ": f'{risque_moy}', "VISION":line})
+                    liste_cours.append({"SYMBOLE": s_txt, "ACTUEL": f'{cours}', "N-1": f'{cours_prec}', "VAR": f'{var}%', "RENTABILITÉ": f'{renta_moy}%', "VOLATILITÉ": f'{risque_moy}%', "VISION":line})
             except FileNotFoundError:
                 continue
             except Exception:
@@ -126,10 +126,10 @@ def Tableau(periode, symbol_txt):
                     variation = s_cinq_ans[close_columns].pct_change().dropna()
                     renta_moy = variation.values.mean()
                     renta_moy = round(renta_moy*100,2)
-                    risque_moy = np.std(s_cinq_ans[close_columns]).values.mean()
+                    risque_moy = np.std(variation).values.mean()
                     risque_moy = round(risque_moy,2)
                     line = [str(val) for val in s_cinq_ans[close_columns].values.flatten()]
-                    liste_cours.append({"SYMBOLE": s_txt, "ACTUEL": f'{cours}', "N-5": f'{cours_prec}', "VAR": f'{var}%', "RENTABILITÉ": f'{renta_moy}%', "VOLATILITÉ": f'{risque_moy}', "VISION":line})
+                    liste_cours.append({"SYMBOLE": s_txt, "ACTUEL": f'{cours}', "N-5": f'{cours_prec}', "VAR": f'{var}%', "RENTABILITÉ": f'{renta_moy}%', "VOLATILITÉ": f'{risque_moy}%', "VISION":line})
             except FileNotFoundError:
                 continue
             except Exception:
