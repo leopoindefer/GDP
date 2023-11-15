@@ -3,7 +3,6 @@ import pandas as pd
 import numpy as np
 import datetime
 from datetime import date
-from datetime import datetime
 
 from fonctions.tableau import Tableau
 from fonctions.comparaison import Comparaison
@@ -182,18 +181,20 @@ with tab3 :
     st.header("Composer votre portefeuille")
     portefeuille = st.multiselect("Choisissez vos actions", symbol_txt)
 
-    ptf_df = pd.DataFrame()
+    ptf_df = list()
     for port in portefeuille:     
         file_path = f"data/actions/{port}.csv"
         s = pd.read_csv(file_path)
-        s = pd.DataFrame(s)
         s["Date"] = pd.to_datetime(s["Date"])
         s = s.set_index("Date")
         s_resampled = s.resample("M").first()
         close_columns = [col for col in s.columns if 'Close' in col]
         if close_columns:
-            ptf_df = pd.concat([ptf_df, s_resampled[close_columns]], axis=1)
+            cours = s[close_columns]
+            ptf_df.append({s:[cours]})
+            ptf_df = pd.DataFrame(ptf_df)
     nb_acts = len(portefeuille)
+    # Utilisez le dictionnaire symbol_dataframes pour obtenir les DataFrames correspondants
     st.write(ptf_df)
     
     calcul = st.button('Calculer')
