@@ -27,7 +27,8 @@ def CDP(portefeuille, nb_acts, ptf_df):
     combi_risque = np.sqrt(combi_poids) * 100
 
     combi_poids = combi_poids.drop(columns=['Volatilité'])
-    combi_poids.rename(columns={portefeuille})
+    for c in combi_poids.columns:
+        combi_poids = combi_poids.rename(columns={c:{portefeuille}})
 
     # Fusionner combi_poids avec combi_renta
     merged_df = combi_poids.merge(combi_renta[['Rentabilité']], left_index=True, right_index=True)
