@@ -201,6 +201,7 @@ with tab3 :
         close_columns = [col for col in s.columns if 'Close' in col]
         if close_columns:
             # Concaténer le DataFrame actuel avec le DataFrame global
+            s = s[close_columns]
             ptf_df = pd.concat([ptf_df, s], axis=1, join="inner")
 
     nb_acts = len(portefeuille)
