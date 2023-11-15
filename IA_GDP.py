@@ -181,7 +181,7 @@ with tab3 :
     st.header("Composer votre portefeuille")
     portefeuille = st.multiselect("Choisissez vos actions", symbol_txt)
 
-    ptf_df = pd.DataFrame()
+    ptf_df = list()
     for port in portefeuille:     
         file_path = f"data/actions/{port}.csv"
         s = pd.read_csv(file_path)
@@ -190,10 +190,10 @@ with tab3 :
         s_resampled = s.resample("M").first()
         close_columns = [col for col in s.columns if 'Close' in col]
         if close_columns:
-            ptf_df.extend(s[close_columns].columns)
-    ptf_df = pd.DataFrame(index=s_resampled.index)  # Utiliser l'index de l'un des DataFrames
-    for col in ptf_df:
-        ptf_df[col] = pd.concat([s_resampled[col] for port in portefeuille], axis=1, join='inner').mean(axis=1)
+            nom = port
+            cours = s.columns
+            ptf_df.append({nom,cours})
+            ptf_df = pd.DataFrame(ptf_df)
     nb_acts = len(portefeuille)
     # Utilisez le dictionnaire symbol_dataframes pour obtenir les DataFrames correspondants
     st.write(ptf_df)
