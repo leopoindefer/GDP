@@ -191,7 +191,7 @@ with tab2:
 
 with tab3 : 
     st.header("Composer votre portefeuille")
-    symbol_df = []
+    symbol_df = {sym: pd.read_csv(f"data/actions/{sym}.csv") for sym in symbol_txt}
     portefeuille = st.multiselect("Choisissez vos actions", symbol_txt)
     nb_acts = len(portefeuille)
 
