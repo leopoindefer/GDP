@@ -181,21 +181,28 @@ with tab3 :
     st.header("Composer votre portefeuille")
     portefeuille = list()
     portefeuille = st.multiselect("Choisissez vos actions", symbol_txt)
+    
+    # Initialisation du DataFrame avec la première action
     prem = f"data/actions/{portefeuille[0]}.csv"
     prem_df = pd.read_csv(prem)
     prem_df["Date"] = pd.to_datetime(prem_df["Date"])
     prem_df = prem_df.set_index("Date")
-    portefeuille_reste = portefeuille[1:]
-    for port in portefeuille_reste:     
+
+    # Initialisation du DataFrame pour le portefeuille total
+    ptf_df = prem_df[[]]
+
+    # Boucle pour concaténer les DataFrames des actions restantes
+    for port in portefeuille[1:]:
         file_path = f"data/actions/{port}.csv"
         s = pd.read_csv(file_path)
-        s = pd.DataFrame(s)
         s["Date"] = pd.to_datetime(s["Date"])
         s = s.set_index("Date")
         s_resampled = s.resample("M").first()
         close_columns = [col for col in s.columns if 'Close' in col]
         if close_columns:
-            ptf_df = pd.concat([prem_df[close_columns], s[close_columns]], axis=1, join="inner")
+            # Concaténer le DataFrame actuel avec le DataFrame global
+            ptf_df = pd.concat([ptf_df, s[close_columns]], axis=1, join="inner")
+
     nb_acts = len(portefeuille)
     # Utilisez le dictionnaire symbol_dataframes pour obtenir les DataFrames correspondants
     st.dataframe(ptf_df)
