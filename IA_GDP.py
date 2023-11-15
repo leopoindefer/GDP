@@ -186,7 +186,6 @@ with tab3 :
 
     # Initialisez le DataFrame résultant avec l'index date
     ptf_df = pd.DataFrame(index=date_index)
-    ptf_df = pd.DataFrame()
     for port in portefeuille:     
         file_path = f"data/actions/{port}.csv"
         s = pd.read_csv(file_path)
