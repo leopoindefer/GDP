@@ -209,6 +209,8 @@ with tab3 :
     nb_acts = len(portefeuille)
     # Utilisez le dictionnaire symbol_dataframes pour obtenir les DataFrames correspondants
     st.dataframe(prem_df)
+    st.dataframe(s)
+    st.dataframe(ptf_df)
     
     calcul = st.button('Calculer')
 
