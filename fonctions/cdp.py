@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-def CDP(nb_acts, ptf_df):
+def CDP(portefeuille, nb_acts, ptf_df):
     file_poids = f"data/poids/{nb_acts}.csv"
     combi_poids = pd.read_csv(file_poids)   
     matrice_poids = combi_poids.values
@@ -27,6 +27,7 @@ def CDP(nb_acts, ptf_df):
     combi_risque = np.sqrt(combi_poids) * 100
 
     combi_poids = combi_poids.drop(columns=['Volatilité'])
+    combi_poids.rename(columns={portefeuille})
 
     # Fusionner combi_poids avec combi_renta
     merged_df = combi_poids.merge(combi_renta[['Rentabilité']], left_index=True, right_index=True)
