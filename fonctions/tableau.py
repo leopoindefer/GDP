@@ -13,20 +13,19 @@ def Tableau(periode, symbol_txt):
                 s = s.set_index("Date")
                 s_resampled = s.resample("M").first()
                 close_columns = [col for col in s_resampled.columns if 'Close' in col]
-                if close_columns:
-                    cours = round(s[close_columns].iloc[-1].values.sum(),2)
-                    cours_prec = round(s_resampled[close_columns].iloc[-2].values.sum(),2)
-                    var = round(((cours - cours_prec)/ cours_prec)*100,2)
-                    mois_prec = datetime.now() - timedelta(days=31)
-                    s_mois_prec = s[s.index>=mois_prec]
-                    s_mois_prec_resampled = s_resampled[s_resampled.index>=mois_prec]
-                    variation = s_mois_prec_resampled[close_columns].pct_change().dropna()
-                    renta_moy = variation.values.mean()
-                    renta_moy = round(renta_moy*100,2)
-                    risque_moy = variation.values.std()
-                    risque_moy = round(risque_moy*100,2)
-                    line = [str(val) for val in s_mois_prec[close_columns].values.flatten()]
-                    liste_cours.append({"SYMBOLE": s_txt, "ACTUEL": f'{cours}', "M-1": f'{cours_prec}', "VAR": f'{var}%', "RENTABILITÉ": f'{renta_moy}%', "VOLATILITÉ": f'{risque_moy}%', "VISION":line})
+                cours = round(s[close_columns].iloc[-1].values.sum(),2)
+                cours_prec = round(s_resampled[close_columns].iloc[-2].values.sum(),2)
+                var = round(((cours - cours_prec)/ cours_prec)*100,2)
+                mois_prec = datetime.now() - timedelta(days=31)
+                s_mois_prec = s[s.index>=mois_prec]
+                s_mois_prec_resampled = s_resampled[s_resampled.index>=mois_prec]
+                variation = s_mois_prec_resampled[close_columns].pct_change().dropna()
+                renta_moy = variation.values.mean()
+                renta_moy = round(renta_moy*100,2)
+                risque_moy = variation.values.std()
+                risque_moy = round(risque_moy*100,2)
+                line = [str(val) for val in s_mois_prec[close_columns].values.flatten()]
+                liste_cours.append({"SYMBOLE": s_txt, "ACTUEL": f'{cours}', "M-1": f'{cours_prec}', "VAR": f'{var}%', "RENTABILITÉ": f'{renta_moy}%', "VOLATILITÉ": f'{risque_moy}%', "VISION":line})
             except FileNotFoundError:
                 continue
             except Exception:
