@@ -188,7 +188,7 @@ with tab3 :
         s["Date"] = pd.to_datetime(s["Date"])
         s = s.set_index("Date")
         s_resampled = s.resample("M").first()
-        selected_dataframes.append(s.filter(like='Close'))
+        selected_dataframes.append(s)
     nb_acts = len(portefeuille)
 
     # Fusionnez les DataFrames en utilisant pd.concat
