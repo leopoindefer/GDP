@@ -212,29 +212,29 @@ with tab3 :
 
                 try :
                     RisqueFaible = df_RisqueFaible.iloc[0]
-                    messfaible = f"Portefeuille efficient pour un risque faible : \n {round(RisqueFaible,2)}"
-                    st.write(messfaible)
+                    st.write("Portefeuille efficient pour un risque faible :")
+                    st.dataframe(RisqueFaible)
                 except:
                     st.write("pas de risque faible")
 
                 try:
                     RisqueMoyen = df_RisqueMoyen.iloc[0]
-                    messmoyen = f"Portefeuille efficient pour un risque faible : \n {round(RisqueMoyen,2)}"
-                    st.write(messmoyen)
+                    st.write("Portefeuille efficient pour un risque moyen :")
+                    st.dataframe(RisqueMoyen)
                 except:
                     st.write("pas de risque moyen")
 
                 try:
                     RisqueEleve = df_RisqueEleve.iloc[0]
-                    messeleve = f"Portefeuille efficient pour un risque faible : \n {round(RisqueEleve,2)}"
-                    st.write(messeleve)
+                    st.write("Portefeuille efficient pour un risque élevé :")
+                    st.dataframe(RisqueEleve)
                 except:
                     st.write("pas de risque élevé")
 
                 try:
                     RisqueTresEleve = df_RisqueTresEleve.iloc[0]
-                    messtreseleve = f"Portefeuille efficient pour un risque faible : \n {round(RisqueTresEleve,2)}"
-                    st.write(messtreseleve)
+                    st.write("Portefeuille efficient pour un risque très élevé :")
+                    st.dataframe(RisqueTresEleve)
                 except:
                     st.write("pas de risque très élevé")
 
