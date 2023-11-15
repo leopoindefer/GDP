@@ -27,15 +27,15 @@ for ind in liste_indice:
 
 symbol_dataframes = []  # Initialiser une liste pour stocker les DataFrames
 
-try:
-    for sym in symbol_txt:
+for sym in symbol_txt:
+    try:
         file_path = f"data/actions/{sym}.csv"
         df = pd.read_csv(file_path)
         symbol_dataframes.append(df)
+    except Exception:
+        continue
 
     symbol_dict = dict(zip(symbol_txt, symbol_dataframes))
-except Exception:
-                continue
 
 st.title("Gérer votre portefeuille avec l'IA")
 
