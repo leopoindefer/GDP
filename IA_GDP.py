@@ -187,6 +187,8 @@ with tab3 :
     prem_df = pd.read_csv(prem)
     prem_df["Date"] = pd.to_datetime(prem_df["Date"])
     prem_df = prem_df.set_index("Date")
+    close_columns = [col for col in prem_df.columns if 'Close' in col]
+    prem_df = prem_df[close_columns]
 
     # Initialisation du DataFrame pour le portefeuille total
     ptf_df = prem_df[[]]
