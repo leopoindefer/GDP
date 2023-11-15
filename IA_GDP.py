@@ -211,9 +211,9 @@ with tab3 :
                 df_RisqueTresEleve = merged_df[merged_df['Volatilité'] > 15].sort_values(by='Rentabilité', ascending=False)
 
                 try :
-                    RisqueFaible = df_RisqueFaible.iloc[0]
+                    RisqueFaible = np.transpose(df_RisqueFaible.iloc[0])
                     st.write("Portefeuille efficient pour un risque faible :")
-                    st.dataframe(np.transpose(RisqueFaible,axis=1))
+                    st.dataframe(RisqueFaible)
                 except:
                     st.write("pas de risque faible")
 
