@@ -210,6 +210,34 @@ with tab3 :
                 df_RisqueEleve = merged_df[(merged_df['Volatilité'] > 8) & (merged_df['Volatilité'] <= 15)].sort_values(by='Rentabilité', ascending=False)
                 df_RisqueTresEleve = merged_df[merged_df['Volatilité'] > 15].sort_values(by='Rentabilité', ascending=False)
 
+                try :
+                    RisqueFaible = df_RisqueFaible.iloc[0]
+                    messfaible = f"Portefeuille efficient pour un risque faible : \n {round(RisqueFaible,2)}"
+                    st.write(messfaible)
+                except:
+                    st.write("pas de risque faible")
+
+                try:
+                    RisqueMoyen = df_RisqueMoyen.iloc[0]
+                    messmoyen = f"Portefeuille efficient pour un risque faible : \n {round(RisqueMoyen,2)}"
+                    st.write(messmoyen)
+                except:
+                    st.write("pas de risque moyen")
+
+                try:
+                    RisqueEleve = df_RisqueEleve.iloc[0]
+                    messeleve = f"Portefeuille efficient pour un risque faible : \n {round(RisqueEleve,2)}"
+                    st.write(messeleve)
+                except:
+                    st.write("pas de risque élevé")
+
+                try:
+                    RisqueTresEleve = df_RisqueTresEleve.iloc[0]
+                    messtreseleve = f"Portefeuille efficient pour un risque faible : \n {round(RisqueTresEleve,2)}"
+                    st.write(messtreseleve)
+                except:
+                    st.write("pas de risque très élevé")
+
             elif nb_acts == 3:
                 merged_df = CDP(portefeuille, nb_acts, ptf_df)
                 st.write('Frontière efficiente')   
