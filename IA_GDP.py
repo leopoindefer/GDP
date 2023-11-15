@@ -190,9 +190,8 @@ with tab3 :
         s_resampled = s.resample("M").first()
         close_columns = [col for col in s.columns if 'Close' in col]
         if close_columns:
-            nom = port
-            cours = s.columns
-            ptf_df.append({nom,cours})
+            cours = s[close_columns]
+            ptf_df.append({s:[cours]})
             ptf_df = pd.DataFrame(ptf_df)
     nb_acts = len(portefeuille)
     # Utilisez le dictionnaire symbol_dataframes pour obtenir les DataFrames correspondants
