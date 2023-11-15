@@ -198,6 +198,7 @@ with tab3 :
             ptf_df = pd.concat(selected_dataframes, axis=1, join='inner')
             ptf_df.index = pd.to_datetime(ptf_df.index)
             ptf_df = ptf_df.resample('MS').first()
+            ptf_df = ptf_df.rename(columns={portefeuille})
 
             if nb_acts == 2:
                 merged_df = CDP(nb_acts, ptf_df)
