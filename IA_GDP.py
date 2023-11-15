@@ -182,11 +182,11 @@ with tab3 :
     st.header("Composer votre portefeuille")
     portefeuille = st.multiselect("Choisissez vos actions", symbol_txt)
 
-    date_index = pd.date_range(start='2000-01-01', end=datetime.now(), freq='D')
-    ptf_df = pd.DataFrame(index=date_index)
+    ptf_df = pd.DataFrame()
     for port in portefeuille:     
         file_path = f"data/actions/{port}.csv"
         s = pd.read_csv(file_path)
+        s = pd.DataFrame(s)
         s["Date"] = pd.to_datetime(s["Date"])
         s = s.set_index("Date")
         s_resampled = s.resample("M").first()
