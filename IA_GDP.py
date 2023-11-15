@@ -189,10 +189,9 @@ with tab3 :
         s_resampled = s.resample("M").first()
         close_columns = [col for col in s_resampled.columns if 'Close' in col]
         if close_columns:
-            symbol_df.append(s)
+            ptf_df = pd.concat(s, axis=1, join='inner')
     nb_acts = len(portefeuille)
     # Utilisez le dictionnaire symbol_dataframes pour obtenir les DataFrames correspondants
-    ptf_df = pd.concat(s, axis=1, join='inner')
     st.write(ptf_df)
     calcul = st.button('Calculer')
     if calcul:
