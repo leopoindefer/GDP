@@ -3,7 +3,6 @@ import pandas as pd
 import numpy as np
 import datetime
 from datetime import date
-from datetime import datetime
 
 from fonctions.tableau import Tableau
 from fonctions.comparaison import Comparaison
@@ -183,7 +182,7 @@ with tab3 :
     portefeuille = st.multiselect("Choisissez vos actions", symbol_txt)
 
 
-    date_index = pd.date_range(start='2000-01-01', end=datetime.now(), freq='D')
+    date_index = pd.date_range(start='2000-01-01', end=date.now(), freq='D')
 
     # Initialisez le DataFrame résultant avec l'index date
     ptf_df = pd.DataFrame(index=date_index)
