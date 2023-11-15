@@ -185,6 +185,7 @@ with tab3 :
         file_path = f"data/actions/{port}.csv"
         s = pd.read_csv(file_path)
         symbol_df.append(s)
+        symbol_df = pd.DataFrame(symbol_df)
     nb_acts = len(portefeuille)
     # Utilisez le dictionnaire symbol_dataframes pour obtenir les DataFrames correspondants
     st.write(symbol_df)
