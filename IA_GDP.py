@@ -15,16 +15,6 @@ st.set_page_config(
     page_icon="💯",
 )
 
-symbol_txt = ["AAPL", "TSLA", "AMZN", "META", "PLUG", "PLTR", "AMD", "RIVN", "NVDA", "SOFI", "NIO", "MARA", "F", "DNA", "LCID", "LIFW", "U", "RLX", "PFE", "BAC", "STNE", "UBER", "AAL", "GRAB", "INTC", "VLA.PA", "ALGRE.PA", "ALO.PA", "BNP.PA", "ALCYB.PA", "STLAP.PA", "AF.PA", "VIE.PA", "SAN.PA", "GLE.PA"]
-symbol_dataframes = []  # Initialiser une liste pour stocker les DataFrames
-
-for sym in symbol_txt:
-    file_path = f"data/actions/{sym}.csv"
-    df = pd.read_csv(file_path)
-    symbol_dataframes.append(df)
-
-symbol_dict = dict(zip(symbol_txt, symbol_dataframes))
-
 symbol_txt = []
 liste_indice = ["CAC40", "DOWJONES", "NASDAQ100", "S&P500", "SBF120"]
 
@@ -34,6 +24,18 @@ for ind in liste_indice:
     indices_df = pd.read_csv(file_path, delimiter=";")
     symbols_list = indices_df["ticker"].tolist()
     symbol_txt.extend(symbols_list)
+
+symbol_dataframes = []  # Initialiser une liste pour stocker les DataFrames
+
+try:
+    for sym in symbol_txt:
+        file_path = f"data/actions/{sym}.csv"
+        df = pd.read_csv(file_path)
+        symbol_dataframes.append(df)
+
+    symbol_dict = dict(zip(symbol_txt, symbol_dataframes))
+except Exception:
+                continue
 
 st.title("Gérer votre portefeuille avec l'IA")
 
