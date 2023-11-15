@@ -194,10 +194,11 @@ with tab3 :
         s = s.set_index("Date")
         s_resampled = s.resample("M").first()
         close_columns = [col for col in s.columns if 'Close' in col]
-        ptf_df = pd.concat([prem_df, s])
+        if close_columns:
+            ptf_df = pd.concat([prem_df[close_columns], s[close_columns]], axis=1, join="inner")
     nb_acts = len(portefeuille)
     # Utilisez le dictionnaire symbol_dataframes pour obtenir les DataFrames correspondants
-    st.dataframe(s)
+    st.dataframe(ptf_df)
     
     calcul = st.button('Calculer')
 
