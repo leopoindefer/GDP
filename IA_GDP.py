@@ -187,14 +187,13 @@ with tab3 :
         symbol_df.append(s)
     nb_acts = len(portefeuille)
     # Utilisez le dictionnaire symbol_dataframes pour obtenir les DataFrames correspondants
-    selected_dataframes = [symbol_df[sym].set_index("Date").filter(like='Close') for sym in portefeuille]
 
     calcul = st.button('Calculer')
     if calcul:
          with st.spinner('Chargement du calcul'):
 
             # Fusionnez les DataFrames en utilisant pd.concat
-            ptf_df = pd.concat(selected_dataframes, axis=1, join='inner')
+            ptf_df = pd.concat(symbol_df, axis=1, join='inner')
             ptf_df.index = pd.to_datetime(ptf_df.index)
             ptf_df = ptf_df.resample('MS').first()
 
