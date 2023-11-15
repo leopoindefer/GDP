@@ -179,7 +179,7 @@ with tab2:
 
 with tab3 : 
     st.header("Composer votre portefeuille")
-    symbol_df = [] 
+    symbol_df = {}
     portefeuille = st.multiselect("Choisissez vos actions", symbol_txt)
 
     for port in portefeuille:
