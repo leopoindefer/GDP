@@ -179,14 +179,14 @@ with tab2:
 
 with tab3 : 
     st.header("Composer votre portefeuille")
+    portefeuille = list()
     portefeuille = st.multiselect("Choisissez vos actions", symbol_txt)
-
-
-    date_index = pd.date_range(start='2000-01-01', end=date.today(), freq='D')
-
-    # Initialisez le DataFrame résultant avec l'index date
-    ptf_df = pd.DataFrame(index=date_index)
-    for port in portefeuille:     
+    prem = f"data/actions/{portefeuille[0]}.csv"
+    prem_df = pd.read_csv(prem)
+    prem_df["Date"] = pd.to_datetime(prem_df["Date"])
+    prem_df = prem_df.set_index("Date")
+    portefeuille_reste = portefeuille[1:]
+    for port in portefeuille_reste:     
         file_path = f"data/actions/{port}.csv"
         s = pd.read_csv(file_path)
         s = pd.DataFrame(s)
@@ -194,16 +194,16 @@ with tab3 :
         s = s.set_index("Date")
         s_resampled = s.resample("M").first()
         close_columns = [col for col in s.columns if 'Close' in col]
-        s = s[close_columns]
+        ptf_df = pd.concat([prem_df, s])
     nb_acts = len(portefeuille)
     # Utilisez le dictionnaire symbol_dataframes pour obtenir les DataFrames correspondants
-    st.write(s)
+    st.dataframe(s)
     
     calcul = st.button('Calculer')
 
     if calcul:
          with st.spinner('Chargement du calcul'):
-
+    
             # Fusionnez les DataFrames en utilisant pd.concat
             ptf_df.index = pd.to_datetime(ptf_df.index)
             ptf_df = ptf_df.resample('MS').first()
