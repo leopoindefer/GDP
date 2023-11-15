@@ -181,7 +181,7 @@ with tab3 :
     st.header("Composer votre portefeuille")
     portefeuille = st.multiselect("Choisissez vos actions", symbol_txt)
     symbol_df = {}
-    for symb in symbol_txt:
+    for symb in portefeuille:
         try:
             symbol_df[symb] = pd.read_csv(f"data/actions/{symb}.csv")
         except Exception as e:
