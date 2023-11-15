@@ -191,6 +191,9 @@ with tab3 :
         close_columns = [col for col in s.columns if 'Close' in col]
         if close_columns:
             ptf_df.extend(s[close_columns].columns)
+    ptf_df = pd.DataFrame(index=s_resampled.index)  # Utiliser l'index de l'un des DataFrames
+    for col in ptf_df:
+        ptf_df[col] = pd.concat([s_resampled[col] for port in portefeuille], axis=1, join='inner').mean(axis=1)
     nb_acts = len(portefeuille)
     # Utilisez le dictionnaire symbol_dataframes pour obtenir les DataFrames correspondants
     st.write(ptf_df)
