@@ -185,6 +185,8 @@ with tab3 :
         file_path = f"data/actions/{port}.csv"
         s = pd.read_csv(file_path)
         symbol_df.append(s)
+        s["Date"] = pd.to_datetime(s["Date"])
+        s = s.set_index("Date")
     nb_acts = len(portefeuille)
     # Utilisez le dictionnaire symbol_dataframes pour obtenir les DataFrames correspondants
     ptf_df = pd.concat(symbol_df, axis=1, join='inner')
