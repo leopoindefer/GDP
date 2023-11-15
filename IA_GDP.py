@@ -193,11 +193,6 @@ with tab3 :
     st.header("Composer votre portefeuille")
     symbol_df = []
     portefeuille = st.multiselect("Choisissez vos actions", symbol_txt)
-
-    for port in portefeuille:
-        file_path = f"data/actions/{port}.csv"
-        s = pd.read_csv(file_path)
-        symbol_df.append(s)
     nb_acts = len(portefeuille)
 
     calcul = st.button('Calculer')
