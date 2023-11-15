@@ -187,7 +187,8 @@ with tab3 :
         symbol_df.append(s)
     nb_acts = len(portefeuille)
     # Utilisez le dictionnaire symbol_dataframes pour obtenir les DataFrames correspondants
-    st.write(symbol_df)
+    ptf_df = pd.concat(symbol_df, axis=1, join='inner')
+    st.write(ptf_df)
     calcul = st.button('Calculer')
     if calcul:
          with st.spinner('Chargement du calcul'):
