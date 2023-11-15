@@ -190,7 +190,7 @@ with tab3 :
         s_resampled = s.resample("M").first()
         close_columns = [col for col in s.columns if 'Close' in col]
         if close_columns:
-            ptf_df = ptf_df.join(s[close_columns], hoow='inner')
+            ptf_df = ptf_df.join(s[close_columns], how='inner')
     nb_acts = len(portefeuille)
     # Utilisez le dictionnaire symbol_dataframes pour obtenir les DataFrames correspondants
     st.write(ptf_df)
