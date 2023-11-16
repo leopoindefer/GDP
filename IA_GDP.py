@@ -149,7 +149,7 @@ with tab2:
             #ARIMA
 
             try:
-                st.write("2 premieres lignes")
+                st.write("")
                 #predict_arima = model_arima(df_arima)
                 #predict_arima = pd.DataFrame(predict_arima)
                 #loss_arima = predict_arima.join(df_arima, how="left")
