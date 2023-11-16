@@ -172,10 +172,16 @@ with tab2:
             montant = st.text_input('Montant à investir', 1000)
         with col2:
             duree = st.date_input("Jusqu'à quand ?", datetime.date(2024, 1, 1), min_value=pd.to_datetime(date.today()), max_value=pd.to_datetime(predict_prophet["date"].iloc[-1]))
-        nb_part, tx_rendement, rendement, tx_rentabilite, rentabilite = Projection(montant, duree, symb, df_prophet, predict_prophet)
-        st.write(f'Nombre d action acheté : {nb_part}', unsafe_allow_html=True)
-        st.write(f'Taux de rendement de : {tx_rendement}, Rendement de {rendement}', unsafe_allow_html=True)
-        st.write(f'Taux de Rentabilité de : {tx_rentabilite}, Rentabilité de {rentabilite}', unsafe_allow_html=True)
+        
+        try:
+            nb_part, tx_rendement, rendement, tx_rentabilite, rentabilite = Projection(montant, duree, symb, df_prophet, predict_prophet)
+            st.write(f'Nombre d action acheté : {nb_part}', unsafe_allow_html=True)
+            st.write(f'Taux de rendement de : {tx_rendement}, Rendement de {rendement}', unsafe_allow_html=True)
+            st.write(f'Taux de Rentabilité de : {tx_rentabilite}, Rentabilité de {rentabilite}', unsafe_allow_html=True)
+        except:
+            st.write('Aucune estimation possible')
+
+
 
 with tab3 : 
     st.header("Composer votre portefeuille")
