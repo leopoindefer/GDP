@@ -16,6 +16,8 @@ st.set_page_config(
 )
 
 symbol_txt = []
+symbol_nom = []
+dict_symb = {}
 liste_indice = ["CAC40", "DOWJONES", "NASDAQ100", "S&P500", "SBF120"]
 
 #liste de toutes les actions
@@ -23,7 +25,10 @@ for ind in liste_indice:
     file_path = f"data/indices/{ind}.csv"
     indices_df = pd.read_csv(file_path, delimiter=";")
     symbols_list = indices_df["ticker"].tolist()
+    symbols_name = indices_df["nom"].tolist()
     symbol_txt.extend(symbols_list)
+    symbol_nom.extend(symbols_name)
+    dict_sym = {symbol_txt: symbol_nom}
 
 st.title("Gérer votre portefeuille avec l'IA")
 
