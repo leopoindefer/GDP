@@ -55,7 +55,7 @@ with tab1 :
     with col_vision3:
         st.write("")
     try:
-        macro = Tableau(periode, actions)
+        macro = Tableau(periode, actions, dict_symb)
         st.dataframe(macro.style.applymap(lambda x: 'color: red' if any('-' in words for words in x.split()) else 'color: green',subset = ['VAR']), column_config={"VISION": st.column_config.LineChartColumn(
             "VISION", y_min=0, y_max=200)})
     except:
