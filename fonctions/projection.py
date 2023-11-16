@@ -24,17 +24,17 @@ def Projection(montant, duree, symb, df_model, prediction):
         tRend = (div/montant)*100
         tRent = (div+gap_value)/montant*100
         if tRent<0:
-            nb_part = f'<span style="color: #B0F2B6;">{round(invest_part,2)}</span>'
-            tx_rendement = f'<span style="color: #B0F2B6;">{round(tRend,2)}%</span>'
-            rendement = f'<span style="color: #B0F2B6;">{round(div,2)}€</span>'
-            tx_rentabilite = f'<span style="color: #B0F2B6;">{round(tRent,2)}%</span>' 
-            rentabilite = f'<span style="color: #B0F2B6;">{round(div + gap_value,2)}€</span>'
+            nb_part = f'<span style="color: #008000;">{round(invest_part,2)}</span>'
+            tx_rendement = f'<span style="color: #008000;">{round(tRend,2)}%</span>'
+            rendement = f'<span style="color: #008000;">{round(div,2)}€</span>'
+            tx_rentabilite = f'<span style="color: #008000;">{round(tRent,2)}%</span>' 
+            rentabilite = f'<span style="color: #008000;">{round(div + gap_value,2)}€</span>'
         elif tRent>=0:
-            nb_part = f'<span style="color: #B0F2B6;">{round(invest_part,2)}</span>'
-            tx_rendement = f'<span style="color: #B0F2B6;">{round(tRend,2)}%</span>'
-            rendement = f'<span style="color: #B0F2B6;">{round(div,2)}€</span>'
-            tx_rentabilite = f'<span style="color: #B0F2B6;">{round(tRent,2)}%</span>' 
-            rentabilite = f'<span style="color: #B0F2B6;">{round(div + gap_value,2)}€</span>'
+            nb_part = f'<span style="color: #008000;">{round(invest_part,2)}</span>'
+            tx_rendement = f'<span style="color: #008000;">{round(tRend,2)}%</span>'
+            rendement = f'<span style="color: #008000;">{round(div,2)}€</span>'
+            tx_rentabilite = f'<span style="color: #008000;">{round(tRent,2)}%</span>' 
+            rentabilite = f'<span style="color: #008000;">{round(div + gap_value,2)}€</span>'
     except:
         print('pas de résultat')
 
