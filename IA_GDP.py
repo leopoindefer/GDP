@@ -164,7 +164,7 @@ with tab2:
             graph = loss_prophet.loc[:,["y","yhat"]]
             graph = graph.rename(columns = {"y":'Reel',"yhat":"prediction"})
             st.line_chart(data=graph)
-            st.write("PROPHET")
+            st.write("PROPHET MSE:")
             st.write(round(mse_prophet,2))
        
         col1, col2 = st.columns(2)
