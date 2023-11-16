@@ -28,7 +28,7 @@ for ind in liste_indice:
     symbols_name = indices_df["nom"].tolist()
     symbol_txt.extend(symbols_list)
     symbol_nom.extend(symbols_name)
-    dict_sym = {symbol_txt: symbol_nom}
+    dict_symb[ind] = {"tickers": symbols_list, "noms": symbols_name}
 
 st.title("Gérer votre portefeuille avec l'IA")
 
