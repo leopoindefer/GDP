@@ -2,7 +2,7 @@ import pandas as pd
 import numpy as np
 from datetime import datetime, timedelta
 
-def Tableau(periode, symbol_txt):
+def Tableau(periode, symbol_txt, dict_symb):
     if periode == "1 mois":
         liste_cours = list()
         for s_txt in symbol_txt:
@@ -25,7 +25,8 @@ def Tableau(periode, symbol_txt):
                 risque_moy = variation.values.std()
                 risque_moy = round(risque_moy*100,2)
                 line = [str(val) for val in s_mois_prec[close_columns].values.flatten()]
-                liste_cours.append({"SYMBOLE": s_txt, "ACTUEL": f'{cours}', "M-1": f'{cours_prec}', "VAR": f'{var}%', "RENTABILITÉ": f'{renta_moy}%', "VOLATILITÉ": f'{risque_moy}%', "VISION":line})
+                nom_correspondant = dict_symb.get(s_txt, {}).get("nom", "")
+                liste_cours.append({"SYMBOLE": s_txt, "ACTUEL": f'{cours}', "M-1": f'{cours_prec}', "VAR": f'{var}%', "RENTABILITÉ": f'{renta_moy}%', "VOLATILITÉ": f'{risque_moy}%', "VISION":line, "NOM": nom_correspondant})
             except FileNotFoundError:
                 continue
             except Exception:
