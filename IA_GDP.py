@@ -87,11 +87,14 @@ with tab1 :
     if run:
         symb1 = comp1
         symb2 = comp2
-        graph_comp, corr = Comparaison(symb1,symb2)
-        st.line_chart(graph_comp)
+        try:
+            graph_comp, corr = Comparaison(symb1,symb2)
+            st.line_chart(graph_comp)
 
-        mess_corr = f'Corrélation linéraire à : {round(corr*100,2)}%'
-        st.write(mess_corr)
+            mess_corr = f'Corrélation linéraire à : {round(corr*100,2)}%'
+            st.write(mess_corr)
+        except:
+            st.write('Comparaison impossible')
 
     st.markdown('----')
     
