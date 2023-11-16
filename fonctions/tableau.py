@@ -25,8 +25,7 @@ def Tableau(periode, symbol_txt, dict_symb):
                 risque_moy = variation.values.std()
                 risque_moy = round(risque_moy*100,2)
                 line = [str(val) for val in s_mois_prec[close_columns].values.flatten()]
-                nom_correspondant = dict_symb.get(s_txt, {}).get("nom", "")
-                liste_cours.append({"SYMBOLE": s_txt, "ACTUEL": f'{cours}', "M-1": f'{cours_prec}', "VAR": f'{var}%', "RENTABILITÉ": f'{renta_moy}%', "VOLATILITÉ": f'{risque_moy}%', "VISION":line, "NOM": nom_correspondant})
+                liste_cours.append({"SYMBOLE": s_txt, "ACTUEL": f'{cours}', "M-1": f'{cours_prec}', "VAR": f'{var}%', "RENTABILITÉ": f'{renta_moy}%', "VOLATILITÉ": f'{risque_moy}%', "VISION":line})
             except FileNotFoundError:
                 continue
             except Exception:
