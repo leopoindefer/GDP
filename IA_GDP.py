@@ -348,7 +348,7 @@ with tab4:
         marche_resampled = marche.resample("M").first()
     with col_medaf2:
         actifs = st.selectbox("Action", actions)
-        file_path = f"data/actions/{actions}.csv"
+        file_path = f"data/actions/{actifs}.csv"
         s = pd.read_csv(file_path)
         s["Date"] = pd.to_datetime(s["Date"])
         s = s.set_index("Date")
