@@ -342,5 +342,18 @@ with tab4:
         file_indice = f"data/indices/{indice}.csv"
         df_indice = pd.read_csv(file_indice, delimiter=";")
         actions = df_indice['ticker'].tolist()
+        marche = pd.read_csv("data/indices/^FCHI")
+        marche["Date"] = pd.to_datetime(marche["Date"])
+        marche = marche.set_index("Date")
+        marche_resampled = marche.resample("M").first()
     with col_medaf2:
         actifs = st.selectbox("Action", actions)
+        file_path = f"data/actions/{actions}.csv"
+        s = pd.read_csv(file_path)
+        s["Date"] = pd.to_datetime(s["Date"])
+        s = s.set_index("Date")
+        s_resampled = s.resample("M").first()
+        close_columns = [col for col in s_resampled.columns if 'Close' in col]
+        variation = s_resampled[close_columns].pct_change().dropna()
+        renta_moy = variation.values.mean()
+    st.dataframe(marche)
