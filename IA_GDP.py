@@ -360,7 +360,7 @@ with tab4:
         close_columns = [col for col in s_resampled.columns if 'Close' in col]
         variation = s_resampled[close_columns].pct_change().dropna()
 
-    actionsvsmarche = pd.merge(variation, variation_marche, how='inner')
-    st.dataframe(actionsvsmarche)
+    #actionsvsmarche = pd.merge(variation, variation_marche, how='inner')
+    st.dataframe(variation_marche)
     #Beta = np.cov(actionsvsmarche, variation_marche) / np.var(variation_marche)
     #st.write(Beta)
