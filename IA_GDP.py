@@ -340,6 +340,7 @@ with tab4:
     col_medaf1, col_medaf2 = st.columns(2)
     with col_medaf1:
         indice = st.selectbox("marche", liste_indice)
+        column_marche = f"Close_{indice}"
         file_indice = f"data/indices/{indice}.csv"
         df_indice = pd.read_csv(file_indice, delimiter=";")
         actions = df_indice['ticker'].tolist()
@@ -353,6 +354,7 @@ with tab4:
         
     with col_medaf2:
         actifs = st.selectbox("Action", actions)
+        column_actif = f"Close_{actifs}"
         file_path = f"data/actions/{actifs}.csv"
         s = pd.read_csv(file_path)
         s["Date"] = pd.to_datetime(s["Date"])
@@ -363,6 +365,6 @@ with tab4:
         variation["Datec"] = variation.index
 
     actionsvsmarche = pd.merge(variation, variation_marche, on='Datec', how='inner')
-    st.dataframe(actionsvsmarche)
-    #Beta = np.cov(actionsvsmarche, variation_marche) / np.var(variation_marche)
-    #st.write(Beta)
+    actionsvsmarche = actionsvsmarche.set_index("Datec")
+    Beta = np.cov(actionsvsmarche[column_actif], actionsvsmarche[column_marche]) / np.var(actionsvsmarche[column_marche])
+    st.write(Beta)
