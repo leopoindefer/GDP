@@ -2,17 +2,26 @@
 
 https://gestiondeportefeuille.streamlit.app
 
-Calcul pour une action:
+# Calcul pour une action:
 
-Rentabilité à t1 = (Vt1 - Vt0) / Vt0
+# Rentabilité à t+1
+rt1 = (Vt1 - Vt0) / Vt0
 
-E(R) = 1/N Σ ((Vn+1 - Vn)/Vn) 
+## Variation
+rti = (Vti+1 - Vti)/Vti
 
-Variance = V((Vn+1 - Vn)/Vn))
+## Rentabilité moyenne
+R = 1/N Σ (rti) 
 
-Volatilité = √(V((Vn+1 - Vn)/Vn)))
+## Variance
+s² = Σ (rti - R)² / n-1
+
+## Risque
+s = √s²
 
 
-Calcul pour un portefeuille: 
+# Calcul pour un portefeuille: 
 
-E(R) = w1R1 + w2R2
+Rp = w1R1 + w2R2 + ... + wnRn
+
+
