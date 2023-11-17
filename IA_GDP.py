@@ -349,6 +349,7 @@ with tab4:
         marche_resampled = marche.resample("M").first()
         close_columns = [col for col in marche_resampled.columns if 'Close' in col]
         variation_marche = marche_resampled[close_columns].pct_change().dropna()
+        variation_marche["Date"] = variation_marche.index
         
     with col_medaf2:
         actifs = st.selectbox("Action", actions)
@@ -359,8 +360,9 @@ with tab4:
         s_resampled = s.resample("M").first()
         close_columns = [col for col in s_resampled.columns if 'Close' in col]
         variation = s_resampled[close_columns].pct_change().dropna()
+        variation["Date"] = variation.index
 
-    #actionsvsmarche = pd.merge(variation, variation_marche, how='inner')
-    st.dataframe(variation_marche)
+    actionsvsmarche = pd.merge(variation, variation_marche, on='Date', how='inner')
+    st.dataframe(actionsvsmarche)
     #Beta = np.cov(actionsvsmarche, variation_marche) / np.var(variation_marche)
     #st.write(Beta)
