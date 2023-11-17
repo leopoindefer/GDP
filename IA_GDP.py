@@ -360,5 +360,5 @@ with tab4:
         close_columns = [col for col in s_resampled.columns if 'Close' in col]
         variation = s_resampled[close_columns].pct_change().dropna()
 
-    Beta = np.cov(variation, variation_marche) / statistics.variance(variation_marche)
+    Beta = np.cov(variation, variation_marche) / np.var(variation_marche)
     st.write(Beta)
