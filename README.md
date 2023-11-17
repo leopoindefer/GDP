@@ -4,7 +4,7 @@ https://gestiondeportefeuille.streamlit.app
 
 # Calcul pour une action:
 
-# Rentabilité à t+1
+## Rentabilité à t+1
 rt1 = (Vt1 - Vt0) / Vt0
 
 ## Variation
