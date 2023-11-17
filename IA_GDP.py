@@ -32,7 +32,7 @@ for ind in liste_indice:
 
 st.title("Gérer votre portefeuille avec l'IA")
 
-tab1, tab2, tab3 = st.tabs(["Analyser le marché", "Prédiction de performance", "Création de portefeuille"])
+tab1, tab2, tab3, tab4 = st.tabs(["Analyser le marché", "Prédiction de performance", "Création de portefeuille","MEDAF"])
 
 with tab1 :
     hide_st_style = """
@@ -333,3 +333,14 @@ with tab3 :
             else:
                 mess_gdp = f"Création de portefeuille pas encore disponible pour {nb_acts}"
                 st.write(mess_gdp)
+
+with tab4:
+    st.write("Calcul MEDAF")
+    col_medaf1, col_medaf2 = st.columns(2)
+    with col_medaf1:
+        indice = st.selectbox("Indice", liste_indice)
+        file_indice = f"data/indices/{indice}.csv"
+        df_indice = pd.read_csv(file_indice, delimiter=";")
+        actions = df_indice['ticker'].tolist()
+    with col_medaf2:
+        actifs = st.selectbox("Action", actions)
