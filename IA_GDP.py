@@ -342,7 +342,7 @@ with tab4:
         file_indice = f"data/indices/{indice}.csv"
         df_indice = pd.read_csv(file_indice, delimiter=";")
         actions = df_indice['ticker'].tolist()
-        marche = pd.read_csv("data/indices/^FCHI")
+        marche = pd.read_csv("data/indices/^FCHI.csv")
         marche["Date"] = pd.to_datetime(marche["Date"])
         marche = marche.set_index("Date")
         marche_resampled = marche.resample("M").first()
@@ -356,4 +356,4 @@ with tab4:
         close_columns = [col for col in s_resampled.columns if 'Close' in col]
         variation = s_resampled[close_columns].pct_change().dropna()
         renta_moy = variation.values.mean()
-    st.dataframe(marche)
+    st.dataframe(marche_resampled)
