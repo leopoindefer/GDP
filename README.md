@@ -29,7 +29,7 @@ corr(x,y) = COV(x,y) / s(x) * s(y)
 
 (w1s1 + w2s2)² = w1²s²1 + 2w1s1w2s2corr(1,2) + w2²s²2
 
-
+### Avec
 w1 : poids du titre 1
 
 w2 : poids du titre 2
