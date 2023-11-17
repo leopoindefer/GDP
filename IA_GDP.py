@@ -366,5 +366,6 @@ with tab4:
 
     actionsvsmarche = pd.merge(variation, variation_marche, on='Datec', how='inner')
     actionsvsmarche = actionsvsmarche.set_index("Datec")
-    Beta = np.cov(actionsvsmarche[column_actif], actionsvsmarche[column_marche]) / np.var(actionsvsmarche[column_marche])
+    Beta = np.cov(actionsvsmarche[column_actif], actionsvsmarche[column_marche]) 
+    #/ np.var(actionsvsmarche[column_marche])
     st.write(Beta)
