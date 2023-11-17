@@ -4,17 +4,14 @@ https://gestiondeportefeuille.streamlit.app
 
 ## Calcul pour une action:
 
-### Rentabilité à t+1
-rt1 = (Vt1 - Vt0) / Vt0
-
-### Variation
-rti = (Vti+1 - Vti)/Vti
+### Rentabilité
+ri = (Vi - Vi-1)/Vi-1
 
 ### Rentabilité moyenne
-R = 1/N Σ (rti) 
+R = 1/N Σ (ri) 
 
 ### Variance
-s² = Σ (rti - R)² / n-1
+s² = Σ (rt - R)² / n-1
 
 ### Risque
 s = √s²
