@@ -3,6 +3,7 @@ import pandas as pd
 import numpy as np
 import datetime
 from datetime import date
+import statistics
 
 from fonctions.tableau import Tableau
 from fonctions.comparaison import Comparaison
@@ -348,7 +349,7 @@ with tab4:
         marche_resampled = marche.resample("M").first()
         close_columns = [col for col in marche_resampled.columns if 'Close' in col]
         variation_marche = marche_resampled[close_columns].pct_change().dropna()
-        renta_moy_marche = variation_marche.values.mean()
+        
     with col_medaf2:
         actifs = st.selectbox("Action", actions)
         file_path = f"data/actions/{actifs}.csv"
@@ -358,6 +359,6 @@ with tab4:
         s_resampled = s.resample("M").first()
         close_columns = [col for col in s_resampled.columns if 'Close' in col]
         variation = s_resampled[close_columns].pct_change().dropna()
-        renta_moy = variation.values.mean()
-    st.write(renta_moy_marche)
-    st.write(renta_moy)
+
+    Beta = np.cov(variation, variation_marche) / statistics.variance(variation_marche)
+    st.write(Beta)
