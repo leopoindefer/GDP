@@ -8,7 +8,7 @@ https://gestiondeportefeuille.streamlit.app
 ri = (Vi - Vi-1)/Vi-1
 
 ### Rentabilité moyenne
-R = 1/N Σ (ri) 
+R = 1/n Σ (ri) 
 
 ### Variance
 s² = Σ (ri - R)² / n-1
