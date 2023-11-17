@@ -11,7 +11,7 @@ ri = (Vi - Vi-1)/Vi-1
 R = 1/N Σ (ri) 
 
 ### Variance
-s² = Σ (rt - R)² / n-1
+s² = Σ (ri - R)² / n-1
 
 ### Risque
 s = √s²
