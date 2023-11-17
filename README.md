@@ -23,5 +23,9 @@ s = √s²
 Rp = w1R1 + w2R2 + ... + wnRn
 
 ### Risque
+COV(x,y) = (x - x̄) * (y - ȳ) / n-1
 
+corr(x,y) = COV(x,y) / s(x) * s(y)
+
+(w1s1 + w2s2)² = w²1s²1 + 2w1s1w2s2corr(1,2) + w2²s²2
 
