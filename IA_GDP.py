@@ -340,7 +340,7 @@ with tab4:
     col_medaf1, col_medaf2 = st.columns(2)
     with col_medaf1:
         indice = st.selectbox("marche", liste_indice)
-        column_marche = f"Close_{indice}"
+        column_marche = f"Close_^FCHI"
         file_indice = f"data/indices/{indice}.csv"
         df_indice = pd.read_csv(file_indice, delimiter=";")
         actions = df_indice['ticker'].tolist()
