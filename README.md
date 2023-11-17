@@ -14,7 +14,7 @@ R = 1/n Σ (ri)
 s² = Σ (ri - R)² / n-1
 
 ### Risque
-s = √s²
+s = √s²n
 
 
 ## Calcul pour un portefeuille: 
@@ -28,4 +28,18 @@ COV(x,y) = (x - x̄) * (y - ȳ) / n-1
 corr(x,y) = COV(x,y) / s(x) * s(y)
 
 (w1s1 + w2s2)² = w1²s²1 + 2w1s1w2s2corr(1,2) + w2²s²2
+
+w1 : poids du titre 1
+
+w2 : poids du titre 2
+
+s1 : risque du titre 1
+
+s2 : risque du titre 2
+
+s²1 : variance du titre 1
+
+s²2 : variance du titre 2
+
+corr(1,2) : taux de corrélation entre le titre 1 et 2
 
