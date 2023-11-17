@@ -346,6 +346,9 @@ with tab4:
         marche["Date"] = pd.to_datetime(marche["Date"])
         marche = marche.set_index("Date")
         marche_resampled = marche.resample("M").first()
+        close_columns = [col for col in marche_resampled.columns if 'Close' in col]
+        variation_marche = marche_resampled[close_columns].pct_change().dropna()
+        renta_moy_marche = variation_marche.values.mean()
     with col_medaf2:
         actifs = st.selectbox("Action", actions)
         file_path = f"data/actions/{actifs}.csv"
@@ -356,4 +359,5 @@ with tab4:
         close_columns = [col for col in s_resampled.columns if 'Close' in col]
         variation = s_resampled[close_columns].pct_change().dropna()
         renta_moy = variation.values.mean()
-    st.dataframe(marche_resampled)
+    st.write(renta_moy_marche)
+    st.write(renta_moy)
