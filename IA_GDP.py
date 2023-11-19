@@ -184,7 +184,7 @@ with tab2:
         st.write(f'Nombre d action acheté : {nb_part}', unsafe_allow_html=True)
         st.write(f'Taux de rendement de : {tx_rendement}, Rendement de {rendement}', unsafe_allow_html=True)
         st.write(f'Taux de Rentabilité de : {tx_rentabilite}, Rentabilité de {rentabilite}', unsafe_allow_html=True)
-        st.write(f'Intervalle de confiance de rentabilité : [{renta_lower}:{renta_upper}]', unsafe_allow_html=True)
+        st.write(f'Intervalle de confiance de rentabilité : [{renta_lower} : {renta_upper}]', unsafe_allow_html=True)
 
 
 
