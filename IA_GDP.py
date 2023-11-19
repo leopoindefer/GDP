@@ -365,5 +365,5 @@ with tab4:
     Beta = np.cov(actionsvsmarche[column_actif], actionsvsmarche[column_marche])[0][1] / np.var(actionsvsmarche[column_marche])
     renta_actfsansrisque = 0.03
     medaf = f'E(R) = {renta_actfsansrisque} + {Beta} * [E(Rm) - {renta_actfsansrisque}]'
-    st.write(medaf)
+    st.write(round(medaf),2)
     st.write("avec E(Rm) =  rentabilité espérée du marché")
