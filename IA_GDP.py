@@ -150,7 +150,6 @@ with tab2:
             loss_prophet = loss_prophet.loc[:,["y","yhat"]]
             loss_prophet['se'] = np.square(loss_prophet['y'] - loss_prophet['yhat'])
             mse_prophet = loss_prophet['se'].mean(axis=0)
-            st.write(mse_prophet)
 
             #ARIMA
 
@@ -171,7 +170,7 @@ with tab2:
             graph = graph.rename(columns = {"y":'Reel',"yhat":"prediction"})
             st.line_chart(data=graph)
             st.write("PROPHET MSE:")
-            #st.write(round(mse_prophet,2))
+            st.write(round(mse_prophet,2))
 
         try:     
             col1, col2 = st.columns(2)
@@ -189,7 +188,7 @@ with tab2:
 
     duree = pd.to_datetime(duree)
     confiance_pred = result_prophet[result_prophet["ds"] == duree]
-    confiance_pred = confiance_pred.loc[:,["yhat_lower","yhat_upper"]]
+    confiance_pred = confiance_pred.loc[:,["yhat_lower","yhat_upper"]].tolist()
     st.write(confiance_pred)
 
 
