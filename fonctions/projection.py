@@ -5,7 +5,7 @@ def Projection(montant, duree, symb, df_model, prediction):
     montant = float(montant)
     duree = pd.to_datetime(duree)
     duree = pd.to_datetime(duree)
-    confiance_pred = prediction[prediction["ds"] == duree]
+    confiance_pred = prediction[prediction["date"] == duree]
     confiance_pred = confiance_pred.loc[:,["yhat_lower","yhat_upper"]]
     try:
         ticker = yf.Ticker(symb)
