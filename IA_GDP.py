@@ -141,21 +141,17 @@ with tab2:
     if action:
         with st.spinner('Chargement de la prédiction'):
 
-            #PROPHET
-            try:
-                result_prophet = prophet_model(df_prophet)
-                predict_prophet = result_prophet.loc[:,["ds","yhat", "yhat_lower", "yhat_upper"]]
+            result_prophet = prophet_model(df_prophet)
+            predict_prophet = result_prophet.loc[:,["ds","yhat", "yhat_lower", "yhat_upper"]]
 
-                df_prophet['ds'] = pd.to_datetime(df_prophet['ds'])
-                predict_prophet['ds'] = pd.to_datetime(predict_prophet['ds'])
-                loss_prophet = predict_prophet.set_index('ds').join(df_prophet.set_index('ds'), how="left")
-                loss_prophet = loss_prophet.loc[:,["ds","yhat"]]
-                loss_prophet['se'] = np.square(loss_prophet['y'] - loss_prophet['yhat'])
-                mse_prophet = loss_prophet['se'].mean(axis=0)
-                mse_prophet = mse_prophet['se'].iloc[-1].tolist()
-            except:
-                st.error('pas de résultat pour PROPHET')
-                
+            df_prophet['ds'] = pd.to_datetime(df_prophet['ds'])
+            predict_prophet['ds'] = pd.to_datetime(predict_prophet['ds'])
+            loss_prophet = predict_prophet.set_index('ds').join(df_prophet.set_index('ds'), how="left")
+            loss_prophet = loss_prophet.loc[:,["ds","yhat"]]
+            loss_prophet['se'] = np.square(loss_prophet['y'] - loss_prophet['yhat'])
+            mse_prophet = loss_prophet['se'].mean(axis=0)
+            mse_prophet = mse_prophet['se'].iloc[-1].tolist()
+
             #ARIMA
 
             try:
