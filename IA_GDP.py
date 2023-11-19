@@ -189,8 +189,7 @@ with tab2:
             st.write('Aucune estimation possible')
 
     duree = pd.to_datetime(duree)
-    result_prophet['Date'] = result_prophet.index
-    confiance_pred = result_prophet[result_prophet["Date"] == duree]
+    confiance_pred = result_prophet[result_prophet["ds"] == duree]
     st.dataframe(confiance_pred)
 
 
