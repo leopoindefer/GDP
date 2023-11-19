@@ -74,7 +74,7 @@ with tab1 :
 
     st.markdown('----')
 
-    st.header("Comparer des actions ou indices")
+    st.header("Comparer des actions")
     col_comp1, col_comp2, col_comp3 = st.columns(3)
 
     with col_comp1:
@@ -143,8 +143,8 @@ with tab2:
 
             #PROPHET
             try:
-                predict_prophet = prophet_model(df_prophet)
-                predict_prophet = predict_prophet.loc[:,["ds","yhat"]]
+                result_prophet = prophet_model(df_prophet)
+                predict_prophet = result_prophet.loc[:,["ds","yhat"]]
 
                 df_prophet['ds'] = pd.to_datetime(df_prophet['ds'])
                 predict_prophet['ds'] = pd.to_datetime(predict_prophet['ds'])
@@ -175,6 +175,7 @@ with tab2:
             st.line_chart(data=graph)
             st.write("PROPHET MSE:")
             st.write(round(mse_prophet,2))
+            st.dataframe(result_prophet)
 
         try:     
             col1, col2 = st.columns(2)
