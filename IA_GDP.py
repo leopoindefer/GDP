@@ -172,7 +172,6 @@ with tab2:
             st.line_chart(data=graph)
             st.write("PROPHET MSE:")
             #st.write(round(mse_prophet,2))
-            st.dataframe(result_prophet)
 
         try:     
             col1, col2 = st.columns(2)
@@ -190,7 +189,8 @@ with tab2:
 
     duree = pd.to_datetime(duree)
     confiance_pred = result_prophet[result_prophet["ds"] == duree]
-    st.dataframe(confiance_pred)
+    confiance_pred = confiance_pred.loc[:,"yhat_lower","yhat_upper"].tolist()
+    st.write(confiance_pred)
 
 
 with tab3 : 
