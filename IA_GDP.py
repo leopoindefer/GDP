@@ -150,7 +150,7 @@ with tab2:
             loss_prophet = loss_prophet.loc[:,["y","yhat"]]
             loss_prophet['se'] = np.square(loss_prophet['y'] - loss_prophet['yhat'])
             mse_prophet = loss_prophet['se'].mean(axis=0)
-            mse_prophet = mse_prophet['se'].iloc[-1].tolist()
+            mse_prophet = mse_prophet.iloc[-1].tolist()
 
             #ARIMA
 
