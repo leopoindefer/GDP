@@ -20,8 +20,8 @@ def Projection(montant, duree, symb, df_model, prediction):
         start_value = df_model["y"].iloc[-1]
         end_date = prediction[prediction['date'] <= duree]
         end_value = end_date["prediction"].iloc[-1]
-        lower_endvalue = confiance_pred["yhat_lower"]
-        upper_endvalue = confiance_pred["yhat_upper"]
+        lower_endvalue = confiance_pred["yhat_lower"].iloc[-1]
+        upper_endvalue = confiance_pred["yhat_upper"].iloc[-1]
         gap_indiv_lower = (lower_endvalue - start_value)
         gap_indiv_upper = (upper_endvalue - start_value)
         gap_indiv_value = (end_value - start_value)
