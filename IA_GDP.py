@@ -189,7 +189,7 @@ with tab2:
 
     duree = pd.to_datetime(duree)
     confiance_pred = result_prophet[result_prophet["ds"] == duree]
-    confiance_pred = confiance_pred.loc[:,"yhat_lower","yhat_upper"]
+    confiance_pred = confiance_pred.loc[:,["yhat_lower","yhat_upper"]]
     st.write(confiance_pred)
 
 
