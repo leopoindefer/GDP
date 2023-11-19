@@ -363,4 +363,7 @@ with tab4:
     actionsvsmarche = pd.merge(variation, variation_marche, on='Datec', how='inner')
     actionsvsmarche = actionsvsmarche.set_index("Datec")
     Beta = np.cov(actionsvsmarche[column_actif], actionsvsmarche[column_marche])[0][1] / np.var(actionsvsmarche[column_marche])
-    st.write(Beta)
+    renta_actfsansrisque = 0.03
+    medaf = f'E(R) = {renta_actfsansrisque} + {Beta} * [E(Rm) - {renta_actfsansrisque}]'
+    st.write(medaf)
+    st.write("avec E(Rm) =  rentabilité espérée du marché")
