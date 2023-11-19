@@ -144,12 +144,13 @@ with tab2:
             #PROPHET
             try:
                 result_prophet = prophet_model(df_prophet)
-                predict_prophet = result_prophet.loc[:,["ds","yhat"]]
+                predict_prophet = result_prophet.loc[:,["ds","yhat", "yhat_lower", "yhat_upper"]]
 
                 df_prophet['ds'] = pd.to_datetime(df_prophet['ds'])
                 predict_prophet['ds'] = pd.to_datetime(predict_prophet['ds'])
                 loss_prophet = predict_prophet.set_index('ds').join(df_prophet.set_index('ds'), how="left")
-                loss_prophet['se'] = (loss_prophet['y'] - loss_prophet['yhat'])**2
+                loss_prophet = loss_prophet.loc[:,["ds","yhat"]]
+                loss_prophet['se'] = np.square(loss_prophet['y'] - loss_prophet['yhat'])
                 mse_prophet = loss_prophet.mean(axis=0)
                 mse_prophet = mse_prophet.iloc[-1].tolist()
             except:
@@ -191,6 +192,9 @@ with tab2:
         except:
             st.write('Aucune estimation possible')
 
+    duree = pd.to_datetime(duree)
+    confiance_pred = result_prophet[result_prophet["Date"] == duree]
+    st.dataframe(confiance_pred)
 
 
 with tab3 : 
