@@ -140,17 +140,18 @@ with tab2:
 
     if action:
         with st.spinner('Chargement de la prédiction'):
+            try:
+                result_prophet = prophet_model(df_prophet)
+                predict_prophet = result_prophet.loc[:,["ds","yhat", "yhat_lower", "yhat_upper"]]
 
-            result_prophet = prophet_model(df_prophet)
-            predict_prophet = result_prophet.loc[:,["ds","yhat", "yhat_lower", "yhat_upper"]]
-
-            df_prophet['ds'] = pd.to_datetime(df_prophet['ds'])
-            predict_prophet['ds'] = pd.to_datetime(predict_prophet['ds'])
-            loss_prophet = predict_prophet.set_index('ds').join(df_prophet.set_index('ds'), how="left")
-            loss_prophet = loss_prophet.loc[:,["y","yhat"]]
-            loss_prophet['se'] = np.square(loss_prophet['y'] - loss_prophet['yhat'])
-            mse_prophet = loss_prophet['se'].mean(axis=0)
-
+                df_prophet['ds'] = pd.to_datetime(df_prophet['ds'])
+                predict_prophet['ds'] = pd.to_datetime(predict_prophet['ds'])
+                loss_prophet = predict_prophet.set_index('ds').join(df_prophet.set_index('ds'), how="left")
+                loss_prophet = loss_prophet.loc[:,["y","yhat"]]
+                loss_prophet['se'] = np.square(loss_prophet['y'] - loss_prophet['yhat'])
+                mse_prophet = loss_prophet['se'].mean(axis=0)
+            except:
+                st.error('pas de résultat pour PROPHET')
             #ARIMA
 
             try:
@@ -179,17 +180,13 @@ with tab2:
             with col2:
                 duree = st.date_input("Jusqu'à quand ?", datetime.date(2024, 1, 1), min_value=pd.to_datetime(df_prophet["ds"].iloc[0]), max_value=pd.to_datetime(predict_prophet["date"].iloc[-1]))
             
-            nb_part, tx_rendement, rendement, tx_rentabilite, rentabilite = Projection(montant, duree, symb, df_prophet, predict_prophet)
+            nb_part, tx_rendement, rendement, tx_rentabilite, rentabilite, tx_renta_lower, renta_lower, tx_renta_upper, renta_upper = Projection(montant, duree, symb, df_prophet, predict_prophet)
             st.write(f'Nombre d action acheté : {nb_part}', unsafe_allow_html=True)
             st.write(f'Taux de rendement de : {tx_rendement}, Rendement de {rendement}', unsafe_allow_html=True)
             st.write(f'Taux de Rentabilité de : {tx_rentabilite}, Rentabilité de {rentabilite}', unsafe_allow_html=True)
+            st.write(f'Intervalle de confiance de rentabilité : [{renta_lower}:{renta_upper}]', unsafe_allow_html=True)
         except:
             st.write('Aucune estimation possible')
-
-    duree = pd.to_datetime(duree)
-    confiance_pred = result_prophet[result_prophet["ds"] == duree]
-    confiance_pred = list(confiance_pred.loc[:,["yhat_lower","yhat_upper"]])
-    st.write(confiance_pred)
 
 
 with tab3 : 
