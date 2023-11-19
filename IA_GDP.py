@@ -178,7 +178,7 @@ with tab2:
         with col1:
             montant = st.text_input('Montant à investir', 1000)
         with col2:
-            duree = st.date_input("Jusqu'à quand ?", datetime.date(2024, 1, 1), min_value=pd.to_datetime(df_prophet["ds"].iloc[0]), max_value=pd.to_datetime(predict_prophet["date"].iloc[-1]))
+            duree = st.date_input("Jusqu'à quand ?", pd.to_datetime(predict_prophet["date"].iloc[-1]), min_value=pd.to_datetime(df_prophet["ds"].iloc[0]), max_value=pd.to_datetime(predict_prophet["date"].iloc[-1]))
             
         nb_part, tx_rendement, rendement, tx_rentabilite, rentabilite, tx_renta_lower, renta_lower, tx_renta_upper, renta_upper = Projection(montant, duree, symb, df_prophet, predict_prophet)
         st.write(f'Nombre d action acheté : {nb_part}', unsafe_allow_html=True)
