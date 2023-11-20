@@ -366,4 +366,7 @@ with tab4:
     renta_actfsansrisque = 0.03
     medaf = f'E(R) = {renta_actfsansrisque} + {round(Beta,2)} * [E(Rm) - {renta_actfsansrisque}]'
     st.write(medaf)
-    st.write("avec E(Rm) =  rentabilité espérée du marché")
+    st.write("E(R) = Rf + Beta * [E(Rm) - Rf]")
+    st.write("Rf = rentabilité de l'actif sans risque")
+    st.write("Beta = rapport de la covariance de la rentabilité de l'actif avec celle du marché à la variance de la rentabilité du marché")
+    st.write("E(Rm) = rentabilité espérée du marché")
