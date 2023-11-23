@@ -33,7 +33,7 @@ for ind in liste_indice:
 
 st.title("Gérer votre portefeuille avec l'IA")
 
-tab1, tab2, tab3, tab4 = st.tabs(["Analyser le marché", "Prédiction de performance", "Création de portefeuille","MEDAF"])
+tab1, tab2, tab3 = st.tabs(["Analyser le marché", "Prédiction de performance", "Création de portefeuille"])
 
 with tab1 :
     hide_st_style = """
@@ -330,43 +330,3 @@ with tab3 :
             else:
                 mess_gdp = f"Création de portefeuille pas encore disponible pour {nb_acts}"
                 st.write(mess_gdp)
-
-with tab4:
-    st.write("Calcul MEDAF")
-    col_medaf1, col_medaf2 = st.columns(2)
-    with col_medaf1:
-        indice = st.selectbox("marche", liste_indice)
-        column_marche = f"Close_^FCHI"
-        file_indice = f"data/indices/{indice}.csv"
-        df_indice = pd.read_csv(file_indice, delimiter=";")
-        actions = df_indice['ticker'].tolist()
-        marche = pd.read_csv("data/indices/^FCHI.csv")
-        marche["Date"] = pd.to_datetime(marche["Date"])
-        marche = marche.set_index("Date")
-        marche_resampled = marche.resample("M").first()
-        close_columns = [col for col in marche_resampled.columns if 'Close' in col]
-        variation_marche = marche_resampled[close_columns].pct_change().dropna()
-        variation_marche["Datec"] = variation_marche.index
-        
-    with col_medaf2:
-        actifs = st.selectbox("Action", actions)
-        column_actif = f"Close_{actifs}"
-        file_path = f"data/actions/{actifs}.csv"
-        s = pd.read_csv(file_path)
-        s["Date"] = pd.to_datetime(s["Date"])
-        s = s.set_index("Date")
-        s_resampled = s.resample("M").first()
-        close_columns = [col for col in s_resampled.columns if 'Close' in col]
-        variation = s_resampled[close_columns].pct_change().dropna()
-        variation["Datec"] = variation.index
-
-    actionsvsmarche = pd.merge(variation, variation_marche, on='Datec', how='inner')
-    actionsvsmarche = actionsvsmarche.set_index("Datec")
-    Beta = np.cov(actionsvsmarche[column_actif], actionsvsmarche[column_marche])[0][1] / np.var(actionsvsmarche[column_marche])
-    renta_actfsansrisque = 0.03
-    medaf = f'E(R) = {renta_actfsansrisque} + {round(Beta,2)} * [E(Rm) - {renta_actfsansrisque}]'
-    st.write(medaf)
-    st.write("E(R) = Rf + Beta * [E(Rm) - Rf]")
-    st.write("Rf = rentabilité de l'actif sans risque")
-    st.write("Beta = rapport de la covariance de la rentabilité de l'actif avec celle du marché à la variance de la rentabilité du marché")
-    st.write("E(Rm) = rentabilité espérée du marché")
