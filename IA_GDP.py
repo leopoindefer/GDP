@@ -213,41 +213,42 @@ with tab3 :
             if nb_acts <= 4:
 
                 merged_df, df_RisqueFaible, df_RisqueMoyen, df_RisqueEleve, df_RisqueTresEleve = CDP(portefeuille, nb_acts, ptf_df)
-                st.write('Frontière efficiente')
+                st.subheader('Frontière efficiente')
                 st.scatter_chart(merged_df, x='Volatilité', y='Rentabilité')
                 #st.dataframe(merged_df, hide_index=True)
+                st.subheader('Portefeuille efficient pour :')
                 col_result1, col_result2, col_result3, col_result4 = st.columns(4)
                 with col_result1:
                     try :
                         RisqueFaible = df_RisqueFaible.iloc[0]
-                        st.write("Portefeuille efficient pour un risque faible :")
+                        st.write("Risque faible")
                         st.dataframe(RisqueFaible)
                     except:
-                        st.write("pas de risque faible")
+                        st.error("pas de risque faible")
 
                 with col_result2:
                     try:
                         RisqueMoyen = df_RisqueMoyen.iloc[0]
-                        st.write("Portefeuille efficient pour un risque moyen :")
+                        st.write("Risque moyen")
                         st.dataframe(RisqueMoyen)
                     except:
-                        st.write("pas de risque moyen")
+                        st.error("pas de risque moyen")
 
                 with col_result3:
                     try:
                         RisqueEleve = df_RisqueEleve.iloc[0]
-                        st.write("Portefeuille efficient pour un risque élevé :")
+                        st.write("Risque élevé")
                         st.dataframe(RisqueEleve)
                     except:
-                        st.write("pas de risque élevé")
+                        st.error("pas de risque élevé")
 
                 with col_result4:
                     try:
                         RisqueTresEleve = df_RisqueTresEleve.iloc[0]
-                        st.write("Portefeuille efficient pour un risque très élevé :")
+                        st.write("Risque très élevé :")
                         st.dataframe(RisqueTresEleve)
                     except:
-                        st.write("pas de risque très élevé")
+                        st.error("pas de risque très élevé")
 
             else:
                 mess_gdp = f"Création de portefeuille pas encore disponible pour {nb_acts}"
