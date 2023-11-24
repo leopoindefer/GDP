@@ -210,85 +210,12 @@ with tab3 :
             ptf_df.index = pd.to_datetime(ptf_df.index)
             ptf_df = ptf_df.resample('MS').first()
 
-            if nb_acts == 2:
+            if nb_acts <= 4:
+
                 merged_df, df_RisqueFaible, df_RisqueMoyen, df_RisqueEleve, df_RisqueTresEleve = CDP(portefeuille, nb_acts, ptf_df)
                 st.write('Frontière efficiente')
                 st.scatter_chart(merged_df, x='Volatilité', y='Rentabilité')
-                developper = st.button("Développer")
-                if developper:
-                    st.dataframe(merged_df, hide_index=True)
-
-                try :
-                    RisqueFaible = df_RisqueFaible.iloc[0]
-                    st.write("Portefeuille efficient pour un risque faible :")
-                    st.dataframe(RisqueFaible)
-                except:
-                    st.write("pas de risque faible")
-
-                try:
-                    RisqueMoyen = df_RisqueMoyen.iloc[0]
-                    st.write("Portefeuille efficient pour un risque moyen :")
-                    st.dataframe(RisqueMoyen)
-                except:
-                    st.write("pas de risque moyen")
-
-                try:
-                    RisqueEleve = df_RisqueEleve.iloc[0]
-                    st.write("Portefeuille efficient pour un risque élevé :")
-                    st.dataframe(RisqueEleve)
-                except:
-                    st.write("pas de risque élevé")
-
-                try:
-                    RisqueTresEleve = df_RisqueTresEleve.iloc[0]
-                    st.write("Portefeuille efficient pour un risque très élevé :")
-                    st.dataframe(RisqueTresEleve)
-                except:
-                    st.write("pas de risque très élevé")
-
-            elif nb_acts == 3:
-                merged_df, df_RisqueFaible, df_RisqueMoyen, df_RisqueEleve, df_RisqueTresEleve = CDP(portefeuille, nb_acts, ptf_df)
-                st.write('Frontière efficiente')   
-                st.scatter_chart(merged_df, x='Volatilité', y='Rentabilité')
-                developper = st.button("Développer")
-                if developper:
-                    st.dataframe(merged_df, hide_index=True)
-
-                try :
-                    RisqueFaible = df_RisqueFaible.iloc[0]
-                    st.write("Portefeuille efficient pour un risque faible :")
-                    st.dataframe(RisqueFaible)
-                except:
-                    st.write("pas de risque faible")
-
-                try:
-                    RisqueMoyen = df_RisqueMoyen.iloc[0]
-                    st.write("Portefeuille efficient pour un risque moyen :")
-                    st.dataframe(RisqueMoyen)
-                except:
-                    st.write("pas de risque moyen")
-
-                try:
-                    RisqueEleve = df_RisqueEleve.iloc[0]
-                    st.write("Portefeuille efficient pour un risque élevé :")
-                    st.dataframe(RisqueEleve)
-                except:
-                    st.write("pas de risque élevé")
-
-                try:
-                    RisqueTresEleve = df_RisqueTresEleve.iloc[0]
-                    st.write("Portefeuille efficient pour un risque très élevé :")
-                    st.dataframe(RisqueTresEleve)
-                except:
-                    st.write("pas de risque très élevé")
-
-            elif nb_acts == 4:
-                merged_df, df_RisqueFaible, df_RisqueMoyen, df_RisqueEleve, df_RisqueTresEleve = CDP(portefeuille, nb_acts, ptf_df)
-                st.write('Frontière efficiente')   
-                st.scatter_chart(merged_df, x='Volatilité', y='Rentabilité')
-                developper = st.button("Développer")
-                if developper:
-                    st.dataframe(merged_df, hide_index=True)
+                #st.dataframe(merged_df, hide_index=True)
 
                 try :
                     RisqueFaible = df_RisqueFaible.iloc[0]
