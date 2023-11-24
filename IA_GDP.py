@@ -210,46 +210,50 @@ with tab3 :
             ptf_df.index = pd.to_datetime(ptf_df.index)
             ptf_df = ptf_df.resample('MS').first()
 
-            if nb_acts <= 4:
+            try:
 
-                merged_df, df_RisqueFaible, df_RisqueMoyen, df_RisqueEleve, df_RisqueTresEleve = CDP(portefeuille, nb_acts, ptf_df)
-                st.subheader('Frontière efficiente')
-                st.scatter_chart(merged_df, x='Volatilité', y='Rentabilité')
-                #st.dataframe(merged_df, hide_index=True)
-                st.subheader('Portefeuille efficient pour :')
-                col_result1, col_result2, col_result3, col_result4 = st.columns(4)
-                with col_result1:
-                    st.write("Risque faible")
-                    try :
-                        RisqueFaible = df_RisqueFaible.iloc[0]
-                        st.dataframe(RisqueFaible)
-                    except:
-                        st.error("Aucun")
+                if nb_acts <= 4:
 
-                with col_result2:
-                    st.write("Risque moyen")
-                    try:
-                        RisqueMoyen = df_RisqueMoyen.iloc[0]
-                        st.dataframe(RisqueMoyen)
-                    except:
-                        st.error("Aucun")
+                    merged_df, df_RisqueFaible, df_RisqueMoyen, df_RisqueEleve, df_RisqueTresEleve = CDP(portefeuille, nb_acts, ptf_df)
+                    st.subheader('Frontière efficiente')
+                    st.scatter_chart(merged_df, x='Volatilité', y='Rentabilité')
+                    #st.dataframe(merged_df, hide_index=True)
+                    st.subheader('Portefeuille efficient pour :')
+                    col_result1, col_result2, col_result3, col_result4 = st.columns(4)
+                    with col_result1:
+                        st.write("Risque faible")
+                        try :
+                            RisqueFaible = df_RisqueFaible.iloc[0]
+                            st.dataframe(RisqueFaible)
+                        except:
+                            st.error("Aucun")
 
-                with col_result3:
-                    st.write("Risque élevé")
-                    try:
-                        RisqueEleve = df_RisqueEleve.iloc[0]
-                        st.dataframe(RisqueEleve)
-                    except:
-                        st.error("Aucun")
+                    with col_result2:
+                        st.write("Risque moyen")
+                        try:
+                            RisqueMoyen = df_RisqueMoyen.iloc[0]
+                            st.dataframe(RisqueMoyen)
+                        except:
+                            st.error("Aucun")
 
-                with col_result4:
-                    st.write("Risque très élevé")
-                    try:
-                        RisqueTresEleve = df_RisqueTresEleve.iloc[0]
-                        st.dataframe(RisqueTresEleve)
-                    except:
-                        st.error("Aucun")
+                    with col_result3:
+                        st.write("Risque élevé")
+                        try:
+                            RisqueEleve = df_RisqueEleve.iloc[0]
+                            st.dataframe(RisqueEleve)
+                        except:
+                            st.error("Aucun")
 
-            else:
-                mess_gdp = f"Création de portefeuille pas encore disponible pour {nb_acts}"
-                st.write(mess_gdp)
+                    with col_result4:
+                        st.write("Risque très élevé")
+                        try:
+                            RisqueTresEleve = df_RisqueTresEleve.iloc[0]
+                            st.dataframe(RisqueTresEleve)
+                        except:
+                            st.error("Aucun")
+
+                else:
+                    mess_gdp = f"Création de portefeuille pas encore disponible pour {nb_acts}"
+                    st.write(mess_gdp)
+            except:
+                st.error("Pas de portefeuille possible")
