@@ -219,36 +219,36 @@ with tab3 :
                 st.subheader('Portefeuille efficient pour :')
                 col_result1, col_result2, col_result3, col_result4 = st.columns(4)
                 with col_result1:
+                    st.write("Risque faible")
                     try :
                         RisqueFaible = df_RisqueFaible.iloc[0]
-                        st.write("Risque faible")
                         st.dataframe(RisqueFaible)
                     except:
-                        st.error("pas de risque faible")
+                        st.error("Aucun")
 
                 with col_result2:
+                    st.write("Risque moyen")
                     try:
                         RisqueMoyen = df_RisqueMoyen.iloc[0]
-                        st.write("Risque moyen")
                         st.dataframe(RisqueMoyen)
                     except:
-                        st.error("pas de risque moyen")
+                        st.error("Aucun")
 
                 with col_result3:
+                    st.write("Risque élevé")
                     try:
                         RisqueEleve = df_RisqueEleve.iloc[0]
-                        st.write("Risque élevé")
                         st.dataframe(RisqueEleve)
                     except:
-                        st.error("pas de risque élevé")
+                        st.error("Aucun")
 
                 with col_result4:
+                    st.write("Risque très élevé")
                     try:
                         RisqueTresEleve = df_RisqueTresEleve.iloc[0]
-                        st.write("Risque très élevé :")
                         st.dataframe(RisqueTresEleve)
                     except:
-                        st.error("pas de risque très élevé")
+                        st.error("Aucun")
 
             else:
                 mess_gdp = f"Création de portefeuille pas encore disponible pour {nb_acts}"
