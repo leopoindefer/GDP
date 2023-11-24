@@ -216,34 +216,38 @@ with tab3 :
                 st.write('Frontière efficiente')
                 st.scatter_chart(merged_df, x='Volatilité', y='Rentabilité')
                 #st.dataframe(merged_df, hide_index=True)
+                col_result1, col_result2, col_result3, col_result4 = st.columns(4)
+                with col_result1:
+                    try :
+                        RisqueFaible = df_RisqueFaible.iloc[0]
+                        st.write("Portefeuille efficient pour un risque faible :")
+                        st.dataframe(RisqueFaible)
+                    except:
+                        st.write("pas de risque faible")
 
-                try :
-                    RisqueFaible = df_RisqueFaible.iloc[0]
-                    st.write("Portefeuille efficient pour un risque faible :")
-                    st.dataframe(RisqueFaible)
-                except:
-                    st.write("pas de risque faible")
+                with col_result2:
+                    try:
+                        RisqueMoyen = df_RisqueMoyen.iloc[0]
+                        st.write("Portefeuille efficient pour un risque moyen :")
+                        st.dataframe(RisqueMoyen)
+                    except:
+                        st.write("pas de risque moyen")
 
-                try:
-                    RisqueMoyen = df_RisqueMoyen.iloc[0]
-                    st.write("Portefeuille efficient pour un risque moyen :")
-                    st.dataframe(RisqueMoyen)
-                except:
-                    st.write("pas de risque moyen")
+                with col_result3:
+                    try:
+                        RisqueEleve = df_RisqueEleve.iloc[0]
+                        st.write("Portefeuille efficient pour un risque élevé :")
+                        st.dataframe(RisqueEleve)
+                    except:
+                        st.write("pas de risque élevé")
 
-                try:
-                    RisqueEleve = df_RisqueEleve.iloc[0]
-                    st.write("Portefeuille efficient pour un risque élevé :")
-                    st.dataframe(RisqueEleve)
-                except:
-                    st.write("pas de risque élevé")
-
-                try:
-                    RisqueTresEleve = df_RisqueTresEleve.iloc[0]
-                    st.write("Portefeuille efficient pour un risque très élevé :")
-                    st.dataframe(RisqueTresEleve)
-                except:
-                    st.write("pas de risque très élevé")
+                with col_result4:
+                    try:
+                        RisqueTresEleve = df_RisqueTresEleve.iloc[0]
+                        st.write("Portefeuille efficient pour un risque très élevé :")
+                        st.dataframe(RisqueTresEleve)
+                    except:
+                        st.write("pas de risque très élevé")
 
             else:
                 mess_gdp = f"Création de portefeuille pas encore disponible pour {nb_acts}"
