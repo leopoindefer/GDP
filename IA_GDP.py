@@ -214,8 +214,9 @@ with tab3 :
                 merged_df, df_RisqueFaible, df_RisqueMoyen, df_RisqueEleve, df_RisqueTresEleve = CDP(portefeuille, nb_acts, ptf_df)
                 st.write('Frontière efficiente')
                 st.scatter_chart(merged_df, x='Volatilité', y='Rentabilité')
-                st.write("Couple rentabilité/volatilité par combinaison de pondération")
-                st.dataframe(merged_df, hide_index=True)
+                developper = st.button("Développer")
+                if developper:
+                    st.dataframe(merged_df, hide_index=True)
 
                 try :
                     RisqueFaible = df_RisqueFaible.iloc[0]
@@ -249,8 +250,9 @@ with tab3 :
                 merged_df, df_RisqueFaible, df_RisqueMoyen, df_RisqueEleve, df_RisqueTresEleve = CDP(portefeuille, nb_acts, ptf_df)
                 st.write('Frontière efficiente')   
                 st.scatter_chart(merged_df, x='Volatilité', y='Rentabilité')
-                st.write("Couple rentabilité/volatilité par combinaison de pondération")
-                st.dataframe(merged_df, hide_index=True)
+                developper = st.button("Développer")
+                if developper:
+                    st.dataframe(merged_df, hide_index=True)
 
                 try :
                     RisqueFaible = df_RisqueFaible.iloc[0]
@@ -284,8 +286,9 @@ with tab3 :
                 merged_df, df_RisqueFaible, df_RisqueMoyen, df_RisqueEleve, df_RisqueTresEleve = CDP(portefeuille, nb_acts, ptf_df)
                 st.write('Frontière efficiente')   
                 st.scatter_chart(merged_df, x='Volatilité', y='Rentabilité')
-                st.write("Couple rentabilité/volatilité par combinaison de pondération")
-                st.dataframe(merged_df, hide_index=True)
+                developper = st.button("Développer")
+                if developper:
+                    st.dataframe(merged_df, hide_index=True)
 
                 try :
                     RisqueFaible = df_RisqueFaible.iloc[0]
