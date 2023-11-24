@@ -211,15 +211,11 @@ with tab3 :
             ptf_df = ptf_df.resample('MS').first()
 
             if nb_acts == 2:
-                merged_df = CDP(portefeuille, nb_acts, ptf_df)
+                merged_df, df_RisqueFaible, df_RisqueMoyen, df_RisqueEleve, df_RisqueTresEleve = CDP(portefeuille, nb_acts, ptf_df)
                 st.write('Frontière efficiente')
                 st.scatter_chart(merged_df, x='Volatilité', y='Rentabilité')
                 st.write("Couple rentabilité/volatilité par combinaison de pondération")
                 st.dataframe(merged_df, hide_index=True)
-                df_RisqueFaible = merged_df[merged_df['Volatilité'] < 3].sort_values(by='Rentabilité', ascending=False)
-                df_RisqueMoyen = merged_df[(merged_df['Volatilité'] >= 3) & (merged_df['Volatilité'] <= 8)].sort_values(by='Rentabilité', ascending=False)
-                df_RisqueEleve = merged_df[(merged_df['Volatilité'] > 8) & (merged_df['Volatilité'] <= 15)].sort_values(by='Rentabilité', ascending=False)
-                df_RisqueTresEleve = merged_df[merged_df['Volatilité'] > 15].sort_values(by='Rentabilité', ascending=False)
 
                 try :
                     RisqueFaible = df_RisqueFaible.iloc[0]
@@ -250,15 +246,11 @@ with tab3 :
                     st.write("pas de risque très élevé")
 
             elif nb_acts == 3:
-                merged_df = CDP(portefeuille, nb_acts, ptf_df)
+                merged_df, df_RisqueFaible, df_RisqueMoyen, df_RisqueEleve, df_RisqueTresEleve = CDP(portefeuille, nb_acts, ptf_df)
                 st.write('Frontière efficiente')   
                 st.scatter_chart(merged_df, x='Volatilité', y='Rentabilité')
                 st.write("Couple rentabilité/volatilité par combinaison de pondération")
                 st.dataframe(merged_df, hide_index=True)
-                df_RisqueFaible = merged_df[merged_df['Volatilité'] < 3].sort_values(by='Rentabilité', ascending=False)
-                df_RisqueMoyen = merged_df[(merged_df['Volatilité'] >= 3) & (merged_df['Volatilité'] <= 8)].sort_values(by='Rentabilité', ascending=False)
-                df_RisqueEleve = merged_df[(merged_df['Volatilité'] > 8) & (merged_df['Volatilité'] <= 15)].sort_values(by='Rentabilité', ascending=False)
-                df_RisqueTresEleve = merged_df[merged_df['Volatilité'] > 15].sort_values(by='Rentabilité', ascending=False)
 
                 try :
                     RisqueFaible = df_RisqueFaible.iloc[0]
@@ -289,15 +281,11 @@ with tab3 :
                     st.write("pas de risque très élevé")
 
             elif nb_acts == 4:
-                merged_df = CDP(portefeuille, nb_acts, ptf_df)
+                merged_df, df_RisqueFaible, df_RisqueMoyen, df_RisqueEleve, df_RisqueTresEleve = CDP(portefeuille, nb_acts, ptf_df)
                 st.write('Frontière efficiente')   
                 st.scatter_chart(merged_df, x='Volatilité', y='Rentabilité')
                 st.write("Couple rentabilité/volatilité par combinaison de pondération")
                 st.dataframe(merged_df, hide_index=True)
-                df_RisqueFaible = merged_df[merged_df['Volatilité'] < 3].sort_values(by='Rentabilité', ascending=False)
-                df_RisqueMoyen = merged_df[(merged_df['Volatilité'] >= 3) & (merged_df['Volatilité'] <= 8)].sort_values(by='Rentabilité', ascending=False)
-                df_RisqueEleve = merged_df[(merged_df['Volatilité'] > 8) & (merged_df['Volatilité'] <= 15)].sort_values(by='Rentabilité', ascending=False)
-                df_RisqueTresEleve = merged_df[merged_df['Volatilité'] > 15].sort_values(by='Rentabilité', ascending=False)
 
                 try :
                     RisqueFaible = df_RisqueFaible.iloc[0]
