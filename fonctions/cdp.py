@@ -1,7 +1,13 @@
 import pandas as pd
 import numpy as np
 
-def CDP(portefeuille, nb_acts, ptf_df):
+def CDP(portefeuille, nb_acts, selected_dataframes):
+
+    # Fusionnez les DataFrames en utilisant pd.concat
+    ptf_df = pd.concat(selected_dataframes, axis=1, join='inner')
+    ptf_df.index = pd.to_datetime(ptf_df.index)
+    ptf_df = ptf_df.resample('MS').first()
+
     file_poids = f"data/poids/{nb_acts}.csv"
     combi_poids = pd.read_csv(file_poids)   
     matrice_poids = combi_poids.values
