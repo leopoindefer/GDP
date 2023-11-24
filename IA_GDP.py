@@ -205,16 +205,11 @@ with tab3 :
 
             selected_dataframes = [symbol_df[sym].set_index("Date").filter(like='Close') for sym in portefeuille]
 
-            # Fusionnez les DataFrames en utilisant pd.concat
-            ptf_df = pd.concat(selected_dataframes, axis=1, join='inner')
-            ptf_df.index = pd.to_datetime(ptf_df.index)
-            ptf_df = ptf_df.resample('MS').first()
-
             try:
 
                 if nb_acts <= 4:
 
-                    merged_df, df_RisqueFaible, df_RisqueMoyen, df_RisqueEleve, df_RisqueTresEleve = CDP(portefeuille, nb_acts, ptf_df)
+                    merged_df, df_RisqueFaible, df_RisqueMoyen, df_RisqueEleve, df_RisqueTresEleve = CDP(portefeuille, nb_acts, selected_dataframes)
                     st.subheader('Frontière efficiente')
                     st.scatter_chart(merged_df, x='Volatilité', y='Rentabilité')
                     #st.dataframe(merged_df, hide_index=True)
