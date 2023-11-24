@@ -35,5 +35,11 @@ def CDP(portefeuille, nb_acts, ptf_df):
 
     #Fusionner le résultat avec combi_risque
     merged_df = merged_df.merge(combi_risque[['Volatilité']], left_index=True, right_index=True)
+
+    #renta optimale pour risque donné
+    df_RisqueFaible = merged_df[merged_df['Volatilité'] < 3].sort_values(by='Rentabilité', ascending=False)
+    df_RisqueMoyen = merged_df[(merged_df['Volatilité'] >= 3) & (merged_df['Volatilité'] <= 8)].sort_values(by='Rentabilité', ascending=False)
+    df_RisqueEleve = merged_df[(merged_df['Volatilité'] > 8) & (merged_df['Volatilité'] <= 15)].sort_values(by='Rentabilité', ascending=False)
+    df_RisqueTresEleve = merged_df[merged_df['Volatilité'] > 15].sort_values(by='Rentabilité', ascending=False)
     
-    return merged_df
+    return merged_df, df_RisqueFaible, df_RisqueMoyen, df_RisqueEleve, df_RisqueTresEleve
