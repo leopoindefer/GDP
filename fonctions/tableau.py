@@ -8,8 +8,7 @@ def Tableau(periode, symbol_txt, dict_symb):
         liste_cours = list()
         for s_txt in symbol_txt:
             try:      
-                file_path = f"data/actions/{s_txt}.csv"
-                s = pd.read_csv(file_path)
+                s = yf.download(s_txt, start = "2000-01-01", end = datetime.now(), group_by='ticker')
                 s["Date"] = pd.to_datetime(s["Date"])
                 s = s.set_index("Date")
                 s_resampled = s.resample("M").first()
@@ -108,7 +107,7 @@ def Tableau(periode, symbol_txt, dict_symb):
         symbol_dataframes = []  # Initialiser une liste pour stocker les DataFrames
         for s_txt in symbol_txt:
             try:      
-                s = yf.download(s_txt, start = start_date, end = datetime.now(), group_by='ticker')
+                s = yf.download(s_txt, start = "2000-01-01", end = datetime.now(), group_by='ticker')
                 symbol_dataframes.append(s)
                 s["Date"] = pd.to_datetime(s["Date"])
                 s = s.set_index("Date")
