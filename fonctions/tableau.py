@@ -8,7 +8,8 @@ def Tableau(periode, symbol_txt, dict_symb):
         liste_cours = list()
         for s_txt in symbol_txt:
             try:      
-                s = yf.download(s_txt, start = "2000-01-01", end = datetime.now(), group_by='ticker')
+                file_path = f"data/actions/{s_txt}.csv"
+                s = pd.read_csv(file_path)
                 s["Date"] = pd.to_datetime(s["Date"])
                 s = s.set_index("Date")
                 s_resampled = s.resample("M").first()
