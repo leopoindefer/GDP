@@ -50,7 +50,7 @@ with tab1 :
     assets_all = Library(liste_indice, None).get_assets()
     assets_all = [e for r in assets_all for e in r]
     #assets = Library(indice,None).get_assets()
-    selected_dataframes = Library(None,assets_all).get_dataframes()
+    selected_dataframes = Library(None,["AAPL","META"]).get_dataframes()
     try:
         if periode == "1 mois":
             tableau = Analyse(selected_dataframes).KPI_1month()
