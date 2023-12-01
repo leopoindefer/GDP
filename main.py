@@ -47,7 +47,7 @@ with tab1 :
     with col_vision3:
         st.write("")
 
-    assets_all = Library(liste_indice, None).get_assets()
+    #assets_all = Library(liste_indice, None).get_assets()
     assets = Library(indice,None).get_assets()
     selected_dataframes = Library(None,assets).get_dataframes()
     try:
