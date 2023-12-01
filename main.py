@@ -48,6 +48,7 @@ with tab1 :
         st.write("")
 
     assets = Library(indice,None).get_assets()
+    assets_all = Library(liste_indice, None).get_assets()
     selected_dataframes = Library(None,assets).get_dataframes()
     try:
         if periode == "1 mois":
@@ -77,7 +78,7 @@ with tab1 :
     col_comp1, col_comp2, col_comp3 = st.columns(3)
 
     with col_comp1:
-        comp1 = st.selectbox('', assets)
+        comp1 = st.selectbox('', assets_all)
     
     with col_comp2:
         asset2 = assets.copy()
@@ -92,7 +93,7 @@ with tab1 :
     if run:
         try:
             assets_comp = [comp1, comp2]
-            selected_dataframes = Library(any, assets_comp)
+            selected_dataframes = Library(None, assets_comp)
             dataframes_resampled = Transform(selected_dataframes)
             compar_chart, corr = Comparaison(dataframes_resampled).inner_combine()
             st.line_chart(compar_chart)
@@ -107,7 +108,7 @@ with tab1 :
 with tab2:
 
     st.header("Action à visualiser")
-    action = st.selectbox('Choisir une action', symbol_txt)
+    action = st.selectbox('Choisir une action', assets)
     symb = action
     column = f"Close_{symb}"
     file = f"data/actions/{symb}.csv"
@@ -190,7 +191,7 @@ with tab2:
 
 with tab3 : 
     st.header("Composer votre portefeuille")
-    portefeuille = st.multiselect("Choisissez vos actions", symbol_txt)
+    portefeuille = st.multiselect("Choisissez vos actions", assets)
     symbol_df = {}
     for symb in portefeuille:
         try:
