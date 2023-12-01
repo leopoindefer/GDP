@@ -38,8 +38,7 @@ with tab1 :
         st.write("")
 
     #assets_all = Library(liste_indice, None).get_assets()
-    #assets = Library(indice,None).get_assets()
-    assets = ["AAPL","META"]
+    assets = Library(indice,None).get_assets()
     #selected_dataframes = Library(None,assets).get_dataframes()
     #st.write(assets)
     #if periode == "6 mois":
