@@ -69,7 +69,7 @@ with tab1 :
 
     with col2_info:
         if info_button:
-            st.info('Rentabilité et volatilité mensuelle')
+            st.info('test Rentabilité et volatilité mensuelle')
 
     st.markdown('----')
 
