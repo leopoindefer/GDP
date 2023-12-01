@@ -41,16 +41,14 @@ with tab1 :
     assets = Library(indice,None).get_assets()
     selected_dataframes = Library(None,assets).get_dataframes()
     st.write(selected_dataframes)
-    #if periode == "1 mois":
-        #tableau = Analyse(selected_dataframes).KPI_1month()
+
     if periode == "6 mois":
         tableau = Analyse(selected_dataframes).KPI_6month()
-    #elif periode == "1 an":
-        #tableau = Analyse(selected_dataframes).KPI_1year()
-    #elif periode == "5 ans":
-        #tableau = Analyse(selected_dataframes).KPI_5year()
+    else:
+        st.write("autre")
     st.dataframe(tableau.style.applymap(lambda x: 'color: red' if any('-' in words for words in x.split()) else 'color: green',subset = ['VAR']), column_config={"VISION": st.column_config.LineChartColumn(
         "VISION", y_min=0, y_max=200)})
+    
 
     col1_info, col2_info = st.columns((1, 8))
     with col1_info:
@@ -87,8 +85,8 @@ with tab1 :
         compar_chart, corr = Comparaison(dataframes_resampled).inner_combine()
         st.line_chart(compar_chart)
 
-        #mess_corr = f'Corrélation linéraire à : {round(corr*100,2)}%'
-        #st.write(mess_corr)
+        mess_corr = f'Corrélation linéraire à : {round(corr*100,2)}%'
+        st.write(mess_corr)
 
 
     st.markdown('----')
