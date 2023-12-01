@@ -41,7 +41,6 @@ with tab1 :
     assets = Library(indice,None).get_assets()
     selected_dataframes = Library(None,assets).get_dataframes()
     st.write(selected_dataframes)
-
     if periode == "6 mois":
         tableau = Analyse(selected_dataframes).KPI_6month()
     else:
