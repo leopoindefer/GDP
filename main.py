@@ -10,26 +10,20 @@ from fonctions.comparaison import Comparaison
 from fonctions.projection import Projection
 from fonctions.cdp import CDP
 from fonctions.prophet import prophet_model
+from fonctions.asset_database import Library
+from fonctions.asset_transform import Transform
+from fonctions.asset_analyzer import Analyse
+from fonctions.asset_comparaison import Comparaison
+from fonctions.asset_prophet import Prediction
+from fonctions.asset_projection import Projection
+from fonctions.asset_optimizer import Optimize
 
 st.set_page_config(
     page_title="GDP",
     page_icon="💯",
 )
 
-symbol_txt = []
-symbol_nom = []
-dict_symb = {}
 liste_indice = ["CAC40", "DOWJONES", "NASDAQ100", "S&P500", "SBF120"]
-
-#liste de toutes les actions
-for ind in liste_indice:
-    file_path = f"data/indices/{ind}.csv"
-    indices_df = pd.read_csv(file_path, delimiter=";")
-    symbols_list = indices_df["ticker"].tolist()
-    symbols_name = indices_df["nom"].tolist()
-    symbol_txt.extend(symbols_list)
-    symbol_nom.extend(symbols_name)
-    dict_symb[ind] = {"tickers": symbols_list, "noms": symbols_name}
 
 st.title("Gérer votre portefeuille avec l'IA")
 
@@ -38,31 +32,36 @@ tab1, tab2, tab3 = st.tabs(["Analyser le marché", "Prédiction de performance",
 with tab1 :
     hide_st_style = """
                 <style>
-                #MainMenu {Visibility: hidden;}
+                MainMenu {Visibility: hidden;}
                 footer {visibility: hidden;}
                 .bouton {visibility: hidden;}
                 </style>
                 """
     st.markdown(hide_st_style, unsafe_allow_html=True) 
-    
+
     col_vision1, col_vision2, col_vision3 = st.columns((2,3,5))
     with col_vision1:
         periode = st.selectbox("Période d'analyse", ["1 mois","6 mois","1 an","5 ans"])
     with col_vision2:
         indice = st.selectbox("Indice", liste_indice)
-        file_indice = f"data/indices/{indice}.csv"
-        df_indice = pd.read_csv(file_indice, delimiter=";")
-        actions = df_indice['ticker'].tolist()
     with col_vision3:
         st.write("")
+
+    assets = Library(indice,None).get_assets()
+    selected_dataframes = Library(None,assets).get_dataframes()
     try:
-        macro = Tableau(periode, actions, dict_symb)
-        st.dataframe(macro.style.applymap(lambda x: 'color: red' if any('-' in words for words in x.split()) else 'color: green',subset = ['VAR']), column_config={"VISION": st.column_config.LineChartColumn(
+        if periode == "1 mois":
+            tableau = Analyse(selected_dataframes).KPI_1month()
+        elif periode == "6 mois":
+            tableau = Analyse(selected_dataframes).KPI_6month()
+        elif periode == "1 an":
+            tableau = Analyse(selected_dataframes).KPI_1year()
+        elif periode == "5 ans":
+            tableau = Analyse(selected_dataframes).KPI_5year()
+        st.dataframe(tableau.style.applymap(lambda x: 'color: red' if any('-' in words for words in x.split()) else 'color: green',subset = ['VAR']), column_config={"VISION": st.column_config.LineChartColumn(
             "VISION", y_min=0, y_max=200)})
     except:
         st.write("pas de donnée")
-    
-    info_button_state = False
 
     col1_info, col2_info = st.columns((1, 8))
     with col1_info:
@@ -78,12 +77,12 @@ with tab1 :
     col_comp1, col_comp2, col_comp3 = st.columns(3)
 
     with col_comp1:
-        comp1 = st.selectbox('', symbol_txt)
-
+        comp1 = st.selectbox('', assets)
+    
     with col_comp2:
-        symbol_txt2 = symbol_txt.copy()
-        symbol_txt2.remove(comp1)
-        comp2 = st.selectbox(' ', symbol_txt2)
+        asset2 = assets.copy()
+        asset2.remove(comp1)
+        comp2 = st.selectbox(' ', asset2)
 
     with col_comp3:
         st.write('')
@@ -91,11 +90,12 @@ with tab1 :
         run = st.button('Comparer')
 
     if run:
-        symb1 = comp1
-        symb2 = comp2
         try:
-            graph_comp, corr = Comparaison(symb1,symb2)
-            st.line_chart(graph_comp)
+            assets_comp = [comp1, comp2]
+            selected_dataframes = Library(any, assets_comp)
+            dataframes_resampled = Transform(selected_dataframes)
+            compar_chart, corr = Comparaison(dataframes_resampled).inner_combine()
+            st.line_chart(compar_chart)
 
             mess_corr = f'Corrélation linéraire à : {round(corr*100,2)}%'
             st.write(mess_corr)
