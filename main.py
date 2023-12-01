@@ -39,8 +39,8 @@ with tab1 :
 
     #assets_all = Library(liste_indice, None).get_assets()
     assets = Library(indice,None).get_assets()
-    selected_dataframes = Library(None,assets).get_dataframes()
-    st.write(selected_dataframes)
+    #selected_dataframes = Library(None,assets).get_dataframes()
+    st.write(assets)
     #if periode == "6 mois":
         #tableau = Analyse(selected_dataframes).KPI_6month()
     #else:
