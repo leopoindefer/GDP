@@ -49,8 +49,8 @@ with tab1 :
 
     assets_all = Library(liste_indice, None).get_assets()
     assets_all = [e for r in assets_all for e in r]
-    assets = Library(indice,None).get_assets()
-    selected_dataframes = Library(None,assets).get_dataframes()
+    #assets = Library(indice,None).get_assets()
+    selected_dataframes = Library(None,assets_all).get_dataframes()
     try:
         if periode == "1 mois":
             tableau = Analyse(selected_dataframes).KPI_1month()
@@ -96,15 +96,14 @@ with tab1 :
         comp2 = symb2
         try:
             assets_comp = [comp1, comp2]
-            mess = f"{comp1} et {comp2}"
-            st.write(mess)
+            st.write(comp1)
             #selected_dataframes = Library(None, assets_comp)
             #dataframes_resampled = Transform(selected_dataframes)
             #compar_chart, corr = Comparaison(dataframes_resampled).inner_combine()
             #st.line_chart(compar_chart)
 
             #mess_corr = f'Corrélation linéraire à : {round(corr*100,2)}%'
-            #sst.write(mess_corr)
+            #st.write(mess_corr)
         except:
             st.write('Comparaison impossible')
 
