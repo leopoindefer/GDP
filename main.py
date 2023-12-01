@@ -47,10 +47,11 @@ with tab1 :
     with col_vision3:
         st.write("")
 
-    assets_all = Library(liste_indice, None).get_assets()
-    assets_all = [e for r in assets_all for e in r]
+    #assets_all = Library(liste_indice, None).get_assets()
+    #assets_all = [e for r in assets_all for e in r]
     #assets = Library(indice,None).get_assets()
-    selected_dataframes = Library(None,["AAPL","META"]).get_dataframes()
+    assets= ["AAPL","META"]
+    selected_dataframes = Library(None,assets).get_dataframes()
     try:
         if periode == "1 mois":
             tableau = Analyse(selected_dataframes).KPI_1month()
@@ -79,10 +80,10 @@ with tab1 :
     col_comp1, col_comp2, col_comp3 = st.columns(3)
 
     with col_comp1:
-        symb1 = st.selectbox('', assets_all)
+        symb1 = st.selectbox('', assets)
     
     with col_comp2:
-        asset2 = assets_all.copy()
+        asset2 = assets.copy()
         asset2.remove(symb1)
         symb2 = st.selectbox(' ', asset2)
 
