@@ -98,13 +98,13 @@ with tab1 :
             assets_comp = [comp1, comp2]
             mess = f"{comp1} et {comp2}"
             st.write(mess)
-            selected_dataframes = Library(None, assets_comp)
-            dataframes_resampled = Transform(selected_dataframes)
-            compar_chart, corr = Comparaison(dataframes_resampled).inner_combine()
-            st.line_chart(compar_chart)
+            #selected_dataframes = Library(None, assets_comp)
+            #dataframes_resampled = Transform(selected_dataframes)
+            #compar_chart, corr = Comparaison(dataframes_resampled).inner_combine()
+            #st.line_chart(compar_chart)
 
-            mess_corr = f'Corrélation linéraire à : {round(corr*100,2)}%'
-            st.write(mess_corr)
+            #mess_corr = f'Corrélation linéraire à : {round(corr*100,2)}%'
+            #sst.write(mess_corr)
         except:
             st.write('Comparaison impossible')
 
