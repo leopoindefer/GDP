@@ -1,5 +1,4 @@
 import pandas as pd 
-from typing import TypeVar, Generic
 
 class Library:
     def __init__(self, indice:list, selected_assets:list) -> None:
@@ -19,7 +18,7 @@ class Library:
             symbol_txt.extend(symbols_list)
             symbol_nom.extend(symbols_name)
             dict_symb[ind] = {"tickers": symbols_list, "noms": symbols_name}
-        return symbols_list
+        return symbol_txt
 
     def get_dataframes(self):
         def load_data(symbol):
