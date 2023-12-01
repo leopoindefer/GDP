@@ -95,10 +95,11 @@ with tab1 :
         comp2 = symb2
         try:
             assets_comp = [comp1, comp2]
-            selected_dataframes = Library(None, assets_comp)
-            dataframes_resampled = Transform(selected_dataframes)
-            compar_chart, corr = Comparaison(dataframes_resampled).inner_combine()
-            st.line_chart(compar_chart)
+            st.write(comp1)
+            #selected_dataframes = Library(None, assets_comp)
+            #dataframes_resampled = Transform(selected_dataframes)
+            #compar_chart, corr = Comparaison(dataframes_resampled).inner_combine()
+            #st.line_chart(compar_chart)
 
             #mess_corr = f'Corrélation linéraire à : {round(corr*100,2)}%'
             #st.write(mess_corr)
