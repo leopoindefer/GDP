@@ -47,8 +47,8 @@ with tab1 :
     with col_vision3:
         st.write("")
 
-    assets_all = Library(liste_indice, None).get_assets()
-    assets_all = [e for r in assets_all for e in r]
+    #assets_all = Library(liste_indice, None).get_assets()
+    #assets_all = [e for r in assets_all for e in r]
     #assets = Library(indice,None).get_assets()
     assets= ["AAPL","META"]
     selected_dataframes = Library(None,assets).get_dataframes()
