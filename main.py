@@ -1,15 +1,5 @@
 import streamlit as st
-import pandas as pd
-import numpy as np
-import datetime
-from datetime import date
-import statistics
 
-from fonctions.tableau import Tableau
-from fonctions.comparaison import Comparaison
-from fonctions.projection import Projection
-from fonctions.cdp import CDP
-from fonctions.prophet import prophet_model
 from fonctions.asset_database import Library
 from fonctions.asset_transform import Transform
 from fonctions.asset_analyzer import Analyse
@@ -22,8 +12,6 @@ st.set_page_config(
     page_title="GDP",
     page_icon="💯",
 )
-
-liste_indice = ["CAC40", "DOWJONES", "NASDAQ100", "S&P500", "SBF120"]
 
 st.title("Gérer votre portefeuille avec l'IA")
 
@@ -39,6 +27,9 @@ with tab1 :
                 """
     st.markdown(hide_st_style, unsafe_allow_html=True) 
 
+    liste_indice = ["CAC40", "DOWJONES", "NASDAQ100", "S&P500", "SBF120"]
+    st.write(liste_indice)
+    
     col_vision1, col_vision2, col_vision3 = st.columns((2,3,5))
     with col_vision1:
         periode = st.selectbox("Période d'analyse", ["1 mois","6 mois","1 an","5 ans"])
@@ -70,7 +61,7 @@ with tab1 :
 
     with col2_info:
         if info_button:
-            st.info('test Rentabilité et volatilité mensuelle')
+            st.info('Rentabilité et volatilité mensuelle')
 
     st.markdown('----')
 
