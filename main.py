@@ -96,6 +96,8 @@ with tab1 :
         comp2 = symb2
         try:
             assets_comp = [comp1, comp2]
+            mess = f"{comp1} et {comp2}"
+            st.write(mess)
             selected_dataframes = Library(None, assets_comp)
             dataframes_resampled = Transform(selected_dataframes)
             compar_chart, corr = Comparaison(dataframes_resampled).inner_combine()
