@@ -47,8 +47,9 @@ with tab1 :
     with col_vision3:
         st.write("")
 
-    assets = Library(indice,None).get_assets()
     assets_all = Library(liste_indice, None).get_assets()
+    assets_all = [e for r in assets_all for e in r]
+    assets = Library(indice,None).get_assets()
     selected_dataframes = Library(None,assets).get_dataframes()
     try:
         if periode == "1 mois":
@@ -78,12 +79,12 @@ with tab1 :
     col_comp1, col_comp2, col_comp3 = st.columns(3)
 
     with col_comp1:
-        comp1 = st.selectbox('', assets_all)
+        symb1 = st.selectbox('', assets_all)
     
     with col_comp2:
-        asset2 = assets.copy()
-        asset2.remove(comp1)
-        comp2 = st.selectbox(' ', asset2)
+        asset2 = assets_all.copy()
+        asset2.remove(symb1)
+        symb2 = st.selectbox(' ', asset2)
 
     with col_comp3:
         st.write('')
@@ -91,6 +92,8 @@ with tab1 :
         run = st.button('Comparer')
 
     if run:
+        comp1 = symb1
+        comp2 = symb2
         try:
             assets_comp = [comp1, comp2]
             selected_dataframes = Library(None, assets_comp)
