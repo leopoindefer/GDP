@@ -36,9 +36,11 @@ class Analyse(Transform):
         return macro
 
     def KPI_6month(self):
-        liste_cours = list()
+        liste_cours = []
         asset_dataframe_resampled = {}
+        liste_symb = []
         for symbol, asset_dataframe in self._selected_dataframes.items():
+            liste_symb.append(symbol)
             try:
                 asset_dataframe_resampled = Transform(asset_dataframe).resample()
                 close_columns = [col for col in asset_dataframe_resampled.columns if 'Close' in col]
@@ -61,7 +63,7 @@ class Analyse(Transform):
                 continue
         #macro = pd.DataFrame(liste_cours)
         #macro.set_index('SYMBOLE', inplace=True)
-        return asset_dataframe_resampled
+        return liste_symb
 
     def KPI_1year(self):
         liste_cours = list()
