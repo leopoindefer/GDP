@@ -41,7 +41,7 @@ class Analyse(Transform):
         liste_symb = []
         for symbol, asset_dataframe in self._selected_dataframes.items():
             liste_symb.append(symbol)
-            asset_dataframe_resampled = Transform(asset_dataframe).resample()
+            asset_dataframe_resampled = Transform(asset_dataframe).resample().values()
             asset_dataframe_resampled = pd.DataFrame(asset_dataframe_resampled)
             close_columns = [col for col in asset_dataframe_resampled.columns if 'Close' in col]
             cours = round(asset_dataframe[close_columns].iloc[-1].values.sum(),2)
