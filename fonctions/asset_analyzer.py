@@ -70,7 +70,7 @@ class Analyse(Transform):
                 continue
         macro = pd.DataFrame(liste_cours)
         #macro.set_index('SYMBOLE', inplace=True)
-        return risque_moy
+        return liste_df
 
     def KPI_1year(self):
         liste_cours = list()
