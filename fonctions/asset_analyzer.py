@@ -56,7 +56,7 @@ class Analyse(Transform):
                 risque_moy = round(risque_moy*100,2)
                 line = [str(val) for val in s_six_mois_prec[close_columns].values.flatten()]
                 symbols = [symbol for symbol in self._selected_dataframes.keys()]
-                symbols.append(symbols)
+                symbols.append(symbol)
                 liste_cours.append({"SYMBOLE": symbol, "ACTUEL": f'{cours}', "M-6": f'{cours_prec}', "VAR": f'{var}%', "RENTABILITÉ": f'{renta_moy}%', "VOLATILITÉ": f'{risque_moy}%', "VISION":line})
             except FileNotFoundError:
                 continue
