@@ -48,6 +48,8 @@ class Analyse(Transform):
             cours_prec = round(asset_dataframe_resampled[close_columns].iloc[-7].values.sum(),2)
             var = round(((cours - cours_prec)/ cours_prec)*100,2)
             sixmois_prec = datetime.now() - timedelta(days=183)
+            sixmois_prec = pd.to_datetime(sixmois_prec)
+            asset_dataframe.index = pd.to_datetime(asset_dataframe.index)
             s_six_mois_prec = asset_dataframe[asset_dataframe.index>=sixmois_prec]
             s_six_mois_prec_resampled = asset_dataframe_resampled[asset_dataframe_resampled.index>=sixmois_prec]
             variation = s_six_mois_prec_resampled[close_columns].pct_change().dropna()
