@@ -44,15 +44,15 @@ class Analyse(Transform):
             liste_df.append(asset_dataframe)
             for s in liste_df:
                 try:      
+                    cours = []
+                    cours_prec = []
+                    var = []
+                    renta_moy = []
+                    risque_moy = []
+                    line = []
                     s_resampled = s.resample("M").first()
                     close_columns = [col for col in s_resampled.columns if 'Close' in col]
                     if close_columns:
-                        cours = []
-                        cours_prec = []
-                        var = []
-                        renta_moy = []
-                        risque_moy = []
-                        line = []
                         cours = round(s[close_columns].iloc[-1].values.sum(),2)
                         cours_prec = round(s_resampled[close_columns].iloc[-7].values.sum(),2)
                         var = round(((cours - cours_prec)/ cours_prec)*100,2)
