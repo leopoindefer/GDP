@@ -7,12 +7,10 @@ class Library:
         pass
 
     def get_assets(self):
-        assets_indices = []
-        for ind in self._indice:
-            file_indice = f"data/indices/{ind}.csv"
-            df_indice = pd.read_csv(file_indice, delimiter=";")
-            assets_indices.extend(df_indice['ticker'].tolist())
-        return assets_indices
+        file_indice = f"data/indices/{self._indice}.csv"
+        df_indice = pd.read_csv(file_indice, delimiter=";")
+        assets_indice = df_indice['ticker'].tolist()
+        return assets_indice
 
     def get_dataframes(self):
         def load_data(symbol):
