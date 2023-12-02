@@ -65,7 +65,7 @@ class Analyse(Transform):
                 except Exception:
                     continue
         macro = pd.DataFrame(liste_cours)
-        macro.set_index('SYMBOLE', inplace=True)
+        #macro.set_index('SYMBOLE', inplace=True)
         return risque_moy
 
     def KPI_1year(self):
