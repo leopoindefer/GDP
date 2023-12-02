@@ -72,6 +72,7 @@ class Analyse(Transform):
                     cours_prec = round(asset_dataframe_resampled[close_columns].iloc[-13].values.sum(),2)
                     var = round(((cours - cours_prec)/ cours_prec)*100,2)
                     annee_prec = datetime.now() - timedelta(days=365)
+                    annee_prec = annee_prec.to_datetime()
                     s_annee_prec = asset_dataframe[asset_dataframe.index>=annee_prec]
                     s_annee_prec_resampled = asset_dataframe_resampled[asset_dataframe_resampled.index>=annee_prec]
                     variation = s_annee_prec_resampled[close_columns].pct_change().dropna()
