@@ -36,12 +36,10 @@ def Tableau(periode, symbol_txt, dict_symb):
     
     elif periode == "6 mois":
         liste_cours = list()
-        symbol_dataframes = []  # Initialiser une liste pour stocker les DataFrames
         for s_txt in symbol_txt:
             try:      
                 file_path = f"data/actions/{s_txt}.csv"
                 s = pd.read_csv(file_path)
-                symbol_dataframes.append(s)
                 s["Date"] = pd.to_datetime(s["Date"])
                 s = s.set_index("Date")
                 s_resampled = s.resample("M").first()
