@@ -61,7 +61,7 @@ class Analyse(Transform):
                 continue
         #macro = pd.DataFrame(liste_cours)
         #macro.set_index('SYMBOLE', inplace=True)
-        return self._selected_dataframes
+        return asset_dataframe_resampled
 
     def KPI_1year(self):
         liste_cours = list()
