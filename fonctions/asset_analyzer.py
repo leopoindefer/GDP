@@ -43,9 +43,9 @@ class Analyse(Transform):
         for symbol, asset_dataframe in self._selected_dataframes.items():
             liste_symb.append(symbol)
             liste_df.append(asset_dataframe)
-            close_columns = [col for col in df.columns if 'Close' in col]
-            if close_columns:
-                for df in liste_df:
+            for df in liste_df:
+                close_columns = [col for col in df.columns if 'Close' in col]
+                if close_columns:
                     df_resampled = Transform(df).resample().values()
                     df_resampled = pd.DataFrame(df_resampled)
                     cours = round(df[close_columns].iloc[-1].values.sum(),2)
