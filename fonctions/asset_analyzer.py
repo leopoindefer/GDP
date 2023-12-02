@@ -69,8 +69,8 @@ class Analyse(Transform):
             except Exception:
                 continue
         macro = pd.DataFrame(liste_cours)
-        #macro.set_index('SYMBOLE', inplace=True)
-        return cours
+        macro.set_index('SYMBOLE', inplace=True)
+        return macro
 
     def KPI_1year(self):
         liste_cours = list()
