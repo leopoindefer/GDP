@@ -130,8 +130,7 @@ with tab3 :
 
             if nb_acts <= 4:
                 portfolio_dataframes = Library(None, portefeuille).get_dataframes()
-                st.write(portfolio_dataframes)
-                #merged_df, df_RisqueFaible, df_RisqueMoyen, df_RisqueEleve, df_RisqueTresEleve = Optimize(portefeuille, nb_acts, portfolio_dataframes).get_optimum()
+                merged_df, df_RisqueFaible, df_RisqueMoyen, df_RisqueEleve, df_RisqueTresEleve = Optimize(portefeuille, nb_acts, portfolio_dataframes).get_optimum()
                 #st.subheader('Frontière efficiente')
                 #st.scatter_chart(merged_df, x='Volatilité', y='Rentabilité')
                     #st.dataframe(merged_df, hide_index=True)
