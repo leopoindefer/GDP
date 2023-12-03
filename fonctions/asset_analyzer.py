@@ -60,7 +60,7 @@ class Analyse(Transform):
 
         macro = pd.DataFrame(liste_cours)
         macro.set_index('SYMBOL', inplace=True)
-        return s_six_mois_prec
+        return variation
 
 
     def KPI_1year(self):
@@ -91,7 +91,7 @@ class Analyse(Transform):
                 continue
         macro = pd.DataFrame(liste_cours)
         macro.set_index('SYMBOLE', inplace=True)
-        return variation
+        return macro
      
     def KPI_5year(self):
         liste_cours = list()
