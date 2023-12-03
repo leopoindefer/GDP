@@ -29,7 +29,7 @@ class Analyse(Transform):
                 liste_cours.append({
                     "SYMBOLE": symbol,
                     "ACTUEL": f'{cours}',
-                    "M-1": f'{cours_prec}',
+                    "M-1": f'{cours_prec.info()}',
                     "VAR" : f'{var}%',
                     "RENTABILITÉ": f'{renta_moy}%', 
                     "VOLATILITÉ": f'{risque_moy}%',
