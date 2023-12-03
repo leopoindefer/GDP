@@ -39,7 +39,7 @@ class Analyse(Transform):
         liste_cours = []
         for symbol in self._selected_dataframes.keys():
             liste_cours.append({"SYMBOLE": symbol})
-        for symbol, asset_dataframe in self._selected_dataframes.items(): 
+        for asset_dataframe in self._selected_dataframes.values(): 
             s = pd.DataFrame(asset_dataframe)
             s.index = pd.to_datetime(s.index)
             s_resampled = s.resample("M").first()
