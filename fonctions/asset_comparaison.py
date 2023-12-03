@@ -1,5 +1,4 @@
 import pandas as pd
-from typing import TypeVar, Generic
 from scipy.stats import pearsonr
 from .asset_transform import Transform
 
@@ -7,41 +6,16 @@ class Comparaison(Transform):
     def __init__(self, selected_dataframes: dict) -> None:
         super().__init__(selected_dataframes)
 
-    def inner_combine(self):
-        symb = list()
-        for symbol in self._selected_dataframes.keys():
-            symb.append(symbol)
-        symb1 = symb[0]
-        column1 = f"Close_{symb1}"
-        df1 = self._selected_dataframes[symb1]
-        df1['date_column'] = df1.index
-        
-        symb2 = symb[-1]
-        column2 = f"Close_{symb2}"
-        df2 = self._selected_dataframes[symb2]
-        df2['date_column'] = df2.index
+    def combine(self, how='inner'):
+        symbols = list(self._selected_dataframes.keys())
+        columns = [f"Close_{symbol}" for symbol in symbols]
 
-        inner_join = pd.merge(df1, df2, on='date_column' ,how='inner')
-        inner_join.set_index('date_column', inplace=True)
+        dfs = [self._selected_dataframes[symbol].assign(date_column=self._selected_dataframes[symbol].index) for symbol in symbols]
 
-        X = inner_join[column1].tolist()
-        Y = inner_join[column2].tolist()
+        joined_df = pd.merge(dfs[0], dfs[-1], on='date_column', how=how)
+        joined_df.set_index('date_column', inplace=True)
+
+        X, Y = joined_df[columns[0]].tolist(), joined_df[columns[-1]].tolist()
         corr, _ = pearsonr(X, Y)
 
-        return  inner_join, corr
-    
-    def left_combine(self):
-        symb = list()
-        for symbol in self._selected_dataframes.keys():
-            symb.append(symbol)
-        symb1 = symb[0]
-        df1 = self._selected_dataframes[symb1]
-        df1['date_column'] = df1.index
-        
-        symb2 = symb[-1]
-        df2 = self._selected_dataframes[symb2]
-        df2['date_column'] = df2.index
-
-        left_join = pd.merge(df1, df2, on='date_column' ,how='left')
-        left_join.set_index('date_column', inplace=True)
-        return  left_join
+        return joined_df, corr
