@@ -64,4 +64,4 @@ class Projection():
         except:
             print('pas de résultat')
 
-        return  nb_part, tx_rendement, rendement, tx_rentabilite, rentabilite, tx_renta_lower, renta_lower, tx_renta_upper, renta_upper
+        return nb_part
