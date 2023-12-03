@@ -56,6 +56,7 @@ class Analyse(Transform):
                 renta_moy = round(renta_moy*100,2)
                 risque_moy = variation.values.std()
                 risque_moy = round(risque_moy*100,2)
+                line = [str(val) for val in s_six_mois_prec[close_columns].values.flatten()]
                 
                 liste_cours.append({
                     "SYMBOL": symbol,
@@ -63,7 +64,8 @@ class Analyse(Transform):
                     "M-6": cours_prec,
                     "VAR" : f'{var}%',
                     "RENTABILITÉ": f'{renta_moy}%', 
-                    "VOLATILITÉ": f'{risque_moy}%'
+                    "VOLATILITÉ": f'{risque_moy}%',
+                    "VISION":line
                 })
 
             except FileNotFoundError:
