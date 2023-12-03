@@ -53,15 +53,19 @@ class Analyse(Transform):
                 variation = s_six_mois_prec_resampled[close_columns].pct_change().dropna()
                 liste_variation.append(variation)
                 renta_moy = variation.values.mean()
+                renta_moy = round(renta_moy*100,2)
+                risque_moy = variation.values.std()
+                risque_moy = round(risque_moy*100,2)
                 
                 liste_cours.append({
                     "SYMBOL": symbol,
                     "ACTUEL": cours,
                     "M-6": cours_prec,
                     "VAR" : f'{var}%',
-                    "RENTABILITÉ": renta_moy
+                    "RENTABILITÉ": f'{renta_moy}%', 
+                    "VOLATILITÉ": f'{risque_moy}%'
                 })
-                
+
             except FileNotFoundError:
                 continue
             except Exception:
