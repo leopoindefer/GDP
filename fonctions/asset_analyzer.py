@@ -40,15 +40,15 @@ class Analyse(Transform):
         liste_symb = []
         liste_df = []
         for symbol, asset_dataframe in self._selected_dataframes.items():
-            cours = []
-            cours_prec = []
-            var = []
-            renta_moy = []
-            risque_moy = []
-            line = []
             liste_symb.append(symbol)
             liste_df.append(asset_dataframe)
             for s in liste_df:
+                cours = []
+                cours_prec = []
+                var = []
+                renta_moy = []
+                risque_moy = []
+                line = []
                 try:   
                     s = pd.DataFrame(s)   
                     s_resampled = s.resample("M").first()
