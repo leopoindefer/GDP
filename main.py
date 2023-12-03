@@ -108,12 +108,14 @@ with tab2:
         montant = st.text_input('Montant à investir', 1000)
     with col2:
         duree = st.date_input("Jusqu'à quand ?", pd.to_datetime(forecast["date"].iloc[-1]), min_value=pd.to_datetime(df_prophet["ds"].iloc[0]), max_value=pd.to_datetime(forecast["date"].iloc[-1]))
-
-    nb_part, tx_rendement, rendement, tx_rentabilite, rentabilite, tx_renta_lower, renta_lower, tx_renta_upper, renta_upper = Projection(montant, duree, asset, df_prophet, forecast).unit_projection()
-    st.write(f'Nombre d action acheté : {nb_part}', unsafe_allow_html=True)
-    st.write(f'Taux de rendement de : {tx_rendement}, Rendement de {rendement}', unsafe_allow_html=True)
-    st.write(f'Taux de Rentabilité de : {tx_rentabilite}, Rentabilité de {rentabilite}', unsafe_allow_html=True)
-    st.write(f'Intervalle de confiance de rentabilité : [{renta_lower} : {renta_upper}]', unsafe_allow_html=True)
+    try :
+        nb_part, tx_rendement, rendement, tx_rentabilite, rentabilite, tx_renta_lower, renta_lower, tx_renta_upper, renta_upper = Projection(montant, duree, asset, df_prophet, forecast).unit_projection()
+        st.write(f'Nombre d action acheté : {nb_part}', unsafe_allow_html=True)
+        st.write(f'Taux de rendement de : {tx_rendement}, Rendement de {rendement}', unsafe_allow_html=True)
+        st.write(f'Taux de Rentabilité de : {tx_rentabilite}, Rentabilité de {rentabilite}', unsafe_allow_html=True)
+        st.write(f'Intervalle de confiance de rentabilité : [{renta_lower} : {renta_upper}]', unsafe_allow_html=True)
+    except:
+        st.error("Pas de projection disponible")
 
 with tab3 : 
     st.header("Composer votre portefeuille")
@@ -127,8 +129,8 @@ with tab3 :
             try:
 
                 if nb_acts <= 4:
-
-                    merged_df, df_RisqueFaible, df_RisqueMoyen, df_RisqueEleve, df_RisqueTresEleve = Optimize(portefeuille, nb_acts, selected_dataframes).get_optimum()
+                    portfolio_dataframes = Library(portefeuille).get_dataframes()
+                    merged_df, df_RisqueFaible, df_RisqueMoyen, df_RisqueEleve, df_RisqueTresEleve = Optimize(portefeuille, nb_acts, portfolio_dataframes).get_optimum()
                     st.subheader('Frontière efficiente')
                     st.scatter_chart(merged_df, x='Volatilité', y='Rentabilité')
                     #st.dataframe(merged_df, hide_index=True)
