@@ -18,10 +18,11 @@ class Analyse(Transform):
                 mois_prec = datetime.now() - timedelta(days=31)
                 s_mois_prec = s[s.index>=mois_prec]
                 cours_prec = round(s_mois_prec[close_columns].iloc[0],2)
+                cours_prec = float(cours_prec)
                 var = round(((cours - cours_prec)/ cours_prec)*100,2)
+                var = float(var)
                 variation = s_mois_prec[close_columns].pct_change().dropna()
-                renta_moy = round(((cours - cours_prec)/cours_prec)*100,2)
-                renta_moy = float(renta_moy)
+                renta_moy = var
                 risque_moy = variation.values.std()
                 risque_moy = round(risque_moy*100,2)
                 line = [str(val) for val in s_mois_prec[close_columns].values.flatten()]
