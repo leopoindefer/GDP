@@ -39,46 +39,45 @@ class Analyse(Transform):
         liste_cours = []
         liste_symb = []
         liste_df = []
+        cours = []
+        cours_prec = []
+        var = []
+        renta_moy = []
+        risque_moy = []
+        line = []
         for symbol, asset_dataframe in self._selected_dataframes.items():
             liste_symb.append(symbol)
             liste_df.append(asset_dataframe)
             for s in liste_df:
-                try:      
-                    cours = []
-                    cours_prec = []
-                    var = []
-                    renta_moy = []
-                    risque_moy = []
-                    line = []
+                try:   
+                    s = pd.DataFrame(s)   
                     s_resampled = s.resample("M").first()
                     close_columns = [col for col in s_resampled.columns if 'Close' in col]
-                    if close_columns:
-                        cours = []
-                        cours_prec = []
-                        var = []
-                        renta_moy = []
-                        risque_moy = []
-                        line = []
-                        cours = round(s[close_columns].iloc[-1].values.sum(),2)
-                        cours_prec = round(s_resampled[close_columns].iloc[-7].values.sum(),2)
-                        var = round(((cours - cours_prec)/ cours_prec)*100,2)
-                        sixmois_prec = datetime.now() - timedelta(days=183)
-                        s_six_mois_prec = s[s.index>=sixmois_prec]
-                        s_six_mois_prec_resampled = s_resampled[s_resampled.index>=sixmois_prec]
-                        variation = s_six_mois_prec_resampled[close_columns].pct_change().dropna()
-                        renta_moy = variation.values.mean()
-                        renta_moy = round(renta_moy*100,2)
-                        risque_moy = variation.values.std()
-                        risque_moy = round(risque_moy*100,2)
-                        line = [str(val) for val in s_six_mois_prec[close_columns].values.flatten()]
-                        liste_cours.append({"SYMBOLE": liste_symb, "ACTUEL": f'{cours}', "M-6": f'{cours_prec}', "VAR": f'{var}%', "RENTABILITÉ": f'{renta_moy}%', "VOLATILITÉ": f'{risque_moy}%', "VISION":line})
+                    cours = round(s[close_columns].iloc[-1].values.sum(),2)
+                    cours_prec = round(s_resampled[close_columns].iloc[-7].values.sum(),2)
+                    var = round(((cours - cours_prec)/ cours_prec)*100,2)
+                    sixmois_prec = datetime.now() - timedelta(days=183)
+                    s_six_mois_prec = s[s.index>=sixmois_prec]
+                    s_six_mois_prec_resampled = s_resampled[s_resampled.index>=sixmois_prec]
+                    variation = s_six_mois_prec_resampled[close_columns].pct_change().dropna()
+                    renta_moy = variation.values.mean()
+                    renta_moy = round(renta_moy*100,2)
+                    risque_moy = variation.values.std()
+                    risque_moy = round(risque_moy*100,2)
                 except FileNotFoundError:
                     continue
                 except Exception:
                     continue
+            cours.append(cours)
+            cours_prec.append(cours_prec)
+            var.append(var)
+            risque_moy.append(risque_moy)
+            renta_moy.append(renta_moy)
+            line.extend([str(val) for val in s_resampled[close_columns].values.flatten()])
+            liste_cours.append({"SYMBOLE": liste_symb, "ACTUEL": f'{cours}', "M-6": f'{cours_prec}', "VAR": f'{var}%', "RENTABILITÉ": f'{renta_moy}%', "VOLATILITÉ": f'{risque_moy}%', "VISION":line})
         macro = pd.DataFrame(liste_cours)
         #macro.set_index('SYMBOLE', inplace=True)
-        return asset_dataframe.info()
+        return macro
 
     def KPI_1year(self):
         liste_cours = list()
