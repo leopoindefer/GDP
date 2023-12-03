@@ -69,12 +69,6 @@ class Analyse(Transform):
                     continue
                 except Exception:
                     continue
-            cours.append(cours)
-            cours_prec.append(cours_prec)
-            var.append(var)
-            risque_moy.append(risque_moy)
-            renta_moy.append(renta_moy)
-            line.extend(line)
             liste_cours.append({"SYMBOLE": liste_symb, "ACTUEL": f'{cours}', "M-6": f'{cours_prec}', "VAR": f'{var}%', "RENTABILITÉ": f'{renta_moy}%', "VOLATILITÉ": f'{risque_moy}%', "VISION":line})
         macro = pd.DataFrame(liste_cours)
         #macro.set_index('SYMBOLE', inplace=True)
