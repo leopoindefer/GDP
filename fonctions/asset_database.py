@@ -24,7 +24,7 @@ class Library:
             symbol_txt.extend(symbols_list)
             symbol_nom.extend(symbols_name)
             dict_symb[ind] = {"tickers": symbols_list, "noms": symbols_name}
-            return dict_symb[ind]
+            return dict_symb[ind].values()
 
     def get_dataframes(self):
         def load_data(symbol):
