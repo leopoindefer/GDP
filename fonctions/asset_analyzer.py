@@ -70,7 +70,7 @@ class Analyse(Transform):
                 continue
 
         macro = pd.DataFrame(liste_cours)
-        macro.set_index('SYMBOLE', inplace=True)
+        #macro.set_index('SYMBOLE', inplace=True)
         return macro
 
 
