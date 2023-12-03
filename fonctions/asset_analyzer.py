@@ -62,8 +62,8 @@ class Analyse(Transform):
                 
                 liste_cours.append({
                     "SYMBOL": symbol,
-                    "ACTUEL": cours,
-                    "M-6": cours_prec,
+                    "ACTUEL": {cours},
+                    "M-6": {round(cours_prec,2)},
                     "VAR" : f'{var}%',
                     "RENTABILITÉ": f'{renta_moy}%', 
                     "VOLATILITÉ": f'{risque_moy}%',
