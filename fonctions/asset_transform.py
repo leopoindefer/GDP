@@ -1,6 +1,5 @@
 import pandas as pd 
 import numpy as np
-from typing import TypeVar, Generic
 
 class Transform():
     def __init__(self, selected_dataframes:dict) -> None:
@@ -8,9 +7,14 @@ class Transform():
         pass
 
     def resample(self):
+        df.index = pd.to_datetime(df.index)
+        df = df.resample("MS").first()
+        return df
+
+    def resample_assets(self):
         dataframes_resampled = {}
         for symbol, df in self._selected_dataframes.items():
             df.index = pd.to_datetime(df.index)
             df = df.resample("MS").first()
-            dataframes_resampled[symbol] = df 
+            dataframes_resampled[symbol] = df
         return dataframes_resampled
