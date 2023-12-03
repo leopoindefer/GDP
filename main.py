@@ -38,7 +38,6 @@ with tab1 :
         st.write("")
 
     assets = Library(indice,None).get_assets()
-    #assets_all = Library(liste_indice, None).get_assets()
     dataframes = Library(None,assets).get_dataframes()
     if periode == "1 mois":
         tableau = Analyse(dataframes).KPI_1month()
@@ -64,7 +63,9 @@ with tab1 :
 
     st.header("Comparer des actions")
     col_comp1, col_comp2, col_comp3 = st.columns(3)
-
+    assets_all = Library(liste_indice, None).get_assets()
+    st.write("assets_all")
+    
     with col_comp1:
         symb1 = st.selectbox('', assets)
     
