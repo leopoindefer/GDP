@@ -11,6 +11,7 @@ class Optimize():
 
         for symbol, dataframes in self._selected_dataframes:
             # Fusionnez les DataFrames
+            dataframes = pd.DataFrame(dataframes)
             ptf_df = pd.concat(dataframes, axis=1, join='inner')
             ptf_df.index = pd.to_datetime(ptf_df.index)
             ptf_df = ptf_df.resample('MS').first()
