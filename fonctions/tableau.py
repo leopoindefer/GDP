@@ -43,7 +43,7 @@ def Tableau(periode, symbol_txt, dict_symb):
                 s["Date"] = pd.to_datetime(s["Date"])
                 s = s.set_index("Date")
                 s_resampled = s.resample("M").first()
-                close_columns = [col for col in s_resampled.columns if 'Close' in col]
+                close_columns = [col for col in  s_resampled.columns if 'Close' in col]
                 cours = round(s[close_columns].iloc[-1].values.sum(),2)
                 cours_prec = round(s_resampled[close_columns].iloc[-7].values.sum(),2)
                 var = round(((cours - cours_prec)/ cours_prec)*100,2)
@@ -56,11 +56,11 @@ def Tableau(periode, symbol_txt, dict_symb):
                 risque_moy = variation.values.std()
                 risque_moy = round(risque_moy*100,2)
                 line = [str(val) for val in s_six_mois_prec[close_columns].values.flatten()]
-                liste_cours.append({"SYMBOLE": s_txt, "ACTUEL": f'{cours}', "M-6": f'{cours_prec}', "VAR": f'{var}%', "RENTABILITÉ": f'{renta_moy}%', "VOLATILITÉ": f'{risque_moy}%', "VISION":line})
             except FileNotFoundError:
                 continue
             except Exception:
                 continue
+        liste_cours.append({"SYMBOLE": s_txt, "ACTUEL": f'{cours}', "M-6": f'{cours_prec}', "VAR": f'{var}%', "RENTABILITÉ": f'{renta_moy}%', "VOLATILITÉ": f'{risque_moy}%', "VISION":line})
         macro = pd.DataFrame(liste_cours)
         macro.set_index('SYMBOLE', inplace=True)
         return macro
