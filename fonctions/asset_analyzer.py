@@ -21,6 +21,7 @@ class Analyse(Transform):
                 var = round(((cours - cours_prec)/ cours_prec)*100,2)
                 variation = s_mois_prec[close_columns].pct_change().dropna()
                 renta_moy = round(((cours - cours_prec)/cours_prec)*100,2)
+                renta_moy = float(renta_moy)
                 risque_moy = variation.values.std()
                 risque_moy = round(risque_moy*100,2)
                 line = [str(val) for val in s_mois_prec[close_columns].values.flatten()]
