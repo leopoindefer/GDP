@@ -44,11 +44,13 @@ class Analyse(Transform):
             close_columns = [col for col in s_resampled.columns if 'Close' in col]
             cours = round(s[close_columns].iloc[-1].values.sum(), 2)
             cours_prec = round(s_resampled[close_columns].iloc[-7].values.sum(),2)
+            var = round(((cours - cours_prec)/ cours_prec)*100,2)
             
             liste_cours.append({
                 "SYMBOL": symbol,
                 "ACTUEL": cours,
-                "M-6": cours_prec
+                "M-6": cours_prec,
+                "VAR" : f'{var}%'
             })
 
         macro = pd.DataFrame(liste_cours)
