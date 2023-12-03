@@ -42,6 +42,6 @@ class Library:
         return selected_dataframes
     
     def get_weights(self):
-        file_poids = f"data/poids/{self._len_assets}.csv"
+        file_poids = f"data/poids/{self._len_asset}.csv"
         combi_poids = pd.read_csv(file_poids)
         return combi_poids
