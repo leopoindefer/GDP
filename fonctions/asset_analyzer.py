@@ -49,13 +49,14 @@ class Analyse(Transform):
             s_six_mois_prec = s[s.index>=sixmois_prec]
             s_six_mois_prec_resampled = s_resampled[s_resampled.index>=sixmois_prec]
             variation = s_six_mois_prec_resampled[close_columns].pct_change().dropna()
+            renta_moy = variation.values.mean()
             
             liste_cours.append({
                 "SYMBOL": symbol,
                 "ACTUEL": cours,
                 "M-6": cours_prec,
                 "VAR" : f'{var}%',
-                "SIXMOISPREC": sixmois_prec
+                "RENTABILITÉ": renta_moy
             })
 
         macro = pd.DataFrame(liste_cours)
