@@ -63,7 +63,7 @@ class Analyse(Transform):
 
         macro = pd.DataFrame(liste_cours)
         macro.set_index('SYMBOL', inplace=True)
-        return liste_variation
+        return macro
 
 
     def KPI_1year(self):
