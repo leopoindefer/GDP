@@ -39,27 +39,33 @@ class Analyse(Transform):
         liste_cours = []
         liste_variation = []
         for symbol, asset_dataframe in self._selected_dataframes.items():
-            s = pd.DataFrame(asset_dataframe)
-            s.index = pd.to_datetime(s.index)
-            s_resampled = s.resample("MS").first()
-            close_columns = [col for col in s_resampled.columns if 'Close' in col]
-            cours = round(s[close_columns].iloc[-1].values.sum(), 2)
-            cours_prec = round(s_resampled[close_columns].iloc[-7].values.sum(),2)
-            var = round(((cours - cours_prec)/ cours_prec)*100,2)
-            sixmois_prec = datetime.now() - timedelta(days=183)
-            s_six_mois_prec = s[s.index>=sixmois_prec]
-            s_six_mois_prec_resampled = s_resampled[s_resampled.index>=sixmois_prec]
-            variation = s_six_mois_prec_resampled[close_columns].pct_change().dropna()
-            liste_variation.append(variation)
-            renta_moy = variation.values.mean()
-            
-            liste_cours.append({
-                "SYMBOL": symbol,
-                "ACTUEL": cours,
-                "M-6": cours_prec,
-                "VAR" : f'{var}%',
-                "RENTABILITÉ": renta_moy
-            })
+            try: 
+                s = pd.DataFrame(asset_dataframe)
+                s.index = pd.to_datetime(s.index)
+                s_resampled = s.resample("MS").first()
+                close_columns = [col for col in s_resampled.columns if 'Close' in col]
+                cours = round(s[close_columns].iloc[-1].values.sum(), 2)
+                cours_prec = round(s_resampled[close_columns].iloc[-7].values.sum(),2)
+                var = round(((cours - cours_prec)/ cours_prec)*100,2)
+                sixmois_prec = datetime.now() - timedelta(days=183)
+                s_six_mois_prec = s[s.index>=sixmois_prec]
+                s_six_mois_prec_resampled = s_resampled[s_resampled.index>=sixmois_prec]
+                variation = s_six_mois_prec_resampled[close_columns].pct_change().dropna()
+                liste_variation.append(variation)
+                renta_moy = variation.values.mean()
+                
+                liste_cours.append({
+                    "SYMBOL": symbol,
+                    "ACTUEL": cours,
+                    "M-6": cours_prec,
+                    "VAR" : f'{var}%',
+                    "RENTABILITÉ": renta_moy
+                })
+                
+            except FileNotFoundError:
+                continue
+            except Exception:
+                continue
 
         macro = pd.DataFrame(liste_cours)
         macro.set_index('SYMBOL', inplace=True)
