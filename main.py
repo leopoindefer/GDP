@@ -37,10 +37,11 @@ with tab1 :
     with col_vision3:
         st.write("")
 
-    assets = Library(indice,None).get_assets()
+    #assets = Library(indice,None).get_assets()
+    assets = ["AAPL","META"]
     #assets_all = Library(liste_indice, None).get_assets()
     dataframes = Library(None,assets).get_dataframes()
-    tableau = Analyse(["META","AAPL"]).KPI_6month()
+    tableau = Analyse(dataframes).KPI_6month()
     st.write(tableau)
     #st.dataframe(tableau.style.applymap(lambda x: 'color: red' if any('-' in words for words in x.split()) else 'color: green',subset = ['VAR']), column_config={"VISION": st.column_config.LineChartColumn(
         #"VISION", y_min=0, y_max=200)})
