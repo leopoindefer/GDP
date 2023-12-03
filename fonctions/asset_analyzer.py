@@ -42,7 +42,7 @@ class Analyse(Transform):
         for asset_dataframe in self._selected_dataframes.values(): 
             s = pd.DataFrame(asset_dataframe)
             s.index = pd.to_datetime(s.index)
-            #s_resampled = s.resample("M").first()
+            s_resampled = s.resample("M").first()
             #close_columns = [col for col in s_resampled.columns if 'Close' in col]
             #cours = round(s[close_columns].iloc[-1].values.sum(),2)
             #cours_prec = round(s_resampled[close_columns].iloc[-7].values.sum(),2)
@@ -59,7 +59,7 @@ class Analyse(Transform):
             #liste_cours.append({"ACTUEL": f'{cours}', "M-6": f'{cours_prec}', "VAR": f'{var}%', "RENTABILITÉ": f'{renta_moy}%', "VOLATILITÉ": f'{risque_moy}%', "VISION":line})
         #macro = pd.DataFrame(liste_cours)
         #macro.set_index('SYMBOLE', inplace=True)
-        return s
+        return s_resampled
 
     def KPI_1year(self):
         liste_cours = list()
