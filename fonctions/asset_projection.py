@@ -23,7 +23,7 @@ class Projection():
             div_indiv = 0
             print('dividende réinvesti')
 
-        try: 
+        try:
             start_value = self._df["y"].iloc[-1]
             end_date = self._forecast[self._forecast['date'] <= duree]
             end_value = end_date["forecast"].iloc[-1]
@@ -51,6 +51,7 @@ class Projection():
                 renta_lower = f'<span style="color: #FF0000;">{round(div + gap_value_lower,2)}€</span>'
                 tx_renta_upper = f'<span style="color: #FF0000;">{round(tRent_upper,2)}%</span>' 
                 renta_upper = f'<span style="color: #FF0000;">{round(div + gap_value_upper,2)}€</span>'
+                return nb_part, tx_rendement, rendement, tx_rentabilite, rentabilite, tx_renta_lower, renta_lower, tx_renta_upper, renta_upper
             elif tRent>=0:
                 nb_part = f'<span style="color: #008000;">{round(invest_part,2)}</span>'
                 tx_rendement = f'<span style="color: #008000;">{round(tRend,2)}%</span>'
@@ -61,7 +62,8 @@ class Projection():
                 renta_lower = f'<span style="color: #008000;">{round(div + gap_value_lower,2)}€</span>'
                 tx_renta_upper = f'<span style="color: #008000;">{round(tRent_upper,2)}%</span>' 
                 renta_upper = f'<span style="color: #008000;">{round(div + gap_value_upper,2)}€</span>'
+                nb_part, tx_rendement, rendement, tx_rentabilite, rentabilite, tx_renta_lower, renta_lower, tx_renta_upper, renta_upper
         except:
             print('pas de résultat')
 
-        return invest_part
+        return nb_part
