@@ -48,6 +48,7 @@ class Analyse(Transform):
             sixmois_prec = datetime.now() - timedelta(days=183)
             s_six_mois_prec = s[s.index>=sixmois_prec]
             s_six_mois_prec_resampled = s_resampled[s_resampled.index>=sixmois_prec]
+            variation = s_six_mois_prec_resampled[close_columns].pct_change().dropna()
             
             liste_cours.append({
                 "SYMBOL": symbol,
@@ -90,7 +91,7 @@ class Analyse(Transform):
                 continue
         macro = pd.DataFrame(liste_cours)
         macro.set_index('SYMBOLE', inplace=True)
-        return macro
+        return variation
      
     def KPI_5year(self):
         liste_cours = list()
