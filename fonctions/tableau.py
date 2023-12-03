@@ -44,20 +44,19 @@ def Tableau(periode, symbol_txt, dict_symb):
                 s = s.set_index("Date")
                 s_resampled = s.resample("M").first()
                 close_columns = [col for col in s_resampled.columns if 'Close' in col]
-                if close_columns:
-                    cours = round(s[close_columns].iloc[-1].values.sum(),2)
-                    cours_prec = round(s_resampled[close_columns].iloc[-7].values.sum(),2)
-                    var = round(((cours - cours_prec)/ cours_prec)*100,2)
-                    sixmois_prec = datetime.now() - timedelta(days=183)
-                    s_six_mois_prec = s[s.index>=sixmois_prec]
-                    s_six_mois_prec_resampled = s_resampled[s_resampled.index>=sixmois_prec]
-                    variation = s_six_mois_prec_resampled[close_columns].pct_change().dropna()
-                    renta_moy = variation.values.mean()
-                    renta_moy = round(renta_moy*100,2)
-                    risque_moy = variation.values.std()
-                    risque_moy = round(risque_moy*100,2)
-                    line = [str(val) for val in s_six_mois_prec[close_columns].values.flatten()]
-                    liste_cours.append({"SYMBOLE": s_txt, "ACTUEL": f'{cours}', "M-6": f'{cours_prec}', "VAR": f'{var}%', "RENTABILITÉ": f'{renta_moy}%', "VOLATILITÉ": f'{risque_moy}%', "VISION":line})
+                cours = round(s[close_columns].iloc[-1].values.sum(),2)
+                cours_prec = round(s_resampled[close_columns].iloc[-7].values.sum(),2)
+                var = round(((cours - cours_prec)/ cours_prec)*100,2)
+                sixmois_prec = datetime.now() - timedelta(days=183)
+                s_six_mois_prec = s[s.index>=sixmois_prec]
+                s_six_mois_prec_resampled = s_resampled[s_resampled.index>=sixmois_prec]
+                variation = s_six_mois_prec_resampled[close_columns].pct_change().dropna()
+                renta_moy = variation.values.mean()
+                renta_moy = round(renta_moy*100,2)
+                risque_moy = variation.values.std()
+                risque_moy = round(risque_moy*100,2)
+                line = [str(val) for val in s_six_mois_prec[close_columns].values.flatten()]
+                liste_cours.append({"SYMBOLE": s_txt, "ACTUEL": f'{cours}', "M-6": f'{cours_prec}', "VAR": f'{var}%', "RENTABILITÉ": f'{renta_moy}%', "VOLATILITÉ": f'{risque_moy}%', "VISION":line})
             except FileNotFoundError:
                 continue
             except Exception:
@@ -68,12 +67,10 @@ def Tableau(periode, symbol_txt, dict_symb):
     
     elif periode == "1 an":
         liste_cours = list()
-        symbol_dataframes = []  # Initialiser une liste pour stocker les DataFrames
         for s_txt in symbol_txt:
             try:      
                 file_path = f"data/actions/{s_txt}.csv"
                 s = pd.read_csv(file_path)
-                symbol_dataframes.append(s)
                 s["Date"] = pd.to_datetime(s["Date"])
                 s = s.set_index("Date")
                 s_resampled = s.resample("M").first()
@@ -102,12 +99,10 @@ def Tableau(periode, symbol_txt, dict_symb):
     
     elif periode == "5 ans":
         liste_cours = list()
-        symbol_dataframes = []  # Initialiser une liste pour stocker les DataFrames
         for s_txt in symbol_txt:
             try:      
                 file_path = f"data/actions/{s_txt}.csv"
                 s = pd.read_csv(file_path)
-                symbol_dataframes.append(s)
                 s["Date"] = pd.to_datetime(s["Date"])
                 s = s.set_index("Date")
                 s_resampled = s.resample("M").first()
