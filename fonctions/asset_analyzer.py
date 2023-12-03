@@ -13,15 +13,14 @@ class Analyse(Transform):
             try:
                 s = pd.DataFrame(asset_dataframe)
                 s.index = pd.to_datetime(s.index)
-                s_resampled = s.resample("MS").first()
-                close_columns = [col for col in s_resampled.columns if 'Close' in col]
+                close_columns = [col for col in s.columns if 'Close' in col]
                 cours = round(s[close_columns].iloc[-1].values.sum(),2)
-                cours_prec = round(s_resampled[close_columns].iloc[-2].values.sum(),2)
-                var = round(((cours - cours_prec)/ cours_prec)*100,2)
                 mois_prec = datetime.now() - timedelta(days=31)
+                date_prec = s[s.index == mois_prec]
+                cours_prec = round(date_prec[close_columns],2)
+                var = round(((cours - cours_prec)/ cours_prec)*100,2)
                 s_mois_prec = s[s.index>=mois_prec]
-                s_mois_prec_resampled = s_resampled[s_resampled.index>=mois_prec]
-                variation = s_mois_prec_resampled[close_columns].pct_change().dropna()
+                variation = ((cours - cours_prec)/cours_prec)*100
                 renta_moy = variation.values.mean()
                 renta_moy = round(renta_moy*100,2)
                 risque_moy = variation.values.std()
