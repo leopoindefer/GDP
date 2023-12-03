@@ -67,10 +67,10 @@ with tab1 :
     st.write(assets_all)
 
     with col_comp1:
-        symb1 = st.selectbox('', assets)
+        symb1 = st.selectbox('', assets_all)
     
     with col_comp2:
-        asset2 = assets.copy()
+        asset2 = assets_all.copy()
         asset2.remove(symb1)
         symb2 = st.selectbox(' ', asset2)
 
