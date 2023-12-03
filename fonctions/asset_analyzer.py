@@ -19,7 +19,7 @@ class Analyse(Transform):
                 s_mois_prec = s[s.index>=mois_prec]
                 cours_prec = round(s_mois_prec[close_columns].iloc[0],2)
                 var = round(((cours - cours_prec)/ cours_prec)*100,2)
-                variation = ((cours - cours_prec)/cours_prec)*100
+                variation = s_mois_prec[close_columns].pct_change().dropna()
                 renta_moy = variation.values.mean()
                 renta_moy = round(renta_moy*100,2)
                 risque_moy = variation.values.std()
