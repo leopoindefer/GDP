@@ -52,7 +52,7 @@ class Analyse(Transform):
 
         macro = pd.DataFrame(liste_cours)
         macro.set_index('SYMBOL', inplace=True)
-        return macro
+        return s_resampled
 
 
     def KPI_1year(self):
