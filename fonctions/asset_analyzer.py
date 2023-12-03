@@ -61,8 +61,9 @@ class Analyse(Transform):
                 continue
             except Exception:
                 continue
+            liste_cours.append({"ACTUEL": f'{cours}', "M-6": f'{cours_prec}', "VAR": f'{var}%', "RENTABILITÉ": f'{renta_moy}%', "VOLATILITÉ": f'{risque_moy}%', "VISION":line})
         macro = pd.DataFrame(liste_cours)
-        #macro.set_index('SYMBOLE', inplace=True)
+        macro.set_index('SYMBOLE', inplace=True)
         return macro
 
     def KPI_1year(self):
