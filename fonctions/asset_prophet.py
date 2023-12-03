@@ -1,6 +1,5 @@
 import pandas as pd
 import numpy as np
-import yfinance as yf
 from prophet import Prophet
 from prophet.diagnostics import performance_metrics
 from .asset_transform import Transform

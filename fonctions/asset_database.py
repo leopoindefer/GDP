@@ -1,9 +1,10 @@
 import pandas as pd 
 
 class Library:
-    def __init__(self, indice:list, selected_assets:list) -> None:
+    def __init__(self, len_asset:int, indice:list, selected_assets:list) -> None:
         self._indice = indice
         self._selected_assets = selected_assets
+        self._len_asset = len_asset
         pass
 
     def get_assets(self):
@@ -39,3 +40,8 @@ class Library:
         dataframes = {symbol: load_data(symbol) for symbol in self._selected_assets}
         selected_dataframes = {symbol: df for symbol, df in dataframes.items() if df is not None}
         return selected_dataframes
+    
+    def get_weights(self):
+        file_poids = f"data/poids/{self._len_assets}.csv"
+        combi_poids = pd.read_csv(file_poids)
+        return combi_poids

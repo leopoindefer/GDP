@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+from .asset_database import Library
 
 class Optimize():
     def __init__(self, selected_assets:list, len_assets:int, selected_dataframes:dict):
@@ -13,8 +14,7 @@ class Optimize():
         ptf_df.index = pd.to_datetime(ptf_df.index)
         ptf_df = ptf_df.resample('MS').first()
 
-        file_poids = f"data/poids/{self._len_assets}.csv"
-        combi_poids = pd.read_csv(file_poids)   
+        combi_poids = Library(self._len_assets).get_weights()
         matrice_poids = combi_poids.values
         matrice_poids = matrice_poids[:,1:]
         combi_poids = pd.DataFrame(matrice_poids)
