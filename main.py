@@ -38,8 +38,8 @@ with tab1 :
     with col_vision3:
         st.write("")
 
-    assets = Library(indice,None).get_assets()
-    dataframes = Library(None,assets).get_dataframes()
+    assets = Library(None, indice,None).get_assets()
+    dataframes = Library(None, None,assets).get_dataframes()
     if periode == "1 mois":
         tableau = Analyse(dataframes).KPI_1month()
     elif periode == "6 mois":
@@ -64,7 +64,7 @@ with tab1 :
 
     st.header("Comparer des actions")
     col_comp1, col_comp2, col_comp3 = st.columns(3)
-    assets_all = Library(liste_indice, None).get_assets_all()
+    assets_all = Library(None, liste_indice, None).get_assets_all()
 
     with col_comp1:
         symb1 = st.selectbox('', assets_all)
@@ -83,7 +83,7 @@ with tab1 :
         comp1 = symb1
         comp2 = symb2
         assets_comp = [comp1, comp2]
-        selected_dataframes = Library(None, assets_comp).get_dataframes()
+        selected_dataframes = Library(None, None, assets_comp).get_dataframes()
         dataframes_resampled_comp = Transform(selected_dataframes).resample()
         compar_chart, corr = Comparaison(dataframes_resampled_comp).inner_combine()
         st.line_chart(compar_chart)
@@ -97,7 +97,7 @@ with tab2:
 
     st.header("Action à visualiser")
     asset = st.selectbox('Choisir une action', assets_all)
-    asset_dataframe = Library(None, asset).get_dataframes()
+    asset_dataframe = Library(None, None, asset).get_dataframes()
     df_prophet,forecast, mse_prophet, graph_forecast = Prediction(asset_dataframe).forecast()
     st.line_chart(data=graph_forecast)
     st.write("PROPHET MSE:")
@@ -129,7 +129,7 @@ with tab3 :
             try:
 
                 if nb_acts <= 4:
-                    portfolio_dataframes = Library(None, portefeuille).get_dataframes()
+                    portfolio_dataframes = Library(None, None, portefeuille).get_dataframes()
                     merged_df = Optimize(portefeuille, nb_acts, portfolio_dataframes).process_data()
                     st.subheader('Frontière efficiente')
                     st.scatter_chart(merged_df, x='Volatilité', y='Rentabilité')
