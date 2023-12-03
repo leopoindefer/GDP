@@ -46,6 +46,8 @@ class Analyse(Transform):
             cours_prec = round(s_resampled[close_columns].iloc[-7].values.sum(),2)
             var = round(((cours - cours_prec)/ cours_prec)*100,2)
             sixmois_prec = datetime.now() - timedelta(days=183)
+            s_six_mois_prec = s[s.index>=sixmois_prec]
+            s_six_mois_prec_resampled = s_resampled[s_resampled.index>=sixmois_prec]
             
             liste_cours.append({
                 "SYMBOL": symbol,
@@ -57,7 +59,7 @@ class Analyse(Transform):
 
         macro = pd.DataFrame(liste_cours)
         macro.set_index('SYMBOL', inplace=True)
-        return macro
+        return s_six_mois_prec
 
 
     def KPI_1year(self):
