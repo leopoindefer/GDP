@@ -31,7 +31,7 @@ with tab1 :
 
     col_vision1, col_vision2, col_vision3 = st.columns((2,3,5))
     with col_vision1:
-        periode = st.selectbox("Période d'analyse", ["6 mois"])
+        periode = st.selectbox("Période d'analyse", ["1 mois","6 mois","1 an","5 ans"])
     with col_vision2:
         indice = st.selectbox("Indice", liste_indice)
     with col_vision3:
@@ -40,7 +40,14 @@ with tab1 :
     assets = Library(indice,None).get_assets()
     #assets_all = Library(liste_indice, None).get_assets()
     dataframes = Library(None,assets).get_dataframes()
-    tableau = Analyse(dataframes).KPI_6month()
+    if periode == "1 mois":
+        tableau = Analyse(dataframes).KPI_1month()
+    elif periode == "6 mois":
+        tableau = Analyse(dataframes).KPI_6month()
+    elif periode == "1 an":
+        tableau = Analyse(dataframes).KPI_1year()
+    elif periode == "5 an":
+        tableau = Analyse(dataframes).KPI_5year()
     st.dataframe(tableau.style.applymap(lambda x: 'color: red' if any('-' in words for words in x.split()) else 'color: green',subset = ['VAR']), column_config={"VISION": st.column_config.LineChartColumn(
         "VISION", y_min=0, y_max=200)})
     
