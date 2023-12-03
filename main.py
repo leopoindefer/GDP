@@ -84,7 +84,7 @@ with tab1 :
         comp2 = symb2
         assets_comp = [comp1, comp2]
         selected_dataframes = Library(None, assets_comp).get_dataframes()
-        dataframes_resampled_comp = Transform(selected_dataframes).resample()
+        dataframes_resampled_comp = Transform(selected_dataframes).resample_assets()
         compar_chart, corr = Comparaison(dataframes_resampled_comp).inner_combine()
         st.line_chart(compar_chart)
 
