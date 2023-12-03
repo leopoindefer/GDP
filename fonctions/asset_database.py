@@ -22,6 +22,7 @@ class Library:
             symbols_list = indices_df["ticker"].tolist()
             symbols_name = indices_df["nom"].tolist()
             symbol_txt.extend(symbols_list)
+            symbol_txt = [e for r in symbol_txt for e in r]
             symbol_nom.extend(symbols_name)
             dict_symb[ind] = {"tickers": symbols_list, "noms": symbols_name}
         return symbol_txt
