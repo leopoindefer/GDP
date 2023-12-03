@@ -9,7 +9,7 @@ class Optimize():
 
     def get_optimum(self):
 
-        for symbol, dataframes in self._selected_dataframes:
+        for symbol, dataframes in self._selected_dataframes.items():
             # Fusionnez les DataFrames
             dataframes = pd.DataFrame(dataframes)
             ptf_df = pd.concat(dataframes, axis=1, join='inner')
