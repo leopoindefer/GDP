@@ -64,4 +64,4 @@ class Projection():
         except:
             print('pas de résultat')
 
-        return nb_part
+        return invest_part
