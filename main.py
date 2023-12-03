@@ -63,7 +63,7 @@ with tab1 :
 
     st.header("Comparer des actions")
     col_comp1, col_comp2, col_comp3 = st.columns(3)
-    assets_all = Library(liste_indice, None).get_assets_all()
+    assets_all = Library(liste_indice, None).get_assets()
     st.write(assets_all)
 
     with col_comp1:
