@@ -16,10 +16,9 @@ class Analyse(Transform):
                 close_columns = [col for col in s.columns if 'Close' in col]
                 cours = round(s[close_columns].iloc[-1].values.sum(),2)
                 mois_prec = datetime.now() - timedelta(days=31)
-                date_prec = s[s.index == mois_prec]
-                cours_prec = round(date_prec[close_columns],2)
-                var = round(((cours - cours_prec)/ cours_prec)*100,2)
                 s_mois_prec = s[s.index>=mois_prec]
+                cours_prec = round(s_mois_prec[close_columns][0],2)
+                var = round(((cours - cours_prec)/ cours_prec)*100,2)
                 variation = ((cours - cours_prec)/cours_prec)*100
                 renta_moy = variation.values.mean()
                 renta_moy = round(renta_moy*100,2)
@@ -30,7 +29,7 @@ class Analyse(Transform):
                 liste_cours.append({
                     "SYMBOLE": symbol,
                     "ACTUEL": f'{cours}',
-                    "M-6": f'{cours_prec}',
+                    "M-1": f'{cours_prec}',
                     "VAR" : f'{var}%',
                     "RENTABILITÉ": f'{renta_moy}%', 
                     "VOLATILITÉ": f'{risque_moy}%',
@@ -110,7 +109,7 @@ class Analyse(Transform):
                 liste_cours.append({
                     "SYMBOLE": symbol,
                     "ACTUEL": f'{cours}',
-                    "M-6": f'{cours_prec}',
+                    "N-1": f'{cours_prec}',
                     "VAR" : f'{var}%',
                     "RENTABILITÉ": f'{renta_moy}%', 
                     "VOLATILITÉ": f'{risque_moy}%',
@@ -149,7 +148,7 @@ class Analyse(Transform):
                 liste_cours.append({
                     "SYMBOLE": symbol,
                     "ACTUEL": f'{cours}',
-                    "M-6": f'{cours_prec}',
+                    "N-5": f'{cours_prec}',
                     "VAR" : f'{var}%',
                     "RENTABILITÉ": f'{renta_moy}%', 
                     "VOLATILITÉ": f'{risque_moy}%',
