@@ -27,7 +27,7 @@ class Analyse(Transform):
                 line = [str(val) for val in s_mois_prec[close_columns].values.flatten()]
                 
                 liste_cours.append({
-                    "SYMBOL": symbol,
+                    "SYMBOLE": symbol,
                     "ACTUEL": f'{cours}',
                     "M-6": f'{cours_prec}',
                     "VAR" : f'{var}%',
@@ -67,7 +67,7 @@ class Analyse(Transform):
                 line = [str(val) for val in s_six_mois_prec[close_columns].values.flatten()]
                 
                 liste_cours.append({
-                    "SYMBOL": symbol,
+                    "SYMBOLE": symbol,
                     "ACTUEL": f'{cours}',
                     "M-6": f'{cours_prec}',
                     "VAR" : f'{var}%',
@@ -82,7 +82,7 @@ class Analyse(Transform):
                 continue
 
         macro = pd.DataFrame(liste_cours)
-        macro.set_index('SYMBOL', inplace=True)
+        macro.set_index('SYMBOLE', inplace=True)
         return macro
 
     def KPI_1year(self):
@@ -107,7 +107,7 @@ class Analyse(Transform):
                 line = [str(val) for val in s_annee_prec[close_columns].values.flatten()]
 
                 liste_cours.append({
-                    "SYMBOL": symbol,
+                    "SYMBOLE": symbol,
                     "ACTUEL": f'{cours}',
                     "M-6": f'{cours_prec}',
                     "VAR" : f'{var}%',
@@ -144,7 +144,7 @@ class Analyse(Transform):
                 line = [str(val) for val in s_cinq_ans[close_columns].values.flatten()]
 
                 liste_cours.append({
-                    "SYMBOL": symbol,
+                    "SYMBOLE": symbol,
                     "ACTUEL": f'{cours}',
                     "M-6": f'{cours_prec}',
                     "VAR" : f'{var}%',
@@ -152,7 +152,7 @@ class Analyse(Transform):
                     "VOLATILITÉ": f'{risque_moy}%',
                     "VISION":line
                 })
-                
+
             except FileNotFoundError:
                 continue
             except Exception:
