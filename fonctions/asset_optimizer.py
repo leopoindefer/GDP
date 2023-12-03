@@ -14,7 +14,7 @@ class Optimize():
         ptf_df.index = pd.to_datetime(ptf_df.index)
         ptf_df = ptf_df.resample('MS').first()
 
-        combi_poids = Library(self._len_assets).get_weights()
+        combi_poids = Library(self._len_assets, None, None).get_weights()
         matrice_poids = combi_poids.values
         matrice_poids = matrice_poids[:,1:]
         combi_poids = pd.DataFrame(matrice_poids)
