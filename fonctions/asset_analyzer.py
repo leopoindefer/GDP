@@ -42,7 +42,7 @@ class Analyse(Transform):
         for asset_dataframe in self._selected_dataframes.values(): 
             s = pd.DataFrame(asset_dataframe)
             s.index = pd.to_datetime(s.index)
-            s_resampled = s.resample("M").first()
+            s_resampled = Transform(s).resample()
             #close_columns = [col for col in s_resampled.columns if 'Close' in col]
             #cours = round(s[close_columns].iloc[-1].values.sum(),2)
             #cours_prec = round(s_resampled[close_columns].iloc[-7].values.sum(),2)
