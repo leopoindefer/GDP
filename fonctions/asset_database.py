@@ -12,6 +12,20 @@ class Library:
         assets_indice = df_indice['ticker'].tolist()
         return assets_indice
 
+    def get_assets_all(self):
+        symbol_txt = []
+        symbol_nom = []
+        dict_symb = {}
+        for ind in self._indice:
+            file_path = f"data/indices/{ind}.csv"
+            indices_df = pd.read_csv(file_path, delimiter=";")
+            symbols_list = indices_df["ticker"].tolist()
+            symbols_name = indices_df["nom"].tolist()
+            symbol_txt.extend(symbols_list)
+            symbol_nom.extend(symbols_name)
+            dict_symb[ind] = {"tickers": symbols_list, "noms": symbols_name}
+            return dict_symb[ind]
+
     def get_dataframes(self):
         def load_data(symbol):
             try:
