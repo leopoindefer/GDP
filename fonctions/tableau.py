@@ -35,7 +35,7 @@ def Tableau(periode, symbol_txt, dict_symb):
         return macro
     
     elif periode == "6 mois":
-        liste_cours = list()
+        liste_cours = []
         for s_txt in symbol_txt:
             try:      
                 file_path = f"data/actions/{s_txt}.csv"
