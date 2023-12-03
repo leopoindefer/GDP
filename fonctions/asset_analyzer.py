@@ -37,6 +37,7 @@ class Analyse(Transform):
 
     def KPI_6month(self):
         liste_cours = []
+        liste_variation = []
         for symbol, asset_dataframe in self._selected_dataframes.items():
             s = pd.DataFrame(asset_dataframe)
             s.index = pd.to_datetime(s.index)
@@ -49,6 +50,7 @@ class Analyse(Transform):
             s_six_mois_prec = s[s.index>=sixmois_prec]
             s_six_mois_prec_resampled = s_resampled[s_resampled.index>=sixmois_prec]
             variation = s_six_mois_prec_resampled[close_columns].pct_change().dropna()
+            liste_variation.append(variation)
             renta_moy = variation.values.mean()
             
             liste_cours.append({
@@ -61,7 +63,7 @@ class Analyse(Transform):
 
         macro = pd.DataFrame(liste_cours)
         macro.set_index('SYMBOL', inplace=True)
-        return macro
+        return liste_variation
 
 
     def KPI_1year(self):
