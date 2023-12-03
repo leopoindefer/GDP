@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+from .asset_transform import Transform
 
 class Optimize():
     def __init__(self, selected_assets:list, len_assets:int, selected_dataframes:dict):
@@ -11,7 +12,7 @@ class Optimize():
         dataframes = self._selected_dataframes.values()
         ptf_df = pd.concat(dataframes, axis=1, join='inner')
         ptf_df.index = pd.to_datetime(ptf_df.index)
-        ptf_df = ptf_df.resample('MS').first()
+        ptf_df = Transform(ptf_df).resample()
 
         file_poids = f"data/poids/{self._len_assets}.csv"
         combi_poids = pd.read_csv(file_poids)   
