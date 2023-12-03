@@ -37,15 +37,13 @@ class Analyse(Transform):
 
     def KPI_6month(self):
         liste_cours = []
-        for symbol in self._selected_dataframes.keys():
-            liste_cours.append({"SYMBOLE": symbol})
-        for asset_dataframe in self._selected_dataframes.values():
+        for symbol, asset_dataframe in self._selected_dataframes.items():
             s = pd.DataFrame(asset_dataframe)
             s.index = pd.to_datetime(s.index)
             s_resampled = s.resample("M").first()
             close_columns = [col for col in s_resampled.columns if 'Close' in col]
             cours = round(s[close_columns].iloc[-1].values.sum(),2)
-            liste_cours.append({"cours": cours})
+            liste_cours.append({"SYMBOL":symbol, "ACTUEL": cours})
             #cours_prec = round(s_resampled[close_columns].iloc[-7].values.sum(),2)
             #var = round(((cours - cours_prec)/ cours_prec)*100,2)
             #sixmois_prec = datetime.now() - timedelta(days=183)
