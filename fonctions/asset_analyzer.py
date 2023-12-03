@@ -41,7 +41,7 @@ class Analyse(Transform):
         for symbol, asset_dataframe in self._selected_dataframes.items():
             s = pd.DataFrame(asset_dataframe)
             s.index = pd.to_datetime(s.index)
-            s_resampled = s.resample("M").first()
+            s_resampled = s.resample("MS").first()
             close_columns = [col for col in s_resampled.columns if 'Close' in col]
             cours = round(s[close_columns].iloc[-1].values.sum(), 2)
             
