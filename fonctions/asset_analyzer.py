@@ -4,8 +4,9 @@ from datetime import datetime, timedelta
 from .asset_transform import Transform
 
 class Analyse(Transform):
-    def __init__(self, selected_dataframes:dict):
+    def __init__(self, selected_dataframes:dict, dataframes_resampled:dict):
         super().__init__(selected_dataframes)
+        self._dataframes_resampled = dataframes_resampled
 
     def KPI_1month(self):
         liste_cours = list()
@@ -42,7 +43,8 @@ class Analyse(Transform):
         for asset_dataframe in self._selected_dataframes.values(): 
             s = pd.DataFrame(asset_dataframe)
             s.index = pd.to_datetime(s.index)
-            s_resampled = Transform(s).resample()
+        for df_resampled in self._dataframes_resampled.values():
+            s_resampled = pd.DataFrame(df_resampled)
             #close_columns = [col for col in s_resampled.columns if 'Close' in col]
             #cours = round(s[close_columns].iloc[-1].values.sum(),2)
             #cours_prec = round(s_resampled[close_columns].iloc[-7].values.sum(),2)
