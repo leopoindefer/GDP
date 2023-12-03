@@ -25,7 +25,7 @@ class Projection():
 
         start_value = self._df["y"].iloc[-1]
         end_date = self._forecast[self._forecast['date'] <= duree]
-        end_value = end_date["forecast"].iloc[-1]
+        end_value = end_date["prediction"].iloc[-1]
         lower_endvalue = confiance_pred["yhat_lower"].iloc[-1]
         upper_endvalue = confiance_pred["yhat_upper"].iloc[-1]
         gap_indiv_lower = (lower_endvalue - start_value)
