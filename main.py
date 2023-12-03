@@ -129,7 +129,7 @@ with tab3 :
             #try:
 
             if nb_acts <= 4:
-                portfolio_dataframes = Library(portefeuille).get_dataframes()
+                portfolio_dataframes = Library(None, portefeuille).get_dataframes()
                 st.write(portfolio_dataframes)
                 #merged_df, df_RisqueFaible, df_RisqueMoyen, df_RisqueEleve, df_RisqueTresEleve = Optimize(portefeuille, nb_acts, portfolio_dataframes).get_optimum()
                 #st.subheader('Frontière efficiente')
