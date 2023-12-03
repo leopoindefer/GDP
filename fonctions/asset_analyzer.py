@@ -4,9 +4,8 @@ from datetime import datetime, timedelta
 from .asset_transform import Transform
 
 class Analyse(Transform):
-    def __init__(self, selected_dataframes:dict, dataframes_resampled:dict):
+    def __init__(self, selected_dataframes:dict):
         super().__init__(selected_dataframes)
-        self._dataframes_resampled = dataframes_resampled
 
     def KPI_1month(self):
         liste_cours = list()
@@ -43,10 +42,9 @@ class Analyse(Transform):
         for asset_dataframe in self._selected_dataframes.values(): 
             s = pd.DataFrame(asset_dataframe)
             s.index = pd.to_datetime(s.index)
-        for df_resampled in self._dataframes_resampled.values():
-            s_resampled = pd.DataFrame(df_resampled)
-            #close_columns = [col for col in s_resampled.columns if 'Close' in col]
-            #cours = round(s[close_columns].iloc[-1].values.sum(),2)
+            s_resampled = s.resample("M").first()
+            close_columns = [col for col in s_resampled.columns if 'Close' in col]
+            cours = round(s[close_columns].iloc[-1].values.sum(),2)
             #cours_prec = round(s_resampled[close_columns].iloc[-7].values.sum(),2)
             #var = round(((cours - cours_prec)/ cours_prec)*100,2)
             #sixmois_prec = datetime.now() - timedelta(days=183)
@@ -61,7 +59,7 @@ class Analyse(Transform):
             #liste_cours.append({"ACTUEL": f'{cours}', "M-6": f'{cours_prec}', "VAR": f'{var}%', "RENTABILITÉ": f'{renta_moy}%', "VOLATILITÉ": f'{risque_moy}%', "VISION":line})
         #macro = pd.DataFrame(liste_cours)
         #macro.set_index('SYMBOLE', inplace=True)
-        return df_resampled
+        return cours
 
     def KPI_1year(self):
         liste_cours = list()
