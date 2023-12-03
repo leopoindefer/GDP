@@ -61,4 +61,4 @@ class Projection():
             tx_renta_upper = f'<span style="color: #008000;">{round(tRent_upper,2)}%</span>' 
             renta_upper = f'<span style="color: #008000;">{round(div + gap_value_upper,2)}€</span>'
 
-        return nb_part
+        return nb_part, tx_rendement, rendement, tx_rentabilite, rentabilite, tx_renta_lower, renta_lower, tx_renta_upper, renta_upper
