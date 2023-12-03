@@ -43,7 +43,7 @@ class Analyse(Transform):
             liste_symb.append(symbol)
             liste_df.append(asset_dataframe)
             for s in liste_df:
-                cours = []
+                cours = [2,3,4]
                 cours_prec = []
                 var = []
                 renta_moy = []
