@@ -40,7 +40,8 @@ class Analyse(Transform):
         for symbol in self._selected_dataframes.keys():
             liste_cours.append({"SYMBOLE": symbol})
         for asset_dataframe in self._selected_dataframes.values(): 
-            s = pd.DataFrame(asset_dataframe)   
+            s = pd.DataFrame(asset_dataframe)
+            s = s.set_index("Date").filter(like='Close')
             s_resampled = s.resample("M").first()
             close_columns = [col for col in s_resampled.columns if 'Close' in col]
             cours = round(s[close_columns].iloc[-1].values.sum(),2)
