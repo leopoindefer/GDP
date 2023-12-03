@@ -7,7 +7,7 @@ class Optimize():
         self._len_assets = len_assets
         self._selected_dataframes = selected_dataframes
 
-    def get_optimum(self):
+    def process_data(self):
         dataframes = self._selected_dataframes.values()
         ptf_df = pd.concat(dataframes, axis=1, join='inner')
         ptf_df.index = pd.to_datetime(ptf_df.index)
@@ -47,10 +47,22 @@ class Optimize():
         #Fusionner le résultat avec combi_risque
         merged_df = merged_df.merge(combi_risque[['Volatilité']], left_index=True, right_index=True)
 
+        return merged_df
+
+    def risk_category(self):
         #renta optimale pour risque donné
+        merged_df = self.process_data()
         df_RisqueFaible = merged_df[merged_df['Volatilité'] < 3].sort_values(by='Rentabilité', ascending=False)
         df_RisqueMoyen = merged_df[(merged_df['Volatilité'] >= 3) & (merged_df['Volatilité'] <= 8)].sort_values(by='Rentabilité', ascending=False)
         df_RisqueEleve = merged_df[(merged_df['Volatilité'] > 8) & (merged_df['Volatilité'] <= 15)].sort_values(by='Rentabilité', ascending=False)
         df_RisqueTresEleve = merged_df[merged_df['Volatilité'] > 15].sort_values(by='Rentabilité', ascending=False)
         
-        return merged_df, df_RisqueFaible, df_RisqueMoyen, df_RisqueEleve, df_RisqueTresEleve
+        return df_RisqueFaible, df_RisqueMoyen, df_RisqueEleve, df_RisqueTresEleve
+    
+    def get_optimum(self):
+        df_RisqueFaible, df_RisqueMoyen, df_RisqueEleve, df_RisqueTresEleve = self.risk_category()
+        RisqueFaible = df_RisqueFaible.iloc[0]
+        RisqueMoyen = df_RisqueMoyen.iloc[0]
+        RisqueEleve = df_RisqueEleve.iloc[0]
+        RisqueTresEleve = df_RisqueTresEleve.iloc[0]
+        return RisqueFaible, RisqueMoyen, RisqueEleve, RisqueTresEleve
