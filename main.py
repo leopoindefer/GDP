@@ -41,8 +41,9 @@ with tab1 :
     assets = ["AAPL","META"]
     #assets_all = Library(liste_indice, None).get_assets()
     dataframes = Library(None,assets).get_dataframes()
-    tableau = Analyse(dataframes).KPI_6month()
-    st.write(dataframes)
+    dataframes_resampled = Transform(dataframes).resample()
+    tableau = Analyse(dataframes, dataframes_resampled).KPI_6month()
+    st.write(tableau)
     #st.dataframe(tableau.style.applymap(lambda x: 'color: red' if any('-' in words for words in x.split()) else 'color: green',subset = ['VAR']), column_config={"VISION": st.column_config.LineChartColumn(
         #"VISION", y_min=0, y_max=200)})
     
@@ -78,8 +79,8 @@ with tab1 :
         comp2 = symb2
         assets_comp = [comp1, comp2]
         selected_dataframes = Library(None, assets_comp).get_dataframes()
-        dataframes_resampled = Transform(selected_dataframes).resample()
-        compar_chart, corr = Comparaison(dataframes_resampled).inner_combine()
+        dataframes_resampled_comp = Transform(selected_dataframes).resample()
+        compar_chart, corr = Comparaison(dataframes_resampled_comp).inner_combine()
         st.line_chart(compar_chart)
 
         mess_corr = f'Corrélation linéraire à : {round(corr*100,2)}%'
