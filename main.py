@@ -93,16 +93,12 @@ with tab1 :
 
     dict_assets_names = Library(None, liste_indice, None).get_assets_name()
     actions_choisis = st.selectbox("actions",dict_assets_names.values())
-
-    def return_assets(self, actions_choisis):
-            # Utilisez la méthode get pour trouver la clé par la valeur
-            dict_assets_names = self.get_assets_name()
-            assets = [next((cle for cle, valeur in dict_assets_names.items() if valeur == actions), None)
-                            for actions in actions_choisis]
-            return assets
+    for asset, names in dict_assets_names:
+        list_assets = []
+        if actions_choisis == dict_assets_names.values():
+            list_assets.append(asset)
     
-    df_test = Library(None, None, actions_choisis).get_dataframes()
-    st.write(df_test)
+    st.write(list_assets)
 
     st.markdown('----')
 
