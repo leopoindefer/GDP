@@ -26,8 +26,6 @@ class Library:
             symbol_nom.extend(symbols_name)
             dict_symb[ind] = {"tickers": symbols_list, "noms": symbols_name}
         return symbol_txt
-    
-    import pandas as pd
 
     def get_assets_name(self):
         list_df = []
@@ -40,13 +38,14 @@ class Library:
         stacked_df = pd.concat(list_df, axis=0, ignore_index=True)
         stacked_df["noms"] = stacked_df["ticker"] + " : " +stacked_df["nom"]
         stacked_df.drop(columns={"nom"},inplace=True)
+        assets_names = stacked_df["noms"].tolist()
         dict_assets_names = {}
         for index, row in stacked_df.iterrows():
             cle = row[0]  # Deuxième colonne comme clé
             valeur = row[1]  # Première colonne comme valeur
             dict_assets_names[cle] = valeur
 
-        return dict_assets_names
+        return assets_names, dict_assets_names
 
 
     def get_dataframes(self):
