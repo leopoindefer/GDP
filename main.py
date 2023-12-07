@@ -69,7 +69,8 @@ with tab1 :
         symb1 = st.selectbox('', assets_all)
     
     with col_comp2:
-        asset2 = assets_all.copy().remove(symb1)
+        asset2 = assets_all.copy()
+        asset2.remove(symb1)
         symb2 = st.selectbox(' ', asset2)
 
     with col_comp3:
