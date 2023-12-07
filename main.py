@@ -91,8 +91,19 @@ with tab1 :
         mess_corr = f'Corrélation linéraire à : {round(corr*100,2)}%'
         st.write(mess_corr)
 
-    assets_names, dict_assets_names = Library(None, liste_indice, None).get_assets_name()
-    st.selectbox("actions",dict_assets_names.values())
+    dict_assets_names = Library(None, liste_indice, None).get_assets_name()
+    actions_choisis = st.selectbox("actions",dict_assets_names.values())
+
+    def return_assets(self, actions_choisis):
+            # Utilisez la méthode get pour trouver la clé par la valeur
+            dict_assets_names = self.get_assets_name()
+            assets = [next((cle for cle, valeur in dict_assets_names.items() if valeur == actions), None)
+                            for actions in actions_choisis]
+            return assets
+    
+    df_test = Library(None, None, actions_choisis).get_dataframes()
+    st.write(df_test)
+
     st.markdown('----')
 
 with tab2:
