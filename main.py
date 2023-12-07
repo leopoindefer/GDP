@@ -64,7 +64,7 @@ with tab1 :
 
     st.header("Comparer des actions")
     col_comp1, col_comp2, col_comp3 = st.columns(3)
-    assets_all = Library(None, liste_indice, None).get_assets_all()
+    assets_all, dict_assets_name = Library(None, liste_indice, None).get_assets_all()
 
     with col_comp1:
         symb1 = st.selectbox('', assets_all)
@@ -92,6 +92,7 @@ with tab1 :
         st.write(mess_corr)
 
     st.markdown('----')
+    st.selectbox(dict_assets_name)
 
 with tab2:
 
