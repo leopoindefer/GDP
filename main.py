@@ -64,7 +64,7 @@ with tab1 :
 
     st.header("Comparer des actions")
     col_comp1, col_comp2, col_comp3 = st.columns(3)
-    assets_all, dict_asset_names = Library(None, liste_indice, None).get_assets_name()
+    assets_all, dict_assets_names = Library(None, liste_indice, None).get_assets_name()
     with col_comp1:
         symb1 = st.selectbox('', assets_all)
     
@@ -78,8 +78,8 @@ with tab1 :
         st.write("")
         run = st.button('Comparer')
     li = [symb1,symb2]
-    comp1 = Library(None,liste_indice,li).get_assets_all()
-    st.write(comp1)
+    list_assets = [cle for cle, valeur in dict_assets_names.items() if valeur == li]
+    st.write(list_assets)
     #if run:
         #comp1 = Library(None,liste_indice,symb1).get_assets_all()
         #comp2 = Library(None,liste_indice,symb2).get_assets_all()
