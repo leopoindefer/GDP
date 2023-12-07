@@ -67,20 +67,19 @@ with tab1 :
     assets_all, dict_assets_names = Library(None, liste_indice, None).get_assets_name()
     with col_comp1:
         symb1 = st.selectbox('', assets_all)
-        comp1 = Library(None,liste_indice,symb1).get_assets_all()
     
     with col_comp2:
         asset2 = assets_all.copy()
         asset2.remove(symb1)
         symb2 = st.selectbox(' ', asset2)
-        comp2 = Library(None,liste_indice,symb2).get_assets_all()
 
     with col_comp3:
         st.write('')
         st.write("")
         run = st.button('Comparer')
 
-    assets_comp = [comp1, comp2]
+    comp2 = Library(None,liste_indice,symb2).get_assets_all()
+    assets_comp = [comp2]
     st.write(assets_comp)
     #if run:
         #assets_comp = [comp1, comp2]
