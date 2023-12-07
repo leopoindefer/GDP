@@ -67,22 +67,22 @@ with tab1 :
     assets_all, dict_assets_names = Library(None, liste_indice, None).get_assets_name()
     with col_comp1:
         symb1 = st.selectbox('', assets_all)
+        comp1 = Library(None,liste_indice,symb1).get_assets_all()
     
     with col_comp2:
         asset2 = assets_all.copy()
         asset2.remove(symb1)
         symb2 = st.selectbox(' ', asset2)
+        comp2 = Library(None,liste_indice,symb2).get_assets_all()
 
     with col_comp3:
         st.write('')
         st.write("")
         run = st.button('Comparer')
-    li = [symb1,symb2]
-    list_assets = [cle for cle, valeur in dict_assets_names.items() if valeur == symb1]
-    st.write(list_assets)
+
+    assets_comp = [comp1, comp2]
+    st.write(assets_comp)
     #if run:
-        #comp1 = Library(None,liste_indice,symb1).get_assets_all()
-        #comp2 = Library(None,liste_indice,symb2).get_assets_all()
         #assets_comp = [comp1, comp2]
         #selected_dataframes = Library(None, None, assets_comp).get_dataframes()
         #dataframes_resampled_comp = Transform(selected_dataframes).resample()
