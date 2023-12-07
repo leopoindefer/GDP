@@ -38,8 +38,13 @@ class Library:
 
         # Concaténez les DataFrames verticalement (axis=0)
         stacked_df = pd.concat(list_df, axis=0, ignore_index=True)
+        dict_assets_names = {}
+        for index, row in stacked_df.iterrows():
+            cle = row[1]  # Deuxième colonne comme clé
+            valeur = row[0]  # Première colonne comme valeur
+            dict_assets_names[cle] = valeur
 
-        return stacked_df
+        return dict_assets_names
 
 
     def get_dataframes(self):
