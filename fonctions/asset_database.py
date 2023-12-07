@@ -27,29 +27,6 @@ class Library:
             dict_symb[ind] = {"tickers": symbols_list, "noms": symbols_name}
         return symbol_txt
 
-    def get_assets_name(self):
-        list_df = []
-        list_names = []
-        for ind in self._indice:
-            file_path = f"data/indices/{ind}.csv"
-            df = pd.read_csv(file_path, delimiter=";")
-            list_df.append(df)
-
-        # Concaténez les DataFrames verticalement (axis=0)
-        stacked_df = pd.concat(list_df, axis=0, ignore_index=True)
-        stacked_df["noms"] = stacked_df["ticker"] + " : " +stacked_df["nom"]
-        stacked_df.drop(columns={"nom"},inplace=True)
-        assets_names = stacked_df["noms"].tolist()
-        list_names.extend(assets_names)
-        dict_assets_names = {}
-        for index, row in stacked_df.iterrows():
-            cle = row[0]  # Deuxième colonne comme clé
-            valeur = row[1]  # Première colonne comme valeur
-            dict_assets_names[cle] = valeur
-
-        return list_names, dict_assets_names
-
-
     def get_dataframes(self):
         def load_data(symbol):
             try:
@@ -68,3 +45,22 @@ class Library:
         file_poids = f"data/poids/{self._len_asset}.csv"
         combi_poids = pd.read_csv(file_poids)
         return combi_poids
+    
+    def get_assets_name(self):
+        list_df = []
+        for ind in self._indice:
+            file_path = f"data/indices/{ind}.csv"
+            df = pd.read_csv(file_path, delimiter=";")
+            list_df.append(df)
+
+        # Concaténez les DataFrames verticalement (axis=0)
+        stacked_df = pd.concat(list_df, axis=0, ignore_index=True)
+        stacked_df["noms"] = stacked_df["ticker"] + " : " +stacked_df["nom"]
+        stacked_df.drop(columns={"nom"},inplace=True)
+        dict_assets_names = {}
+        for index, row in stacked_df.iterrows():
+            cle = row[0]  # Deuxième colonne comme clé
+            valeur = row[1]  # Première colonne comme valeur
+            dict_assets_names[cle] = valeur
+
+        return dict_assets_names
