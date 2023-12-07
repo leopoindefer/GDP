@@ -43,8 +43,6 @@ class Library:
         return list_assets
     
     def get_dataframes(self):
-        list_assets = self.get_assets_all()
-        list_assets = self.get_assets()
         def load_data(symbol):
             try:
                 data = pd.read_csv(f"data/actions/{symbol}.csv")
@@ -54,6 +52,6 @@ class Library:
                 print(f"Error loading data for {symbol}: {e}")
                 return None
 
-        dataframes = {symbol: load_data(symbol) for symbol in list_assets}
+        dataframes = {symbol: load_data(symbol) for symbol in self._selected_assets}
         selected_dataframes = {symbol: df for symbol, df in dataframes.items() if df is not None}
         return selected_dataframes
