@@ -34,8 +34,8 @@ class Library:
             cle = row[0]  # Deuxième colonne comme clé
             valeur = row[1]  # Première colonne comme valeur
             dict_assets_names[cle] = valeur
-
-        return list(dict_assets_names.values()), dict_assets_names
+        symbol = [cle for cle, valeur in dict_assets_names.items() if valeur == self._selected_assets]
+        return symbol, list(dict_assets_names.values()), dict_assets_names
     
     def get_assets_all(self):
         dict_assets_names = self.get_assets_name()
