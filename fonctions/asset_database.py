@@ -40,7 +40,7 @@ class Library:
                 except:
                     continue
 
-        stacked_df = pd.concat(list_df, ignore_index=True, axis=0)
+        stacked_df = pd.concat(list_df, axis=0, ignore_index=True)
         return stacked_df
 
     def get_dataframes(self):
