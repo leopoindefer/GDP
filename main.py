@@ -92,7 +92,7 @@ with tab1 :
         st.write(mess_corr)
 
     st.markdown('----')
-    resultat = [dict_assets_name['noms'] + ": "+ dict_assets_name['tickers']]
+    resultat = [dict_assets_name['noms'] + dict_assets_name['tickers']]
     st.write(resultat)
 
 with tab2:
