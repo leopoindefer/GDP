@@ -92,7 +92,7 @@ with tab1 :
         st.write(mess_corr)
 
     st.markdown('----')
-    resultat = [cle + str(valeur) if isinstance(valeur, list) else cle + valeur for cle, valeur in dict_assets_name.items()]
+    resultat = [dict_assets_name['noms'] + ": "+ dict_assets_name['tickers']]
     st.write(resultat)
 
 with tab2:
