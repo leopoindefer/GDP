@@ -92,7 +92,7 @@ with tab1 :
         st.write(mess_corr)
 
     assets_names, dict_assets_names = Library(None, liste_indice, None).get_assets_name()
-    st.selectbox(assets_names)
+    st.selectbox("actions",assets_names)
     st.markdown('----')
 
 with tab2:
