@@ -78,7 +78,7 @@ with tab1 :
         st.write("")
         run = st.button('Comparer')
     li = [symb1,symb2]
-    list_assets = [cle for cle, valeur in dict_assets_names.items() if valeur == li]
+    list_assets = [cle for cle, valeur in dict_assets_names.items() if valeur == symb1]
     st.write(list_assets)
     #if run:
         #comp1 = Library(None,liste_indice,symb1).get_assets_all()
