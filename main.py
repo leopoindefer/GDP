@@ -92,8 +92,7 @@ with tab1 :
         st.write(mess_corr)
 
     stacked_df = Library(None, liste_indice, None).get_assets_name()
-    st.write(stacked_df)
-
+    st.selectbox(stacked_df.values())
     st.markdown('----')
 
 with tab2:
