@@ -92,7 +92,7 @@ with tab1 :
         st.write(mess_corr)
 
     st.markdown('----')
-    st.selectbox(dict_assets_name)
+    st.write(dict_assets_name)
 
 with tab2:
 
