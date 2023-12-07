@@ -25,7 +25,20 @@ class Library:
             symbol_txt.extend(symbols_list)
             symbol_nom.extend(symbols_name)
             dict_symb[ind] = {"tickers": symbols_list, "noms": symbols_name}
-        return symbol_txt, dict_symb[ind]
+        return symbol_txt
+    
+    def get_assets_name(self):
+        list_df = []
+        for ind in self._indice:
+            file_path = f"data/indices/{ind}.csv"
+            
+            with open(file_path, 'r') as fichier_csv:
+                next(fichier_csv, None)
+                df = pd.read_csv(fichier_csv)
+                list_df.append(df)
+
+        stacked_df = pd.concat(list_df, ignore_index=True)
+        return stacked_df
 
     def get_dataframes(self):
         def load_data(symbol):
