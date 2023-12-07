@@ -77,7 +77,8 @@ with tab1 :
         st.write('')
         st.write("")
         run = st.button('Comparer')
-    comp1 = Library(None,liste_indice,symb1).get_assets_all()
+    li = [symb1,symb2]
+    comp1 = Library(None,liste_indice,li).get_assets_all()
     st.write(comp1)
     #if run:
         #comp1 = Library(None,liste_indice,symb1).get_assets_all()
