@@ -44,6 +44,7 @@ class Library:
     
     def get_dataframes(self):
         list_assets = self.get_assets_all()
+        list_assets = self.get_assets()
         def load_data(symbol):
             try:
                 data = pd.read_csv(f"data/actions/{symbol}.csv")
