@@ -77,18 +77,18 @@ with tab1 :
         st.write('')
         st.write("")
         run = st.button('Comparer')
+    st.write(f'{symb1} et {symb2}')
+    #if run:
+        #comp1 = Library(None,liste_indice,symb1).get_assets_all()
+        #comp2 = Library(None,liste_indice,symb2).get_assets_all()
+        #assets_comp = [comp1, comp2]
+        #selected_dataframes = Library(None, None, assets_comp).get_dataframes()
+        #dataframes_resampled_comp = Transform(selected_dataframes).resample()
+        #compar_chart, corr = Comparaison(dataframes_resampled_comp).inner_combine()
+        #st.line_chart(compar_chart)
 
-    if run:
-        comp1 = Library(None,liste_indice,symb1).get_assets_all()
-        comp2 = Library(None,liste_indice,symb2).get_assets_all()
-        assets_comp = [comp1, comp2]
-        selected_dataframes = Library(None, None, assets_comp).get_dataframes()
-        dataframes_resampled_comp = Transform(selected_dataframes).resample()
-        compar_chart, corr = Comparaison(dataframes_resampled_comp).inner_combine()
-        st.line_chart(compar_chart)
-
-        mess_corr = f'Corrélation linéraire à : {round(corr*100,2)}%'
-        st.write(mess_corr)
+        #mess_corr = f'Corrélation linéraire à : {round(corr*100,2)}%'
+        #st.write(mess_corr)
 
     st.markdown('----')
 
