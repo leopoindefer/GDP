@@ -38,7 +38,7 @@ class Library:
 
         # Concaténez les DataFrames verticalement (axis=0)
         stacked_df = pd.concat(list_df, axis=0, ignore_index=True)
-        stacked_df["noms"] = stacked_df["ticker"] + ": " +stacked_df["nom"]
+        stacked_df["noms"] = stacked_df["ticker"] + " : " +stacked_df["nom"]
         stacked_df.drop(columns={"nom"},inplace=True)
         dict_assets_names = {}
         for index, row in stacked_df.iterrows():
@@ -46,7 +46,7 @@ class Library:
             valeur = row[0]  # Première colonne comme valeur
             dict_assets_names[cle] = valeur
 
-        return stacked_df
+        return dict_assets_names
 
 
     def get_dataframes(self):
