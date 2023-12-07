@@ -42,8 +42,8 @@ class Library:
         stacked_df.drop(columns={"nom"},inplace=True)
         dict_assets_names = {}
         for index, row in stacked_df.iterrows():
-            cle = row[1]  # Deuxième colonne comme clé
-            valeur = row[0]  # Première colonne comme valeur
+            cle = row[0]  # Deuxième colonne comme clé
+            valeur = row[1]  # Première colonne comme valeur
             dict_assets_names[cle] = valeur
 
         return dict_assets_names
