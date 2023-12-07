@@ -92,11 +92,8 @@ with tab1 :
         st.write(mess_corr)
 
     dict_assets_names = Library(None, liste_indice, None).get_assets_name()
-    actions_choisis = st.selectbox("actions",dict_assets_names.values())
-    for asset, names in dict_assets_names:
-        list_assets = []
-        if actions_choisis == names:
-            list_assets.append(asset)
+    actions_choisies = st.selectbox("actions",dict_assets_names.values())
+    list_assets = [cle for cle, valeur in dict_assets_names.items() if valeur == actions_choisies]
     
     st.write(list_assets)
 
