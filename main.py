@@ -78,7 +78,7 @@ with tab1 :
         st.write("")
         run = st.button('Comparer')
 
-    symbole = Library(None,liste_indice,symb1).get_assets_all()
+    symbole = Library(None,liste_indice,symb2).get_assets_all()
     st.write(symbole)
     
     #if run:
