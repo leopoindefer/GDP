@@ -64,7 +64,7 @@ with tab1 :
 
     st.header("Comparer des actions")
     col_comp1, col_comp2, col_comp3 = st.columns(3)
-    assets_all = Library(None, liste_indice, None).get_assets_all()
+    assets_all = Library(None, liste_indice, None).get_assets_name()
 
     with col_comp1:
         symb1 = st.selectbox('', assets_all)
@@ -90,12 +90,6 @@ with tab1 :
 
         mess_corr = f'Corrélation linéraire à : {round(corr*100,2)}%'
         st.write(mess_corr)
-
-    dict_assets_names = Library(None, liste_indice, None).get_assets_name()
-    actions_choisies = st.selectbox("actions",dict_assets_names.values())
-    list_assets = [cle for cle, valeur in dict_assets_names.items() if valeur == actions_choisies]
-    
-    st.write(list_assets)
 
     st.markdown('----')
 
