@@ -38,7 +38,7 @@ class Library:
         return dict_assets_names.values(), dict_assets_names
     
     def get_assets_all(self):
-        dict_assets_names = self.get_assets_names()
+        dict_assets_names = self.get_assets_name()
         list_assets = [cle for cle, valeur in dict_assets_names.items() if valeur == self._selected_assets]
         return list_assets
     
