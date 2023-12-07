@@ -33,8 +33,11 @@ class Library:
             file_path = f"data/indices/{ind}.csv"
             df = pd.read_csv(file_path, delimiter=";")
             list_df.append(df)
-        stacked_df = pd.concat(list_df, axis=0, ignore_index=True)
-        return stacked_df
+
+        # Utilisez pd.melt pour fusionner les colonnes en une seule
+        melted_df = pd.concat([pd.melt(df)['value'] for df in list_df], ignore_index=True)
+
+        return melted_df
 
     def get_dataframes(self):
         def load_data(symbol):
