@@ -91,8 +91,8 @@ with tab1 :
         mess_corr = f'Corrélation linéraire à : {round(corr*100,2)}%'
         st.write(mess_corr)
 
-        stacked_df = Library(None, liste_indice, None).get_assets_name()
-        st.write(stacked_df)
+    stacked_df = Library(None, liste_indice, None).get_assets_name()
+    st.write(stacked_df)
 
     st.markdown('----')
 
