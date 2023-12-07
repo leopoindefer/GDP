@@ -64,7 +64,7 @@ with tab1 :
 
     st.header("Comparer des actions")
     col_comp1, col_comp2, col_comp3 = st.columns(3)
-    assets_all, dict_assets_names = Library(None, liste_indice, None).get_assets_name()
+    assets_all = Library(None, liste_indice, None).get_assets_name()
     with col_comp1:
         symb1 = st.selectbox('', assets_all)
     
@@ -79,8 +79,8 @@ with tab1 :
         run = st.button('Comparer')
 
     if run:
-        comp1 = symb1
-        comp2 = symb2
+        comp1 = Library(None,None,symb1).get_assets_all()
+        comp2 = Library(None,None,symb2).get_assets_all()
         assets_comp = [comp1, comp2]
         selected_dataframes = Library(None, None, assets_comp).get_dataframes()
         dataframes_resampled_comp = Transform(selected_dataframes).resample()
