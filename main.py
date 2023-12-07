@@ -79,8 +79,8 @@ with tab1 :
         run = st.button('Comparer')
 
     if run:
-        comp1 = Library(None,None,symb1).get_assets_all()
-        comp2 = Library(None,None,symb2).get_assets_all()
+        comp1 = Library(None,liste_indice,symb1).get_assets_all()
+        comp2 = Library(None,liste_indice,symb2).get_assets_all()
         assets_comp = [comp1, comp2]
         selected_dataframes = Library(None, None, assets_comp).get_dataframes()
         dataframes_resampled_comp = Transform(selected_dataframes).resample()
