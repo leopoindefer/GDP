@@ -64,7 +64,7 @@ with tab1 :
 
     st.header("Comparer des actions")
     col_comp1, col_comp2, col_comp3 = st.columns(3)
-    assets_all, dict_assets_name = Library(None, liste_indice, None).get_assets_all()
+    assets_all = Library(None, liste_indice, None).get_assets_all()
 
     with col_comp1:
         symb1 = st.selectbox('', assets_all)
@@ -91,9 +91,10 @@ with tab1 :
         mess_corr = f'Corrélation linéraire à : {round(corr*100,2)}%'
         st.write(mess_corr)
 
+        stacked_df = Library(None, liste_indice, None).get_assets_name()
+        st.write(stacked_df)
+
     st.markdown('----')
-    resultat = [dict_assets_name['noms'] + dict_assets_name['tickers']]
-    st.write(resultat)
 
 with tab2:
 
