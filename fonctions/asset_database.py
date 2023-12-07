@@ -31,7 +31,7 @@ class Library:
         list_df = []
         for ind in self._indice:
             file_path = f"data/indices/{ind}.csv"
-            df = pd.read_csv(file_path, delimiter=";")
+            df = pd.read_csv(file_path)
             list_df.append(df)
 
         # Utilisez pd.melt pour fusionner les colonnes en une seule
