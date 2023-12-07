@@ -31,15 +31,8 @@ class Library:
         list_df = []
         for ind in self._indice:
             file_path = f"data/indices/{ind}.csv"
-            
-            with open(file_path, 'r') as fichier_csv:
-                next(fichier_csv, None)
-                try:
-                    df = pd.read_csv(fichier_csv)
-                    list_df.append(df)
-                except:
-                    continue
-
+            df = pd.read_csv(file_path, delimiter=";")
+            list_df.append(df)
         stacked_df = pd.concat(list_df, axis=0, ignore_index=True)
         return stacked_df
 
