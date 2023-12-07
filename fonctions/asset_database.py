@@ -27,17 +27,20 @@ class Library:
             dict_symb[ind] = {"tickers": symbols_list, "noms": symbols_name}
         return symbol_txt
     
+    import pandas as pd
+
     def get_assets_name(self):
         list_df = []
         for ind in self._indice:
             file_path = f"data/indices/{ind}.csv"
-            df = pd.read_csv(file_path)
+            df = pd.read_csv(file_path, delimiter=";")
             list_df.append(df)
 
-        # Utilisez pd.melt pour fusionner les colonnes en une seule
-        melted_df = pd.concat([pd.melt(df)['value'] for df in list_df], ignore_index=True)
+        # Concaténez les DataFrames verticalement (axis=0)
+        stacked_df = pd.concat(list_df, axis=0, ignore_index=True)
 
-        return melted_df
+        return stacked_df
+
 
     def get_dataframes(self):
         def load_data(symbol):
