@@ -77,6 +77,10 @@ with tab1 :
         st.write('')
         st.write("")
         run = st.button('Comparer')
+
+    symbole = Library(None,liste_indice,symb1).get_assets_all()
+    st.write(symbole)
+    
     #if run:
         #assets_comp = [comp1, comp2]
         #selected_dataframes = Library(None, None, assets_comp).get_dataframes()
