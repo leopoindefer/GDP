@@ -20,7 +20,6 @@ class Library:
     
     def get_assets_name(self):
         list_df = []
-        list_assets_name = []
         for ind in self._indice:
             file_path = f"data/indices/{ind}.csv"
             df = pd.read_csv(file_path, delimiter=";")
@@ -35,10 +34,8 @@ class Library:
             cle = row[0]  # Deuxième colonne comme clé
             valeur = row[1]  # Première colonne comme valeur
             dict_assets_names[cle] = valeur
-        for asset, name in dict_assets_names:
-            list_assets_name.append(name)
 
-        return list_assets_name, dict_assets_names
+        return list(dict_assets_names.values()), dict_assets_names
     
     def get_assets_all(self):
         dict_assets_names = self.get_assets_name()
