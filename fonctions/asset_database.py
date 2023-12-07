@@ -34,8 +34,11 @@ class Library:
             
             with open(file_path, 'r') as fichier_csv:
                 next(fichier_csv, None)
-                df = pd.read_csv(fichier_csv)
-                list_df.append(df)
+                try:
+                    df = pd.read_csv(fichier_csv)
+                    list_df.append(df)
+                except:
+                    continue
 
         stacked_df = pd.concat(list_df, ignore_index=True)
         return stacked_df
