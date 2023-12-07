@@ -29,6 +29,7 @@ class Library:
 
     def get_assets_name(self):
         list_df = []
+        list_names = []
         for ind in self._indice:
             file_path = f"data/indices/{ind}.csv"
             df = pd.read_csv(file_path, delimiter=";")
@@ -39,13 +40,14 @@ class Library:
         stacked_df["noms"] = stacked_df["ticker"] + " : " +stacked_df["nom"]
         stacked_df.drop(columns={"nom"},inplace=True)
         assets_names = stacked_df["noms"].tolist()
+        list_names.extend(assets_names)
         dict_assets_names = {}
         for index, row in stacked_df.iterrows():
             cle = row[0]  # Deuxième colonne comme clé
             valeur = row[1]  # Première colonne comme valeur
             dict_assets_names[cle] = valeur
 
-        return assets_names, dict_assets_names
+        return list_names, dict_assets_names
 
 
     def get_dataframes(self):
