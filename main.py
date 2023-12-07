@@ -95,7 +95,7 @@ with tab1 :
     actions_choisis = st.selectbox("actions",dict_assets_names.values())
     for asset, names in dict_assets_names:
         list_assets = []
-        if actions_choisis == dict_assets_names.values():
+        if actions_choisis == names:
             list_assets.append(asset)
     
     st.write(list_assets)
