@@ -64,17 +64,17 @@ class Optimize():
         try:
             RisqueFaible = df_RisqueFaible.iloc[0]
         except:
-            pass
+            RisqueFaible = 0
         try:
             RisqueMoyen = df_RisqueMoyen.iloc[0]
         except:
-            pass
+            RisqueFaible = 0
         try:
             RisqueEleve = df_RisqueEleve.iloc[0]
         except:
-            pass
+            RisqueFaible = 0
         try:   
             RisqueTresEleve = df_RisqueTresEleve.iloc[0]
         except:
-            pass
+            RisqueFaible = 0
         return RisqueFaible, RisqueMoyen, RisqueEleve, RisqueTresEleve
