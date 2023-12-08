@@ -126,7 +126,6 @@ with tab3 :
         [list_assets.append(cle) for cle, valeur in dict_assets_names.items() if valeur == actions]
     st.write(list_assets)
     nb_acts = len(portefeuille)
-    st.write(portefeuille)
     calcul = st.button('Calculer')
     if calcul:
          with st.spinner('Chargement du calcul'):
