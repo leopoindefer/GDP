@@ -61,7 +61,7 @@ class Projection():
 
     def get_color(self):
         tRend, tRent, tRent_lower, tRent_upper = self.get_rentability()
-        return '#FF0000;' if tRent < 0 else '#008000;'
+        return '#FF0000;' #if tRent < 0 else '#008000;'
     
     def unit_projection(self):
         tRend, tRent, tRent_lower, tRent_upper = self.get_rentability()
