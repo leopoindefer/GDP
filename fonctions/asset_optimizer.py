@@ -61,8 +61,20 @@ class Optimize():
     
     def get_optimum(self):
         df_RisqueFaible, df_RisqueMoyen, df_RisqueEleve, df_RisqueTresEleve = self.risk_category()
-        RisqueFaible = df_RisqueFaible.iloc[0]
-        RisqueMoyen = df_RisqueMoyen.iloc[0]
-        RisqueEleve = df_RisqueEleve.iloc[0]
-        RisqueTresEleve = df_RisqueTresEleve.iloc[0]
+        try:
+            RisqueFaible = df_RisqueFaible.iloc[0]
+        except:
+            pass
+        try:
+            RisqueMoyen = df_RisqueMoyen.iloc[0]
+        except:
+            pass
+        try:
+            RisqueEleve = df_RisqueEleve.iloc[0]
+        except:
+            pass
+        try:   
+            RisqueTresEleve = df_RisqueTresEleve.iloc[0]
+        except:
+            pass
         return RisqueFaible, RisqueMoyen, RisqueEleve, RisqueTresEleve
