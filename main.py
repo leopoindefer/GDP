@@ -80,18 +80,16 @@ with tab1 :
 
     comp1 = [cle for cle, valeur in dict_assets_names.items() if valeur == symb1]
     comp2 = [cle for cle, valeur in dict_assets_names.items() if valeur == symb2]
-    list_assets = [comp1,comp2]
-    list_assets = sum(list_assets, [])
-    st.write(list_assets)
     
-    #if run:
-        #assets_comp = [comp1, comp2]
-        #selected_dataframes = Library(None, None, assets_comp).get_dataframes()
-        #dataframes_resampled_comp = Transform(selected_dataframes).resample()
-        #compar_chart, corr = Comparaison(dataframes_resampled_comp).inner_combine()
-        #st.line_chart(compar_chart)
+    if run:
+        assets_comp = [comp1, comp2]
+        assets_comp = sum(assets_comp, [])
+        selected_dataframes = Library(None, None, assets_comp).get_dataframes()
+        dataframes_resampled_comp = Transform(selected_dataframes).resample()
+        compar_chart, corr = Comparaison(dataframes_resampled_comp).inner_combine()
+        st.line_chart(compar_chart)
 
-        #st.write(f'Corrélation linéraire à : {round(corr*100,2)}%')
+        st.write(f'Corrélation linéraire à : {round(corr*100,2)}%')
 
     st.markdown('----')
 
