@@ -109,14 +109,14 @@ with tab2:
         montant = st.text_input('Montant à investir', 1000)
     with col2:
         duree = st.date_input("Jusqu'à quand ?", pd.to_datetime(forecast["date"].iloc[-1]), min_value=pd.to_datetime(df_prophet["ds"].iloc[0]), max_value=pd.to_datetime(forecast["date"].iloc[-1]))
-    try :
-        nb_part, tx_rendement, rendement, tx_rentabilite, rentabilite, tx_renta_lower, renta_lower, tx_renta_upper, renta_upper = Projection(montant, duree, asset, df_prophet, forecast).unit_projection()
-        st.write(f'Nombre d action acheté : {nb_part}', unsafe_allow_html=True)
-        st.write(f'Taux de rendement de : {tx_rendement}, Rendement de {rendement}', unsafe_allow_html=True)
-        st.write(f'Taux de Rentabilité de : {tx_rentabilite}, Rentabilité de {rentabilite}', unsafe_allow_html=True)
-        st.write(f'Intervalle de confiance de rentabilité : [{renta_lower} : {renta_upper}]', unsafe_allow_html=True)
-    except:
-        st.error("Pas de projection disponible")
+    #try :
+    nb_part, tx_rendement, rendement, tx_rentabilite, rentabilite, tx_renta_lower, renta_lower, tx_renta_upper, renta_upper = Projection(montant, duree, asset, df_prophet, forecast).unit_projection()
+    st.write(f'Nombre d action acheté : {nb_part}', unsafe_allow_html=True)
+    st.write(f'Taux de rendement de : {tx_rendement}, Rendement de {rendement}', unsafe_allow_html=True)
+    st.write(f'Taux de Rentabilité de : {tx_rentabilite}, Rentabilité de {rentabilite}', unsafe_allow_html=True)
+    st.write(f'Intervalle de confiance de rentabilité : [{renta_lower} : {renta_upper}]', unsafe_allow_html=True)
+    #except:
+        #st.error("Pas de projection disponible")
 
 with tab3 : 
     st.header("Composer votre portefeuille")
@@ -130,12 +130,11 @@ with tab3 :
     if calcul:
          with st.spinner('Chargement du calcul'):
              
-            #try:
+            try:
 
                 if nb_acts <= 4:
                     portfolio_dataframes = Library(None, None, list_assets).get_dataframes()
                     merged_df = Optimize(list_assets, nb_acts, portfolio_dataframes).process_data()
-                    st.write(merged_df)
                     st.subheader('Frontière efficiente')
                     st.scatter_chart(merged_df, x='Volatilité', y='Rentabilité')
                     #st.dataframe(merged_df, hide_index=True)
@@ -173,5 +172,5 @@ with tab3 :
                 else:
                     mess_gdp = f"Création de portefeuille pas encore disponible pour {nb_acts}"
                     st.write(mess_gdp)
-            #except:
-                #st.error("Pas de portefeuille possible")
+            except:
+                st.error("Pas de portefeuille possible")
