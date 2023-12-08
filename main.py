@@ -97,6 +97,7 @@ with tab2:
 
     st.header("Action à visualiser")
     asset = st.selectbox('Choisir une action', assets_all)
+    asset = [cle for cle, valeur in dict_assets_names.items() if valeur == asset]
     asset_dataframe = Library(None, None, asset).get_dataframes()
     df_prophet,forecast, mse_prophet, graph_forecast = Prediction(asset_dataframe).forecast()
     st.line_chart(data=graph_forecast)
