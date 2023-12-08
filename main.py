@@ -124,10 +124,8 @@ with tab3 :
     list_assets = []
     for actions in portefeuille:
         [list_assets.append(cle) for cle, valeur in dict_assets_names.items() if valeur == actions]
-    flat_list_assets = []
-    for item in list_assets:
-        flat_list_assets += item
-    st.write(flat_list_assets)
+    list_assets = list_assets[-1]
+    st.write(list_assets)
     nb_acts = len(portefeuille)
     calcul = st.button('Calculer')
     if calcul:
