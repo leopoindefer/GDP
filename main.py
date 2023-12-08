@@ -90,7 +90,6 @@ with tab1 :
         st.line_chart(compar_chart)
 
         st.write(f'Corrélation linéraire à : {round(corr*100,2)}%')
-        st.write('test')
 
     st.markdown('----')
 
