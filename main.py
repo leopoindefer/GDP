@@ -122,14 +122,15 @@ with tab3 :
     st.header("Composer votre portefeuille")
     portefeuille = st.multiselect("Choisissez vos actions", assets_all)
     nb_acts = len(portefeuille)
+    list_assets = []
     for actions in portefeuille:
-        list_assets = []
         [list_assets.append(cle) for cle, valeur in dict_assets_names.items() if valeur == actions]
+
     calcul = st.button('Calculer')
     if calcul:
          with st.spinner('Chargement du calcul'):
              
-            try:
+            #try:
 
                 if nb_acts <= 4:
                     portfolio_dataframes = Library(None, None, list_assets).get_dataframes()
@@ -171,5 +172,5 @@ with tab3 :
                 else:
                     mess_gdp = f"Création de portefeuille pas encore disponible pour {nb_acts}"
                     st.write(mess_gdp)
-            except:
-                st.error("Pas de portefeuille possible")
+            #except:
+                #st.error("Pas de portefeuille possible")
