@@ -69,11 +69,11 @@ class Optimize():
             RisqueMoyen = df_RisqueMoyen.iloc[0]
         else:
             RisqueMoyen = "Aucun"
-        if df_RisqueEleve == False:
+        if df_RisqueEleve.empty == False:
             RisqueEleve = df_RisqueEleve.iloc[0]
         else:
             RisqueEleve = "Aucun"
-        if df_RisqueTresEleve == False:
+        if df_RisqueTresEleve.empty == False:
             RisqueTresEleve = df_RisqueTresEleve.iloc[0]
         else:
             RisqueTresEleve = "Aucun"
