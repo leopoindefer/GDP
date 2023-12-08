@@ -78,7 +78,9 @@ with tab1 :
         st.write("")
         run = st.button('Comparer')
 
-    list_assets = [cle for cle, valeur in dict_assets_names.items() if valeur == [symb1,symb2]]
+    comp1 = [cle for cle, valeur in dict_assets_names.items() if valeur == symb1]
+    comp2 = [cle for cle, valeur in dict_assets_names.items() if valeur == symb2]
+    list_assets = [comp1,comp2]
     st.write(list_assets)
     
     #if run:
