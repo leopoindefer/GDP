@@ -140,7 +140,7 @@ with tab3 :
                     st.scatter_chart(merged_df, x='Volatilité', y='Rentabilité')
                     #st.dataframe(merged_df, hide_index=True)
                     st.subheader('Portefeuille efficient pour :')
-                    RisqueFaible, RisqueMoyen, RisqueEleve, RisqueTresEleve = Optimize(list_assets, nb_acts, merged_df).get_optimum()
+                    RisqueFaible, RisqueMoyen, RisqueEleve, RisqueTresEleve = Optimize(list_assets, nb_acts, merged_df).risk_category()
                     col_result1, col_result2, col_result3, col_result4 = st.columns(4)
                     with col_result1:
                         st.write("Risque faible")
