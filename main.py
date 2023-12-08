@@ -81,6 +81,7 @@ with tab1 :
     comp1 = [cle for cle, valeur in dict_assets_names.items() if valeur == symb1]
     comp2 = [cle for cle, valeur in dict_assets_names.items() if valeur == symb2]
     list_assets = [comp1,comp2]
+    list_assets = sum(list_assets, [])
     st.write(list_assets)
     
     #if run:
