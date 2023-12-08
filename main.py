@@ -121,8 +121,9 @@ with tab2:
 with tab3 : 
     st.header("Composer votre portefeuille")
     portefeuille = st.multiselect("Choisissez vos actions", assets_all)
+    portefeuille = [cle for cle, valeur in dict_assets_names.items() if valeur == portefeuille]
     nb_acts = len(portefeuille)
-
+    st.write(portefeuille)
     calcul = st.button('Calculer')
     if calcul:
          with st.spinner('Chargement du calcul'):
