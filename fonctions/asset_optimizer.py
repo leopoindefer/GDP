@@ -51,7 +51,7 @@ class Optimize():
 
     def risk_category(self):
         #renta optimale pour risque donné
-        merged_df = self._selected_dataframes
+        merged_df = self.process_data()
         df_RisqueFaible = merged_df[merged_df['Volatilité'] < 3].sort_values(by='Rentabilité', ascending=False)
         df_RisqueMoyen = merged_df[(merged_df['Volatilité'] >= 3) & (merged_df['Volatilité'] <= 8)].sort_values(by='Rentabilité', ascending=False)
         df_RisqueEleve = merged_df[(merged_df['Volatilité'] > 8) & (merged_df['Volatilité'] <= 15)].sort_values(by='Rentabilité', ascending=False)
@@ -61,8 +61,20 @@ class Optimize():
     
     def get_optimum(self):
         df_RisqueFaible, df_RisqueMoyen, df_RisqueEleve, df_RisqueTresEleve = self.risk_category()
-        RisqueFaible = df_RisqueFaible.iloc[0]
-        RisqueMoyen = df_RisqueMoyen.iloc[0]
-        RisqueEleve = df_RisqueEleve.iloc[0]
-        RisqueTresEleve = df_RisqueTresEleve.iloc[0]
+        if df_RisqueFaible.empty == False:
+            RisqueFaible = df_RisqueFaible.iloc[0]
+        else:
+            RisqueFaible = "Aucun"
+        if df_RisqueMoyen.empty == False:
+            RisqueMoyen = df_RisqueMoyen.iloc[0]
+        else:
+            RisqueMoyen = "Aucun"
+        if df_RisqueEleve.empty == False:
+            RisqueEleve = df_RisqueEleve.iloc[0]
+        else:
+            RisqueEleve = "Aucun"
+        if df_RisqueTresEleve.empty == False:
+            RisqueTresEleve = df_RisqueTresEleve.iloc[0]
+        else:
+            RisqueTresEleve = "Aucun"
         return RisqueFaible, RisqueMoyen, RisqueEleve, RisqueTresEleve
