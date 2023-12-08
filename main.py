@@ -78,7 +78,7 @@ with tab1 :
         st.write("")
         run = st.button('Comparer')
 
-    comp1 = Library(None,None,symb1).get_assets_all()
+    comp1 = [cle for cle, valeur in dict_assets_names.items() if valeur == symb1]
     comp2 = [cle for cle, valeur in dict_assets_names.items() if valeur == symb2]
     
     if run:
@@ -90,6 +90,7 @@ with tab1 :
         st.line_chart(compar_chart)
 
         st.write(f'Corrélation linéraire à : {round(corr*100,2)}%')
+        st.write('test')
 
     st.markdown('----')
 
