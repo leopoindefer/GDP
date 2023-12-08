@@ -144,31 +144,20 @@ with tab3 :
                     col_result1, col_result2, col_result3, col_result4 = st.columns(4)
                     with col_result1:
                         st.write("Risque faible")
-                        try :
-                            st.dataframe(RisqueFaible)
-                        except:
-                            st.error("Aucun")
+                        st.dataframe(RisqueFaible)
 
                     with col_result2:
                         st.write("Risque moyen")
-                        try:
-                            st.write(RisqueMoyen)
-                        except:
-                            st.error("Aucun")
+                        st.write(RisqueMoyen)
+
 
                     with col_result3:
                         st.write("Risque élevé")
-                        try:
-                            st.write(RisqueEleve)
-                        except:
-                            st.error("Aucun")
+                        st.write(RisqueEleve)
 
                     with col_result4:
                         st.write("Risque très élevé")
-                        try:
-                            st.write(RisqueTresEleve)
-                        except:
-                            st.error("Aucun")
+                        st.write(RisqueTresEleve)
 
                 else:
                     mess_gdp = f"Création de portefeuille pas encore disponible pour {nb_acts}"
