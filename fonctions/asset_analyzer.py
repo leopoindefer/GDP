@@ -26,10 +26,9 @@ class Analyse(Transform):
                 renta_moy = var
                 risque_moy = variation.values.std()
                 risque_moy = round(risque_moy*100,2)
-                #[cle for cle, valeur in dict_assets_names.items() if valeur == actions]
                 line = [str(val) for val in s_mois_prec[close_columns].values.flatten()]
                 name = [cle for cle, valeur in self._dict_assets_names.items() if valeur == symbol]
-                name = name[0]
+                #name = name[0]
 
                 liste_cours.append({
                     "SYMBOLE": symbol,
@@ -38,8 +37,8 @@ class Analyse(Transform):
                     "VAR" : f'{var}%',
                     "RENTABILITÉ": f'{renta_moy}%', 
                     "VOLATILITÉ": f'{risque_moy}%',
-                    "VISION":line,
-                    "NOM": f'{name}'
+                    "VISION":line
+                    #"NOM": f'{name}'
                 })
             
             except FileNotFoundError:
