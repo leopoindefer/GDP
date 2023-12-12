@@ -31,13 +31,13 @@ class Analyse(Transform):
 
                 liste_cours.append({
                     "SYMBOLE": symbol,
+                    "NOM" : f'{name}',
                     "ACTUEL": f'{cours}',
                     "M-1": f'{cours_prec}',
                     "VAR" : f'{var}%',
                     "RENTABILITÉ": f'{renta_moy}%', 
                     "VOLATILITÉ": f'{risque_moy}%',
-                    "VISION":line,
-                    "NOM" : f'{name}'
+                    "VISION":line
                 })
             
             except FileNotFoundError:
