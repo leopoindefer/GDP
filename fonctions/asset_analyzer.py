@@ -70,9 +70,11 @@ class Analyse(Transform):
                 risque_moy = variation.values.std()
                 risque_moy = round(risque_moy*100,2)
                 line = [str(val) for val in s_six_mois_prec[close_columns].values.flatten()]
-                
+                name = [str(valeur) for cle, valeur in self._dict_assets_names.items() if cle == symbol][0]
+
                 liste_cours.append({
                     "SYMBOLE": symbol,
+                    "NOM" : f'{name}',
                     "ACTUEL": f'{cours}',
                     "M-6": f'{cours_prec}',
                     "VAR" : f'{var}%',
@@ -111,9 +113,11 @@ class Analyse(Transform):
                 risque_moy = variation.values.std()
                 risque_moy = round(risque_moy*100,2)
                 line = [str(val) for val in s_annee_prec[close_columns].values.flatten()]
+                name = [str(valeur) for cle, valeur in self._dict_assets_names.items() if cle == symbol][0]
 
                 liste_cours.append({
                     "SYMBOLE": symbol,
+                    "NOM" : f'{name}',
                     "ACTUEL": f'{cours}',
                     "N-1": f'{cours_prec}',
                     "VAR" : f'{var}%',
@@ -151,9 +155,11 @@ class Analyse(Transform):
                 risque_moy = variation.values.std()
                 risque_moy = round(risque_moy*100,2)
                 line = [str(val) for val in s_cinq_ans[close_columns].values.flatten()]
+                name = [str(valeur) for cle, valeur in self._dict_assets_names.items() if cle == symbol][0]
 
                 liste_cours.append({
                     "SYMBOLE": symbol,
+                    "NOM" : f'{name}',
                     "ACTUEL": f'{cours}',
                     "N-5": f'{cours_prec}',
                     "VAR" : f'{var}%',
