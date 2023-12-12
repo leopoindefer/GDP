@@ -41,7 +41,7 @@ with tab1 :
     assets = Library(None, indice,None).get_assets()
     dataframes = Library(None, None,assets).get_dataframes()
     if periode == "1 mois":
-        tableau, max_date = Analyse(dataframes).KPI_1month()
+        tableau = Analyse(dataframes).KPI_1month()
     elif periode == "6 mois":
         tableau = Analyse(dataframes, dict_assets_names).KPI_6month()
     elif periode == "1 an":
