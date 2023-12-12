@@ -14,8 +14,8 @@ class Analyse(Transform):
                 s.index = pd.to_datetime(s.index)
                 close_columns = [col for col in s.columns if 'Close' in col]
                 cours = round(s[close_columns].iloc[-1].values.sum(),2)
-                max_date = s.index[-1]
-                mois_prec = pd.to_datetime(datetime.now() - timedelta(days=31))
+                max_date = pd.to_datetime(s.index[-1])
+                mois_prec = pd.to_datetime(max_date - timedelta(days=31))
                 s_mois_prec = s[s.index>=mois_prec]
                 cours_prec = round(s_mois_prec[close_columns].iloc[0],2)
                 cours_prec = float(cours_prec)
