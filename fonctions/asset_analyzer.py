@@ -4,9 +4,9 @@ from .asset_transform import Transform
 from .asset_database import Library
 
 class Analyse(Transform):
-    def __init__(self, selected_dataframes:dict, dict_assets_names:dict):
+    def __init__(self, selected_dataframes:dict):
         super().__init__(selected_dataframes)
-        self._dict_assets_names = dict_assets_names
+        #self._dict_assets_names = dict_assets_names
 
     def KPI_1month(self):
         liste_cours = []
