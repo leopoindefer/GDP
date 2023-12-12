@@ -14,6 +14,7 @@ class Analyse(Transform):
                 s.index = pd.to_datetime(s.index)
                 close_columns = [col for col in s.columns if 'Close' in col]
                 cours = round(s[close_columns].iloc[-1].values.sum(),2)
+                max_date = s.index[-1]
                 mois_prec = pd.to_datetime(datetime.now() - timedelta(days=31))
                 s_mois_prec = s[s.index>=mois_prec]
                 cours_prec = round(s_mois_prec[close_columns].iloc[0],2)
@@ -43,7 +44,7 @@ class Analyse(Transform):
 
         macro = pd.DataFrame(liste_cours)
         macro.set_index('SYMBOLE', inplace=True)
-        return macro, s_mois_prec
+        return macro, max_date
 
     def KPI_6month(self):
         liste_cours = []
