@@ -27,7 +27,7 @@ class Analyse(Transform):
                 risque_moy = variation.values.std()
                 risque_moy = round(risque_moy*100,2)
                 line = [str(val) for val in s_mois_prec[close_columns].values.flatten()]
-                name = [str(valeur) for cle, valeur in self._dict_assets_names.items() if cle == symbol]
+                name = [str(valeur) for cle, valeur in self._dict_assets_names.items() if cle == symbol][0]
 
                 liste_cours.append({
                     "SYMBOLE": symbol,
