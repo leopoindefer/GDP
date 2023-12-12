@@ -29,6 +29,7 @@ class Analyse(Transform):
                 #[cle for cle, valeur in dict_assets_names.items() if valeur == actions]
                 line = [str(val) for val in s_mois_prec[close_columns].values.flatten()]
                 name = [cle for cle, valeur in self._dict_assets_names.items() if valeur == symbol]
+                name = name.astype(str)
                 
                 liste_cours.append({
                     "SYMBOLE": symbol,
