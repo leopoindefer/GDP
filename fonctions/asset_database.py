@@ -25,16 +25,23 @@ class Library:
             df = pd.read_csv(file_path, delimiter=";")
             list_df.append(df)
 
-        # Concaténez les DataFrames verticalement (axis=0)
         stacked_df = pd.concat(list_df, axis=0, ignore_index=True)
-        stacked_df["noms"] = stacked_df["ticker"] + " : " +stacked_df["nom"]
-        stacked_df.drop(columns={"nom"},inplace=True)
         dict_assets_names = {}
         for index, row in stacked_df.iterrows():
-            cle = row[0]  # Deuxième colonne comme clé
-            valeur = row[1]  # Première colonne comme valeur
+            cle = row[0]
+            valeur = row[1]
             dict_assets_names[cle] = valeur
-        return list(dict_assets_names.values()), dict_assets_names
+
+        stacked_df_concat = stacked_df.copy()
+        stacked_df_concat["noms"] = stacked_df["ticker"] + " : " +stacked_df["nom"]
+        stacked_df_concat.drop(columns={"nom"},inplace=True)
+        dict_assets_names_concat = {}
+        for index, row in stacked_df_concat.iterrows():
+            cle = row[0]
+            valeur = row[1]
+            dict_assets_names_concat[cle] = valeur
+
+        return list(dict_assets_names_concat.values()), dict_assets_names, dict_assets_names_concat
     
     def get_assets_all(self):
         dict_assets_names = self.get_assets_name()
