@@ -3,8 +3,9 @@ from datetime import datetime, timedelta
 from .asset_transform import Transform
 
 class Analyse(Transform):
-    def __init__(self, selected_dataframes:dict):
+    def __init__(self, selected_dataframes:dict, dict_assets_names:dict):
         super().__init__(selected_dataframes)
+        self._dict_assets_names = dict_assets_names
 
     def KPI_1month(self):
         liste_cours = []
@@ -26,6 +27,7 @@ class Analyse(Transform):
                 risque_moy = variation.values.std()
                 risque_moy = round(risque_moy*100,2)
                 line = [str(val) for val in s_mois_prec[close_columns].values.flatten()]
+                name = [str(valeur) for cle, valeur in self._dict_assets_names.items() if cle == symbol]
 
                 liste_cours.append({
                     "SYMBOLE": symbol,
@@ -34,7 +36,8 @@ class Analyse(Transform):
                     "VAR" : f'{var}%',
                     "RENTABILITÉ": f'{renta_moy}%', 
                     "VOLATILITÉ": f'{risque_moy}%',
-                    "VISION":line
+                    "VISION":line,
+                    "NOM" : f'{name}'
                 })
             
             except FileNotFoundError:
@@ -44,7 +47,7 @@ class Analyse(Transform):
 
         macro = pd.DataFrame(liste_cours)
         macro.set_index('SYMBOLE', inplace=True)
-        return macro, max_date
+        return macro
 
     def KPI_6month(self):
         liste_cours = []
