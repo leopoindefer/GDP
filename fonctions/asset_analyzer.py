@@ -43,7 +43,7 @@ class Analyse(Transform):
 
         macro = pd.DataFrame(liste_cours)
         macro.set_index('SYMBOLE', inplace=True)
-        return macro
+        return macro, s_mois_prec
 
     def KPI_6month(self):
         liste_cours = []
