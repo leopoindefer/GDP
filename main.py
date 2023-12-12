@@ -41,7 +41,7 @@ with tab1 :
     assets = Library(None, indice,None).get_assets()
     dataframes = Library(None, None,assets).get_dataframes()
     if periode == "1 mois":
-        tableau = Analyse(dataframes).KPI_1month()
+        tableau,s_mois_prec = Analyse(dataframes).KPI_1month()
     elif periode == "6 mois":
         tableau = Analyse(dataframes).KPI_6month()
     elif periode == "1 an":
@@ -50,6 +50,7 @@ with tab1 :
         tableau = Analyse(dataframes).KPI_5year()
     st.dataframe(tableau.style.applymap(lambda x: 'color: red' if any('-' in words for words in x.split()) else 'color: green',subset = ['VAR']), column_config={"VISION": st.column_config.LineChartColumn(
         "VISION", y_min=0, y_max=200)})
+    st.write(s_mois_prec)
     
 
     col1_info, col2_info = st.columns((1, 8))
