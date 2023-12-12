@@ -28,8 +28,8 @@ class Library:
         stacked_df = pd.concat(list_df, axis=0, ignore_index=True)
         dict_assets_names = {}
         for index, row in stacked_df.iterrows():
-            cle = row[0]
-            valeur = row[1]
+            cle = row[1]
+            valeur = row[0]
             dict_assets_names[cle] = valeur
 
         stacked_df_concat = stacked_df.copy()
