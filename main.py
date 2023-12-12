@@ -38,6 +38,8 @@ with tab1 :
     with col_vision3:
         st.write("")
 
+    st.write(dict_assets_names)
+
     assets = Library(None, indice,None).get_assets()
     dataframes = Library(None, None,assets).get_dataframes()
     if periode == "1 mois":
