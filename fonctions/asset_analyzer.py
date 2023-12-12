@@ -12,7 +12,6 @@ class Analyse(Transform):
         liste_cours = []
         for symbol, asset_dataframe in self._selected_dataframes.items():
             try:
-                name = [cle for cle, valeur in self._dict_assets_names.items() if valeur == symbol]
                 s = pd.DataFrame(asset_dataframe)
                 s.index = pd.to_datetime(s.index)
                 close_columns = [col for col in s.columns if 'Close' in col]
@@ -29,6 +28,7 @@ class Analyse(Transform):
                 risque_moy = round(risque_moy*100,2)
                 #[cle for cle, valeur in dict_assets_names.items() if valeur == actions]
                 line = [str(val) for val in s_mois_prec[close_columns].values.flatten()]
+                name = [cle for cle, valeur in self._dict_assets_names.items() if valeur == symbol]
                 
                 liste_cours.append({
                     "SYMBOLE": symbol,
