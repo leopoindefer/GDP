@@ -60,7 +60,8 @@ class Analyse(Transform):
                 cours = round(s[close_columns].iloc[-1].values.sum(),2)
                 cours_prec = round(s_resampled[close_columns].iloc[-7].values.sum(),2)
                 var = round(((cours - cours_prec)/ cours_prec)*100,2)
-                sixmois_prec = datetime.now() - timedelta(days=183)
+                max_date = pd.to_datetime(s.index[-1])
+                sixmois_prec = pd.to_datetime(max_date - timedelta(days=183))
                 s_six_mois_prec = s[s.index>=sixmois_prec]
                 s_six_mois_prec_resampled = s_resampled[s_resampled.index>=sixmois_prec]
                 variation = s_six_mois_prec_resampled[close_columns].pct_change().dropna()
@@ -100,7 +101,8 @@ class Analyse(Transform):
                 cours = round(s[close_columns].iloc[-1].values.sum(),2)
                 cours_prec = round(s_resampled[close_columns].iloc[-13].values.sum(),2)
                 var = round(((cours - cours_prec)/ cours_prec)*100,2)
-                annee_prec = datetime.now() - timedelta(days=365)
+                max_date = pd.to_datetime(s.index[-1])
+                annee_prec = pd.to_datetime(max_date - timedelta(days=365))
                 s_annee_prec = s[s.index>=annee_prec]
                 s_annee_prec_resampled = s_resampled[s_resampled.index>=annee_prec]
                 variation = s_annee_prec_resampled[close_columns].pct_change().dropna()
@@ -138,7 +140,8 @@ class Analyse(Transform):
                 s_resampled = s.resample("MS").first()
                 close_columns = [col for col in s_resampled.columns if 'Close' in col]
                 cours = round(s[close_columns].iloc[-1].values.sum(),2)
-                start_date = datetime.now() - timedelta(days=365*5)
+                max_date = pd.to_datetime(s.index[-1])
+                start_date = pd.to_datetime(max_date - timedelta(days=365*5))
                 s_cinq_ans = s_resampled[s_resampled.index>=start_date]
                 cours_prec = round(s_cinq_ans[close_columns].iloc[0].values.sum(),2)
                 var = round(((cours - cours_prec)/ cours_prec)*100,2)
