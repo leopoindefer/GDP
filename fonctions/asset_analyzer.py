@@ -10,6 +10,7 @@ class Analyse(Transform):
 
     def KPI_1month(self):
         liste_cours = []
+        liste_noms = []
         for symbol, asset_dataframe in self._selected_dataframes.items():
             try:
                 s = pd.DataFrame(asset_dataframe)
@@ -27,8 +28,7 @@ class Analyse(Transform):
                 risque_moy = variation.values.std()
                 risque_moy = round(risque_moy*100,2)
                 line = [str(val) for val in s_mois_prec[close_columns].values.flatten()]
-                [cle for cle, valeur in self._dict_assets_names.items() if valeur == symbol]
-                #name = name[0]
+                [liste_noms.append(cle) for cle, valeur in self._dict_assets_names.items() if valeur == symbol]
 
                 liste_cours.append({
                     "SYMBOLE": symbol,
@@ -37,8 +37,8 @@ class Analyse(Transform):
                     "VAR" : f'{var}%',
                     "RENTABILITÉ": f'{renta_moy}%', 
                     "VOLATILITÉ": f'{risque_moy}%',
-                    "VISION":line
-                    #"NOM": f'{name}'
+                    "VISION":line,
+                    "NOM": f'{liste_noms}'
                 })
             
             except FileNotFoundError:
