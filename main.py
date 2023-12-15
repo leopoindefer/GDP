@@ -92,12 +92,14 @@ with tab1 :
     st.markdown('----')
 
 with tab2:
-
+    
+    list_asset =[]
     st.header("Action à visualiser")
     asset = st.selectbox('Choisir une action', assets_all)
-    asset = Library(None,liste_indice,list(asset)).get_symbol()
-    st.write(asset)
-    asset_dataframe = Library(None, None, asset).get_dataframes()
+    list_asset.append(asset)
+    list_symbol = Library(None,liste_indice,list_asset).get_symbol()
+    st.write(list_symbol)
+    #asset_dataframe = Library(None, None, asset).get_dataframes()
     #df_prophet,forecast, mse_prophet, graph_forecast = Prediction(asset_dataframe).forecast()
     #st.line_chart(data=graph_forecast)
     #st.write("PROPHET MSE:")
