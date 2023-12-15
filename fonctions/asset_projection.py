@@ -59,8 +59,7 @@ class Projection():
         tRent_upper = (div+gap_value_upper)/montant*100
         return tRend, tRent, tRent_lower, tRent_upper
 
-    def get_color(self):
-        tRend, tRent, tRent_lower, tRent_upper = self.get_rentability()
+    def get_color(tRent):
         return '#FF0000;' if tRent < 0 else '#008000;'
     
     def unit_projection(self):
