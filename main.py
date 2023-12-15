@@ -95,7 +95,7 @@ with tab2:
 
     st.header("Action à visualiser")
     asset = st.selectbox('Choisir une action', assets_all)
-    asset = Library(None,liste_indice,asset).get_symbol()
+    asset = Library(None,liste_indice,list(asset)).get_symbol()
     st.write(asset)
     asset_dataframe = Library(None, None, asset).get_dataframes()
     #df_prophet,forecast, mse_prophet, graph_forecast = Prediction(asset_dataframe).forecast()
