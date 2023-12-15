@@ -89,4 +89,4 @@ class Projection():
             f'<span style="{color_style}">{tx_renta_upper}%</span>',
             f'<span style="{color_style}">{renta_upper}€</span>',
         )
-        return nb_part, tx_rendement, rendement, tx_rentabilite, rentabilite, tx_renta_lower, renta_lower, tx_renta_upper, renta_upper
+        return color_style, nb_part, tx_rendement, rendement, tx_rentabilite, rentabilite, tx_renta_lower, renta_lower, tx_renta_upper, renta_upper
