@@ -40,14 +40,7 @@ with tab1 :
 
     assets = Library(None, indice,None).get_assets()
     dataframes = Library(None, None,assets).get_dataframes()
-    if periode == "1 mois":
-        tableau = Analyse(dataframes, dict_assets_names).KPI_1month()
-    elif periode == "6 mois":
-        tableau = Analyse(dataframes, dict_assets_names).KPI_6month()
-    elif periode == "1 an":
-        tableau = Analyse(dataframes, dict_assets_names).KPI_1year()
-    elif periode == "5 ans":
-        tableau = Analyse(dataframes, dict_assets_names).KPI_5year()
+    tableau = Analyse(dataframes, dict_assets_names, periode).KPI()
     st.dataframe(tableau.style.applymap(lambda x: 'color: red' if any('-' in words for words in x.split()) else 'color: green',subset = ['VAR']), column_config={"VISION": st.column_config.LineChartColumn(
         "VISION", y_min=0, y_max=200)})
 
