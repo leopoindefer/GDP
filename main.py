@@ -75,9 +75,6 @@ with tab1 :
         st.write('')
         st.write("")
         run = st.button('Comparer')
-
-    comp1 = [cle for cle, valeur in dict_assets_names_concat.items() if valeur == symb1]
-    comp2 = [cle for cle, valeur in dict_assets_names_concat.items() if valeur == symb2]
     
     if run:
         list_asset_comp = [symb1,symb2]
