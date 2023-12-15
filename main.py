@@ -120,6 +120,8 @@ with tab3 :
     st.header("Composer votre portefeuille")
     portefeuille = st.multiselect("Choisissez vos actions", assets_all)
     nb_acts = len(portefeuille)
+    list_assets = Library(None,None,portefeuille).get_symbol()
+    st.write(list_assets)
 
     calcul = st.button('Calculer')
     if calcul:
@@ -128,7 +130,6 @@ with tab3 :
             try:
 
                 if nb_acts <= 4:
-                    list_assets = Library(None,None,portefeuille).get_symbol()
                     portfolio_dataframes = Library(None, None, list_assets).get_dataframes()
                     merged_df = Optimize(list_assets, nb_acts, portfolio_dataframes).process_data()
                     st.subheader('Frontière efficiente')
