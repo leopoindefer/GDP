@@ -96,25 +96,26 @@ with tab2:
     st.header("Action à visualiser")
     asset = st.selectbox('Choisir une action', assets_all)
     asset = Library(None,liste_indice,asset).get_symbol()
+    st.write(asset)
     asset_dataframe = Library(None, None, asset).get_dataframes()
-    df_prophet,forecast, mse_prophet, graph_forecast = Prediction(asset_dataframe).forecast()
-    st.line_chart(data=graph_forecast)
-    st.write("PROPHET MSE:")
-    st.write(round(mse_prophet,2))
+    #df_prophet,forecast, mse_prophet, graph_forecast = Prediction(asset_dataframe).forecast()
+    #st.line_chart(data=graph_forecast)
+    #st.write("PROPHET MSE:")
+    #st.write(round(mse_prophet,2))
     
-    col1, col2 = st.columns(2)
-    with col1:
-        montant = st.text_input('Montant à investir', 1000)
-    with col2:
-        duree = st.date_input("Jusqu'à quand ?", pd.to_datetime(forecast["date"].iloc[-1]), min_value=pd.to_datetime(df_prophet["ds"].iloc[0]), max_value=pd.to_datetime(forecast["date"].iloc[-1]))
-    try :
-        nb_part, tx_rendement, rendement, tx_rentabilite, rentabilite, tx_renta_lower, renta_lower, tx_renta_upper, renta_upper = Projection(montant, duree, asset, df_prophet, forecast).unit_projection()
-        st.write(f'Nombre d action acheté : {nb_part}', unsafe_allow_html=True)
-        st.write(f'Taux de rendement de : {tx_rendement}, Rendement de {rendement}', unsafe_allow_html=True)
-        st.write(f'Taux de Rentabilité de : {tx_rentabilite}, Rentabilité de {rentabilite}', unsafe_allow_html=True)
-        st.write(f'Intervalle de confiance de rentabilité : [{renta_lower} : {renta_upper}]', unsafe_allow_html=True)
-    except:
-        st.error("Pas de projection disponible")
+    #col1, col2 = st.columns(2)
+    #with col1:
+        #montant = st.text_input('Montant à investir', 1000)
+    #with col2:
+        #duree = st.date_input("Jusqu'à quand ?", pd.to_datetime(forecast["date"].iloc[-1]), min_value=pd.to_datetime(df_prophet["ds"].iloc[0]), max_value=pd.to_datetime(forecast["date"].iloc[-1]))
+    #try :
+        #nb_part, tx_rendement, rendement, tx_rentabilite, rentabilite, tx_renta_lower, renta_lower, tx_renta_upper, renta_upper = Projection(montant, duree, asset, df_prophet, forecast).unit_projection()
+        #st.write(f'Nombre d action acheté : {nb_part}', unsafe_allow_html=True)
+        #st.write(f'Taux de rendement de : {tx_rendement}, Rendement de {rendement}', unsafe_allow_html=True)
+        #st.write(f'Taux de Rentabilité de : {tx_rentabilite}, Rentabilité de {rentabilite}', unsafe_allow_html=True)
+        #st.write(f'Intervalle de confiance de rentabilité : [{renta_lower} : {renta_upper}]', unsafe_allow_html=True)
+    #except:
+        #st.error("Pas de projection disponible")
 
 with tab3 : 
     st.header("Composer votre portefeuille")
