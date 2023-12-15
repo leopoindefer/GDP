@@ -98,12 +98,11 @@ with tab2:
     asset = st.selectbox('Choisir une action', assets_all)
     list_asset.append(asset)
     list_symbol = Library(None,liste_indice,list_asset).get_symbol()
-    st.write(list_symbol)
-    #asset_dataframe = Library(None, None, asset).get_dataframes()
-    #df_prophet,forecast, mse_prophet, graph_forecast = Prediction(asset_dataframe).forecast()
-    #st.line_chart(data=graph_forecast)
-    #st.write("PROPHET MSE:")
-    #st.write(round(mse_prophet,2))
+    asset_dataframe = Library(None, None, asset).get_dataframes()
+    df_prophet,forecast, mse_prophet, graph_forecast = Prediction(asset_dataframe).forecast()
+    st.line_chart(data=graph_forecast)
+    st.write("PROPHET MSE:")
+    st.write(round(mse_prophet,2))
     
     #col1, col2 = st.columns(2)
     #with col1:
