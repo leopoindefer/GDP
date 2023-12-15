@@ -120,7 +120,7 @@ with tab3 :
     st.header("Composer votre portefeuille")
     portefeuille = st.multiselect("Choisissez vos actions", assets_all)
     nb_acts = len(portefeuille)
-    list_assets = Library(None,None,portefeuille).get_symbol()
+    list_assets = Library(None,liste_indice,portefeuille).get_symbol()
     st.write(list_assets)
 
     calcul = st.button('Calculer')
