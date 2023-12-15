@@ -6,7 +6,7 @@ class Library:
         self._selected_assets = selected_assets
         self._len_asset = len_asset
         pass
-
+    
     def get_assets(self):
         file_indice = f"data/indices/{self._indice}.csv"
         df_indice = pd.read_csv(file_indice, delimiter=";")
@@ -42,6 +42,13 @@ class Library:
             dict_assets_names_concat[cle] = valeur
 
         return list(dict_assets_names_concat.values()), dict_assets_names, dict_assets_names_concat
+    
+    def get_symbol(self):
+        all_assets, dict_assets_names, dict_assets_names_concat = self.get_assets_name()
+        list_symbols = []
+        for actions in self._selected_assets:
+            [list_symbols.append(cle) for cle, valeur in dict_assets_names_concat.items() if valeur == actions]
+        return list_symbols
     
     def get_assets_all(self):
         dict_assets_names = self.get_assets_name()
