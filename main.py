@@ -95,7 +95,7 @@ with tab2:
 
     st.header("Action à visualiser")
     asset = st.selectbox('Choisir une action', assets_all)
-    asset = [cle for cle, valeur in dict_assets_names_concat.items() if valeur == asset]
+    asset = Library(None,liste_indice,asset).get_symbol()
     asset_dataframe = Library(None, None, asset).get_dataframes()
     df_prophet,forecast, mse_prophet, graph_forecast = Prediction(asset_dataframe).forecast()
     st.line_chart(data=graph_forecast)
@@ -120,8 +120,6 @@ with tab3 :
     st.header("Composer votre portefeuille")
     portefeuille = st.multiselect("Choisissez vos actions", assets_all)
     nb_acts = len(portefeuille)
-    list_assets = Library(None,liste_indice,portefeuille).get_symbol()
-    st.write(list_assets)
 
     calcul = st.button('Calculer')
     if calcul:
@@ -130,6 +128,7 @@ with tab3 :
             try:
 
                 if nb_acts <= 4:
+                    list_assets = Library(None,liste_indice,portefeuille).get_symbol()
                     portfolio_dataframes = Library(None, None, list_assets).get_dataframes()
                     merged_df = Optimize(list_assets, nb_acts, portfolio_dataframes).process_data()
                     st.subheader('Frontière efficiente')
