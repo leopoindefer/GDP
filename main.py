@@ -68,16 +68,19 @@ with tab1 :
         st.write('')
         st.write("")
         run = st.button('Comparer')
-    
-    if run:
-        list_asset_comp = [symb1,symb2]
-        assets_comp = Library(None,liste_indice,list_asset_comp).get_symbol()
-        selected_dataframes = Library(None, None, assets_comp).get_dataframes()
-        dataframes_resampled_comp = Transform(selected_dataframes).resample()
-        compar_chart, corr = Comparaison(dataframes_resampled_comp).inner_combine()
-        st.line_chart(compar_chart)
+        
+    try:
+        if run:
+            list_asset_comp = [symb1,symb2]
+            assets_comp = Library(None,liste_indice,list_asset_comp).get_symbol()
+            selected_dataframes = Library(None, None, assets_comp).get_dataframes()
+            dataframes_resampled_comp = Transform(selected_dataframes).resample()
+            compar_chart, corr = Comparaison(dataframes_resampled_comp).inner_combine()
+            st.line_chart(compar_chart)
 
-        st.write(f'Corrélation linéraire à : {round(corr*100,2)}%')
+            st.write(f'Corrélation linéraire à : {round(corr*100,2)}%')
+    except:
+        st.error("Comparaison impossible")
 
     st.markdown('----')
 
