@@ -12,7 +12,6 @@ from fonctions.asset_optimizer import Optimize
 st.set_page_config(
     page_title="GDP",
     page_icon="💯",
-    backgroundColor = "#F0F0F0"
 )
 
 st.title("Gérer votre portefeuille avec l'IA")
