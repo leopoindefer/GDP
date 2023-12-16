@@ -12,6 +12,7 @@ from fonctions.asset_optimizer import Optimize
 st.set_page_config(
     page_title="GDP",
     page_icon="💯",
+    backgroundColor = "#F0F0F0"
 )
 
 st.title("Gérer votre portefeuille avec l'IA")
@@ -26,6 +27,7 @@ with tab1 :
                 MainMenu {Visibility: hidden;}
                 footer {visibility: hidden;}
                 .bouton {visibility: hidden;}
+                backgroundColor = "#F0F0F0"
                 </style>
                 """
     st.markdown(hide_st_style, unsafe_allow_html=True) 
@@ -68,7 +70,7 @@ with tab1 :
         st.write('')
         st.write("")
         run = st.button('Comparer')
-        
+
     try:
         if run:
             list_asset_comp = [symb1,symb2]
