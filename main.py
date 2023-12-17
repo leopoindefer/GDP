@@ -113,7 +113,7 @@ with tab3 :
     st.header("Composer votre portefeuille")
     portefeuille = st.multiselect("Choisissez vos actions", assets_all)
 
-    calcul = st.button('Calculer')
+    calcul = st.button('Optimiser mon portefeuille')
     if calcul:
          with st.spinner('Chargement du calcul'):
             nb_acts = len(portefeuille)
