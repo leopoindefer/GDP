@@ -60,8 +60,6 @@ with tab1 :
         symb1 = st.selectbox('', assets_all,index=None,placeholder="Action 1")
     
     with col_comp2:
-        #asset2 = assets_all.copy()
-        #asset2.remove(symb1) 
         symb2 = st.selectbox(' ', assets_all,index=None,placeholder="Action 2")
 
     with col_comp3:
@@ -114,11 +112,11 @@ with tab2:
 with tab3 : 
     st.header("Composer votre portefeuille")
     portefeuille = st.multiselect("Choisissez vos actions", assets_all)
-    nb_acts = len(portefeuille)
 
     calcul = st.button('Calculer')
     if calcul:
          with st.spinner('Chargement du calcul'):
+            nb_acts = len(portefeuille)
              
             try:
 
