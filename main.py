@@ -26,7 +26,6 @@ with tab1 :
                 MainMenu {Visibility: hidden;}
                 footer {visibility: hidden;}
                 .bouton {visibility: hidden;}
-                backgroundColor = "#F0F0F0"
                 </style>
                 """
     st.markdown(hide_st_style, unsafe_allow_html=True) 
@@ -58,12 +57,12 @@ with tab1 :
     st.header("Comparer des actions")
     col_comp1, col_comp2, col_comp3 = st.columns(3)
     with col_comp1:
-        symb1 = st.selectbox('', assets_all)
+        symb1 = st.selectbox('', assets_all, placeholder="Action 1")
     
     with col_comp2:
         asset2 = assets_all.copy()
         asset2.remove(symb1)
-        symb2 = st.selectbox(' ', asset2)
+        symb2 = st.selectbox(' ', asset2, placeholder="Action 2")
 
     with col_comp3:
         st.write('')
