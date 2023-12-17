@@ -57,12 +57,12 @@ with tab1 :
     st.header("Comparer des actions")
     col_comp1, col_comp2, col_comp3 = st.columns(3)
     with col_comp1:
-        symb1 = st.selectbox('', assets_all, placeholder="Action 1")
+        symb1 = st.selectbox('', assets_all,index=None,placeholder="Action 1")
     
     with col_comp2:
         asset2 = assets_all.copy()
         asset2.remove(symb1)
-        symb2 = st.selectbox(' ', asset2, placeholder="Action 2")
+        symb2 = st.selectbox(' ', asset2,index=None,placeholder="Action 2")
 
     with col_comp3:
         st.write('')
