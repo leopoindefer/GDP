@@ -86,7 +86,7 @@ with tab2:
     
     assets =[]
     st.header("Action à visualiser")
-    col1_viz,col2_viz = st.columns((8,2))
+    col1_viz,col2_viz = st.columns((8,1))
     with col1_viz:
         asset = st.selectbox('Choisir une action', assets_all)
     with col2_viz:
