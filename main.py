@@ -91,6 +91,7 @@ with tab2:
         asset = st.selectbox('Choisir une action', assets_all)
     with col2_viz:
         st.write("   ")
+        st.write("     ")
         search_button = st.button("🔎")
     if search_button:
         assets.append(asset)
