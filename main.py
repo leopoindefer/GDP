@@ -86,8 +86,12 @@ with tab2:
     
     assets =[]
     st.header("Action à visualiser")
-    asset = st.selectbox('Choisir une action', assets_all)
-    if asset:
+    col1_viz,col2_viz = st.columns((8,2))
+    with col1_viz:
+        asset = st.selectbox('Choisir une action', assets_all)
+    with col2_viz:
+        search_button = st.button("🔎")
+    if search_button:
         assets.append(asset)
         list_symbol = Library(None,liste_indice,assets).get_symbol()
         asset_dataframe = Library(None, None, asset).get_dataframes()
