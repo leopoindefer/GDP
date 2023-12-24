@@ -88,7 +88,7 @@ with tab2:
     st.header("Action à visualiser")
     col1_viz,col2_viz = st.columns((8,1))
     with col1_viz:
-        asset = st.selectbox('Choisir une action', assets_all)
+        asset = st.selectbox('Choisir une action', assets_all, index=None,placeholder="Action")
     with col2_viz:
         st.write("   ")
         st.write("     ")
