@@ -66,8 +66,8 @@ class Optimize():
         df = df.rename(columns={c:'Répartition'})
         mask = (df.index != 'Rentabilité') & (df.index != 'Volatilité')
         df.loc[mask, 'Répartition'] *= 100
-        df.loc[mask, 'Répartition'] = df.loc[mask, 'Répartition'].astype(str) + '%'
         df['Répartition'] = df['Répartition'].round(2)
+        df.loc[mask, 'Répartition'] = df.loc[mask, 'Répartition'].astype(str) + '%'
         return df
 
     def get_optimum(self):
