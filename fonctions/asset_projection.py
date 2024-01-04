@@ -67,25 +67,14 @@ class Projection():
         invest_part, div, gap_value, gap_value_lower, gap_value_upper = self.get_gap_values()
         color_style = self.get_color(tRent)
         nb_part, tx_rendement, rendement, tx_rentabilite, rentabilite, tx_renta_lower, renta_lower, tx_renta_upper, renta_upper = (
-            round(invest_part, 2),
-            round(tRend, 2),
-            round(div, 2),
-            round(tRent, 2),
-            round(div + gap_value, 2),
-            round(tRent_lower, 2),
-            round(div + gap_value_lower, 2),
-            round(tRent_upper, 2),
-            round(div + gap_value_upper, 2),
-        )
-        nb_part, tx_rendement, rendement, tx_rentabilite, rentabilite, tx_renta_lower, renta_lower, tx_renta_upper, renta_upper = (
-            f'<span style="{color_style}">{nb_part}</span>',
-            f'<span style="{color_style}">{tx_rendement}%</span>',
-            f'<span style="{color_style}">{rendement}€</span>',
-            f'<span style="{color_style}">{tx_rentabilite}%</span>',
-            f'<span style="{color_style}">{rentabilite}€</span>',
-            f'<span style="{color_style}">{tx_renta_lower}%</span>',
-            f'<span style="{color_style}">{renta_lower}€</span>',
-            f'<span style="{color_style}">{tx_renta_upper}%</span>',
-            f'<span style="{color_style}">{renta_upper}€</span>',
+            f'<span style="{color_style}">{round(invest_part, 2)}</span>',
+            f'<span style="{color_style}">{round(tRend, 2)}%</span>',
+            f'<span style="{color_style}">{round(div, 2)}€</span>',
+            f'<span style="{color_style}">{round(tRent, 2)}%</span>',
+            f'<span style="{color_style}">{round(div + gap_value, 2)}€</span>',
+            f'<span style="{color_style}">{round(tRent_lower, 2)}%</span>',
+            f'<span style="{color_style}">{round(div + gap_value_lower, 2)}€</span>',
+            f'<span style="{color_style}">{round(tRent_upper, 2)}%</span>',
+            f'<span style="{color_style}">{round(div + gap_value_upper, 2)}€</span>',
         )
         return nb_part, tx_rendement, rendement, tx_rentabilite, rentabilite, tx_renta_lower, renta_lower, tx_renta_upper, renta_upper
