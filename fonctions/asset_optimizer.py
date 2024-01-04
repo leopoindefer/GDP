@@ -68,7 +68,7 @@ class Optimize():
         perf = (df.index == 'Rentabilité') & (df.index == 'Volatilité')
         df.loc[mask, 'Répartition'] *= 100
         df.loc[perf, 'Répartition'] = df.loc[perf, 'Répartition'].round(2)
-        df.loc[mask, 'Répartition'] = df.loc[mask, 'Répartition'].astype(str) + '%'
+        df.loc[:,'Répartition'] = df.loc[:,'Répartition'].astype(str) + '%'
         return df
 
     def get_optimum(self):
