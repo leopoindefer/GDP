@@ -62,7 +62,7 @@ class Optimize():
     def column_rename(self, df):
         df = pd.DataFrame(df)
         for c in df.columns:
-            c = c    
+            c = c
         df = df.rename(columns={c:'Repart'})
         return df
 
