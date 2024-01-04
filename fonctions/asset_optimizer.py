@@ -59,11 +59,18 @@ class Optimize():
         
         return df_RisqueFaible, df_RisqueMoyen, df_RisqueEleve, df_RisqueTresEleve
     
+    def column_rename(self, df):
+        df = pd.DataFrame(df)
+        for c in df.columns:
+            c = c    
+        df = df.rename(columns={c:'Repart'})
+        return df
+
     def get_optimum(self):
         df_RisqueFaible, df_RisqueMoyen, df_RisqueEleve, df_RisqueTresEleve = self.risk_category()
         if df_RisqueFaible.empty == False:
             RisqueFaible = df_RisqueFaible.iloc[0]
-            RisqueFaible = RisqueFaible.loc[-2:-1,:].multiply(100)
+            RisqueFaible = self.column_rename(self, RisqueFaible)
         else: 
             RisqueFaible = "Aucun"
         if df_RisqueMoyen.empty == False:
