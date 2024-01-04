@@ -107,20 +107,17 @@ with tab2:
             montant = st.text_input('Montant à investir', 1000)
         with col2:
             duree = st.date_input("Jusqu'à quand ?", pd.to_datetime(forecast["date"].iloc[-1]), min_value=pd.to_datetime(df_prophet["ds"].iloc[0]), max_value=pd.to_datetime(forecast["date"].iloc[-1]))
-        try :
-            nb_part, tx_rendement, rendement, tx_rentabilite, rentabilite, tx_renta_lower, renta_lower, tx_renta_upper, renta_upper = Projection(montant, duree, asset, df_prophet, forecast).unit_projection()
-            if tx_rentabilite > 0:
-                st.write(f'Nombre d action acheté : :green[{nb_part}]',unsafe_allow_html=True)
-                st.write(f'Taux de rendement de : :green[{tx_rendement}], Rendement de :green[{rendement}]',unsafe_allow_html=True)
-                st.write(f'Taux de Rentabilité de : :green[{tx_rentabilite}], Rentabilité de :green[{rentabilite}]',unsafe_allow_html=True)  
-                st.write(f'Intervalle de confiance de rentabilité : [:green[{renta_lower}] : :green[{renta_upper}]]',unsafe_allow_html=True)
-            else :
-                st.write(f'Nombre d action acheté : :red[{nb_part}]',unsafe_allow_html=True)
-                st.write(f'Taux de rendement de : :red[{tx_rendement}], Rendement de :red[{rendement}]',unsafe_allow_html=True)
-                st.write(f'Taux de Rentabilité de : :red[{tx_rentabilite}], Rentabilité de :red[{rentabilite}]',unsafe_allow_html=True)  
-                st.write(f'Intervalle de confiance de rentabilité : [:red[{renta_lower}] : :red[{renta_upper}]]',unsafe_allow_html=True)
-        except:
-            st.error("Pas de projection disponible")
+        #try :
+        nb_part, tx_rendement, rendement, tx_rentabilite, rentabilite, tx_renta_lower, renta_lower, tx_renta_upper, renta_upper = Projection(montant, duree, asset, df_prophet, forecast).unit_projection()
+        if tx_rentabilite > 0:
+            st.write(f'Nombre d action acheté : :green[{nb_part}]',unsafe_allow_html=True)
+            st.write(f'Taux de rendement de : :green[{tx_rendement}], Rendement de :green[{rendement}]',unsafe_allow_html=True)
+            st.write(f'Taux de Rentabilité de : :green[{tx_rentabilite}], Rentabilité de :green[{rentabilite}]',unsafe_allow_html=True)  
+            st.write(f'Intervalle de confiance de rentabilité : [:green[{renta_lower}] : :green[{renta_upper}]]',unsafe_allow_html=True)
+        else :
+            st.write("rien")
+        #except:
+            #st.error("Pas de projection disponible")
 
 with tab3 : 
     st.header("Composer votre portefeuille")
