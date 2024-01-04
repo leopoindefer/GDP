@@ -84,7 +84,7 @@ with tab1 :
 
 with tab2:
     
-    assets =[]
+    assets_viz =[]
     st.header("Action à visualiser")
     col1_viz,col2_viz = st.columns((8,1))
     with col1_viz:
@@ -94,9 +94,9 @@ with tab2:
         st.write("     ")
         search_button = st.button("🔎")
     if search_button:
-        assets.append(asset)
-        list_symbol = Library(None,liste_indice,assets).get_symbol()
-        asset_dataframe = Library(None, None, asset).get_dataframes()
+        assets_viz.append(asset)
+        list_symbol = Library(None,liste_indice,assets_viz).get_symbol()
+        asset_dataframe = Library(None, None, assets_viz).get_dataframes()
         df_prophet,forecast, mse_prophet, graph_forecast = Prediction(asset_dataframe).forecast()
         st.line_chart(data=graph_forecast)
         st.write("PROPHET MSE:")
