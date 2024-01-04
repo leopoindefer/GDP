@@ -23,6 +23,9 @@ assets_all, dict_assets_names, dict_assets_names_concat = Library(None, liste_in
 with tab1 :
     hide_st_style = """
                 <style>
+                body {
+                background: #21252F; 
+                }
                 MainMenu {Visibility: hidden;}
                 footer {visibility: hidden;}
                 .bouton {visibility: hidden;}
