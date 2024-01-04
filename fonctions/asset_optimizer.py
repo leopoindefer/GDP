@@ -71,7 +71,9 @@ class Optimize():
         if df_RisqueFaible.empty == False:
             RisqueFaible = df_RisqueFaible.iloc[0]
             RisqueFaible = self.column_rename(RisqueFaible)
-            RisqueFaible.loc[:-2] = RisqueFaible.loc[:-2].multiply(100)
+            mask = (RisqueFaible.index != 'Rentabilité') & (RisqueFaible.index != 'Volatilité')
+            RisqueFaible.loc[mask, 'Répartition'] *= 100
+            RisqueFaible.loc[mask, 'Répartition'] = RisqueFaible.loc[mask, 'Répartition'].astype(str) + '%'
         else: 
             RisqueFaible = "Aucun"
         if df_RisqueMoyen.empty == False:
