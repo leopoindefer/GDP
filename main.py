@@ -170,7 +170,7 @@ with tab3 :
             except:
                 st.error("Pas de portefeuille possible")
             
-            st.subheader(':green[Investir !]')
+            st.subheader(':red[Investir !]')
             liste_url = []
             for a in list_assets:
                 url = f'https://finance.yahoo.com/quote/{a}?p={a}&.tsrc=fin-srch'
