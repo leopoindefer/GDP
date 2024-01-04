@@ -14,7 +14,7 @@ st.set_page_config(
     page_icon="💯",
 )
 
-st.title("Gérer votre portefeuille avec l'IA")
+st.title("Créer et optimiser votre portefeuille facilement")
 
 tab1, tab2, tab3 = st.tabs(["Analyser le marché", "Prédiction de performance", "Création de portefeuille"])
 liste_indice = ["CAC40", "DOWJONES", "NASDAQ100", "S&P500", "SBF120"]
@@ -109,10 +109,10 @@ with tab2:
             duree = st.date_input("Jusqu'à quand ?", pd.to_datetime(forecast["date"].iloc[-1]), min_value=pd.to_datetime(df_prophet["ds"].iloc[0]), max_value=pd.to_datetime(forecast["date"].iloc[-1]))
         try :
             nb_part, tx_rendement, rendement, tx_rentabilite, rentabilite, tx_renta_lower, renta_lower, tx_renta_upper, renta_upper = Projection(montant, duree, asset, df_prophet, forecast).unit_projection()
-            st.write(f'Nombre d action acheté : {nb_part}', unsafe_allow_html=True)
-            st.write(f'Taux de rendement de : {tx_rendement}, Rendement de {rendement}', unsafe_allow_html=True)
-            st.write(f'Taux de Rentabilité de : {tx_rentabilite}, Rentabilité de {rentabilite}', unsafe_allow_html=True)
-            st.write(f'Intervalle de confiance de rentabilité : [{renta_lower} : {renta_upper}]', unsafe_allow_html=True)
+            st.write(f'Nombre d action acheté : {nb_part}  
+            Taux de rendement de : {tx_rendement}, Rendement de {rendement}  
+            Taux de Rentabilité de : {tx_rentabilite}, Rentabilité de {rentabilite}  
+            Intervalle de confiance de rentabilité : [{renta_lower} : {renta_upper}]')
         except:
             st.error("Pas de projection disponible")
 
@@ -170,7 +170,7 @@ with tab3 :
             except:
                 st.error("Pas de portefeuille possible")
             
-            st.subheader(':red[Investir !]')
+            st.subheader(':green[Investir !]')
             liste_url = []
             for a in list_assets:
                 url = f'https://finance.yahoo.com/quote/{a}?p={a}&.tsrc=fin-srch'
