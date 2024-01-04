@@ -175,5 +175,5 @@ with tab3 :
             for a in list_assets:
                 url = f'https://finance.yahoo.com/quote/{a}?p={a}&.tsrc=fin-srch'
                 liste_url.append(url)          
-            url_str = ', '.join(liste_url)
-            st.write(url_str)
+            url_str = '  '.join(liste_url)
+            st.markdown(url_str)
