@@ -68,13 +68,13 @@ class Projection():
         color_style = self.get_color(tRent)
         nb_part, tx_rendement, rendement, tx_rentabilite, rentabilite, tx_renta_lower, renta_lower, tx_renta_upper, renta_upper = (
             f':{color_style}[{round(invest_part, 2)}]',
-            f':{color_style}[{round(tRend, 2)}]%',
-            f':{color_style}[{round(div, 2)}]€',
-            f':{color_style}[{round(tRent, 2)}]%',
-            f':{color_style}[{round(div + gap_value, 2)}]€',
-            f':{color_style}[{round(tRent_lower, 2)}]%',
-            f':{color_style}[{round(div + gap_value_lower, 2)}]€',
-            f':{color_style}[{round(tRent_upper, 2)}]%',
-            f':{color_style}[{round(div + gap_value_upper, 2)}]€',
+            f':{color_style}[{round(tRend, 2)}%]',
+            f':{color_style}[{round(div, 2)}€]',
+            f':{color_style}[{round(tRent, 2)}%]',
+            f':{color_style}[{round(div + gap_value, 2)}€]',
+            f':{color_style}[{round(tRent_lower, 2)}%]',
+            f':{color_style}[{round(div + gap_value_lower, 2)}€]',
+            f':{color_style}[{round(tRent_upper, 2)}%]',
+            f':{color_style}[{round(div + gap_value_upper, 2)}€]',
         )
         return nb_part, tx_rendement, rendement, tx_rentabilite, rentabilite, tx_renta_lower, renta_lower, tx_renta_upper, renta_upper
