@@ -97,6 +97,7 @@ with tab2:
         assets_viz.append(asset)
         list_symbol = Library(None,liste_indice,assets_viz).get_symbol()
         asset_dataframe = Library(None, None, assets_viz).get_dataframes()
+        st.write(asset_dataframe)
         df_prophet,forecast, mse_prophet, graph_forecast = Prediction(asset_dataframe).forecast()
         st.line_chart(data=graph_forecast)
         st.write("PROPHET MSE:")
