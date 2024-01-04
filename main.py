@@ -14,7 +14,7 @@ st.set_page_config(
     page_icon="💯",
 )
 
-st.title("Créer et optimiser votre portefeuille facilement")
+st.title("Créer votre portefeuille facilement")
 
 tab1, tab2, tab3 = st.tabs(["Analyser le marché", "Prédiction de performance", "Création de portefeuille"])
 liste_indice = ["CAC40", "DOWJONES", "NASDAQ100", "S&P500", "SBF120"]
@@ -128,50 +128,50 @@ with tab3 :
          with st.spinner('Chargement du calcul'):
             nb_acts = len(portefeuille)
              
-            try:
+            #try:
 
-                if nb_acts <= 4:
-                    list_assets = Library(None,liste_indice,portefeuille).get_symbol()
-                    portfolio_dataframes = Library(None, None, list_assets).get_dataframes()
-                    merged_df = Optimize(list_assets, nb_acts, portfolio_dataframes).process_data()
-                    st.subheader('Frontière efficiente')
-                    st.scatter_chart(merged_df, x='Volatilité', y='Rentabilité')
-                    st.subheader('Portefeuille efficient pour :')
-                    RisqueFaible, RisqueMoyen, RisqueEleve, RisqueTresEleve = Optimize(list_assets, nb_acts, portfolio_dataframes).get_optimum()
-                    col_result1, col_result2, col_result3, col_result4 = st.columns(4)
-                    with col_result1:
-                        st.write("Risque faible")
-                        try :
-                            st.dataframe(RisqueFaible)
-                        except:
-                            st.write("Aucun")
+            if nb_acts <= 4:
+                list_assets = Library(None,liste_indice,portefeuille).get_symbol()
+                portfolio_dataframes = Library(None, None, list_assets).get_dataframes()
+                merged_df = Optimize(list_assets, nb_acts, portfolio_dataframes).process_data()
+                st.subheader('Frontière efficiente')
+                st.scatter_chart(merged_df, x='Volatilité', y='Rentabilité')
+                st.subheader('Portefeuille efficient pour :')
+                RisqueFaible, RisqueMoyen, RisqueEleve, RisqueTresEleve = Optimize(list_assets, nb_acts, portfolio_dataframes).get_optimum()
+                col_result1, col_result2, col_result3, col_result4 = st.columns(4)
+                with col_result1:
+                    st.write("Risque faible")
+                    try :
+                        st.dataframe(RisqueFaible)
+                    except:
+                        st.write("Aucun")
 
-                    with col_result2:
-                        st.write("Risque moyen")
-                        try:
-                            st.write(RisqueMoyen)
-                        except:
-                            st.write("Aucun")
+                with col_result2:
+                    st.write("Risque moyen")
+                    try:
+                        st.write(RisqueMoyen)
+                    except:
+                        st.write("Aucun")
 
-                    with col_result3:
-                        st.write("Risque élevé")
-                        try:
-                            st.write(RisqueEleve)
-                        except:
-                            st.write("Aucun")
+                with col_result3:
+                    st.write("Risque élevé")
+                    try:
+                        st.write(RisqueEleve)
+                    except:
+                        st.write("Aucun")
 
-                    with col_result4:
-                        st.write("Risque très élevé")
-                        try:
-                            st.write(RisqueTresEleve)
-                        except:
-                            st.write("Aucun")
+                with col_result4:
+                    st.write("Risque très élevé")
+                    try:
+                        st.write(RisqueTresEleve)
+                    except:
+                        st.write("Aucun")
 
-                else:
-                    mess_gdp = f"Création de portefeuille pas encore disponible pour {nb_acts}"
-                    st.write(mess_gdp)
-            except:
-                st.error("Pas de portefeuille possible")
+            else:
+                mess_gdp = f"Création de portefeuille pas encore disponible pour {nb_acts}"
+                st.write(mess_gdp)
+            #except:
+                #st.error("Pas de portefeuille possible")
             
             st.subheader(':green[Investir !]')
             liste_url = []
