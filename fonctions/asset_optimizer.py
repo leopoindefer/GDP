@@ -59,36 +59,37 @@ class Optimize():
         
         return df_RisqueFaible, df_RisqueMoyen, df_RisqueEleve, df_RisqueTresEleve
     
-    def column_rename(self, df):
+    def result_df(self, df):
         df = pd.DataFrame(df)
         for c in df.columns:
             c = c
         df = df.rename(columns={c:'Répartition'})
+        mask = (df.index != 'Rentabilité') & (df.index != 'Volatilité')
+        df.loc[mask, 'Répartition'] *= 100
+        df.loc[mask, 'Répartition'] = df.loc[mask, 'Répartition'].astype(str) + '%'
+        df['Répartition'] = df['Répartition'].round(2)
         return df
 
     def get_optimum(self):
         df_RisqueFaible, df_RisqueMoyen, df_RisqueEleve, df_RisqueTresEleve = self.risk_category()
         if df_RisqueFaible.empty == False:
             RisqueFaible = df_RisqueFaible.iloc[0]
-            RisqueFaible = self.column_rename(RisqueFaible)
-            mask = (RisqueFaible.index != 'Rentabilité') & (RisqueFaible.index != 'Volatilité')
-            RisqueFaible.loc[mask, 'Répartition'] *= 100
-            RisqueFaible.loc[mask, 'Répartition'] = RisqueFaible.loc[mask, 'Répartition'].astype(str) + '%'
+            RisqueFaible = self.result_df(RisqueFaible)
         else: 
             RisqueFaible = "Aucun"
         if df_RisqueMoyen.empty == False:
             RisqueMoyen = df_RisqueMoyen.iloc[0]
-            RisqueMoyen = self.column_rename(RisqueMoyen)
+            RisqueMoyen = self.result_df(RisqueMoyen)
         else:
             RisqueMoyen = "Aucun"
         if df_RisqueEleve.empty == False:
             RisqueEleve = df_RisqueEleve.iloc[0]
-            RisqueEleve = self.column_rename(RisqueEleve)
+            RisqueEleve = self.result_df(RisqueEleve)
         else:
             RisqueEleve = "Aucun"
         if df_RisqueTresEleve.empty == False:
             RisqueTresEleve = df_RisqueTresEleve.iloc[0]
-            RisqueEleve = self.column_rename(RisqueEleve)
+            RisqueEleve = self.result_df(RisqueEleve)
         else:
             RisqueTresEleve = "Aucun"
         return RisqueFaible, RisqueMoyen, RisqueEleve, RisqueTresEleve
