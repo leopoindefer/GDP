@@ -60,21 +60,21 @@ class Projection():
         return tRend, tRent, tRent_lower, tRent_upper
 
     def get_color(self, tRent):
-        return '#FF0000;' if tRent < 0 else '#008000;'
+        return 'red' if tRent < 0 else 'green'
     
     def unit_projection(self):
         tRend, tRent, tRent_lower, tRent_upper = self.get_rentability()
         invest_part, div, gap_value, gap_value_lower, gap_value_upper = self.get_gap_values()
         color_style = self.get_color(tRent)
         nb_part, tx_rendement, rendement, tx_rentabilite, rentabilite, tx_renta_lower, renta_lower, tx_renta_upper, renta_upper = (
-            round(invest_part, 2),
-            round(tRend, 2),
-            round(div, 2),
-            round(tRent, 2),
-            round(div + gap_value, 2),
-            round(tRent_lower, 2),
-            round(div + gap_value_lower, 2),
-            round(tRent_upper, 2),
-            round(div + gap_value_upper, 2),
+            f':{color_style}[{round(invest_part, 2)}]',
+            f':{color_style}[{round(tRend, 2)}]%',
+            f':{color_style}[{round(div, 2)}]€',
+            f':{color_style}[{round(tRent, 2)}]%',
+            f':{color_style}[{round(div + gap_value, 2)}]€',
+            f':{color_style}[{round(tRent_lower, 2)}]%',
+            f':{color_style}[{round(div + gap_value_lower, 2)}]€',
+            f':{color_style}[{round(tRent_upper, 2)}]%',
+            f':{color_style}[{round(div + gap_value_upper, 2)}]€',
         )
         return nb_part, tx_rendement, rendement, tx_rentabilite, rentabilite, tx_renta_lower, renta_lower, tx_renta_upper, renta_upper
