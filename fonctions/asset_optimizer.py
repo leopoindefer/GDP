@@ -63,7 +63,7 @@ class Optimize():
         df = pd.DataFrame(df)
         for c in df.columns:
             c = c
-        df = df.rename(columns={c:'Repart'})
+        df = df.rename(columns={c:'Répartition'})
         return df
 
     def get_optimum(self):
@@ -71,18 +71,22 @@ class Optimize():
         if df_RisqueFaible.empty == False:
             RisqueFaible = df_RisqueFaible.iloc[0]
             RisqueFaible = self.column_rename(RisqueFaible)
+            RisqueFaible.loc[:-2] = RisqueFaible.loc[:-2].multiply(100)
         else: 
             RisqueFaible = "Aucun"
         if df_RisqueMoyen.empty == False:
             RisqueMoyen = df_RisqueMoyen.iloc[0]
+            RisqueMoyen = self.column_rename(RisqueMoyen)
         else:
             RisqueMoyen = "Aucun"
         if df_RisqueEleve.empty == False:
             RisqueEleve = df_RisqueEleve.iloc[0]
+            RisqueEleve = self.column_rename(RisqueEleve)
         else:
             RisqueEleve = "Aucun"
         if df_RisqueTresEleve.empty == False:
             RisqueTresEleve = df_RisqueTresEleve.iloc[0]
+            RisqueEleve = self.column_rename(RisqueEleve)
         else:
             RisqueTresEleve = "Aucun"
         return RisqueFaible, RisqueMoyen, RisqueEleve, RisqueTresEleve
