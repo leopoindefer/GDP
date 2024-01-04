@@ -116,9 +116,9 @@ with tab2:
                 st.write(f'Intervalle de confiance de rentabilité : [:green[{renta_lower}] : :green[{renta_upper}]]',unsafe_allow_html=True)
             else :
                 st.write(f'Nombre d action acheté : :red[{nb_part}]',unsafe_allow_html=True)
-                st.write(f'Taux de rendement de : :red{tx_rendement}], Rendement de :red{rendement}]',unsafe_allow_html=True)
-                st.write(f'Taux de Rentabilité de : :red{tx_rentabilite}], Rentabilité de :red{rentabilite}]',unsafe_allow_html=True)  
-                st.write(f'Intervalle de confiance de rentabilité : [:red{renta_lower}] : :red{renta_upper}]]',unsafe_allow_html=True)
+                st.write(f'Taux de rendement de : :red[{tx_rendement}], Rendement de :red[{rendement}]',unsafe_allow_html=True)
+                st.write(f'Taux de Rentabilité de : :red[{tx_rentabilite}], Rentabilité de :red[{rentabilite}]',unsafe_allow_html=True)  
+                st.write(f'Intervalle de confiance de rentabilité : [:red[{renta_lower}] : :red[{renta_upper}]]',unsafe_allow_html=True)
         except:
             st.error("Pas de projection disponible")
 
