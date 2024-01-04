@@ -90,7 +90,7 @@ class Optimize():
             RisqueEleve = "Aucun"
         if df_RisqueTresEleve.empty == False:
             RisqueTresEleve = df_RisqueTresEleve.iloc[0]
-            RisqueEleve = self.result_df(RisqueEleve)
+            RisqueTresEleve = self.result_df(RisqueTresEleve)
         else:
             RisqueTresEleve = "Aucun"
         return RisqueFaible, RisqueMoyen, RisqueEleve, RisqueTresEleve
