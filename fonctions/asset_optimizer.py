@@ -70,7 +70,7 @@ class Optimize():
         df_RisqueFaible, df_RisqueMoyen, df_RisqueEleve, df_RisqueTresEleve = self.risk_category()
         if df_RisqueFaible.empty == False:
             RisqueFaible = df_RisqueFaible.iloc[0]
-            RisqueFaible = self.column_rename(self, RisqueFaible)
+            RisqueFaible = self.column_rename(RisqueFaible)
         else: 
             RisqueFaible = "Aucun"
         if df_RisqueMoyen.empty == False:
