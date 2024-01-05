@@ -142,7 +142,8 @@ with tab3 :
                 with col_result1:
                     st.write("Risque faible")
                     try :
-                        st.dataframe(RisqueFaible)
+                        st.dataframe(RisqueFaible.iloc[:-2])
+                        st.dataframe(RisqueFaible.iloc[-2:])
                     except:
                         st.write("Aucun")
 
