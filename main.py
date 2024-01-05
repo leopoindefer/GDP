@@ -159,8 +159,8 @@ with tab3 :
                     st.write("Risque élevé")
                     try:
                         st.write(RisqueEleve.iloc[:-2])
-                        RisqueEleve['Performance'] = RisqueEleve.iloc[-2:]
-                        st.write(RisqueEleve['Performance'])
+                        RisqueEleve['Performance'] = RisqueEleve
+                        st.write(RisqueEleve['Performance'].iloc[-2:])
                     except:
                         st.write("Aucun")
 
