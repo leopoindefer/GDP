@@ -180,13 +180,14 @@ with tab3 :
                 else:
                     mess_gdp = f"Création de portefeuille pas encore disponible pour {nb_acts}"
                     st.write(mess_gdp)
+                    
+                st.subheader(':green[Investir !]')
+                liste_url = []
+                for a in list_assets:
+                    url = f'https://finance.yahoo.com/quote/{a}?p={a}&.tsrc=fin-srch'
+                    liste_url.append(url)          
+                url_str = ', '.join(liste_url)
+                st.markdown(url_str)
+                
             except:
                 st.error("Pas de portefeuille possible")
-            
-            st.subheader(':green[Investir !]')
-            liste_url = []
-            for a in list_assets:
-                url = f'https://finance.yahoo.com/quote/{a}?p={a}&.tsrc=fin-srch'
-                liste_url.append(url)          
-            url_str = ', '.join(liste_url)
-            st.markdown(url_str)
