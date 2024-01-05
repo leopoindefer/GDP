@@ -131,7 +131,7 @@ with tab3 :
             try:
                 
                 if nb_acts == 1:
-                    st.write('Merci de choisir plus d une action')
+                    st.error('Merci de choisir plus d une action')
                 elif nb_acts <= 4 and nb_acts > 1:
                     list_assets = Library(None,liste_indice,portefeuille).get_symbol()
                     portfolio_dataframes = Library(None, None, list_assets).get_dataframes()
