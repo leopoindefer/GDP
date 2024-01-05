@@ -143,7 +143,8 @@ with tab3 :
                     st.write("Risque faible")
                     try :
                         st.dataframe(RisqueFaible.iloc[:-2])
-                        st.dataframe(RisqueFaible.iloc[-2:])
+                        RisqueFaible['Performance'] = RisqueFaible
+                        st.dataframe(RisqueFaible['Performance'].iloc[-2:])
                     except:
                         st.write("Aucun")
 
@@ -151,7 +152,8 @@ with tab3 :
                     st.write("Risque moyen")
                     try:
                         st.write(RisqueMoyen.iloc[:-2])
-                        st.write(RisqueMoyen.iloc[-2:])
+                        RisqueMoyen['Performance'] = RisqueMoyen
+                        st.write(RisqueMoyen['Performance'].iloc[-2:])
                     except:
                         st.write("Aucun")
 
@@ -168,7 +170,8 @@ with tab3 :
                     st.write("Risque très élevé")
                     try:
                         st.write(RisqueTresEleve.iloc[:-2])
-                        st.write(RisqueTresEleve.iloc[-2:])
+                        RisqueTresEleve['Performance'] = RisqueTresEleve
+                        st.write(RisqueTresEleve['Performance'].iloc[-2:])
                     except:
                         st.write("Aucun")
 
