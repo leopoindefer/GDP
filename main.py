@@ -150,21 +150,25 @@ with tab3 :
                 with col_result2:
                     st.write("Risque moyen")
                     try:
-                        st.write(RisqueMoyen)
+                        st.write(RisqueMoyen.iloc[:-2])
+                        st.write(RisqueMoyen.iloc[-2:])
                     except:
                         st.write("Aucun")
 
                 with col_result3:
                     st.write("Risque élevé")
                     try:
-                        st.write(RisqueEleve)
+                        st.write(RisqueEleve.iloc[:-2])
+                        RisqueEleve['Performance'] = RisqueEleve.iloc[-2:]
+                        st.write(RisqueEleve['Performance'])
                     except:
                         st.write("Aucun")
 
                 with col_result4:
                     st.write("Risque très élevé")
                     try:
-                        st.write(RisqueTresEleve)
+                        st.write(RisqueTresEleve.iloc[:-2])
+                        st.write(RisqueTresEleve.iloc[-2:])
                     except:
                         st.write("Aucun")
 
