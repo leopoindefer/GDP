@@ -125,7 +125,7 @@ with tab3 :
 
     calcul = st.button('Optimiser mon portefeuille')
     if calcul:
-         with st.spinner('Chargement du calcul'):
+         with st.spinner('Calcul en cours'):
             nb_acts = len(portefeuille)
              
             try:
@@ -136,7 +136,7 @@ with tab3 :
                     list_assets = Library(None,liste_indice,portefeuille).get_symbol()
                     portfolio_dataframes = Library(None, None, list_assets).get_dataframes()
                     merged_df = Optimize(list_assets, nb_acts, portfolio_dataframes).process_data()
-                    st.subheader('Ensemble des portfeuilles disponibles')
+                    st.subheader('Ensemble des portefeuilles disponibles')
                     st.scatter_chart(merged_df, x='Volatilité', y='Rentabilité')
                     st.subheader('Portefeuille efficient pour :')
                     RisqueFaible, RisqueMoyen, RisqueEleve, RisqueTresEleve = Optimize(list_assets, nb_acts, portfolio_dataframes).get_optimum()
