@@ -2,7 +2,7 @@ import pandas as pd
 import yfinance as yf
 
 class Projection():
-    def __init__(self, montant, duree, asset, df, forecast):
+    def __init__(self, montant:float, duree:str, asset:str, df:pd.DataFrame, forecast:pd.DataFrame) -> None:
         self._montant = montant
         self._duree = duree
         self._asset = asset
