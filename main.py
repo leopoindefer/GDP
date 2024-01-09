@@ -76,9 +76,9 @@ with tab1 :
             assets_comp = Library(None,liste_indice,list_asset_comp).get_symbol()
             selected_dataframes = Library(None, None, assets_comp).get_dataframes()
             dataframes_resampled_comp = Transform(selected_dataframes).resample()
-            compar_chart, corr = Comparaison(dataframes_resampled_comp).inner_combine()
+            compar_chart = Comparaison(dataframes_resampled_comp).inner_combine()
             st.line_chart(compar_chart)
-
+            corr = Comparaison(dataframes_resampled_comp).get_correlation()
             st.write(f'Corrélation linéraire à : {round(corr*100,2)}%')
     except:
         st.error("Comparaison impossible")
