@@ -1,12 +1,13 @@
 import pandas as pd
 import numpy as np
 from .asset_database import Library
+from .asset_transform import Transform
 
-class Optimize():
+class Optimize(Transform):
     def __init__(self, selected_assets:list, len_assets:int, selected_dataframes:dict):
+        super().__init__(selected_dataframes)
         self._selected_assets = selected_assets
         self._len_assets = len_assets
-        self._selected_dataframes = selected_dataframes
 
     def process_data(self):
         dataframes = self._selected_dataframes.values()
