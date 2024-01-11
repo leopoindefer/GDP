@@ -1,15 +1,13 @@
 import pandas as pd 
-import numpy as np
+import pandas as pd
 
 class Transform():
-    def __init__(self, selected_dataframes:dict) -> None:
+    def __init__(self, selected_dataframes: dict) -> None:
         self._selected_dataframes = selected_dataframes
-        pass
 
     def resample(self):
-        dataframes_resampled = {}
-        for symbol, df in self._selected_dataframes.items():
-            df.index = pd.to_datetime(df.index)
-            df = df.resample("MS").first()
-            dataframes_resampled[symbol] = df
+        dataframes_resampled = {symbol: df.resample("MS").first() for symbol, df in self._selected_dataframes.items()}
         return dataframes_resampled
+    
+    def __str__(self) -> str:
+        return f"{self._selected_dataframes.keys()} est rééchantilloné à la fréquence mensuelle"
