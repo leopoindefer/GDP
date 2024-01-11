@@ -21,11 +21,11 @@ class Analyse(Transform):
                     max_date = s.index[-1]
                     mois_prec = max_date - pd.DateOffset(months=1)
                     s_mois_prec = s[s.index >= mois_prec]
-                    cours_prec = round(s_mois_prec[close_columns].iloc[0], 2)
-                    var = round(((cours - cours_prec) / cours_prec) * 100, 2)
+                    cours_prec = float(round(s_mois_prec[close_columns].iloc[0], 2))
+                    var = float(round(((cours - cours_prec) / cours_prec) * 100, 2))
                     variation = s_mois_prec[close_columns].pct_change().dropna()
                     renta_moy = var
-                    risque_moy = variation.values.std() * 100
+                    risque_moy = float(round(variation.values.std() * 100,2))
                     line = [str(val) for val in s_mois_prec[close_columns].values.flatten()]
                     name = self._dict_assets_names.get(symbol, "")
 
