@@ -8,7 +8,7 @@ class Optimize():
         self._len_assets = len_assets
         self._selected_dataframes = selected_dataframes
 
-    def process_data(self):
+    def process_data(self) -> pd.DataFrame:
         dataframes = self._selected_dataframes.values()
         ptf_df = pd.concat(dataframes, axis=1, join='inner')
         ptf_df.index = pd.to_datetime(ptf_df.index)
@@ -51,7 +51,7 @@ class Optimize():
         return merged_df
 
     #Classer les niveaux de risque
-    def risk_category(self):
+    def risk_category(self) -> tuple:
         merged_df = self.process_data()
         df_RisqueFaible = merged_df[merged_df['Volatilité'] < 3].sort_values(by='Rentabilité', ascending=False)
         df_RisqueMoyen = merged_df[(merged_df['Volatilité'] >= 3) & (merged_df['Volatilité'] <= 8)].sort_values(by='Rentabilité', ascending=False)
@@ -61,7 +61,7 @@ class Optimize():
         return df_RisqueFaible, df_RisqueMoyen, df_RisqueEleve, df_RisqueTresEleve
     
     #Récupérer la renta max pour chaque niveau de risque
-    def get_optimum(self):
+    def get_optimum(self) -> tuple:
         df_RisqueFaible, df_RisqueMoyen, df_RisqueEleve, df_RisqueTresEleve = self.risk_category()
         RisqueFaible = df_RisqueFaible.iloc[0] if not df_RisqueFaible.empty else "Aucun"
         RisqueMoyen = df_RisqueMoyen.iloc[0] if not df_RisqueMoyen.empty else "Aucun"
