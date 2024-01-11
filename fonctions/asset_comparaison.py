@@ -27,6 +27,7 @@ class Comparaison(Transform):
     
     def get_correlation(self):
         inner_join = self.inner_combine()
+        inner_join = pd.DataFrame(inner_join)
         column1 = inner_join.columns[0]
         column2 = inner_join.columns[1]
         X = inner_join[column1].tolist()
