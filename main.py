@@ -79,7 +79,7 @@ with tab1 :
         compar_chart = Comparaison(dataframes_resampled_comp).inner_combine()
         st.line_chart(compar_chart)
         corr = Comparaison(dataframes_resampled_comp).get_correlation()
-        st.write(f'Corrélation linéraire à : {corr*100}%')
+        st.write(f'Corrélation linéraire à : {round(corr*100,2)}%')
     #except:
         #st.error("Comparaison impossible")
 
