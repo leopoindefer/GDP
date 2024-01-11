@@ -76,6 +76,7 @@ with tab1 :
             assets_comp = Library(None,liste_indice,list_asset_comp).get_symbol()
             selected_dataframes = Library(None, None, assets_comp).get_dataframes()
             dataframes_resampled_comp = Transform(selected_dataframes).resample()
+            st.write(dataframes_resampled_comp)
             compar_chart = Comparaison(dataframes_resampled_comp).inner_combine()
             st.line_chart(compar_chart)
             corr = Comparaison(dataframes_resampled_comp).get_correlation()
