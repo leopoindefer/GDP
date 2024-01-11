@@ -68,8 +68,8 @@ class Analyse(Transform):
                     s_mois_prec = s[s.index >= sixmois_prec]
                     s_mois_prec_resampled = s_resampled[s_resampled.index >= sixmois_prec]
                     variation = s_mois_prec_resampled[close_columns].pct_change().dropna()
-                    renta_moy = variation.values.mean() * 100
-                    risque_moy = variation.values.std() * 100
+                    renta_moy = round(variation.values.mean() * 100,2)
+                    risque_moy = round(variation.values.std() * 100,2)
                     line = [str(val) for val in s_mois_prec[close_columns].values.flatten()]
                     name = self._dict_assets_names.get(symbol, "")
 
