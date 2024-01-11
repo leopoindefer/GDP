@@ -1,4 +1,3 @@
-import pandas as pd 
 import pandas as pd
 
 class Transform():
@@ -6,7 +5,7 @@ class Transform():
         self._selected_dataframes = selected_dataframes
 
     def resample(self):
-        dataframes_resampled = {symbol: pd.to_datetime(df.index).resample("MS").first() for symbol, df in self._selected_dataframes.items()}
+        dataframes_resampled = {symbol: df.set_index(pd.to_datetime(df.index)).resample("MS").first() for symbol, df in self._selected_dataframes.items()}
         return dataframes_resampled
     
     def __str__(self) -> str:
