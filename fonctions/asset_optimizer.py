@@ -60,11 +60,23 @@ class Optimize():
         
         return df_RisqueFaible, df_RisqueMoyen, df_RisqueEleve, df_RisqueTresEleve
     
+    #Transformer le format de sortie
+    def result_df(self, df):
+        df = pd.DataFrame(df)
+        for c in df.columns:
+            c = c
+        df = df.rename(columns={c:'Répartition'})
+        mask = (df.index != 'Rentabilité') & (df.index != 'Volatilité')
+        df.loc[mask, 'Répartition'] *= 100
+        df.loc[:,'Répartition'] = df.loc[:,'Répartition'].round(2)
+        df.loc[:,'Répartition'] = df.loc[:,'Répartition'].astype(str) + '%'
+        return df
+    
     #Récupérer la renta max pour chaque niveau de risque
     def get_optimum(self) -> tuple:
         df_RisqueFaible, df_RisqueMoyen, df_RisqueEleve, df_RisqueTresEleve = self.risk_category()
-        RisqueFaible = df_RisqueFaible.iloc[0] if not df_RisqueFaible.empty else "Aucun"
-        RisqueMoyen = df_RisqueMoyen.iloc[0] if not df_RisqueMoyen.empty else "Aucun"
-        RisqueEleve = df_RisqueEleve.iloc[0] if not df_RisqueEleve.empty else "Aucun"
-        RisqueTresEleve = df_RisqueTresEleve.iloc[0] if not df_RisqueTresEleve.empty else "Aucun"
+        RisqueFaible = self.result_df(df_RisqueFaible.iloc[0]) if not df_RisqueFaible.empty else "Aucun"
+        RisqueMoyen = self.result_df(df_RisqueMoyen.iloc[0]) if not df_RisqueMoyen.empty else "Aucun"
+        RisqueEleve = self.result_df(df_RisqueEleve.iloc[0]) if not df_RisqueEleve.empty else "Aucun"
+        RisqueTresEleve = self.result_df(df_RisqueTresEleve.iloc[0]) if not df_RisqueTresEleve.empty else "Aucun"
         return RisqueFaible, RisqueMoyen, RisqueEleve, RisqueTresEleve
