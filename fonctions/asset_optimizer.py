@@ -1,13 +1,12 @@
 import pandas as pd
 import numpy as np
 from .asset_database import Library
-from .asset_transform import Transform
 
-class Optimize(Transform):
+class Optimize():
     def __init__(self, selected_assets:list, len_assets:int, selected_dataframes:dict):
-        super().__init__(selected_dataframes)
         self._selected_assets = selected_assets
         self._len_assets = len_assets
+        self._selected_dataframes = selected_dataframes
 
     def process_data(self):
         dataframes = self._selected_dataframes.values()
@@ -15,6 +14,7 @@ class Optimize(Transform):
         ptf_df.index = pd.to_datetime(ptf_df.index)
         ptf_df = ptf_df.resample('MS').first()
 
+        #matrice de pondération
         combi_poids = Library(self._len_assets, None, None).get_weights()
         matrice_poids = combi_poids.values
         matrice_poids = matrice_poids[:,1:]
@@ -50,8 +50,8 @@ class Optimize(Transform):
 
         return merged_df
 
+    #Classer les niveaux de risque
     def risk_category(self):
-        #renta optimale pour risque donné
         merged_df = self.process_data()
         df_RisqueFaible = merged_df[merged_df['Volatilité'] < 3].sort_values(by='Rentabilité', ascending=False)
         df_RisqueMoyen = merged_df[(merged_df['Volatilité'] >= 3) & (merged_df['Volatilité'] <= 8)].sort_values(by='Rentabilité', ascending=False)
@@ -60,37 +60,11 @@ class Optimize(Transform):
         
         return df_RisqueFaible, df_RisqueMoyen, df_RisqueEleve, df_RisqueTresEleve
     
-    def result_df(self, df):
-        df = pd.DataFrame(df)
-        for c in df.columns:
-            c = c
-        df = df.rename(columns={c:'Répartition'})
-        mask = (df.index != 'Rentabilité') & (df.index != 'Volatilité')
-        df.loc[mask, 'Répartition'] *= 100
-        df.loc[:,'Répartition'] = df.loc[:,'Répartition'].round(2)
-        df.loc[:,'Répartition'] = df.loc[:,'Répartition'].astype(str) + '%'
-        return df
-
+    #Récupérer la renta max pour chaque niveau de risque
     def get_optimum(self):
         df_RisqueFaible, df_RisqueMoyen, df_RisqueEleve, df_RisqueTresEleve = self.risk_category()
-        if df_RisqueFaible.empty == False:
-            RisqueFaible = df_RisqueFaible.iloc[0]
-            RisqueFaible = self.result_df(RisqueFaible)
-        else: 
-            RisqueFaible = "Aucun"
-        if df_RisqueMoyen.empty == False:
-            RisqueMoyen = df_RisqueMoyen.iloc[0]
-            RisqueMoyen = self.result_df(RisqueMoyen)
-        else:
-            RisqueMoyen = "Aucun"
-        if df_RisqueEleve.empty == False:
-            RisqueEleve = df_RisqueEleve.iloc[0]
-            RisqueEleve = self.result_df(RisqueEleve)
-        else:
-            RisqueEleve = "Aucun"
-        if df_RisqueTresEleve.empty == False:
-            RisqueTresEleve = df_RisqueTresEleve.iloc[0]
-            RisqueTresEleve = self.result_df(RisqueTresEleve)
-        else:
-            RisqueTresEleve = "Aucun"
+        RisqueFaible = df_RisqueFaible.iloc[0] if not df_RisqueFaible.empty else "Aucun"
+        RisqueMoyen = df_RisqueMoyen.iloc[0] if not df_RisqueMoyen.empty else "Aucun"
+        RisqueEleve = df_RisqueEleve.iloc[0] if not df_RisqueEleve.empty else "Aucun"
+        RisqueTresEleve = df_RisqueTresEleve.iloc[0] if not df_RisqueTresEleve.empty else "Aucun"
         return RisqueFaible, RisqueMoyen, RisqueEleve, RisqueTresEleve
