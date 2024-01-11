@@ -23,14 +23,13 @@ class Comparaison(Transform):
         inner_join = pd.merge(df1, df2, on='date_column' ,how='inner')
         inner_join.set_index('date_column', inplace=True)
 
-        return  inner_join
+        return inner_join
     
     def get_correlation(self):
         inner_join = self.inner_combine()
-        inner_join = pd.DataFrame(inner_join)
         column1 = inner_join.columns[0]
         column2 = inner_join.columns[1]
         X = inner_join[column1].tolist()
         Y = inner_join[column2].tolist()
-        corr = pearsonr(X, Y)
+        corr, _ = pearsonr(X, Y)
         return corr
