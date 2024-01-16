@@ -1,41 +1,41 @@
 nom;ticker
-Credit Agricole;ACA
-Teleperformance;TEP
-Hermes;RMS
-Safran;SAF
-Air Liquide;AI
-Carrefour;CA
-TotalEnergies;TTE
-L'oreal;OR
-Bouygues;EN
-Sanofi;SAN
-Axa;CS
-Danone;BN
-Pernod Ricard;RI
-Lvmh;MC
-Thales;HO
-Kering;KER
-EssilorLuxottica;EL
-Schneider Electric;SU
-Veolia Environ.;VIE
-Saint Gobain;SGO
-CapGemini;CAP
-Vinci;DG
-Publicis Groupe;PUB
-Societe Generale;GLE
-Bnp Paribas;BNP
-Renault;RNO
-Orange;ORA
-Engie;ENGI
-Alstom;ALO
-Legrand SA;LR
-Edenred;EDEN
-Worldline;WLN
-Unibail Rodamco Westfield;URW
-Eurofins Scient.;ERF
-Dassault Systemes;DSY
-Michelin;ML
-Arcelor Mittal;MT
-Stmicroelectronics;STMPA
-Airbus;AIR
-Stellantis;STLAP
+Credit Agricole;ACA.PA
+Teleperformance;TEP.PA
+Hermes;RMS.PA
+Safran;SAF.PA
+Air Liquide;AI.PA
+Carrefour;CA.PA
+TotalEnergies;TTE.PA
+L'oreal;OR.PA
+Bouygues;EN.PA
+Sanofi;SAN.PA
+Axa;CS.PA
+Danone;BN.PA
+Pernod Ricard;RI.PA
+Lvmh;MC.PA
+Thales;HO.PA
+Kering;KER.PA
+EssilorLuxottica;EL.PA
+Schneider Electric;SU.PA
+Veolia Environ.;VIE.PA
+Saint Gobain;SGO.PA
+CapGemini;CAP.PA
+Vinci;DG.PA
+Publicis Groupe;PUB.PA
+Societe Generale;GLE.PA
+Bnp Paribas;BNP.PA
+Renault;RNO.PA
+Orange;ORA.PA
+Engie;ENGI.PA
+Alstom;ALO.PA
+Legrand SA;LR.PA
+Edenred;EDEN.PA
+Worldline;WLN.PA
+Unibail Rodamco Westfield;URW.PA
+Eurofins Scient.;ERF.PA
+Dassault Systemes;DSY.PA
+Michelin;ML.PA
+Arcelor Mittal;MT.PA
+Stmicroelectronics;STMPA.PA
+Airbus;AIR.PA
+Stellantis;STLAP.PA
